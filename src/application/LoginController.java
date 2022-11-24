@@ -1,15 +1,28 @@
 package application;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.text.Text;
+import java.io.IOException;
+import application.utilities.DraggableWindow;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
+import javafx.stage.Stage;
 
-public class LoginController {
+
+
+public class LoginController{
 	@FXML
 	private Button loginButton; 
 	@FXML 
@@ -30,11 +43,29 @@ public class LoginController {
 	private Button usernameButton;
 	@FXML
 	private Button passwordButton;
-	
+	@FXML 
+	private Parent root;
 	@FXML
-	public void loginButtonClicked(ActionEvent event) {
-		passwordLabel.setText(passwordTextField.getText());
-	}
+	private Stage stage;
+	@FXML
+	private Scene scene;
+	@FXML
+	public void loginButtonClicked(ActionEvent event) throws IOException{
+		root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		window.dragWindow(root, stage);
+		scene = new Scene(root);
+		String billingCSS = this.getClass().getResource("/application/billings/BillingStyle.css").toExternalForm();
+		scene.getStylesheets().add(billingCSS);
+		window.fullscreenWindow(scene, stage);
+		window.dragWindow(root, stage);
+		stage.setFullScreenExitHint("");
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		stage.setFullScreen(true);
+		stage.show();
+		}
 	
 	@FXML
 	public void exitButtonClicked(ActionEvent event) {

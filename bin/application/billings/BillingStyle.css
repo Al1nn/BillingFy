@@ -1,0 +1,32 @@
+.root{
+	-fx-background-image : url("../resources/background.png");
+	-fx-background-size: cover; 
+}
+
+#buttonLayout{
+	-fx-background-color: "#5283E9";
+	-fx-background-radius: 25 0 0 25;
+	-fx-border-radius: 25 0 0 25;
+}
+
+#billingLayout{
+	-fx-background-color: "#FAECF9";
+	-fx-background-radius: 25 25 25 25;
+	-fx-border-radius: 25 25 25 25;
+}
+
+#exitButton{
+	-fx-background-color: transparent;
+}
+
+#exitButton:hover{
+	-fx-background-color: transparent;
+}
+
+#exitIcon{
+	-fx-fill: "white";
+}
+
+#exitIcon:hover{
+	-fx-fill: #538EEA;
+}

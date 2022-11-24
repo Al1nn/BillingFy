@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.root{
+#anchorPane{
 	-fx-background-image : url("resources/background.png");
 	-fx-background-size: cover; 
 }
@@ -59,6 +59,7 @@
  	-fx-border-radius: 5 5 0 0;
  	-fx-background-radius: 5 5 0 0;
 }
+
 #usernameButton,#passwordButton{
 	-fx-background-color: transparent;
 }
