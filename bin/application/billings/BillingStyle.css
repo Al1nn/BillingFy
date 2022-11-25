@@ -30,3 +30,30 @@
 #exitIcon:hover{
 	-fx-fill: #538EEA;
 }
+#comboBox, #comboBox .list-view{
+	-fx-background-color: "#FAECF9";
+	-fx-background-radius: 15px;
+	-fx-border-color: "#436A86";
+	-fx-border-radius: 15px;
+}
+
+#comboBox .list-cell{
+	-fx-background-color: transparent;
+	-fx-alignment: center;
+	-fx-font-family: "Roboto";
+}
+#comboBox .list-cell:hover {
+	-fx-text-fill: "#538EEA";
+}
+#comboBox .list-cell:selected{
+	-fx-text-fill: "#000000";
+}
+
+#comboBox:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#538EEA";
+}
+#comboBox .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#538EEA"
+}

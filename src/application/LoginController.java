@@ -59,11 +59,9 @@ public class LoginController{
 		String billingCSS = this.getClass().getResource("/application/billings/BillingStyle.css").toExternalForm();
 		scene.getStylesheets().add(billingCSS);
 		window.fullscreenWindow(scene, stage);
-		window.dragWindow(root, stage);
 		stage.setFullScreenExitHint("");
 		stage.setScene(scene);
 		stage.centerOnScreen();
-		stage.setFullScreen(true);
 		stage.show();
 		}
 	
