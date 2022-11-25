@@ -6,5 +6,5 @@ module BillingFy {
 	requires de.jensd.fx.glyphs.fontawesome;
 	requires CustomStage;
 	opens application to javafx.graphics, javafx.fxml;
-	opens application.billings to javafx.graphics, javafx.fxml;
+	opens application.billings to javafx.graphics, javafx.fxml, javafx.base;
 }
