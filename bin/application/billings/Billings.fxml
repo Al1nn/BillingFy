@@ -27,7 +27,7 @@
                   <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <ComboBox fx:id="comboBox" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
+                  <ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -95,33 +95,82 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Button layoutX="624.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Status" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="844.7857151031494" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="39.78571319580078" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="661.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Taxa" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="735.7142868041992" layoutY="56.0" size="24" AnchorPane.rightAnchor="148.85714149475098" AnchorPane.topAnchor="35.428571701049805" />
-            <Button layoutX="552.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Suma" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="630.0" layoutY="56.0" size="24" AnchorPane.rightAnchor="254.5714282989502" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="411.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" text="Data Scadenta" AnchorPane.rightAnchor="358.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="520.8571434020996" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="363.7142848968506" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="468.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" text="Data Emiterii" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="578.3571453094482" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="506.21428298950195" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="358.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Client" AnchorPane.rightAnchor="642.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="435.0" layoutY="56.0" size="24" AnchorPane.rightAnchor="649.5714282989502" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="248.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Numar" AnchorPane.rightAnchor="752.0" AnchorPane.topAnchor="31.0" />
-            <FontAwesomeIconView glyphName="ANGLE_DOWN" layoutX="325.0" layoutY="55.0" size="24" AnchorPane.rightAnchor="759.5714282989502" AnchorPane.topAnchor="35.0" />
-            <TextField layoutX="895.0" layoutY="80.0" prefHeight="30.0" prefWidth="125.0" promptText="     Data Scadenta" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="69.0" />
-            <TextField layoutX="808.0" layoutY="69.0" prefHeight="30.0" prefWidth="125.0" promptText="       Data Emiterii" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="69.0" />
-            <TextField layoutX="673.0" layoutY="69.0" prefHeight="30.0" prefWidth="125.0" promptText="       Numar Factura" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="69.0">
+            <Button fx:id="sortStatusButton" layoutX="624.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortStatusButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Status" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortStatusIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="844.7857151031494" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="39.78571319580078" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortTaxButton" layoutX="661.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortTaxButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Taxa" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortTaxIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="735.7142868041992" layoutY="56.0" size="24" AnchorPane.rightAnchor="148.85714149475098" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortSumButton" layoutX="552.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortSumButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Suma" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortSumIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="630.0" layoutY="56.0" size="24" AnchorPane.rightAnchor="254.5714282989502" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortDueDateButton" layoutX="411.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortDueDateButtonClicked" prefHeight="30.0" prefWidth="132.0" text="Data Scadenta" AnchorPane.rightAnchor="358.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortDueDateIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="520.8571434020996" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="363.7142848968506" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortIssueDateButton" layoutX="468.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortIssueDateButtonClicked" prefHeight="30.0" prefWidth="132.0" text="Data Emiterii" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortIssueDateIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="578.3571453094482" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="506.21428298950195" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortClientButton" layoutX="358.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortClientButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Client" AnchorPane.rightAnchor="642.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortClientIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="435.0" layoutY="56.0" size="24" AnchorPane.rightAnchor="649.5714282989502" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="sortNumberButton" layoutX="248.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortNumberButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Numar" AnchorPane.rightAnchor="752.0" AnchorPane.topAnchor="31.0">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView fx:id="sortNumberIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="325.0" layoutY="55.0" size="24" AnchorPane.rightAnchor="759.5714282989502" AnchorPane.topAnchor="34.0" />
+            <TextField fx:id="searchDueDate" layoutX="944.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Data Scadenta" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="69.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="searchIssueDate" layoutX="789.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Data Emiterii" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="69.0">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="searchNumber" layoutX="644.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Numar Factura" AnchorPane.rightAnchor="321.0" AnchorPane.topAnchor="69.0">
                <font>
                   <Font name="Roboto" size="13.0" />
                </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </TextField>
-            <ComboBox layoutX="513.0" layoutY="72.0" prefHeight="30.0" prefWidth="125.0" promptText="Status" AnchorPane.rightAnchor="437.0" AnchorPane.topAnchor="69.0" />
-            <TextField layoutX="401.0" layoutY="69.0" prefHeight="30.0" prefWidth="125.0" promptText="       Nume Client" AnchorPane.rightAnchor="574.0" AnchorPane.topAnchor="69.0">
+            <ComboBox fx:id="searchStatus" layoutX="499.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Status" AnchorPane.rightAnchor="466.0" AnchorPane.topAnchor="69.0">
+               <padding>
+                  <Insets left="30.0" />
+               </padding></ComboBox>
+            <TextField fx:id="searchClient" layoutX="354.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Nume Client" AnchorPane.rightAnchor="611.0" AnchorPane.topAnchor="69.0">
                <font>
                   <Font name="Roboto" size="13.0" />
                </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </TextField>
+            <FontAwesomeIconView glyphName="SEARCH" layoutX="943.0" layoutY="91.0" size="20" AnchorPane.rightAnchor="138.4285717010498" AnchorPane.topAnchor="73.85714340209961" />
+            <FontAwesomeIconView glyphName="SEARCH" layoutX="797.9999828338623" layoutY="91.0" size="20" AnchorPane.rightAnchor="283.4285888671875" AnchorPane.topAnchor="73.85714340209961" />
+            <FontAwesomeIconView glyphName="SEARCH" layoutX="653.2856788635254" layoutY="91.0" size="20" AnchorPane.rightAnchor="428.1428928375244" AnchorPane.topAnchor="73.85714340209961" />
+            <FontAwesomeIconView glyphName="SEARCH" layoutX="363.4285640716553" layoutY="91.0" size="20" AnchorPane.rightAnchor="718.0000076293945" AnchorPane.topAnchor="73.85714340209961" />
          </children>
       </AnchorPane>
       <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1128.0" layoutY="19.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="18.5">

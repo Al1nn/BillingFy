@@ -10,7 +10,7 @@
 }
 
 #billingLayout{
-	-fx-background-color: "#FAECF9";
+	-fx-background-color: "#DAECF9";
 	-fx-background-radius: 25 25 25 25;
 	-fx-border-radius: 25 25 25 25;
 }
@@ -30,30 +30,30 @@
 #exitIcon:hover{
 	-fx-fill: #538EEA;
 }
-#comboBox, #comboBox .list-view{
-	-fx-background-color: "#FAECF9";
+#itemsPerPage, #itemsPerPage .list-view{
+	-fx-background-color: "#DAECF9";
 	-fx-background-radius: 15px;
 	-fx-border-color: "#436A86";
 	-fx-border-radius: 15px;
 }
 
-#comboBox .list-cell{
+#itemsPerPage .list-cell{
 	-fx-background-color: transparent;
 	-fx-alignment: center;
 	-fx-font-family: "Roboto";
 }
-#comboBox .list-cell:hover {
+#itemsPerPage .list-cell:hover {
 	-fx-text-fill: "#538EEA";
 }
-#comboBox .list-cell:selected{
+#itemsPerPage .list-cell:selected{
 	-fx-text-fill: "#000000";
 }
 
-#comboBox:hover{
+#itemsPerPage:hover{
 	-fx-background-color: transparent;
 	-fx-border-color: "#538EEA";
 }
-#comboBox .arrow{
+#itemsPerPage .arrow{
 	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
 	-fx-background-color: "#538EEA"
 }
@@ -119,4 +119,40 @@
 }
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color:  linear-gradient(to right, #1dbbdd44, #538EEA);
+}
+
+#sortTaxButton,#sortSumButton,#sortStatusButton,#sortNumberButton,#sortIssueDateButton,#sortDueDateButton,#sortClientButton{
+	-fx-background-color: transparent;
+	-fx-border-color: "#436A86";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+}
+#sortTaxButton:hover,#sortSumButton:hover,#sortStatusButton:hover,#sortNumberButton:hover,#sortIssueDateButton:hover,#sortDueDateButton:hover,#sortClientButton:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#538EEA";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+}
+
+#searchNumber, #searchIssueDate, #searchDueDate,#searchClient{
+	-fx-background-color: "#7EAAEF";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+	-fx-border-color: "#436A86";
+	-fx-prompt-text-fill: "#6B6B6B";
+}
+#searchStatus , #searchStatus .list-view{
+	-fx-background-color: "#7EAAEF";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+	-fx-border-color: "#436A86";
+}
+#searchStatus .list-cell{
+	-fx-background-color: transparent;
+	-fx-alignment: center;
+	-fx-font-family: "Roboto";
+}
+#itemsPerPage .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#000000"
 }

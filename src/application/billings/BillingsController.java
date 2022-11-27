@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
@@ -80,7 +81,7 @@ public class BillingsController implements Initializable {
     private AnchorPane buttonLayout;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private ComboBox<String> itemsPerPage;
 
     @FXML
     private Button exitButton;
@@ -88,25 +89,71 @@ public class BillingsController implements Initializable {
     @FXML
     private FontAwesomeIconView exitIcon;
 
-	@FXML
-	public void exitButtonClicked(ActionEvent event) {
-		Platform.exit();
-	}
-	
     @FXML
-    void billingNextPageClicked(ActionEvent event) {
-
-    }
+    private Button sortClientButton;
 
     @FXML
-    void billingPreviousPageClicked(ActionEvent event) {
+    private FontAwesomeIconView sortClientIcon;
 
-    }
+    @FXML
+    private Button sortDueDateButton;
+
+    @FXML
+    private FontAwesomeIconView sortDueDateIcon;
+
+    @FXML
+    private Button sortIssueDateButton;
+
+    @FXML
+    private FontAwesomeIconView sortIssueDateIcon;
+
+    @FXML
+    private Button sortNumberButton;
+
+    @FXML
+    private FontAwesomeIconView sortNumberIcon;
+
+    @FXML
+    private Button sortStatusButton;
+
+    @FXML
+    private FontAwesomeIconView sortStatusIcon;
+
+    @FXML
+    private Button sortSumButton;
+
+    @FXML
+    private FontAwesomeIconView sortSumIcon;
+
+    @FXML
+    private Button sortTaxButton;
+
+    @FXML
+    private FontAwesomeIconView sortTaxIcon;
+
+    @FXML
+    private TextField searchClient;
+
+    @FXML
+    private TextField searchDueDate;
+
+    @FXML
+    private TextField searchIssueDate;
+
+    @FXML
+    private TextField searchNumber;
+
+    @FXML
+    private ComboBox<String> searchStatus;
+    
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		String[] cmboxOptions = { "10 iteme", "20 iteme", "30 iteme" };
-		comboBox.getItems().addAll(cmboxOptions);
+		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
+		itemsPerPage.getItems().addAll(itemPerPageOptions);
+		String[] statusOptions = {"Platit","Neplatit"};
+		searchStatus.getItems().addAll(statusOptions);
+		
 		billingNumber.setCellValueFactory(new PropertyValueFactory<>("billingNumber"));
 		billingClient.setCellValueFactory(new PropertyValueFactory<>("billingClient"));
 		billingIssueDate.setCellValueFactory(new PropertyValueFactory<>("billingIssueDate"));
@@ -136,5 +183,82 @@ public class BillingsController implements Initializable {
 		billingTable.getItems().add(billing);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 	}
+	
+	@FXML
+	public void exitButtonClicked(ActionEvent event) {
+		Platform.exit();
+	}
+	
+    @FXML
+    void billingNextPageClicked(ActionEvent event) {
 
+    }
+
+    @FXML
+    void billingPreviousPageClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void sortClientButtonClicked(ActionEvent event) {
+    	if(sortClientIcon.getGlyphName() == "ANGLE_UP")
+    		sortClientIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortClientIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortDueDateButtonClicked(ActionEvent event) {
+    	if(sortDueDateIcon.getGlyphName() == "ANGLE_UP")
+    		sortDueDateIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortDueDateIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortIssueDateButtonClicked(ActionEvent event) {
+    	if(sortIssueDateIcon.getGlyphName() == "ANGLE_UP")
+    		sortIssueDateIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortIssueDateIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortNumberButtonClicked(ActionEvent event) {
+    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
+    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortNumberIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortStatusButtonClicked(ActionEvent event) {
+    	if(sortStatusIcon.getGlyphName() == "ANGLE_UP")
+    		sortStatusIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortStatusIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortSumButtonClicked(ActionEvent event) {
+    	if(sortSumIcon.getGlyphName() == "ANGLE_UP")
+    		sortSumIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortSumIcon.setGlyphName("ANGLE_UP");
+    
+    }
+
+    @FXML
+    void sortTaxButtonClicked(ActionEvent event) {
+    	if(sortTaxIcon.getGlyphName() == "ANGLE_UP")
+    		sortTaxIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    	sortTaxIcon.setGlyphName("ANGLE_UP");
+    
+    }
 }
