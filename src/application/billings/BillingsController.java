@@ -1,10 +1,15 @@
 package application.billings;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,6 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 
 public class BillingsController implements Initializable {
     @FXML
@@ -146,13 +154,171 @@ public class BillingsController implements Initializable {
     @FXML
     private ComboBox<String> searchStatus;
     
+    @FXML
+    private Button billingsButton;
 
+    @FXML
+    private OctIconView billingsIcon;
+        
+    @FXML
+    private Button clientsButton;
+
+    @FXML
+    private Circle clientsCircle;
+
+    @FXML
+    private FontAwesomeIconView clientsIcon;
+
+    @FXML
+    private Button servicesButton;
+
+    @FXML
+    private Circle servicesCircle;
+
+    @FXML
+    private FontAwesomeIconView servicesIcon;
+    
+    @FXML
+    private Button statisticsButton;
+
+    @FXML
+    private Circle statisticsCircle;
+
+    @FXML
+    private FontAwesomeIconView statisticsIcon;
+    
+    @FXML
+    private Button businessButton;
+
+    @FXML
+    private Circle businessCircle;
+
+    @FXML
+    private FontAwesomeIconView businessIcon;
+    
+    @FXML
+    private Button addBillingButton;
+
+    @FXML
+    private Circle addBillingCircle;
+
+    @FXML
+    private MaterialIconView addBillingIcon;
+    
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		String[] statusOptions = {"Platit","Neplatit"};
 		searchStatus.getItems().addAll(statusOptions);
+		
+		clientsButton.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				clientsCircle.setFill(Color.LIGHTGRAY);
+				clientsIcon.setFill(Color.web("#5283E9"));
+			}
+		
+		});
+		clientsButton.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				clientsCircle.setFill(Color.web("#2E4EB8"));
+				clientsIcon.setFill(Color.web("#FFFFFF"));
+				clientsButton.setTextFill(Color.WHITE);
+			}
+		});
+		
+		servicesButton.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				servicesCircle.setFill(Color.LIGHTGRAY);
+				servicesIcon.setFill(Color.web("#5283E9"));
+			}
+		});
+		
+		servicesButton.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				servicesCircle.setFill(Color.web("#2E4EB8"));
+				servicesIcon.setFill(Color.web("#FFFFFF"));
+				servicesButton.setTextFill(Color.WHITE);
+			}
+		
+		});
+		
+		statisticsButton.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				statisticsCircle.setFill(Color.LIGHTGRAY);
+				statisticsIcon.setFill(Color.web("#5283E9"));
+			}
+		
+		});
+		
+		statisticsButton.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				statisticsCircle.setFill(Color.web("#2E4EB8"));
+				statisticsIcon.setFill(Color.web("#FFFFFF"));
+				statisticsButton.setTextFill(Color.WHITE);
+			}
+		});
+		
+		businessButton.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				businessCircle.setFill(Color.LIGHTGRAY);
+				businessIcon.setFill(Color.web("#5283E9"));
+			}
+		});
+		
+		businessButton.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				businessCircle.setFill(Color.web("#2E4EB8"));
+				businessIcon.setFill(Color.web("#FFFFFF"));
+				businessButton.setTextFill(Color.WHITE);
+			}
+	
+		});
+		
+		addBillingButton.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				addBillingCircle.setFill(Color.LIGHTGRAY);
+				addBillingIcon.setFill(Color.web("#5283E9"));
+			}
+		});
+		
+		addBillingButton.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				addBillingCircle.setFill(Color.web("#2E4EB8"));
+				addBillingIcon.setFill(Color.web("#FFFFFF"));
+				addBillingButton.setTextFill(Color.WHITE);
+			}
+		});
 		
 		billingNumber.setCellValueFactory(new PropertyValueFactory<>("billingNumber"));
 		billingClient.setCellValueFactory(new PropertyValueFactory<>("billingClient"));
@@ -260,5 +426,30 @@ public class BillingsController implements Initializable {
     	else
     	sortTaxIcon.setGlyphName("ANGLE_UP");
     
+    }
+    
+    @FXML
+    void clientsButtonClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void servicesButtonClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void statisticsButtonClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void businessButtonClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void addBillingButtonClicked(ActionEvent event) {
+
     }
 }
