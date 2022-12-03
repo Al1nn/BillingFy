@@ -9,7 +9,7 @@
 	-fx-border-radius: 25 0 0 25;
 }
 
-#billingLayout{
+#clientLayout{
 	-fx-background-color: "#DAECF9";
 	-fx-background-radius: 25 25 25 25;
 	-fx-border-radius: 25 25 25 25;
@@ -58,17 +58,17 @@
 	-fx-background-color: "#538EEA"
 }
 
-#billingPreviousPage, #billingNextPage{
+#clientPreviousPage, #clientNextPage{
 	-fx-background-color: transparent;
 	-fx-border-color: "#436A86";
 	-fx-border-radius: 40px;
 }
-#billingPreviousPage:hover, #billingNextPage:hover{
+#clientPreviousPage:hover, #clientNextPage:hover{
 	-fx-background-color: transparent;
  	-fx-border-color: "#538EEA";
 	-fx-border-radius: 40px;
 }
-#billingNextPageIcon:hover, #billingPreviousPageIcon:hover{
+#clientNextPageIcon:hover, #clientPreviousPageIcon:hover{
 	-fx-fill: "#538EEA";
 }
 
@@ -121,64 +121,54 @@
     -fx-background-color:  linear-gradient(to right, #1dbbdd44, #538EEA);
 }
 
-#sortTaxButton,#sortSumButton,#sortStatusButton,#sortNumberButton,#sortIssueDateButton,#sortDueDateButton,#sortClientButton{
+#sortPhoneNumberButton,#sortEmailButton,#sortZipCodeButton,#sortNumberButton,#sortCityButton,#sortCountryButton,#sortClientButton{
 	-fx-background-color: transparent;
 	-fx-border-color: "#436A86";
 	-fx-background-radius: 25px;
 	-fx-border-radius: 25px;
 }
-#sortTaxButton:hover,#sortSumButton:hover,#sortStatusButton:hover,#sortNumberButton:hover,#sortIssueDateButton:hover,#sortDueDateButton:hover,#sortClientButton:hover{
+#sortPhoneNumberButton:hover,#sortEmailButton:hover,#sortZipCodeButton:hover,#sortNumberButton:hover,#sortCityButton:hover,#sortCountryButton:hover,#sortClientButton:hover{
 	-fx-background-color: transparent;
 	-fx-border-color: "#538EEA";
 	-fx-background-radius: 25px;
 	-fx-border-radius: 25px;
 }
 
-#searchNumber, #searchIssueDate, #searchDueDate,#searchClient{
+#searchEmail, #searchPhoneNumber,#searchClient{
 	-fx-background-color: "#7EAAEF";
 	-fx-background-radius: 25px;
 	-fx-border-radius: 25px;
 	-fx-border-color: "#436A86";
 	-fx-prompt-text-fill: "#6B6B6B";
 }
-#searchStatus , #searchStatus .list-view{
-	-fx-background-color: "#7EAAEF";
-	-fx-background-radius: 15px;
-	-fx-border-radius: 15px;
-	-fx-border-color: "#436A86";
-}
-#searchStatus .list-cell{
-	-fx-background-color: transparent;
-	-fx-alignment: center;
-	-fx-font-family: "Roboto";
-}
+
 #itemsPerPage .arrow{
 	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
 	-fx-background-color: "#000000"
 }
-#billingsButton{
+#clientsButton{
 	-fx-background-color: "#FFFFFF";
 	-fx-background-radius: 15px;
 	-fx-border-radius: 15px;
 	-fx-text-fill: "#5283E9";
 }
-#billingsIcon{
+ #clientsIcon{
 	-fx-fill: "#5283E9";
 }
-#clientsButton,#servicesButton,#statisticsButton,#businessButton,#addBillingButton{
+#billingsButton,#servicesButton,#statisticsButton,#businessButton,#addBillingButton{
 	-fx-background-color: transparent;
 	-fx-background-radius: 15px;
 	-fx-border-radius: 15px;
 	-fx-border-color: rgba(255,255,255, 0.2);
 }
-#clientsButton:hover,#servicesButton:hover,#statisticsButton:hover,#businessButton:hover,#addBillingButton:hover{
+#billingsButton:hover,#servicesButton:hover,#statisticsButton:hover,#businessButton:hover,#addBillingButton:hover{
 	-fx-background-color: white;
 	-fx-background-radius: 15px;
 	-fx-border-radius: 15px;
 	-fx-border-color: rgba(255,255,255, 0.2);
 	-fx-text-fill: "#5283E9";
 }
-#clientsButton:selected , #servicesButton:selected , #statisticsButton:selected,#businessButton:selected,#addBillingButton:selected{
+#billingsButton:selected , #servicesButton:selected , #statisticsButton:selected,#businessButton:selected,#addBillingButton:selected{
 	-fx-text-fill: "#FFFFFF";
 }
 

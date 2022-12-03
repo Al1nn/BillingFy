@@ -1,5 +1,17 @@
 package application.billings;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialicons.MaterialIcon;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
 public class Billing {
 	private String billingNumber;
 	private String billingClient;
@@ -9,13 +21,15 @@ public class Billing {
 	private String billingTax;
 	private String billingTotal;
 	private String billingStatus;
-	private String billingFunctions;
+	
+	private HBox pane;
+	private HBox statusPane;
 	
 	public Billing(String billingNumber, String billingClient
 			, String billingIssueDate, String billingDueDate
 			, String billingSum, String billingTax
 			, String billingTotal, String billingStatus
-			, String billingFunctions) {
+			) {
 		this.billingNumber = billingNumber;
 		this.billingClient = billingClient;
 		this.billingIssueDate = billingIssueDate;
@@ -24,11 +38,89 @@ public class Billing {
 		this.billingTax = billingTax;
 		this.billingTotal = billingTotal;
 		this.billingStatus = billingStatus;
-		this.billingFunctions = billingFunctions;
+		Circle circle = new Circle();
+		Text text = new Text();
+		text.setText(billingStatus);
+		circle.setRadius(10);
+		if (this.billingStatus == "Neplatit") {
+			circle.setFill(Color.web("#E25F5F"));
+			text.setFill(Color.web("#E25F5F"));
+		}else if(this.billingStatus == "Platit") {
+			circle.setFill(Color.web("#41A33F"));
+			text.setFill(Color.web("#41A33F"));
+		}
+		this.statusPane = new HBox(circle,text);
+		statusPane.setSpacing(10);
+		//Button Column
+		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css").toExternalForm();
+		//Edit button
+		Button editButton = new Button();
+		FontAwesomeIconView editButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+		editButtonIcon.setFill(Color.web("#547cbc"));
+		editButtonIcon.setSize("20");
+		editButton.setGraphic(editButtonIcon);
+		editButton.getStylesheets().add(buttonStyle);
+		setIconFills(editButton, editButtonIcon);
+		//Delete button
+		Button deleteButton = new Button();
+		FontAwesomeIconView deleteButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+		deleteButtonIcon.setFill(Color.web("#547cbc"));
+		deleteButtonIcon.setSize("20");
+		deleteButton.setGraphic(deleteButtonIcon);
+		deleteButton.getStylesheets().add(buttonStyle);
+		setIconFills(deleteButton, deleteButtonIcon);
+		//Download button
+		Button downloadButton = new Button();
+		MaterialIconView downloadButtonIcon = new MaterialIconView(MaterialIcon.FILE_DOWNLOAD);
+		downloadButtonIcon.setFill(Color.web("#547cbc"));
+		downloadButtonIcon.setSize("20");
+		downloadButton.setGraphic(downloadButtonIcon);
+		downloadButton.getStylesheets().add(buttonStyle);
+		setIconFills(downloadButton, downloadButtonIcon);
+		this.setPane(new HBox(editButton,deleteButton,downloadButton));
 	}
 
-	
+	private void setIconFills(Button button, FontAwesomeIconView buttonIcon) {
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				buttonIcon.setFill(Color.WHITE);
+			}
+		
+		});
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				buttonIcon.setFill(Color.web("#547cbc"));
+			}
+	
+		});
+	}
+	
+	private void setIconFills(Button button, MaterialIconView buttonIcon) {
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				buttonIcon.setFill(Color.WHITE);
+			}
+		
+		});
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				buttonIcon.setFill(Color.web("#547cbc"));
+			}
+	
+		});
+	}
 	public String getBillingNumber() {
 		return billingNumber;
 	}
@@ -119,14 +211,27 @@ public class Billing {
 
 
 
-	public String getBillingFunctions() {
-		return billingFunctions;
+	public HBox getPane() {
+		return pane;
 	}
 
 
 
-	public void setBillingFunctions(String billingFunctions) {
-		this.billingFunctions = billingFunctions;
+	public void setPane(HBox pane) {
+		this.pane = pane;
 	}
+
+	public HBox getStatusPane() {
+		return statusPane;
+	}
+
+	public void setStatusPane(HBox statusPane) {
+		this.statusPane = statusPane;
+	}
+
+
+
+	
+
 	
 }

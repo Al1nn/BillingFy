@@ -1,17 +1,26 @@
 package application.billings;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import application.utilities.DraggableWindow;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -19,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -327,26 +337,15 @@ public class BillingsController implements Initializable {
 		billingSum.setCellValueFactory(new PropertyValueFactory<>("billingSum"));
 		billingTax.setCellValueFactory(new PropertyValueFactory<>("billingTax"));
 		billingTotal.setCellValueFactory(new PropertyValueFactory<>("billingTotal"));
-		billingStatus.setCellValueFactory(new PropertyValueFactory<>("billingStatus"));
-		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("billingFunctions"));
+		billingStatus.setCellValueFactory(new PropertyValueFactory<>("statusPane"));
+		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
+
+		final ObservableList<Billing> data = FXCollections.observableArrayList(
+				new Billing("1", "SC COMPANY NAME", "12.12.2O22", "12.12.2022", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Neplatit"),
+				new Billing("1", "SC CACA S.R.L", "12.11.2020", "12.12.2020", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Platit")
+				);
 		
-		Billing billing = new Billing("1", "SC COMPANY NAME S.R.L", "12.12.2020", "12.12.2020", "100 000 000 $", "100 000 000 $", "100 000 000 $","Neplatit","Butoane");
-		
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
-		billingTable.getItems().add(billing);
+		billingTable.setItems(data);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 	}
 	
@@ -429,8 +428,19 @@ public class BillingsController implements Initializable {
     }
     
     @FXML
-    void clientsButtonClicked(ActionEvent event) {
-
+    void clientsButtonClicked(ActionEvent event) throws IOException{
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/clients/Clients.fxml"));
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		window.dragWindow(root, stage);
+		Scene scene = new Scene(root);
+		String billingCSS = this.getClass().getResource("/application/clients/ClientStyle.css").toExternalForm();
+		scene.getStylesheets().add(billingCSS);
+		window.fullscreenWindow(scene, stage);
+		stage.setFullScreenExitHint("");
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		stage.show();
     }
     
     @FXML

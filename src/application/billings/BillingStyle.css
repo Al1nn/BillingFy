@@ -96,11 +96,11 @@
 .table-row-cell:selected .text{
 	-fx-fill: "#000000";
 }
-
+/* 
 .table-view .table-cell:hover{
 	-fx-background-color: "#538EEA";
 }
-
+*/
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
