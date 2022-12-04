@@ -21,7 +21,7 @@
    <children>
       <AnchorPane fx:id="buttonLayout" layoutX="75.0" layoutY="66.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="66.0">
          <children>
-            <Button fx:id="billingsButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" mnemonicParsing="false" onAction="#billingsButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Facturi" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="25.0">
+            <Button fx:id="billingsButton" alignment="BOTTOM_CENTER" layoutX="35.0" layoutY="28.0" mnemonicParsing="false" onAction="#billingsButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Facturi" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="28.0">
                <font>
                   <Font name="Roboto" size="11.0" />
                </font></Button>
@@ -50,7 +50,7 @@
                   <Font name="Roboto" size="9.75" />
                </font>
             </Button>
-            <Circle fx:id="billingsCircle" fill="#2e4eb8" layoutX="78.0" layoutY="60.0" radius="25.0" stroke="#dddddd" strokeType="INSIDE" />
+            <Circle fx:id="billingsCircle" fill="#2e4eb8" layoutX="78.0" layoutY="60.0" radius="25.0" stroke="#dbdbdb00" strokeType="INSIDE" />
             <OctIconView fx:id="billingsIcon" fill="WHITE" glyphName="FILE_TEXT" layoutX="63.0" layoutY="72.0" size="32" AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="43.0" />
             <Circle fx:id="clientsCircle" fill="#dddddd" layoutX="78.0" layoutY="157.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" />
             <FontAwesomeIconView fx:id="clientsIcon" fill="WHITE" glyphName="USER" layoutX="66.0" layoutY="150.0" size="32" textAlignment="CENTER" textOrigin="TOP" AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="141.0" />

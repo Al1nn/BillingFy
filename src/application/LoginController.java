@@ -43,9 +43,9 @@ public class LoginController{
 	@FXML 
 	private Parent root;
 	@FXML
-	private Stage stage;
+	protected Stage stage;
 	@FXML
-	private Scene scene;
+	protected Scene scene;
 	@FXML
 	public void loginButtonClicked(ActionEvent event) throws IOException{
 		root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));

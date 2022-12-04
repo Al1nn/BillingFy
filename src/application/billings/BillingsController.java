@@ -4,8 +4,8 @@ package application.billings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import application.utilities.DraggableWindow;
+import application.utilities.MeniuButtonsStyle;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
@@ -13,14 +13,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -30,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -221,114 +220,13 @@ public class BillingsController implements Initializable {
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		String[] statusOptions = {"Platit","Neplatit"};
 		searchStatus.getItems().addAll(statusOptions);
-		
-		clientsButton.setOnMouseEntered(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				clientsCircle.setFill(Color.LIGHTGRAY);
-				clientsIcon.setFill(Color.web("#5283E9"));
-			}
-		
-		});
-		clientsButton.setOnMouseExited(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				clientsCircle.setFill(Color.web("#2E4EB8"));
-				clientsIcon.setFill(Color.web("#FFFFFF"));
-				clientsButton.setTextFill(Color.WHITE);
-			}
-		});
-		
-		servicesButton.setOnMouseEntered(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				servicesCircle.setFill(Color.LIGHTGRAY);
-				servicesIcon.setFill(Color.web("#5283E9"));
-			}
-		});
-		
-		servicesButton.setOnMouseExited(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				servicesCircle.setFill(Color.web("#2E4EB8"));
-				servicesIcon.setFill(Color.web("#FFFFFF"));
-				servicesButton.setTextFill(Color.WHITE);
-			}
-		
-		});
-		
-		statisticsButton.setOnMouseEntered(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				statisticsCircle.setFill(Color.LIGHTGRAY);
-				statisticsIcon.setFill(Color.web("#5283E9"));
-			}
-		
-		});
-		
-		statisticsButton.setOnMouseExited(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				statisticsCircle.setFill(Color.web("#2E4EB8"));
-				statisticsIcon.setFill(Color.web("#FFFFFF"));
-				statisticsButton.setTextFill(Color.WHITE);
-			}
-		});
-		
-		businessButton.setOnMouseEntered(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				businessCircle.setFill(Color.LIGHTGRAY);
-				businessIcon.setFill(Color.web("#5283E9"));
-			}
-		});
-		
-		businessButton.setOnMouseExited(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				businessCircle.setFill(Color.web("#2E4EB8"));
-				businessIcon.setFill(Color.web("#FFFFFF"));
-				businessButton.setTextFill(Color.WHITE);
-			}
-	
-		});
-		
-		addBillingButton.setOnMouseEntered(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				addBillingCircle.setFill(Color.LIGHTGRAY);
-				addBillingIcon.setFill(Color.web("#5283E9"));
-			}
-		});
-		
-		addBillingButton.setOnMouseExited(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				addBillingCircle.setFill(Color.web("#2E4EB8"));
-				addBillingIcon.setFill(Color.web("#FFFFFF"));
-				addBillingButton.setTextFill(Color.WHITE);
-			}
-		});
+		setInitialDesignButtons();
+		MeniuButtonsStyle style = new MeniuButtonsStyle();
+		style.styleButtons(clientsButton, clientsIcon, clientsCircle);
+		style.styleButtons(servicesButton, servicesIcon, servicesCircle);
+		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
+		style.styleButtons(businessButton, businessIcon, businessCircle);
+		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		
 		billingNumber.setCellValueFactory(new PropertyValueFactory<>("billingNumber"));
 		billingClient.setCellValueFactory(new PropertyValueFactory<>("billingClient"));
@@ -340,13 +238,29 @@ public class BillingsController implements Initializable {
 		billingStatus.setCellValueFactory(new PropertyValueFactory<>("statusPane"));
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 
-		final ObservableList<Billing> data = FXCollections.observableArrayList(
+		final ObservableList<Billing> billingsData = FXCollections.observableArrayList(
 				new Billing("1", "SC COMPANY NAME", "12.12.2O22", "12.12.2022", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Neplatit"),
 				new Billing("1", "SC CACA S.R.L", "12.11.2020", "12.12.2020", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Platit")
 				);
 		
-		billingTable.setItems(data);
+		billingTable.setItems(billingsData);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
+	}
+	
+	public void setInitialDesignButtons() {
+		billingsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15; "
+				+ "-fx-text-fill: #5283E9");
+		billingsIcon.setFill(Color.web("#5283E9"));
+		clientsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
+				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
+		servicesButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
+				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
+		statisticsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
+				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
+		businessButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
+				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
+		addBillingButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
+				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
 	}
 	
 	@FXML
@@ -433,12 +347,11 @@ public class BillingsController implements Initializable {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		DraggableWindow window = new DraggableWindow();
 		window.dragWindow(root, stage);
-		Scene scene = new Scene(root);
 		String billingCSS = this.getClass().getResource("/application/clients/ClientStyle.css").toExternalForm();
-		scene.getStylesheets().add(billingCSS);
-		window.fullscreenWindow(scene, stage);
+		stage.getScene().getStylesheets().add(billingCSS);
+		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
-		stage.setScene(scene);
+		stage.getScene().setRoot(root);
 		stage.centerOnScreen();
 		stage.show();
     }
