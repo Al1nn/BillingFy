@@ -33,185 +33,188 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class ClientsController implements Initializable{
+public class ClientsController implements Initializable {
 
-    @FXML
-    private Button addBillingButton;
+	@FXML
+	private Button addClientButton;
 
-    @FXML
-    private Circle addBillingCircle;
+	@FXML
+	private Button addBillingButton;
 
-    @FXML
-    private MaterialIconView addBillingIcon;
+	@FXML
+	private Circle addBillingCircle;
 
-    @FXML
-    private AnchorPane anchorPane;
+	@FXML
+	private MaterialIconView addBillingIcon;
 
-    @FXML
-    private Button billingsButton;
+	@FXML
+	private AnchorPane anchorPane;
 
-    @FXML
-    private Circle billingsCircle;
+	@FXML
+	private Button billingsButton;
 
-    @FXML
-    private OctIconView billingsIcon;
+	@FXML
+	private Circle billingsCircle;
 
-    @FXML
-    private Button businessButton;
+	@FXML
+	private OctIconView billingsIcon;
 
-    @FXML
-    private Circle businessCircle;
+	@FXML
+	private Button businessButton;
 
-    @FXML
-    private FontAwesomeIconView businessIcon;
+	@FXML
+	private Circle businessCircle;
 
-    @FXML
-    private AnchorPane buttonLayout;
+	@FXML
+	private FontAwesomeIconView businessIcon;
 
-    @FXML
-    private TableColumn<?, ?> clientCity;
+	@FXML
+	private AnchorPane buttonLayout;
 
-    @FXML
-    private TableColumn<?, ?> clientCountry;
+	@FXML
+	private TableColumn<?, ?> clientCity;
 
-    @FXML
-    private Text clientCurrentPage;
+	@FXML
+	private TableColumn<?, ?> clientCountry;
 
-    @FXML
-    private TableColumn<?, ?> clientEmail;
+	@FXML
+	private Text clientCurrentPage;
 
-    @FXML
-    private TableColumn<?, ?> clientFunctions;
+	@FXML
+	private TableColumn<?, ?> clientEmail;
 
-    @FXML
-    private AnchorPane clientLayout;
+	@FXML
+	private TableColumn<?, ?> clientFunctions;
 
-    @FXML
-    private Text clientLengthText;
+	@FXML
+	private AnchorPane clientLayout;
 
-    @FXML
-    private TableColumn<?, ?> clientName;
+	@FXML
+	private Text clientLengthText;
 
-    @FXML
-    private Button clientNextPage;
+	@FXML
+	private TableColumn<?, ?> clientName;
 
-    @FXML
-    private FontAwesomeIconView clientNextPageIcon;
+	@FXML
+	private Button clientNextPage;
 
-    @FXML
-    private TableColumn<?, ?> clientNumber;
+	@FXML
+	private FontAwesomeIconView clientNextPageIcon;
 
-    @FXML
-    private Text clientPages;
+	@FXML
+	private TableColumn<?, ?> clientNumber;
 
-    @FXML
-    private TableColumn<?, ?> clientPhoneNumber;
+	@FXML
+	private Text clientPages;
 
-    @FXML
-    private Button clientPreviousPage;
+	@FXML
+	private TableColumn<?, ?> clientPhoneNumber;
 
-    @FXML
-    private FontAwesomeIconView clientPreviousPageIcon;
+	@FXML
+	private Button clientPreviousPage;
 
-    @FXML
-    private Text clientTitle;
+	@FXML
+	private FontAwesomeIconView clientPreviousPageIcon;
 
-    @FXML
-    private TableColumn<?, ?> clientZipCode;
+	@FXML
+	private Text clientTitle;
 
-    @FXML
-    private Button clientsButton;
+	@FXML
+	private TableColumn<?, ?> clientZipCode;
 
-    @FXML
-    private Circle clientsCircle;
+	@FXML
+	private Button clientsButton;
 
-    @FXML
-    private FontAwesomeIconView clientsIcon;
+	@FXML
+	private Circle clientsCircle;
 
-    @FXML
-    private TableView<?> clientsTable;
+	@FXML
+	private FontAwesomeIconView clientsIcon;
 
-    @FXML
-    private Button exitButton;
+	@FXML
+	private TableView<Client> clientsTable;
 
-    @FXML
-    private FontAwesomeIconView exitIcon;
+	@FXML
+	private Button exitButton;
 
-    @FXML
-    private ComboBox<String> itemsPerPage;
+	@FXML
+	private FontAwesomeIconView exitIcon;
 
-    @FXML
-    private TextField searchClient;
-    
-    @FXML
-    private TextField searchEmail;
+	@FXML
+	private ComboBox<String> itemsPerPage;
 
-    @FXML
-    private TextField searchPhoneNumber;
-    
-    @FXML
-    private Button servicesButton;
+	@FXML
+	private TextField searchClient;
 
-    @FXML
-    private Circle servicesCircle;
+	@FXML
+	private TextField searchEmail;
 
-    @FXML
-    private FontAwesomeIconView servicesIcon;
+	@FXML
+	private TextField searchPhoneNumber;
 
-    @FXML
-    private Button sortCityButton;
+	@FXML
+	private Button servicesButton;
 
-    @FXML
-    private FontAwesomeIconView sortCityIcon;
+	@FXML
+	private Circle servicesCircle;
 
-    @FXML
-    private Button sortClientButton;
+	@FXML
+	private FontAwesomeIconView servicesIcon;
 
-    @FXML
-    private FontAwesomeIconView sortClientIcon;
+	@FXML
+	private Button sortCityButton;
 
-    @FXML
-    private Button sortCountryButton;
+	@FXML
+	private FontAwesomeIconView sortCityIcon;
 
-    @FXML
-    private FontAwesomeIconView sortCountryIcon;
+	@FXML
+	private Button sortClientButton;
 
-    @FXML
-    private Button sortEmailButton;
+	@FXML
+	private FontAwesomeIconView sortClientIcon;
 
-    @FXML
-    private FontAwesomeIconView sortEmailIcon;
+	@FXML
+	private Button sortCountryButton;
 
-    @FXML
-    private Button sortNumberButton;
+	@FXML
+	private FontAwesomeIconView sortCountryIcon;
 
-    @FXML
-    private FontAwesomeIconView sortNumberIcon;
+	@FXML
+	private Button sortEmailButton;
 
-    @FXML
-    private Button sortPhoneNumberButton;
+	@FXML
+	private FontAwesomeIconView sortEmailIcon;
 
-    @FXML
-    private FontAwesomeIconView sortPhoneNumberIcon;
+	@FXML
+	private Button sortNumberButton;
 
-    @FXML
-    private Button sortZipCodeButton;
+	@FXML
+	private FontAwesomeIconView sortNumberIcon;
 
-    @FXML
-    private FontAwesomeIconView sortZipCodeIcon;
+	@FXML
+	private Button sortPhoneNumberButton;
 
-    @FXML
-    private Button statisticsButton;
+	@FXML
+	private FontAwesomeIconView sortPhoneNumberIcon;
 
-    @FXML
-    private Circle statisticsCircle;
+	@FXML
+	private Button sortZipCodeButton;
 
-    @FXML
-    private FontAwesomeIconView statisticsIcon;
+	@FXML
+	private FontAwesomeIconView sortZipCodeIcon;
 
-    @Override
+	@FXML
+	private Button statisticsButton;
+
+	@FXML
+	private Circle statisticsCircle;
+
+	@FXML
+	private FontAwesomeIconView statisticsIcon;
+
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
+		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
@@ -220,16 +223,29 @@ public class ClientsController implements Initializable{
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		
-		
-		
+
+		clientNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
+		clientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+		clientCountry.setCellValueFactory(new PropertyValueFactory<>("clientCountry"));
+		clientCity.setCellValueFactory(new PropertyValueFactory<>("clientCity"));
+		clientZipCode.setCellValueFactory(new PropertyValueFactory<>("clientZipCode"));
+		clientEmail.setCellValueFactory(new PropertyValueFactory<>("clientEmail"));
+		clientPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("clientPhoneNumber"));
+		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
+		final ObservableList<Client> clientData = FXCollections.observableArrayList(
+				new Client("1", "SC COMPANY NAME", "Romania", "Pitesti", "115025", "cascsac@gmail.com", "0745263634"),
+				new Client("1", "SC CACA NAME", "Romania", "Costesti", "162636", "geogsg@gmail.com", "0746263635"));
+
+		clientsTable.setItems(clientData);
+		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
 	}
-    
-    public void setInitialDesignButtons() {
+
+	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
-		clientsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15;"
-				+ "-fx-text-fill: #5283E9");
+		clientsButton
+				.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15;"
+						+ "-fx-text-fill: #5283E9");
 		clientsIcon.setFill(Color.web("#5283E9"));
 		servicesButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
@@ -240,16 +256,16 @@ public class ClientsController implements Initializable{
 		addBillingButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
 	}
-    
-    @FXML
-    void addBillingButtonClicked(ActionEvent event) {
 
-    }
+	@FXML
+	void addBillingButtonClicked(ActionEvent event) {
 
-    @FXML
-    void billingsButtonClicked(ActionEvent event) throws IOException {
-    	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));
-		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	}
+
+	@FXML
+	void billingsButtonClicked(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		DraggableWindow window = new DraggableWindow();
 		window.dragWindow(root, stage);
 		String billingCSS = this.getClass().getResource("/application/billings/BillingStyle.css").toExternalForm();
@@ -259,100 +275,103 @@ public class ClientsController implements Initializable{
 		stage.getScene().setRoot(root);
 		stage.centerOnScreen();
 		stage.show();
-    }
+	}
 
-    @FXML
-    void businessButtonClicked(ActionEvent event) {
+	@FXML
+	void addClientButtonClicked(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void clientNextPageClicked(ActionEvent event) {
+	@FXML
+	void businessButtonClicked(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void clientPreviousPageClicked(ActionEvent event) {
+	@FXML
+	void clientNextPageClicked(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void clientsButtonClicked(ActionEvent event) {
+	@FXML
+	void clientPreviousPageClicked(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void exitButtonClicked(ActionEvent event) {
-    	Platform.exit();
-    }
+	@FXML
+	void clientsButtonClicked(ActionEvent event) {
 
-    @FXML
-    void servicesButtonClicked(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void exitButtonClicked(ActionEvent event) {
+		Platform.exit();
+	}
 
-    @FXML
-    void sortCityButtonClicked(ActionEvent event) {
-    	if (sortCityIcon.getGlyphName() == "ANGLE_UP") {
+	@FXML
+	void servicesButtonClicked(ActionEvent event) {
+
+	}
+
+	@FXML
+	void sortCityButtonClicked(ActionEvent event) {
+		if (sortCityIcon.getGlyphName() == "ANGLE_UP") {
 			sortCityIcon.setGlyphName("ANGLE_DOWN");
-		}else
+		} else
 			sortCityIcon.setGlyphName("ANGLE_UP");
-    }
+	}
 
-    @FXML
-    void sortClientButtonClicked(ActionEvent event) {
-    	if(sortClientIcon.getGlyphName() == "ANGLE_UP") {
-    		sortClientIcon.setGlyphName("ANGLE_DOWN");
-    	}else
-    		sortClientIcon.setGlyphName("ANGLE_UP");
-    }
+	@FXML
+	void sortClientButtonClicked(ActionEvent event) {
+		if (sortClientIcon.getGlyphName() == "ANGLE_UP") {
+			sortClientIcon.setGlyphName("ANGLE_DOWN");
+		} else
+			sortClientIcon.setGlyphName("ANGLE_UP");
+	}
 
-    @FXML
-    void sortCountryButtonClicked(ActionEvent event) {
-    	if(sortCountryIcon.getGlyphName() == "ANGLE_UP")
-    		sortCountryIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortCountryIcon.setGlyphName("ANGLE_UP");
-    }
+	@FXML
+	void sortCountryButtonClicked(ActionEvent event) {
+		if (sortCountryIcon.getGlyphName() == "ANGLE_UP")
+			sortCountryIcon.setGlyphName("ANGLE_DOWN");
+		else
+			sortCountryIcon.setGlyphName("ANGLE_UP");
+	}
 
-    @FXML
-    void sortEmailButtonClicked(ActionEvent event) {
-    	if(sortEmailIcon.getGlyphName() == "ANGLE_UP")
-    		sortEmailIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortEmailIcon.setGlyphName("ANGLE_UP");
-    }
+	@FXML
+	void sortEmailButtonClicked(ActionEvent event) {
+		if (sortEmailIcon.getGlyphName() == "ANGLE_UP")
+			sortEmailIcon.setGlyphName("ANGLE_DOWN");
+		else
+			sortEmailIcon.setGlyphName("ANGLE_UP");
+	}
 
-    @FXML
-    void sortNumberButtonClicked(ActionEvent event) {
-    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else 
+	@FXML
+	void sortNumberButtonClicked(ActionEvent event) {
+		if (sortNumberIcon.getGlyphName() == "ANGLE_UP")
+			sortNumberIcon.setGlyphName("ANGLE_DOWN");
+		else
 			sortNumberIcon.setGlyphName("ANGLE_UP");
-		
-    }
 
-    @FXML
-    void sortPhoneNumberButtonClicked(ActionEvent event) {
-    	if(sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else 
+	}
+
+	@FXML
+	void sortPhoneNumberButtonClicked(ActionEvent event) {
+		if (sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP")
+			sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
+		else
 			sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
-    }
+	}
 
-    @FXML
-    void sortZipCodeButtonClicked(ActionEvent event) {
-    	if(sortZipCodeIcon.getGlyphName() == "ANGLE_UP")
-    		sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortZipCodeIcon.setGlyphName("ANGLE_UP");
-    }
+	@FXML
+	void sortZipCodeButtonClicked(ActionEvent event) {
+		if (sortZipCodeIcon.getGlyphName() == "ANGLE_UP")
+			sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
+		else
+			sortZipCodeIcon.setGlyphName("ANGLE_UP");
+	}
 
-    @FXML
-    void statisticsButtonClicked(ActionEvent event) {
+	@FXML
+	void statisticsButtonClicked(ActionEvent event) {
 
-    }
-
-	
+	}
 
 }

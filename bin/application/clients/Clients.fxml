@@ -209,6 +209,14 @@
             <FontAwesomeIconView glyphName="SEARCH" layoutX="797.9999828338623" layoutY="91.0" size="20" AnchorPane.rightAnchor="283.4285888671875" AnchorPane.topAnchor="73.85714340209961" />
             <FontAwesomeIconView glyphName="SEARCH" layoutX="653.2856788635254" layoutY="91.0" size="20" AnchorPane.rightAnchor="428.1428928375244" AnchorPane.topAnchor="73.85714340209961" />
             <FontAwesomeIconView glyphName="SEARCH" layoutX="508.14283752441406" layoutY="91.0" size="20" AnchorPane.rightAnchor="573.2857341766357" AnchorPane.topAnchor="73.85714340209961" />
+            <Button fx:id="addClientButton" alignment="CENTER_RIGHT" layoutX="1015.0" layoutY="69.0" mnemonicParsing="false" onAction="#addClientButtonClicked" prefHeight="30.0" prefWidth="135.0" text="Adauga Client" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="69.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font></Button>
+            <FontAwesomeIconView glyphName="USER_PLUS" layoutX="944.5714302062988" layoutY="92.0" size="20" AnchorPane.rightAnchor="132.57142639160156" AnchorPane.topAnchor="74.85714340209961" />
          </children>
       </AnchorPane>
       <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1128.0" layoutY="19.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="18.5">

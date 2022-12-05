@@ -147,10 +147,22 @@
 	-fx-background-color: "#000000"
 }
 
+#addClientButton{
+	-fx-background-color: "#5283E9";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+	-fx-text-fill: white;
+	-fx-border-color: rgba(255,255,255,0.2);
+}
 
 
-
-
+#addClientButton:hover{
+	-fx-background-color: "#2E4EB8";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+	-fx-text-fill: white;
+	-fx-border-color: rgba(255,255,255,0.2);
+}
 
 
 
