@@ -135,7 +135,7 @@
                   <Font name="Roboto" size="16.0" />
                </font>
             </Text>
-            <Text fill="#2e4eb8" layoutX="84.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facturi Gasite">
+            <Text fill="#2e4eb8" layoutX="84.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clienti Gasiti">
                <font>
                   <Font size="16.0" />
                </font>

@@ -13,14 +13,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -283,8 +280,18 @@ public class ClientsController implements Initializable {
 	}
 
 	@FXML
-	void businessButtonClicked(ActionEvent event) {
-
+	void businessButtonClicked(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/application/business/Business.fxml"));
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		window.dragWindow(root, stage);
+		String billingCSS = this.getClass().getResource("/application/business/BusinessStyle.css").toExternalForm();
+		stage.getScene().getStylesheets().add(billingCSS);
+		window.fullscreenWindow(stage.getScene(), stage);
+		stage.setFullScreenExitHint("");
+		stage.getScene().setRoot(root);
+		stage.centerOnScreen();
+		stage.show();
 	}
 
 	@FXML
