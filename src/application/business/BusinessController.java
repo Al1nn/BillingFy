@@ -321,37 +321,59 @@ public class BusinessController implements Initializable{
 
     @FXML
     void sortBusinessButtonClicked(ActionEvent event) {
-
+    	if(sortBusinessIcon.getGlyphName() == "ANGLE_UP")
+    		sortBusinessIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    		sortBusinessIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
     void sortCityButtonClicked(ActionEvent event) {
-
+    	if (sortCityIcon.getGlyphName() == "ANGLE_UP") {
+			sortCityIcon.setGlyphName("ANGLE_DOWN");
+		} else
+			sortCityIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
     void sortCountryButtonClicked(ActionEvent event) {
-
+    	if(sortCountryIcon.getGlyphName() == "ANGLE_UP")
+    		sortCountryIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    		sortCountryIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
     void sortEmailButtonClicked(ActionEvent event) {
-
+    	if (sortEmailIcon.getGlyphName() == "ANGLE_UP")
+    		sortEmailIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    		sortEmailIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {
-
+    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
+    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
+    	else {
+			sortNumberIcon.setGlyphName("ANGLE_UP");
+		}
     }
 
     @FXML
     void sortPhoneNumberButtonClicked(ActionEvent event) {
-
+    	if(sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP")
+    		sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    		sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
     void sortZipCodeButtonClicked(ActionEvent event) {
-
+    	if(sortZipCodeIcon.getGlyphName() == "ANGLE_UP")
+    		sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
+    	else
+    		sortZipCodeIcon.setGlyphName("ANGLE_UP");
     }
 
     @FXML
