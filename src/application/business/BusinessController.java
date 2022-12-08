@@ -387,8 +387,18 @@ public class BusinessController implements Initializable{
     }
 
     @FXML
-    void statisticsButtonClicked(ActionEvent event) {
-
+    void statisticsButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/statistics/Statistics.fxml"));
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		window.dragWindow(root, stage);
+		String billingCSS = this.getClass().getResource("/application/statistics/StatisticsStyle.css").toExternalForm();
+		stage.getScene().getStylesheets().add(billingCSS);
+		window.fullscreenWindow(stage.getScene(), stage);
+		stage.setFullScreenExitHint("");
+		stage.getScene().setRoot(root);
+		stage.centerOnScreen();
+		stage.show();
     }
 
 	

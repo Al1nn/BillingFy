@@ -11,4 +11,5 @@ module BillingFy {
 	opens application.clients to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.business to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.services to javafx.graphics, javafx.fxml, javafx.base;
+	opens application.statistics to javafx.graphics, javafx.fxml, javafx.base;
 }

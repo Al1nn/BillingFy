@@ -1,0 +1,16 @@
+.root{
+	-fx-background-image : url("../resources/background.png");
+	-fx-background-size: cover; 
+}
+
+#buttonLayout{
+	-fx-background-color: "#5283E9";
+	-fx-background-radius: 25 0 0 25;
+	-fx-border-radius: 25 0 0 25;
+}
+
+#statisticsLayout{
+	-fx-background-color: "#DAECF9";
+	-fx-background-radius: 25 25 25 25;
+	-fx-border-radius: 25 25 25 25;
+}
