@@ -315,8 +315,18 @@ public class ClientsController implements Initializable {
 	}
 
 	@FXML
-	void servicesButtonClicked(ActionEvent event) {
-
+	void servicesButtonClicked(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/application/services/Services.fxml"));
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		window.dragWindow(root, stage);
+		String billingCSS = this.getClass().getResource("/application/services/ServicesStyle.css").toExternalForm();
+		stage.getScene().getStylesheets().add(billingCSS);
+		window.fullscreenWindow(stage.getScene(), stage);
+		stage.setFullScreenExitHint("");
+		stage.getScene().setRoot(root);
+		stage.centerOnScreen();
+		stage.show();
 	}
 
 	@FXML
