@@ -300,7 +300,9 @@ public class ServicesController implements Initializable{
 		DraggableWindow window = new DraggableWindow();
 		window.dragWindow(root, stage);
 		String billingCSS = this.getClass().getResource("/application/statistics/StatisticsStyle.css").toExternalForm();
+		String chartCSS = this.getClass().getResource("/application/resources/chartStyle.css").toExternalForm();
 		stage.getScene().getStylesheets().add(billingCSS);
+		stage.getScene().getStylesheets().add(chartCSS);
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);

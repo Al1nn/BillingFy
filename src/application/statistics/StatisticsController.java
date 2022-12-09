@@ -10,12 +10,17 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -97,6 +102,16 @@ public class StatisticsController implements Initializable{
     @FXML
     private Text statisticsTitle;
     
+
+    @FXML
+    private BarChart<?, ?> servicesIncomingsChart;
+
+    @FXML
+    private BarChart<?, ?> servicesNumberChart;
+    
+    @FXML
+    private PieChart clientsPieChart;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setInitialDesignButtons();
@@ -106,7 +121,39 @@ public class StatisticsController implements Initializable{
 		style.styleButtons(servicesButton, servicesIcon, servicesCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-	}
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+				new PieChart.Data("Grapefruit",13),
+				new PieChart.Data("Oranges", 25),
+				new PieChart.Data("Apples", 50)
+				);
+		clientsPieChart.setData(pieChartData);
+		
+		XYChart.Series series1 = new XYChart.Series();
+		series1.setName("data1");
+		series1.getData().add(new XYChart.Data("Caca",250));
+		series1.getData().add(new XYChart.Data("Muie",500));
+		
+		XYChart.Series series2 = new XYChart.Series();
+		series2.setName("data2");
+		series2.getData().add(new XYChart.Data("Caca",350));
+		series2.getData().add(new XYChart.Data("Muie",750));
+		
+		XYChart.Series series1I = new XYChart.Series();
+		series1I.setName("data1");
+		series1I.getData().add(new XYChart.Data("Caca",150));
+		series1I.getData().add(new XYChart.Data("Muie",450));
+		
+		XYChart.Series series2I = new XYChart.Series();
+		series2I.setName("data2");
+		series2I.getData().add(new XYChart.Data("Caca",350));
+		series2I.getData().add(new XYChart.Data("Muie",150));
+		
+		
+		
+		servicesNumberChart.getData().addAll(series1,series2);
+		servicesIncomingsChart.getData().addAll(series1I,series2I);
+		
+		}
     
     public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
@@ -186,7 +233,9 @@ public class StatisticsController implements Initializable{
 		DraggableWindow window = new DraggableWindow();
 		window.dragWindow(root, stage);
 		String billingCSS = this.getClass().getResource("/application/services/ServicesStyle.css").toExternalForm();
+		String chartCSS = this.getClass().getResource("/application/resources/chartStyle.css").toExternalForm();
 		stage.getScene().getStylesheets().add(billingCSS);
+		stage.getScene().getStylesheets().add(chartCSS);
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
