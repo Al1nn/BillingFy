@@ -286,7 +286,7 @@ public class ClientsController implements Initializable {
 		String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 		stage.setScene(new Scene(root));
 		stage.getScene().getStylesheets().add(popupCSS);
-		stage.initModality(Modality.NONE);
+		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.centerOnScreen();
