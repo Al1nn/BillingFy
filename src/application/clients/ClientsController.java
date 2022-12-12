@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -25,7 +26,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -275,8 +279,18 @@ public class ClientsController implements Initializable {
 	}
 
 	@FXML
-	void addClientButtonClicked(ActionEvent event) {
-
+	void addClientButtonClicked(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/application/clients/popup/ClientPopup.fxml"));
+		Stage stage = new Stage();
+		DraggableWindow window = new DraggableWindow();
+		String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
+		stage.setScene(new Scene(root));
+		stage.getScene().getStylesheets().add(popupCSS);
+		stage.initModality(Modality.NONE);
+		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.centerOnScreen();
+		stage.show();
 	}
 
 	@FXML
