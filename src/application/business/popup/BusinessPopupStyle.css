@@ -38,3 +38,25 @@
 #currencyComboBox{
 	-fx-background-color: "#CBDAFF";
 }
+
+#currencyComboBox .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#000000"
+}
+#currencyComboBox .list-view{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5 5 5 5;
+	-fx-border-color: "#2e4eb8";
+}
+
+#currencyComboBox .list-cell{
+	-fx-background-color: transparent;
+	-fx-font-family: "Roboto";
+}
+#currencyComboBox .list-cell:hover {
+	-fx-text-fill: "#538EEA";
+}
+#currencyComboBox .list-cell:selected{
+	-fx-text-fill: "#000000";
+}
