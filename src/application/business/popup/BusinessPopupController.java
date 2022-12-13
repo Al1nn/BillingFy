@@ -204,57 +204,57 @@ public class BusinessPopupController implements Initializable{
     
     @FXML
     void CUIButtonClicked(ActionEvent event) {
-
+    	CUITextField.clear();
     }
 
     @FXML
     void IBANButtonClicked(ActionEvent event) {
-
+    	IBANTextField.clear();
     }
 
     @FXML
     void bankButtonClicked(ActionEvent event) {
-
+    	bankTextField.clear();
     }
 
     @FXML
     void beneficiaryButtonClicked(ActionEvent event) {
-
+    	beneficiaryTextField.clear();
     }
 
     @FXML
     void businessButtonClicked(ActionEvent event) {
-
+    	businessNameTextField.clear();
     }
 
     @FXML
     void cityButtonClicked(ActionEvent event) {
-
+    	cityTextField.clear();
     }
 
     @FXML
     void countryButtonClicked(ActionEvent event) {
-
+    	countryTextField.clear();
     }
 
     @FXML
     void countyButtonClicked(ActionEvent event) {
-
+    	countryTextField.clear();
     }
 
     @FXML
     void emailButtonClicked(ActionEvent event) {
-
+    	emailTextField.clear();
     }
 
     @FXML
     void euidButtonClicked(ActionEvent event) {
-
+    	euidTextField.clear();
     }
 
     @FXML
     void exchangeButtonClicked(ActionEvent event) {
-
+    	exchangeTextField.clear();
     }
 
     @FXML
@@ -264,42 +264,42 @@ public class BusinessPopupController implements Initializable{
 
     @FXML
     void numberButtonClicked(ActionEvent event) {
-
+    	numberTextField.clear();
     }
 
     @FXML
     void phoneNumberButtonClicked(ActionEvent event) {
-
+    	phoneNumberTextField.clear();
     }
 
     @FXML
     void referenceButtonClicked(ActionEvent event) {
-
+    	referenceTextField.clear();
     }
 
     @FXML
     void saveDataClicked(ActionEvent event) {
-
+    	saveData.getScene().getWindow();
     }
 
     @FXML
     void streetButtonClicked(ActionEvent event) {
-
+    	streetTextField.clear();
     }
 
     @FXML
     void swiftButtonClicked(ActionEvent event) {
-
+    	swiftTextField.clear();
     }
 
     @FXML
     void tradeRegisterButtonClicked(ActionEvent event) {
-
+    	tradeRegisterTextField.clear();
     }
 
     @FXML
     void zipCodeButtonClicked(ActionEvent event) {
-
+    	zipCodeTextField.clear();
     }
 
 	
