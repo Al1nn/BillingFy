@@ -1,5 +1,6 @@
 package application.business;
-
+import application.billings.BillingsController;
+import application.business.popup.BusinessPopupController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -28,7 +30,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class BusinessController implements Initializable{
 
@@ -260,8 +264,17 @@ public class BusinessController implements Initializable{
     }
 
     @FXML
-    void addBusinessButtonClicked(ActionEvent event) {
-
+    void addBusinessButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
+		Stage stage = new Stage();
+		String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();		
+		stage.setScene(new Scene(root));
+		stage.getScene().getStylesheets().add(popupCSS);
+		stage.initModality(Modality.NONE);
+		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.centerOnScreen();
+		stage.show();
     }
 
     @FXML

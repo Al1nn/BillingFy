@@ -2,10 +2,8 @@ package application.clients;
 
 import java.io.IOException;
 
-import application.utilities.DraggableWindow;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -68,7 +66,6 @@ public class Client {
 				try {
 					Parent root = FXMLLoader.load(getClass().getResource("/application/clients/popup/ClientPopup.fxml"));
 					Stage stage = new Stage();
-					DraggableWindow window = new DraggableWindow();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					stage.setScene(new Scene(root));
 					stage.getScene().getStylesheets().add(popupCSS);

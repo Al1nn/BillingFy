@@ -27,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.layout.AnchorPane;
@@ -282,7 +281,6 @@ public class ClientsController implements Initializable {
 	void addClientButtonClicked(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/application/clients/popup/ClientPopup.fxml"));
 		Stage stage = new Stage();
-		DraggableWindow window = new DraggableWindow();
 		String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 		stage.setScene(new Scene(root));
 		stage.getScene().getStylesheets().add(popupCSS);
