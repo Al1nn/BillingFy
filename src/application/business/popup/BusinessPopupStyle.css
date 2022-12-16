@@ -64,6 +64,6 @@
 #phoneNumberButton,#emailButton,#zipCodeButton,#numberButton,#streetButton,#countyButton,#cityButton,#countryButton,#euidButton,#tradeRegisterButton,#CUIButton,#businessButton,#bankButton,#beneficiaryButton,#swiftButton,#IBANButton,#referenceButton,#exchangeButton,#currencyButton{
 	-fx-background-color: transparent;
 } 
-#phoneNumberIcon:hover,#emailIcon:hover,#zipCodeIcon:hover,#numberIcon:hover,#streetIcon:hover,#countyIcon:hover,#cityIcon:hover,#countryIcon:hover,#euidIcon:hover,#tradeRegisterIcon:hover,#CUIIcon:hover,#businessIcon:hover,#currencyButton:hover,#exchangeButton:hover,#referenceButton:hover,#IBANButton:hover,#beneficiaryButton:hover,#bankButton:hover{
-	-fx-fill: "#2E4EB8";
+#exchangeIcon:hover,#referenceIcon:hover,#swiftIcon:hover,#IBANIcon:hover,#beneficiaryIcon:hover,#bankIcon:hover,#phoneNumberIcon:hover,#emailIcon:hover,#zipCodeIcon:hover,#numberIcon:hover,#streetIcon:hover,#countyIcon:hover,#cityIcon:hover,#countryIcon:hover,#euidIcon:hover,#tradeRegisterIcon:hover,#CUIIcon:hover,#businessIcon:hover{
+	-fx-fill: "#5283E9";
 }
