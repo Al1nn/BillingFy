@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -33,7 +34,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ServicesController implements Initializable{
 
@@ -244,8 +247,17 @@ public class ServicesController implements Initializable{
     }
 
     @FXML
-    void addServicesButtonClicked(ActionEvent event) {
-
+    void addServicesButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));
+		Stage stage = new Stage();
+		String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
+		stage.setScene(new Scene(root));
+		stage.getScene().getStylesheets().add(popupCSS);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.centerOnScreen();
+		stage.show();
     }
 
     @FXML
