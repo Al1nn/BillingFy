@@ -3,6 +3,7 @@ package application.services.popup;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,11 +18,20 @@ public class ServicesContentController implements Initializable{
     private Button addAmountButton;
 
     @FXML
+    private FontAwesomeIconView addAmountIcon;
+    
+    @FXML
     private AnchorPane anchorPane;
     
     @FXML
     private Button removeAmountButton;
 
+    @FXML
+    private FontAwesomeIconView removeAmountIcon;
+    
+    @FXML
+    private FontAwesomeIconView removeFormIcon;
+    
     @FXML
     private Button removeForm;
 
@@ -35,6 +45,9 @@ public class ServicesContentController implements Initializable{
     private TextField serviceDescriptionField;
 
     @FXML
+    private FontAwesomeIconView serviceDescriptionIcon;
+    
+    @FXML
     private ComboBox<String> serviceExchangeField;
 
     @FXML
@@ -44,11 +57,17 @@ public class ServicesContentController implements Initializable{
     private TextField serviceNameField;
 
     @FXML
+    private FontAwesomeIconView serviceNameIcon;
+    
+    @FXML
     private Button servicePriceButton;
 
     @FXML
     private TextField servicePriceField;
 
+    @FXML
+    private FontAwesomeIconView servicePriceIcon;
+    
     private int amount = 1;
     
     @Override
@@ -74,7 +93,12 @@ public class ServicesContentController implements Initializable{
 
     @FXML
     void removeFormClicked(ActionEvent event) {
-
+    	serviceNameField.clear();
+    	servicePriceField.clear();
+    	serviceDescriptionField.clear();
+    	amount = 1;
+    	serviceAmountField.setText(String.valueOf(amount));
+    	serviceExchangeField.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -91,8 +115,6 @@ public class ServicesContentController implements Initializable{
     void servicePriceButtonClicked(ActionEvent event) {
     	servicePriceField.clear();
     }
-
-	
-
+    
 }
 

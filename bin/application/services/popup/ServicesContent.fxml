@@ -20,7 +20,7 @@
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="85.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
       <Button fx:id="serviceNameButton" focusTraversable="false" layoutX="133.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" onAction="#serviceNameButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
+            <FontAwesomeIconView fx:id="serviceNameIcon" glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
       </Button>
       <Text fill="#2e4eb8" layoutX="12.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Serviciu">
@@ -41,17 +41,17 @@
       </Text>
       <Button fx:id="addAmountButton" focusTraversable="false" layoutX="268.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#addAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
-            <FontAwesomeIconView glyphName="PLUS" size="15" />
+            <FontAwesomeIconView fx:id="addAmountIcon" glyphName="PLUS" size="15" />
          </graphic>
       </Button>
       <Button fx:id="removeAmountButton" focusTraversable="false" layoutX="268.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#removeAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
-            <FontAwesomeIconView glyphName="MINUS" size="15" />
+            <FontAwesomeIconView fx:id="removeAmountIcon" glyphName="MINUS" size="15" />
          </graphic>
       </Button>
       <Button fx:id="removeForm" layoutX="328.0" minWidth="43.0" mnemonicParsing="false" onAction="#removeFormClicked" prefHeight="45.0" prefWidth="43.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TRASH" size="30" />
+            <FontAwesomeIconView fx:id="removeFormIcon" glyphName="TRASH" size="30" />
          </graphic>
       </Button>
       <TextField fx:id="servicePriceField" focusTraversable="false" layoutY="51.0" prefHeight="45.0" prefWidth="172.0">
@@ -62,7 +62,7 @@
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="85.0" layoutY="96.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
       <Button fx:id="servicePriceButton" focusTraversable="false" layoutX="133.0" layoutY="58.0" minWidth="38.0" mnemonicParsing="false" onAction="#servicePriceButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
+            <FontAwesomeIconView fx:id="servicePriceIcon" glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
       </Button>
       <Text fill="#2e4eb8" layoutX="12.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pret">
@@ -78,7 +78,7 @@
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="84.0" layoutY="147.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
       <Button fx:id="serviceDescriptionButton" focusTraversable="false" layoutX="132.0" layoutY="109.0" minWidth="38.0" mnemonicParsing="false" onAction="#serviceDescriptionButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
+            <FontAwesomeIconView fx:id="serviceDescriptionIcon" glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
       </Button>
       <Text fill="#2e4eb8" layoutX="11.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descriere">
