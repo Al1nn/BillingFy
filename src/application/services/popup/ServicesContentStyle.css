@@ -1,0 +1,9 @@
+#anchorPane{
+	-fx-background-color: "#DAECF9";
+}
+#serviceNameField,#serviceAmountField,#serviceDescriptionField,#serviceExchangeField,#servicePriceField{
+	-fx-background-color: "#CBDAFF";
+}
+#removeForm{
+	-fx-background-color: transparent;
+}

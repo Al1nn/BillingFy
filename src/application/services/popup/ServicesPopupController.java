@@ -30,6 +30,9 @@ public class ServicesPopupController implements Initializable{
     private Button addServiceButton;
 
     @FXML
+    private FontAwesomeIconView addServiceIcon;
+    
+    @FXML
     private Button exitPopup;
 
     @FXML
@@ -54,6 +57,8 @@ public class ServicesPopupController implements Initializable{
     	try {
     		contentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesContent.fxml"));
+			String contentCSS = this.getClass().getResource("/application/services/popup/ServicesContentStyle.css").toExternalForm();
+			root.getStylesheets().add(contentCSS);
 			contentPane.addRow(0, root);
 			scrollPane.setContent(contentPane);
 			scrollPane.setFitToWidth(true);
@@ -66,6 +71,8 @@ public class ServicesPopupController implements Initializable{
     @FXML
     void addServiceButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesContent.fxml"));
+    	String contentCSS = this.getClass().getResource("/application/services/popup/ServicesContentStyle.css").toExternalForm();
+    	root.getStylesheets().add(contentCSS);
     	contentPane.addRow(nrPressed, root);
     	nrPressed++;
     }

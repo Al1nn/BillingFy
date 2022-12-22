@@ -10,15 +10,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.services.popup.ServicesContentController">
    <children>
-      <TextField focusTraversable="false" prefHeight="45.0" prefWidth="172.0">
+      <TextField fx:id="serviceNameField" focusTraversable="false" prefHeight="45.0" prefWidth="172.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
       </TextField>
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="85.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button focusTraversable="false" layoutX="133.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0">
+      <Button fx:id="serviceNameButton" focusTraversable="false" layoutX="133.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" onAction="#serviceNameButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
             <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
@@ -28,7 +28,7 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <TextField focusTraversable="false" layoutX="185.0" prefHeight="45.0" prefWidth="130.0">
+      <TextField fx:id="serviceAmountField" focusTraversable="false" layoutX="185.0" prefHeight="45.0" prefWidth="130.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
@@ -39,28 +39,28 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="268.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="54.0">
+      <Button fx:id="addAmountButton" focusTraversable="false" layoutX="268.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#addAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
             <FontAwesomeIconView glyphName="PLUS" size="15" />
          </graphic>
       </Button>
-      <Button focusTraversable="false" layoutX="268.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="54.0">
+      <Button fx:id="removeAmountButton" focusTraversable="false" layoutX="268.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#removeAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
             <FontAwesomeIconView glyphName="MINUS" size="15" />
          </graphic>
       </Button>
-      <Button layoutX="330.0" minWidth="43.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="43.0">
+      <Button fx:id="removeForm" layoutX="328.0" minWidth="43.0" mnemonicParsing="false" onAction="#removeFormClicked" prefHeight="45.0" prefWidth="43.0">
          <graphic>
             <FontAwesomeIconView glyphName="TRASH" size="30" />
          </graphic>
       </Button>
-      <TextField focusTraversable="false" layoutY="51.0" prefHeight="45.0" prefWidth="172.0">
+      <TextField fx:id="servicePriceField" focusTraversable="false" layoutY="51.0" prefHeight="45.0" prefWidth="172.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
       </TextField>
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="85.0" layoutY="96.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button focusTraversable="false" layoutX="133.0" layoutY="58.0" minWidth="38.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0">
+      <Button fx:id="servicePriceButton" focusTraversable="false" layoutX="133.0" layoutY="58.0" minWidth="38.0" mnemonicParsing="false" onAction="#servicePriceButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
             <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
@@ -70,13 +70,13 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <TextField focusTraversable="false" layoutX="-1.0" layoutY="102.0" prefHeight="45.0" prefWidth="172.0">
+      <TextField fx:id="serviceDescriptionField" focusTraversable="false" layoutX="-1.0" layoutY="102.0" prefHeight="45.0" prefWidth="172.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
       </TextField>
       <Line endX="87.0" endY="-1.52587890625E-5" layoutX="84.0" layoutY="147.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button focusTraversable="false" layoutX="132.0" layoutY="109.0" minWidth="38.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0">
+      <Button fx:id="serviceDescriptionButton" focusTraversable="false" layoutX="132.0" layoutY="109.0" minWidth="38.0" mnemonicParsing="false" onAction="#serviceDescriptionButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
             <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" />
          </graphic>
@@ -86,6 +86,15 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <ComboBox layoutX="185.0" layoutY="51.0" prefHeight="45.0" prefWidth="130.0" />
+      <ComboBox fx:id="serviceExchangeField" layoutX="185.0" layoutY="51.0" prefHeight="45.0" prefWidth="130.0">
+         <padding>
+            <Insets left="1.0" top="20.0" />
+         </padding></ComboBox>
+      <Text fill="#2e4eb8" layoutX="197.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valuta">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Text>
+      <Line endX="45.0" endY="7.62939453125E-6" layoutX="270.0" layoutY="96.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
    </children>
 </AnchorPane>

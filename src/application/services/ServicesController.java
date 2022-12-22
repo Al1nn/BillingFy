@@ -251,8 +251,10 @@ public class ServicesController implements Initializable{
     	Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));
 		Stage stage = new Stage();
 		String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
+		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 		stage.setScene(new Scene(root));
 		stage.getScene().getStylesheets().add(popupCSS);
+		stage.getScene().getStylesheets().add(scrollCSS);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		stage.initStyle(StageStyle.UNDECORATED);
