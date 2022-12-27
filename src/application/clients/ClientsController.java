@@ -258,8 +258,19 @@ public class ClientsController implements Initializable {
 	}
 
 	@FXML
-	void addBillingButtonClicked(ActionEvent event) {
-
+	void addBillingButtonClicked(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsPopup.fxml"));
+		Stage stage = new Stage();
+		String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
+		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
+		stage.setScene(new Scene(root));
+		stage.getScene().getStylesheets().add(popupCSS);
+		stage.getScene().getStylesheets().add(scrollCSS);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.centerOnScreen();
+		stage.show();
 	}
 
 	@FXML

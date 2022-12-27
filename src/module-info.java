@@ -15,4 +15,5 @@ module BillingFy {
 	opens application.clients.popup to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.business.popup to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.services.popup to javafx.graphics, javafx.fxml, javafx.base;
+	opens application.billings.popup to javafx.graphics, javafx.fxml, javafx.base;
 }

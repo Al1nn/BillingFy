@@ -1,0 +1,10 @@
+#exitButton{
+	-fx-background-color: transparent;
+}
+#exitIcon{
+	
+}
+
+#exitButtonIcon:hover{
+	-fx-fill: #538EEA;
+}

@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -26,7 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.paint.Color;
@@ -406,7 +409,18 @@ public class BillingsController implements Initializable {
     }
     
     @FXML
-    void addBillingButtonClicked(ActionEvent event) {
-
+    void addBillingButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsPopup.fxml"));
+		Stage stage = new Stage();
+		String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
+		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
+		stage.setScene(new Scene(root));
+		stage.getScene().getStylesheets().add(popupCSS);
+		stage.getScene().getStylesheets().add(scrollCSS);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.centerOnScreen();
+		stage.show();
     }
 }

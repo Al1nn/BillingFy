@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsPopupController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="400.0">
+         <children>
+            <Line endX="273.5" layoutX="113.0" layoutY="78.0" startX="-100.0" />
+            <Text layoutX="24.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adauga Factura">
+               <font>
+                  <Font name="Roboto Bold" size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="exitButton" layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="25.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="exitButtonIcon" glyphName="TIMES_CIRCLE" size="26" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emitent">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="127.0" startX="-100.0" stroke="#2e4eb8" />
+            <ComboBox fx:id="issuerNameCmbBox" layoutX="12.0" layoutY="145.0" prefHeight="33.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="2.0" top="22.0" />
+               </padding></ComboBox>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Firma">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <TextField fx:id="issuerCUITextField" layoutX="215.0" layoutY="145.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUI">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="issuerCUIButton" layoutX="346.0" layoutY="153.0" minWidth="38.0" mnemonicParsing="false" onAction="#issuerCUIButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="issuerCUIIcon" glyphName="TIMES_CIRCLE" size="22" />
+               </graphic>
+            </Button>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
