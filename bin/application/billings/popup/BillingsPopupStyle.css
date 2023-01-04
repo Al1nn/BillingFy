@@ -8,3 +8,17 @@
 #exitButtonIcon:hover{
 	-fx-fill: #538EEA;
 }
+
+#clientZipCodeField,#clientStreetField,#clientRegisterNumberField,#clientPhoneNumberField,#clientNumberField,#clientEmailField,#clientEUIDField,#clientCountyField,#clientCountryField,#clientCityField,#clientCUITextField
+,#issuerZipCodeField,#issuerStreetField,#issuerRegisterNumberField,#issuerPhoneNumberField,#issuerNumberField,#issuerEmailField,#issuerEUIDField,#issuerCountyField,#issuerCountryField,#issuerCityField,#issuerCUITextField
+,#calculationTotalField,#calculationTaxField,#calculationSubtotalField,#paymentSwiftField,#paymentReferenceField,#paymentIssueDateField,#paymentIBANField,#paymentExchangeField,#paymentDueDateField,#paymentBeneficiaryField,#paymentBankField
+{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+
+#clientEUIDButton,#clientCountyButton,#clientCountryButton,#clientCityButton,#clientCUIButton,#clientZipCodeButton,#clientStreetButton,#clientRegisterNumberButton,#clientPhoneNumberButton,#clientNumberButton,#clientEmailButton
+,#issuerZipCodeButton,#issuerRegisterNumberButton,#issuerPhoneNumberButton,#issuerNumberButton
+{
+	-fx-background-color: transparent;
+}

@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsPopupController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" vbarPolicy="NEVER" vvalue="1.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsPopupController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="400.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2100.0" prefWidth="400.0">
          <children>
             <Line endX="273.5" layoutX="113.0" layoutY="78.0" startX="-100.0" />
             <Text layoutX="24.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adauga Factura">
@@ -411,6 +411,270 @@
                   <Font name="Roboto" size="13.0" />
                </font>
             </Text>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="927.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Servicii">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="941.0" startX="-100.0" stroke="#2e4eb8" />
+            <ComboBox fx:id="serviceExchangeCmbBox" layoutX="272.0" layoutY="898.0" prefHeight="36.0" prefWidth="115.0">
+               <padding>
+                  <Insets left="3.0" top="13.0" />
+               </padding>
+            </ComboBox>
+            <Text fill="#2e4eb8" layoutX="284.0" layoutY="915.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valuta">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="30.0" layoutX="357.0" layoutY="938.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="addServiceButton" layoutX="231.0" layoutY="905.0" minWidth="32.0" mnemonicParsing="false" onAction="#addServiceButtonClicked" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="1160.0" startX="-100.0" stroke="#2e4eb8" />
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taxes">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="1316.0" startX="-100.0" stroke="#2e4eb8" />
+            <AnchorPane layoutX="1.0" layoutY="158.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="374.0" />
+            <AnchorPane layoutY="157.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="374.0" />
+            <ScrollPane layoutX="12.0" layoutY="951.0" prefHeight="166.0" prefWidth="376.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="166.0" prefWidth="376.0" />
+              </content>
+            </ScrollPane>
+            <ScrollPane layoutX="12.0" layoutY="1170.0" prefHeight="110.0" prefWidth="376.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="376.0" />
+               </content>
+            </ScrollPane>
+            <AnchorPane layoutY="219.0" minHeight="0.0" minWidth="0.0" prefHeight="166.0" prefWidth="376.0" />
+            <ScrollPane layoutX="12.0" layoutY="1326.0" prefHeight="110.0" prefWidth="376.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="376.0" />
+               </content>
+            </ScrollPane>
+            <AnchorPane layoutY="156.0" minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="376.0" />
+            <Button fx:id="addDiscountButton" layoutX="349.0" layoutY="1125.0" minWidth="32.0" mnemonicParsing="false" onAction="#addDiscountButtonClicked" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Button fx:id="addTaxesButton" layoutX="349.0" layoutY="1282.0" minWidth="32.0" mnemonicParsing="false" onAction="#addTaxesButtonClicked" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalii Plata">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="1486.0" startX="-100.0" stroke="#2e4eb8" />
+            <TextField fx:id="paymentBankField" layoutX="12.0" layoutY="1501.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Banca">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1546.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentBankButton" layoutX="143.0" layoutY="1509.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentBankButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentBankIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <TextField fx:id="paymentBeneficiaryField" layoutX="215.0" layoutY="1501.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="1546.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentBeneficiaryButton" layoutX="346.0" layoutY="1509.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentBeneficiaryButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentBeneficiaryIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="1518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beneficiar">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="paymentIBANField" layoutX="12.0" layoutY="1556.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1601.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentIBANButton" layoutX="143.0" layoutY="1564.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentIBANButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentIBANIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <TextField fx:id="paymentSwiftField" layoutX="215.0" layoutY="1556.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="1601.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentSwiftButton" layoutX="346.0" layoutY="1564.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentSwiftButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentSwiftIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="1573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Swift">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="paymentReferenceField" layoutX="12.0" layoutY="1611.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Referinta">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1656.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentIReferenceButton" layoutX="143.0" layoutY="1619.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentReferenceButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentReferenceIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <TextField fx:id="paymentExchangeField" layoutX="215.0" layoutY="1611.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="1656.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentExchangeButton" layoutX="345.0" layoutY="1619.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentExchangeButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentExchangeIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="1628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Curs Valutar">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="paymentIssueDateField" layoutX="12.0" layoutY="1666.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Emiterii">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1711.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentIIssueDateButton" layoutX="143.0" layoutY="1674.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentIssueDateButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentIssueDateIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <TextField fx:id="paymentDueDateField" layoutX="215.0" layoutY="1666.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="1711.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="paymentDueDateButton" layoutX="346.0" layoutY="1674.0" minWidth="38.0" mnemonicParsing="false" onAction="#paymentDueDateButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="paymentDueDateIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="1683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Scadenta">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="paymentCurrencyCmbBox" layoutX="12.0" layoutY="1721.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="3.0" top="17.0" />
+               </padding>
+            </ComboBox>
+            <Text fx:id="paymentCurrency" fill="#2e4eb8" layoutX="24.0" layoutY="1738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valuta">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1766.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1804.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcule">
+               <font>
+                  <Font name="Roboto Bold" size="18.0" />
+               </font>
+            </Text>
+            <Line endX="273.5" layoutX="113.0" layoutY="1818.0" startX="-100.0" stroke="#2e4eb8" />
+            <TextField fx:id="calculationSubtotalField" layoutX="12.0" layoutY="1834.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1851.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1879.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="calculationSubtotalButton" layoutX="143.0" layoutY="1842.0" minWidth="38.0" mnemonicParsing="false" onAction="#calculationSubtotalButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="calculationSubtotalIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <TextField fx:id="calculationTaxField" layoutX="215.0" layoutY="1834.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="300.0" layoutY="1879.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="calculationTaxButton" layoutX="346.0" layoutY="1842.0" minWidth="38.0" mnemonicParsing="false" onAction="#calculationTaxButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="calculationTaxIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Text fill="#2e4eb8" layoutX="229.0" layoutY="1851.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taxe">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="calculationTotalField" layoutX="12.0" layoutY="1889.0" prefHeight="45.0" prefWidth="172.0">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="15.0" />
+               </padding>
+            </TextField>
+            <Text fill="#2e4eb8" layoutX="24.0" layoutY="1906.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
+               <font>
+                  <Font name="Roboto" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="97.0" layoutY="1934.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
+            <Button fx:id="calculationTotalButton" layoutX="143.0" layoutY="1897.0" minWidth="38.0" mnemonicParsing="false" onAction="#calculationTotalButtonClicked" prefHeight="31.0" prefWidth="38.0">
+               <graphic>
+                  <FontAwesomeIconView fx:id="calculationTotalIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
+               </graphic>
+            </Button>
+            <Button fx:id="saveData" layoutX="13.0" layoutY="2014.0" mnemonicParsing="false" onAction="#saveDataClicked" prefHeight="30.0" prefWidth="100.0" text="Salveaza" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" />
+            <Button fx:id="exitPopup" layoutX="322.0" layoutY="2014.0" mnemonicParsing="false" onAction="#exitPopupClicked" prefHeight="30.0" prefWidth="100.0" text="Renunta" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" />
          </children></AnchorPane>
   </content>
 </ScrollPane>
