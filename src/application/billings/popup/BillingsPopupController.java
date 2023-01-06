@@ -1,17 +1,59 @@
 package application.billings.popup;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
-public class BillingsPopupController implements Initializable{
+public class BillingsPopupController {
+
+    @FXML
+    private Button addDiscountButton;
+
+    @FXML
+    private FontAwesomeIconView addDiscountIcon;
+
+    @FXML
+    private Button addServiceButton;
+
+    @FXML
+    private FontAwesomeIconView addServiceIcon;
+
+    @FXML
+    private FontAwesomeIconView addTaxIcon;
+
+    @FXML
+    private Button addTaxesButton;
+
+    @FXML
+    private Button calculationSubtotalButton;
+
+    @FXML
+    private TextField calculationSubtotalField;
+
+    @FXML
+    private FontAwesomeIconView calculationSubtotalIcon;
+
+    @FXML
+    private Button calculationTaxButton;
+
+    @FXML
+    private TextField calculationTaxField;
+
+    @FXML
+    private FontAwesomeIconView calculationTaxIcon;
+
+    @FXML
+    private Button calculationTotalButton;
+
+    @FXML
+    private TextField calculationTotalField;
+
+    @FXML
+    private FontAwesomeIconView calculationTotalIcon;
 
     @FXML
     private Button clientCUIButton;
@@ -68,7 +110,7 @@ public class BillingsPopupController implements Initializable{
     private FontAwesomeIconView clientEmailIcon;
 
     @FXML
-    private ComboBox<String> clientNameCmbBox;
+    private ComboBox<?> clientNameCmbBox;
 
     @FXML
     private Button clientNumberButton;
@@ -84,6 +126,9 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private TextField clientPhoneNumberField;
+
+    @FXML
+    private FontAwesomeIconView clientPhoneNumberIcon;
 
     @FXML
     private Button clientRegisterNumberButton;
@@ -117,6 +162,9 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private FontAwesomeIconView exitButtonIcon;
+
+    @FXML
+    private Button exitPopup;
 
     @FXML
     private Button issuerCUIButton;
@@ -173,7 +221,7 @@ public class BillingsPopupController implements Initializable{
     private FontAwesomeIconView issuerEmailIcon;
 
     @FXML
-    private ComboBox<String> issuerNameCmbBox;
+    private ComboBox<?> issuerNameCmbBox;
 
     @FXML
     private Button issuerNumberButton;
@@ -192,9 +240,6 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private FontAwesomeIconView issuerPhoneNumberIcon;
-
-    @FXML
-    private FontAwesomeIconView issuerPhoneNumberIcon1;
 
     @FXML
     private Button issuerRegisterNumberButton;
@@ -222,10 +267,7 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private FontAwesomeIconView issuerZipCodeIcon;
-    
-    @FXML
-    private ComboBox<String> serviceExchangeCmbBox;
-    
+
     @FXML
     private Button paymentBankButton;
 
@@ -243,6 +285,12 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private FontAwesomeIconView paymentBeneficiaryIcon;
+
+    @FXML
+    private Text paymentCurrency;
+
+    @FXML
+    private ComboBox<?> paymentCurrencyCmbBox;
 
     @FXML
     private Button paymentDueDateButton;
@@ -297,78 +345,43 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     private FontAwesomeIconView paymentSwiftIcon;
-    
-    @FXML
-    private ComboBox<String> paymentCurrencyCmbBox;
-    
-    @FXML
-    private Button calculationSubtotalButton;
 
-    @FXML
-    private TextField calculationSubtotalField;
-
-    @FXML
-    private FontAwesomeIconView calculationSubtotalIcon;
-
-    @FXML
-    private Button calculationTaxButton;
-
-    @FXML
-    private TextField calculationTaxField;
-
-    @FXML
-    private FontAwesomeIconView calculationTaxIcon;
-
-    @FXML
-    private Button calculationTotalButton;
-
-    @FXML
-    private TextField calculationTotalField;
-
-    @FXML
-    private FontAwesomeIconView calculationTotalIcon;
-    
-    @FXML
-    private Button exitPopup;
-    
     @FXML
     private Button saveData;
-    
+
     @FXML
-    private Button addServiceButton;
-    
-    @FXML
-    private Button addDiscountButton;
-    
-    @FXML
-    private Button addTaxesButton;
-    
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		String[] issuerNameOptions = {"ALL IN TECHNOLOGIES","Endava","UPIT"};
-		String[] clientNameOptions = {"Alin","Romy","Ionut"};
-		String[] serviceExchangeOptions = {"RON","EUR","USD"};
-		issuerNameCmbBox.getItems().addAll(issuerNameOptions);
-		clientNameCmbBox.getItems().addAll(clientNameOptions);
-		serviceExchangeCmbBox.getItems().addAll(serviceExchangeOptions);
-		paymentCurrencyCmbBox.getItems().addAll(serviceExchangeOptions);
-    }
-    
+    private ComboBox<?> serviceExchangeCmbBox;
+
     @FXML
     void addDiscountButtonClicked(ActionEvent event) {
 
     }
-    
-    @FXML
-    void addTaxesButtonClicked(ActionEvent event) {
-    	
-    }
-    
+
     @FXML
     void addServiceButtonClicked(ActionEvent event) {
-    	
+
     }
-    
+
+    @FXML
+    void addTaxesButtonClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void calculationSubtotalButtonClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void calculationTaxButtonClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void calculationTotalButtonClicked(ActionEvent event) {
+
+    }
+
     @FXML
     void clientCUIButtonClicked(ActionEvent event) {
 
@@ -427,6 +440,11 @@ public class BillingsPopupController implements Initializable{
     @FXML
     void exitButtonClicked(ActionEvent event) {
     	exitButton.getScene().getWindow().hide();
+    }
+
+    @FXML
+    void exitPopupClicked(ActionEvent event) {
+    	exitPopup.getScene().getWindow().hide();
     }
 
     @FXML
@@ -525,28 +543,8 @@ public class BillingsPopupController implements Initializable{
     }
 
     @FXML
-    void calculationSubtotalButtonClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void calculationTaxButtonClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void calculationTotalButtonClicked(ActionEvent event) {
-
-    }
-    
-    @FXML
-    void exitPopupClicked(ActionEvent event) {
-    	exitPopup.getScene().getWindow().hide();
-    }
-    
-    @FXML
     void saveDataClicked(ActionEvent event) {
 
     }
-    
+
 }
