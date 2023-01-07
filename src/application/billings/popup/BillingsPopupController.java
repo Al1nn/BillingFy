@@ -373,7 +373,17 @@ public class BillingsPopupController implements Initializable{
     private ScrollPane discountScrollPane;
     
     @FXML
+    private GridPane discountContentPane;
+    
+    private int discountButtonPressed = 1;
+    
+    @FXML
     private ScrollPane taxScrollPane;
+    
+    @FXML
+    private GridPane taxContentPane;
+    
+    private int taxButtonPressed = 1;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -394,12 +404,40 @@ public class BillingsPopupController implements Initializable{
 			e.printStackTrace();
 		}
     	
+    	try {
+    		discountContentPane = new GridPane();
+			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
+			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
+			root.getStylesheets().add(contentCSS);
+			discountContentPane.addRow(0, root);
+			discountScrollPane.setContent(discountContentPane);
+			discountScrollPane.setFitToWidth(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
+    	try {
+    		taxContentPane = new GridPane();
+			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
+			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
+			root.getStylesheets().add(contentCSS);
+			taxContentPane.addRow(0, root);
+			taxScrollPane.setContent(taxContentPane);
+			taxScrollPane.setFitToWidth(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
     
     @FXML
-    void addDiscountButtonClicked(ActionEvent event) {
-
+    void addDiscountButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
+    	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
+    	root.getStylesheets().add(contentCSS);
+    	discountContentPane.addRow(discountButtonPressed, root);
+    	discountButtonPressed++;
     }
 
     @FXML
