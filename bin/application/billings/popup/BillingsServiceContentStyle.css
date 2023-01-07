@@ -1,0 +1,20 @@
+.root{
+	-fx-background-color: "#DAECF9";
+}
+
+#billingServiceNameField,#billingServiceAmountField,#billingPriceField,#billingDescriptionField{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+#addAmountButton,#removeAmountButton,#billingServiceNameButton,#billingPriceButton,#billingDescriptionButton,#removeForm{
+	-fx-background-color: transparent;
+}
+#removeFormIcon{
+	-fx-fill: "#942c5c";
+}
+#removeFormIcon:hover{
+	-fx-fill: "#b51e1e";
+}
+#removeAmountIcon:hover,#billingServiceIcon:hover,#billingPriceIcon:hover,#billingDescriptionIcon:hover,#addAmountIcon:hover{
+	-fx-fill: "#5283E9";
+}

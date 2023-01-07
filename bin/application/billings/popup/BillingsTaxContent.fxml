@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsTaxContentController">
    <children>
-      <TextField prefHeight="45.0" prefWidth="185.0">
+      <TextField fx:id="billingTaxNameField" prefHeight="45.0" prefWidth="185.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
@@ -22,12 +22,12 @@
          </font>
       </Text>
       <Line endX="100.0" layoutX="85.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button layoutX="144.0" layoutY="8.0" minWidth="38.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0">
+      <Button fx:id="billingTaxNameButton" layoutX="144.0" layoutY="8.0" minWidth="38.0" mnemonicParsing="false" onAction="#billingTaxNameButtonClicked" prefHeight="31.0" prefWidth="38.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="22" text="" />
+            <FontAwesomeIconView fx:id="billingTaxNameIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
          </graphic>
       </Button>
-      <TextField focusTraversable="false" layoutX="195.0" prefHeight="45.0" prefWidth="130.0">
+      <TextField fx:id="billingTaxValueField" focusTraversable="false" layoutX="195.0" prefHeight="45.0" prefWidth="130.0">
          <padding>
             <Insets left="10.0" right="30.0" top="15.0" />
          </padding>
@@ -38,19 +38,19 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="278.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="54.0">
+      <Button fx:id="addValueButton" focusTraversable="false" layoutX="278.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#addValueButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
-            <FontAwesomeIconView glyphName="PLUS" size="15" />
+            <FontAwesomeIconView fx:id="addValueIcon" glyphName="PLUS" size="15" />
          </graphic>
       </Button>
-      <Button focusTraversable="false" layoutX="278.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="54.0">
+      <Button fx:id="removeValueButton" focusTraversable="false" layoutX="278.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#removeValueButtonClicked" prefHeight="15.0" prefWidth="54.0">
          <graphic>
-            <FontAwesomeIconView glyphName="MINUS" size="15" />
+            <FontAwesomeIconView fx:id="removeValueIcon" glyphName="MINUS" size="15" />
          </graphic>
       </Button>
-      <Button layoutX="331.0" minWidth="43.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="43.0">
+      <Button fx:id="removeForm" layoutX="331.0" minWidth="43.0" mnemonicParsing="false" onAction="#removeFormClicked" prefHeight="45.0" prefWidth="43.0">
          <graphic>
-            <FontAwesomeIconView glyphName="TRASH" size="30" />
+            <FontAwesomeIconView fx:id="removeFormIcon" glyphName="TRASH" size="30" />
          </graphic>
       </Button>
    </children>

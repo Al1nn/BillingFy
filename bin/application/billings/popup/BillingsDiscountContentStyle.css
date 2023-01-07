@@ -1,0 +1,20 @@
+.root{
+	-fx-background-color: "#DAECF9";
+}
+
+#billingDiscountPercentageField,#billingDiscountNameField{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+#removeForm,#addPercentageButton,#removePercentageButton,#billingDiscountNameButton{
+	-fx-background-color: transparent;
+}
+#removeFormIcon{
+	-fx-fill: "#942c5c";
+}
+#removeFormIcon:hover{
+	-fx-fill: "#b51e1e";
+}
+#addPercentageIcon:hover,#removePercentageIcon:hover,#billingDiscountNameIcon:hover{
+	-fx-fill: "#5283E9";
+}
