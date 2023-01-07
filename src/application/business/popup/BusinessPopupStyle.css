@@ -38,6 +38,9 @@
 #currencyComboBox{
 	-fx-background-color: "#CBDAFF";
 }
+#currencyComboBox .text-field, #currencyComboBox > .arrow-button{
+	-fx-background-color: transparent;
+}
 
 #currencyComboBox .arrow{
 	-fx-shape: "M 0 0 H 7 L 3.5 4 z";

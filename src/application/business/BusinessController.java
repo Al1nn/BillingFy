@@ -281,7 +281,7 @@ public class BusinessController implements Initializable{
 		String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();		
 		stage.setScene(new Scene(root));
 		stage.getScene().getStylesheets().add(popupCSS);
-		stage.initModality(Modality.NONE);
+		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.centerOnScreen();

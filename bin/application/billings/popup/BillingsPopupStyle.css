@@ -36,6 +36,10 @@
 #issuerNameCmbBox,#serviceExchangeCmbBox,#paymentCurrencyCmbBox,#clientNameCmbBox{
 	-fx-background-color: "#CBDAFF";
 }
+#issuerNameCmbBox .text-field ,#issuerNameCmbBox > .arrow-button , #serviceExchangeCmbBox .text-field, #serviceExchangeCmbBox > .arrow-button , #paymentCurrencyCmbBox .text-field, #paymentCurrencyCmbBox > .arrow-button,#clientNameCmbBox .text-field,#clientNameCmbBox > .arrow-button{
+	-fx-background-color: transparent;
+}
+
 #issuerNameCmbBox .list-view,#serviceExchangeCmbBox .list-view,#paymentCurrencyCmbBox .list-view,#clientNameCmbBox .list-view
 {
 	-fx-background-color: "#CBDAFF";

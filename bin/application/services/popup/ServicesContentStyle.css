@@ -25,6 +25,9 @@
 	-fx-border-radius: 5 5 5 5;
 	-fx-border-color: "#2e4eb8";
 }
+#serviceExchangeField .text-field ,#serviceExchangeField > .arrow-button{
+	-fx-background-color: transparent;
+}
 #serviceExchangeField .list-cell{
 	-fx-background-color: transparent;
 	-fx-font-family: "Roboto";

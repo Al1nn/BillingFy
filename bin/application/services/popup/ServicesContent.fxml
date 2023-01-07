@@ -86,7 +86,7 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
-      <ComboBox fx:id="serviceExchangeField" layoutX="185.0" layoutY="51.0" prefHeight="45.0" prefWidth="130.0">
+      <ComboBox fx:id="serviceExchangeField" editable="true" layoutX="185.0" layoutY="51.0" prefHeight="45.0" prefWidth="130.0">
          <padding>
             <Insets left="1.0" top="20.0" />
          </padding></ComboBox>

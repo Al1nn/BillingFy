@@ -1,14 +1,18 @@
 package application.billings.popup;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class BillingsPopupController {
+public class BillingsPopupController implements Initializable{
 
     @FXML
     private Button addDiscountButton;
@@ -110,7 +114,7 @@ public class BillingsPopupController {
     private FontAwesomeIconView clientEmailIcon;
 
     @FXML
-    private ComboBox<?> clientNameCmbBox;
+    private ComboBox<String> clientNameCmbBox;
 
     @FXML
     private Button clientNumberButton;
@@ -221,7 +225,7 @@ public class BillingsPopupController {
     private FontAwesomeIconView issuerEmailIcon;
 
     @FXML
-    private ComboBox<?> issuerNameCmbBox;
+    private ComboBox<String> issuerNameCmbBox;
 
     @FXML
     private Button issuerNumberButton;
@@ -290,7 +294,7 @@ public class BillingsPopupController {
     private Text paymentCurrency;
 
     @FXML
-    private ComboBox<?> paymentCurrencyCmbBox;
+    private ComboBox<String> paymentCurrencyCmbBox;
 
     @FXML
     private Button paymentDueDateButton;
@@ -350,8 +354,16 @@ public class BillingsPopupController {
     private Button saveData;
 
     @FXML
-    private ComboBox<?> serviceExchangeCmbBox;
-
+    private ComboBox<String> serviceExchangeCmbBox;
+    
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		String[] clientNameOptions = {"Alin","Romy","Ionut","Edi"};
+		String[] issuerNameOptions = {"Endava","IBM","ALL TECHNOLOGIES"};	
+    	clientNameCmbBox.getItems().addAll(clientNameOptions);
+    	issuerNameCmbBox.getItems().addAll(issuerNameOptions);
+	}
+    
     @FXML
     void addDiscountButtonClicked(ActionEvent event) {
 
@@ -546,5 +558,7 @@ public class BillingsPopupController {
     void saveDataClicked(ActionEvent event) {
 
     }
+
+	
 
 }

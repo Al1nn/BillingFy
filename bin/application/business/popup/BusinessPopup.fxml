@@ -251,7 +251,7 @@
                   <Insets left="10.0" right="30.0" top="15.0" />
                </padding>
             </TextField>
-            <ComboBox fx:id="currencyComboBox" focusTraversable="false" layoutX="20.0" layoutY="699.0" prefHeight="45.0" prefWidth="172.0">
+            <ComboBox fx:id="currencyComboBox" editable="true" focusTraversable="false" layoutX="20.0" layoutY="699.0" prefHeight="45.0" prefWidth="172.0">
                <padding>
                   <Insets top="15.0" />
                </padding></ComboBox>

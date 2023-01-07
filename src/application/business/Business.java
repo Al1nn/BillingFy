@@ -1,12 +1,21 @@
 package application.business;
 
+import java.io.IOException;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Business {
 	private String businessNumber;
@@ -37,6 +46,7 @@ public class Business {
 		editButton.setGraphic(editButtonIcon);
 		editButton.getStylesheets().add(buttonStyle);
 		setIconFills(editButton, editButtonIcon);
+		buttonFunctions(editButton);
 		// Delete button
 		Button deleteButton = new Button();
 		FontAwesomeIconView deleteButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
@@ -64,6 +74,32 @@ public class Business {
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
 				buttonIcon.setFill(Color.web("#547cbc"));
+			}
+
+		});
+	}
+	
+	public void buttonFunctions(Button button) {
+		button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
+					Stage stage = new Stage();
+					String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
+					stage.setScene(new Scene(root));
+					stage.getScene().getStylesheets().add(popupCSS);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.initOwner((Stage) ((Node) arg0.getSource()).getScene().getWindow());
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.centerOnScreen();
+					stage.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 
 		});
