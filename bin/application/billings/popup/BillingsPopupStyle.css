@@ -92,6 +92,10 @@
 #addTaxesButton,#addServiceButton,#addDiscountButton{
 	-fx-background-color: transparent;
 }
+#addDiscountIcon,#addServiceIcon,#addTaxIcon{
+	-fx-fill: "#2E4EB8";
+}
+
 #addTaxIcon:pressed,#addServiceIcon:pressed,#addDiscountIcon:pressed{
 	-fx-fill: "#5283E9";
 }
