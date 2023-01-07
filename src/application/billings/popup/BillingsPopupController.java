@@ -1,15 +1,20 @@
 package application.billings.popup;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class BillingsPopupController implements Initializable{
@@ -356,12 +361,40 @@ public class BillingsPopupController implements Initializable{
     @FXML
     private ComboBox<String> serviceExchangeCmbBox;
     
+    @FXML
+    private ScrollPane serviceScrollPane;
+    
+    @FXML 
+    private GridPane serviceContentPane;
+    
+    private int serviceButtonPressed = 1;
+    
+    @FXML
+    private ScrollPane discountScrollPane;
+    
+    @FXML
+    private ScrollPane taxScrollPane;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] clientNameOptions = {"Alin","Romy","Ionut","Edi"};
 		String[] issuerNameOptions = {"Endava","IBM","ALL TECHNOLOGIES"};	
     	clientNameCmbBox.getItems().addAll(clientNameOptions);
     	issuerNameCmbBox.getItems().addAll(issuerNameOptions);
+    	try {
+    		serviceContentPane = new GridPane();
+			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
+			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
+			root.getStylesheets().add(contentCSS);
+			serviceContentPane.addRow(0, root);
+			serviceScrollPane.setContent(serviceContentPane);
+			serviceScrollPane.setFitToWidth(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
 	}
     
     @FXML
@@ -370,8 +403,12 @@ public class BillingsPopupController implements Initializable{
     }
 
     @FXML
-    void addServiceButtonClicked(ActionEvent event) {
-
+    void addServiceButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
+    	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
+    	root.getStylesheets().add(contentCSS);
+    	serviceContentPane.addRow(serviceButtonPressed, root);
+    	serviceButtonPressed++;
     }
 
     @FXML
