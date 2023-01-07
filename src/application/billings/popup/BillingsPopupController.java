@@ -450,78 +450,82 @@ public class BillingsPopupController implements Initializable{
     }
 
     @FXML
-    void addTaxesButtonClicked(ActionEvent event) {
-
+    void addTaxesButtonClicked(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
+    	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
+    	root.getStylesheets().add(contentCSS);
+    	taxContentPane.addRow(taxButtonPressed, root);
+    	taxButtonPressed++;
     }
 
     @FXML
     void calculationSubtotalButtonClicked(ActionEvent event) {
-
+    	calculationSubtotalField.clear();
     }
 
     @FXML
     void calculationTaxButtonClicked(ActionEvent event) {
-
+    	calculationTaxField.clear();
     }
 
     @FXML
     void calculationTotalButtonClicked(ActionEvent event) {
-
+    	calculationTotalField.clear();
     }
 
     @FXML
     void clientCUIButtonClicked(ActionEvent event) {
-
+    	clientCUITextField.clear();
     }
 
     @FXML
     void clientCityButtonClicked(ActionEvent event) {
-
+    	clientCityField.clear();
     }
 
     @FXML
     void clientCountryButtonClicked(ActionEvent event) {
-
+    	clientCountryField.clear();
     }
 
     @FXML
     void clientCountyButtonClicked(ActionEvent event) {
-
+    	clientCountyField.clear();
     }
 
     @FXML
     void clientEUIDButtonClicked(ActionEvent event) {
-
+    	clientEUIDField.clear();
     }
 
     @FXML
     void clientEmailButtonClicked(ActionEvent event) {
-
+    	clientEmailField.clear();
     }
 
     @FXML
     void clientNumberButtonClicked(ActionEvent event) {
-
+    	clientNumberField.clear();
     }
 
     @FXML
     void clientPhoneNumberButtonClicked(ActionEvent event) {
-
+    	clientPhoneNumberField.clear();
     }
 
     @FXML
     void clientRegisterNumberButtonClicked(ActionEvent event) {
-
+    	clientRegisterNumberField.clear();
     }
 
     @FXML
     void clientStreetButtonClicked(ActionEvent event) {
-
+    	clientStreetField.clear();
     }
 
     @FXML
     void clientZipCodeButtonClicked(ActionEvent event) {
-
+    	clientZipCodeField.clear();
     }
 
     @FXML
@@ -536,104 +540,102 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     void issuerCUIButtonClicked(ActionEvent event) {
-
+    	issuerCUITextField.clear();
     }
 
     @FXML
     void issuerCityButtonClicked(ActionEvent event) {
-
+    	issuerCityField.clear();
     }
 
     @FXML
     void issuerCountryButtonClicked(ActionEvent event) {
-
+    	issuerCountryField.clear();
     }
 
     @FXML
     void issuerCountyButtonClicked(ActionEvent event) {
-
+    	issuerCountyField.clear();
     }
 
     @FXML
     void issuerEUIDButtonClicked(ActionEvent event) {
-
-    }
+    	issuerEUIDField.clear();
+    }	
 
     @FXML
     void issuerEmailButtonClicked(ActionEvent event) {
-
+    	issuerEmailField.clear();
     }
 
     @FXML
     void issuerNumberButtonClicked(ActionEvent event) {
-
+    	issuerNumberField.clear();
     }
 
     @FXML
     void issuerPhoneNumberButtonClicked(ActionEvent event) {
-
+    	issuerPhoneNumberField.clear();
     }
 
     @FXML
     void issuerRegisterNumberButtonClicked(ActionEvent event) {
-
+    	issuerRegisterNumberField.clear();
     }
 
     @FXML
     void issuerStreetButtonClicked(ActionEvent event) {
-
+    	issuerStreetField.clear();
     }
 
     @FXML
     void issuerZipCodeButtonClicked(ActionEvent event) {
-
+    	issuerZipCodeField.clear();
     }
 
     @FXML
     void paymentBankButtonClicked(ActionEvent event) {
-
+    	paymentBankField.clear();
     }
 
     @FXML
     void paymentBeneficiaryButtonClicked(ActionEvent event) {
-
+    	paymentBeneficiaryField.clear();
     }
 
     @FXML
     void paymentDueDateButtonClicked(ActionEvent event) {
-
+    	paymentDueDateField.clear();
     }
 
     @FXML
     void paymentExchangeButtonClicked(ActionEvent event) {
-
+    	paymentExchangeField.clear();
     }
 
     @FXML
     void paymentIBANButtonClicked(ActionEvent event) {
-
+    	paymentIBANField.clear();
     }
 
     @FXML
     void paymentIssueDateButtonClicked(ActionEvent event) {
-
+    	paymentIssueDateField.clear();
     }
 
     @FXML
     void paymentReferenceButtonClicked(ActionEvent event) {
-
+    	paymentReferenceField.clear();
     }
 
     @FXML
     void paymentSwiftButtonClicked(ActionEvent event) {
-
+    	paymentSwiftField.clear();
     }
 
     @FXML
     void saveDataClicked(ActionEvent event) {
-
+    	
     }
-
-	
 
 }
