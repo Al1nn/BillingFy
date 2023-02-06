@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
+import application.utilities.ResizeWindow;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
@@ -311,6 +312,14 @@ public class BusinessController implements Initializable{
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
 //		stage.centerOnScreen();
+		if(!stage.isFullScreen())
+		{
+		ResizeWindow trigger = new ResizeWindow();
+		trigger.resizeWindow(root, stage);
+		}
+		//stage.centerOnScreen();
+		stage.setMinWidth(1350);
+		stage.setMinHeight(750);
 		stage.show();
     }
     
@@ -326,6 +335,14 @@ public class BusinessController implements Initializable{
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
 //		stage.centerOnScreen();
+		if(!stage.isFullScreen())
+		{
+		ResizeWindow trigger = new ResizeWindow();
+		trigger.resizeWindow(root, stage);
+		}
+		//stage.centerOnScreen();
+		stage.setMinWidth(1350);
+		stage.setMinHeight(750);
 		stage.show();
     }
     
@@ -343,6 +360,14 @@ public class BusinessController implements Initializable{
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
 //		stage.centerOnScreen();
+		if(!stage.isFullScreen())
+		{
+		ResizeWindow trigger = new ResizeWindow();
+		trigger.resizeWindow(root, stage);
+		}
+		//stage.centerOnScreen();
+		stage.setMinWidth(1350);
+		stage.setMinHeight(750);
 		stage.show();
     }
      @FXML
@@ -359,6 +384,14 @@ public class BusinessController implements Initializable{
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
 //		stage.centerOnScreen();
+		if(!stage.isFullScreen())
+		{
+		ResizeWindow trigger = new ResizeWindow();
+		trigger.resizeWindow(root, stage);
+		}
+		//stage.centerOnScreen();
+		stage.setMinWidth(1350);
+		stage.setMinHeight(750);
 		stage.show();
     }
     @FXML
