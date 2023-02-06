@@ -2,6 +2,7 @@ package application;
 import java.io.IOException;
 
 import application.utilities.DraggableWindow;
+import application.utilities.ResizeWindow;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,6 +60,13 @@ public class LoginController{
 		stage.setFullScreenExitHint("");
 		stage.setScene(scene);
 		stage.centerOnScreen();
+		if(!stage.isFullScreen())
+			{
+			ResizeWindow trigger = new ResizeWindow();
+			trigger.resizeWindow(root, stage);
+			}
+		stage.setMinWidth(1350);
+		stage.setMinHeight(750);
 		stage.show();
 		}
 	
