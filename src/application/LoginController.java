@@ -51,10 +51,10 @@ public class LoginController{
 		root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		DraggableWindow window = new DraggableWindow();
-		window.dragWindow(root, stage);
 		scene = new Scene(root);
 		String billingCSS = this.getClass().getResource("/application/billings/BillingStyle.css").toExternalForm();
 		scene.getStylesheets().add(billingCSS);
+		window.dragWindow(root, stage);
 		window.fullscreenWindow(scene, stage);
 		stage.setFullScreenExitHint("");
 		stage.setScene(scene);

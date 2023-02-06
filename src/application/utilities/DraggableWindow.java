@@ -1,35 +1,31 @@
 package application.utilities;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 
 public class DraggableWindow {
 	private double xOffset;
 	private double yOffset;
 	
 	public void dragWindow(Parent root, Stage primaryStage) {
-		root.setOnMousePressed(new EventHandler<MouseEvent>() {
+		 root.setOnMousePressed(event -> {
+			 if(!event.isPrimaryButtonDown() || event.getTarget() instanceof Button)
+				 return;
+		      xOffset = event.getSceneX();
+		      yOffset = event.getSceneY();
+		    });
 
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				xOffset = event.getSceneX();
-				yOffset = event.getSceneY();
-			}
-		});
-		root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				primaryStage.setX(event.getScreenX() - xOffset);
-				primaryStage.setY(event.getSceneY() - yOffset);
-			}
-		});
+		 root.setOnMouseDragged(event -> {
+			 if(!event.isPrimaryButtonDown() || event.getTarget() instanceof Button)
+				 return;
+		      primaryStage.setX(event.getScreenX() - xOffset);
+		      primaryStage.setY(event.getScreenY() - yOffset);
+		    });
 	}
 	public void fullscreenWindow(Scene scene, Stage stage) {
 		scene.setOnKeyPressed(e ->{
@@ -37,5 +33,6 @@ public class DraggableWindow {
 				stage.setFullScreen(true);
 		});
 	}
+
 	
 }

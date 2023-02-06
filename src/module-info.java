@@ -6,6 +6,7 @@ module BillingFy {
 	requires de.jensd.fx.glyphs.fontawesome;
 	requires de.jensd.fx.glyphs.materialicons;
 	requires javafx.base;
+	requires java.desktop;
 	opens application to javafx.graphics, javafx.fxml;
 	opens application.billings to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.clients to javafx.graphics, javafx.fxml, javafx.base;

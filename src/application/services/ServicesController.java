@@ -244,33 +244,45 @@ public class ServicesController implements Initializable{
     @FXML
     void addBillingButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsPopup.fxml"));
-		Stage stage = new Stage();
+		Stage childStage = new Stage();
+		Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
 		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
-		stage.setScene(new Scene(root));
-		stage.getScene().getStylesheets().add(popupCSS);
-		stage.getScene().getStylesheets().add(scrollCSS);
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.centerOnScreen();
-		stage.show();
+		childStage.setScene(new Scene(root));
+		childStage.getScene().getStylesheets().add(popupCSS);
+		childStage.getScene().getStylesheets().add(scrollCSS);
+		childStage.initModality(Modality.WINDOW_MODAL);
+		childStage.initOwner(parentStage);
+		childStage.initStyle(StageStyle.UNDECORATED);
+		childStage.show();
+		//stage.centerOnScreen();
+		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+
+		childStage.setX(x);
+		childStage.setY(y);
     }
 
     @FXML
     void addServicesButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));
-		Stage stage = new Stage();
+		Stage childStage = new Stage();
+		Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
 		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
-		stage.setScene(new Scene(root));
-		stage.getScene().getStylesheets().add(popupCSS);
-		stage.getScene().getStylesheets().add(scrollCSS);
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.centerOnScreen();
-		stage.show();
+		childStage.setScene(new Scene(root));
+		childStage.getScene().getStylesheets().add(popupCSS);
+		childStage.getScene().getStylesheets().add(scrollCSS);
+		childStage.initModality(Modality.APPLICATION_MODAL);
+		childStage.initOwner(parentStage);
+		childStage.initStyle(StageStyle.UNDECORATED);
+//		stage.centerOnScreen();
+		childStage.show();
+		
+		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+		childStage.setX(x);
+		childStage.setY(y);
     }
 
     @FXML
@@ -284,7 +296,7 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-		stage.centerOnScreen();
+//		stage.centerOnScreen();
 		stage.show();
     }
 
@@ -299,7 +311,7 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-		stage.centerOnScreen();
+//		stage.centerOnScreen();
 		stage.show();
     }
 
@@ -314,7 +326,7 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-		stage.centerOnScreen();
+//		stage.centerOnScreen();
 		stage.show();
     }
 
@@ -331,7 +343,7 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-		stage.centerOnScreen();
+//		stage.centerOnScreen();
 		stage.show();
     }
     
