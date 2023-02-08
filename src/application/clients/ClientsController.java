@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.clients.backend.ClientDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -11,7 +12,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -213,6 +213,8 @@ public class ClientsController implements Initializable {
 	@FXML
 	private FontAwesomeIconView statisticsIcon;
 
+	private ObservableList<Client> clientData;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
@@ -224,7 +226,8 @@ public class ClientsController implements Initializable {
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-
+		///Initialize contents from table with Database from MySQL !!!!!!!!
+		
 		clientNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
 		clientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
 		clientCountry.setCellValueFactory(new PropertyValueFactory<>("clientCountry"));
@@ -233,12 +236,17 @@ public class ClientsController implements Initializable {
 		clientEmail.setCellValueFactory(new PropertyValueFactory<>("clientEmail"));
 		clientPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("clientPhoneNumber"));
 		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
-		final ObservableList<Client> clientData = FXCollections.observableArrayList(
-				new Client("1", "SC COMPANY NAME", "Romania", "Pitesti", "115025", "cascsac@gmail.com", "0745263634"),
-				new Client("1", "SC CACA NAME", "Romania", "Costesti", "162636", "geogsg@gmail.com", "0746263635"));
+		ClientDatabase connection = new ClientDatabase();
+		try {
+			clientData = connection.retrieveData();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		clientsTable.setItems(clientData);
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
+		
 	}
 
 	public void setInitialDesignButtons() {
@@ -272,10 +280,8 @@ public class ClientsController implements Initializable {
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
 		childStage.show();
-		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
-
 		childStage.setX(x);
 		childStage.setY(y);
 	}
@@ -291,13 +297,8 @@ public class ClientsController implements Initializable {
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
-		if(!stage.isFullScreen())
-		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
-		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -314,14 +315,26 @@ public class ClientsController implements Initializable {
 		childStage.initModality(Modality.APPLICATION_MODAL);
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
-//		stage.centerOnScreen();
 		childStage.show();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
 		childStage.setY(y);
+		refreshData(childStage);
 	}
-
+	
+	private void refreshData(Stage childStage) {
+		childStage.setOnHidden(evt -> {
+			ClientDatabase connection = new ClientDatabase();
+			try {
+				clientData = connection.retrieveData();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			clientsTable.setItems(clientData);
+		});
+	}
 	@FXML
 	void businessButtonClicked(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/application/business/Business.fxml"));
@@ -333,13 +346,8 @@ public class ClientsController implements Initializable {
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
-		if(!stage.isFullScreen())
-		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
-		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -358,13 +366,8 @@ public class ClientsController implements Initializable {
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
-		if(!stage.isFullScreen())
-		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
-		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -382,13 +385,8 @@ public class ClientsController implements Initializable {
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
-		if(!stage.isFullScreen())
-		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
-		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -463,6 +461,7 @@ public class ClientsController implements Initializable {
 			sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
 		else
 			sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
+
 	}
 
 	@FXML
