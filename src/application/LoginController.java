@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -33,6 +34,8 @@ public class LoginController{
 	private PasswordField passwordTextField;
 	@FXML 
 	private Rectangle rectangleForm;
+    @FXML
+    private Text registerText;
 	@FXML
 	private Text passwordLabel;
 	@FXML
@@ -60,15 +63,25 @@ public class LoginController{
 		stage.setFullScreenExitHint("");
 		stage.setScene(scene);
 		stage.centerOnScreen();
-		if(!stage.isFullScreen())
-			{
-			ResizeWindow trigger = new ResizeWindow();
-			trigger.resizeWindow(root, stage);
-			}
+		ResizeWindow trigger = new ResizeWindow();
+		trigger.resizeWindow(root, stage);	
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
-		}
+	}
+	
+	@FXML
+    void registerTextClicked(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("/application/register/RegisterForm.fxml"));
+		stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		DraggableWindow window = new DraggableWindow();
+		scene = new Scene(root);
+		String registerCSS = this.getClass().getResource("/application/register/RegisterStyle.css").toExternalForm();
+		scene.getStylesheets().add(registerCSS);
+		window.dragWindow(root, stage);
+		stage.setScene(scene);
+		stage.show();
+	}
 	
 	@FXML
 	public void exitButtonClicked(ActionEvent event) {
@@ -79,8 +92,10 @@ public class LoginController{
 	public void usernameButtonClicked(ActionEvent event) {
 		usernameTextField.clear();
 	}
+	
 	@FXML
 	public void passwordButtonClicked(ActionEvent event) {
 		passwordTextField.clear();
 	}
+	
 }

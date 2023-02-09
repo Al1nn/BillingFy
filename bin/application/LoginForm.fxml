@@ -15,13 +15,16 @@
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
 	<children>
       <Rectangle id="rectangleForm" fx:id="rectangleForm" arcHeight="5.0" arcWidth="5.0" fill="#1ff0ff00" height="460.0" layoutX="29.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="297.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="299.0" />
-		<TextField id="usernameTextField" fx:id="usernameTextField" layoutX="103.0" layoutY="280.0" prefHeight="40.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="372.0">
+		<TextField id="usernameTextField" fx:id="usernameTextField" layoutX="103.0" layoutY="268.0" prefHeight="45.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="372.0">
          <opaqueInsets>
-            <Insets right="50.0" />
+            <Insets right="50.0" top="35.0" />
          </opaqueInsets>
          <padding>
             <Insets left="10.0" right="35.0" />
-         </padding></TextField>
+         </padding>
+         <font>
+            <Font name="Roboto" size="16.0" />
+         </font></TextField>
 		<Button fx:id="loginButton" layoutX="106.0" layoutY="450.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="40.1" prefWidth="140.04" text="LOG IN" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="378.5" />
 		<Text fx:id="textLabel" layoutX="389.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BillingFy" wrappingWidth="169.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="67.0">
          <font>
@@ -32,26 +35,37 @@
             <Image url="@resources/login-picture.png" />
          </image>
       </ImageView>
-      <PasswordField id="passwordTextField" fx:id="passwordTextField" layoutX="103.0" layoutY="361.0" prefHeight="40.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="372.0">
+      <PasswordField id="passwordTextField" fx:id="passwordTextField" layoutX="103.0" layoutY="340.0" prefHeight="45.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="372.0">
          <padding>
             <Insets left="10.0" right="35.0" />
-         </padding></PasswordField>
+         </padding>
+         <font>
+            <Font name="Roboto" size="16.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="55.0" top="35.0" />
+         </opaqueInsets></PasswordField>
       <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="579.0" layoutY="12.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.leftAnchor="579.0" AnchorPane.rightAnchor="-7.5">
          <graphic>
             <FontAwesomeIconView fx:id="exitIcon" glyphName="TIMES_CIRCLE" size="24" wrappingWidth="20.571428298950195" />
          </graphic></Button>
-      <Text fx:id="usernameLabel" layoutX="115.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="449.5442695617676">
+      <Text fx:id="usernameLabel" layoutX="114.95573043823242" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="451.0999336242676">
          <font>
             <Font name="Roboto" size="13.0" />
          </font></Text>
-      <Text fx:id="passwordLabel" layoutX="117.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="449.58853912353516" />
-      <Button fx:id="usernameButton" layoutX="214.0" layoutY="283.0" minWidth="35.0" mnemonicParsing="false" onAction="#usernameButtonClicked" prefHeight="34.0" prefWidth="35.0" text="Button" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="357.5">
+      <Text fx:id="passwordLabel" layoutX="114.95573043823242" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="450.97525787353516" />
+      <Button fx:id="usernameButton" layoutX="209.0" layoutY="274.0" minWidth="35.0" mnemonicParsing="false" onAction="#usernameButtonClicked" prefHeight="34.0" prefWidth="35.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="362.5">
          <graphic>
             <FontAwesomeIconView fx:id="usernameIcon" glyphName="TIMES_CIRCLE" size="24" />
          </graphic></Button>
-      <Button fx:id="passwordButton" layoutX="214.0" layoutY="364.0" minWidth="35.0" mnemonicParsing="false" onAction="#passwordButtonClicked" prefHeight="34.0" prefWidth="35.0" text="Button" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="357.5">
+      <Button fx:id="passwordButton" layoutX="209.0" layoutY="346.0" minWidth="35.0" mnemonicParsing="false" onAction="#passwordButtonClicked" prefHeight="34.0" prefWidth="35.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="362.5">
          <graphic>
             <FontAwesomeIconView fx:id="passwordIcon" glyphName="TIMES_CIRCLE" size="24" />
          </graphic></Button>
+      <Text fx:id="registerText" fill="WHITE" layoutX="103.0" layoutY="409.0" onMouseClicked="#registerTextClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="New user ? Register Now .">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Text>
 	</children>
 </AnchorPane>

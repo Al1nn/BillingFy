@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.register.RegisterController">
+   <children>
+      <Text fx:id="registerMessage" layoutX="226.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully added account !">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font></Text>
+      <Rectangle id="rectangleForm" fx:id="rectangleForm" arcHeight="5.0" arcWidth="5.0" fill="#1ff0ff00" height="460.0" layoutX="107.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="407.0" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="111.0" />
+      <TextField id="registerEmailTextField" fx:id="registerEmailTextField" layoutX="183.0" layoutY="293.0" prefHeight="45.0" prefWidth="254.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="188.0">
+         <opaqueInsets>
+            <Insets right="50.0" top="35.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="50.0" top="10.0" />
+         </padding>
+         <font>
+            <Font name="Roboto" size="16.0" />
+         </font>
+      </TextField>
+      <TextField id="registerUsernameTextField" fx:id="registerUsernameTextField" layoutX="183.0" layoutY="237.0" prefHeight="45.0" prefWidth="254.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="188.0">
+         <opaqueInsets>
+            <Insets right="50.0" top="35.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="50.0" top="10.0" />
+         </padding>
+         <font>
+            <Font name="Roboto" size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="registerButton" layoutX="325.0" layoutY="438.0" maxWidth="110.0" mnemonicParsing="false" onAction="#registerButtonClicked" prefHeight="40.0" prefWidth="110.0" text="REGISTER" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="181.0">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font></Button>
+      <ImageView fitHeight="268.0" fitWidth="254.0" layoutX="198.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="173.0">
+         <image>
+            <Image url="@../resources/login-picture.png" />
+         </image>
+      </ImageView>
+      <PasswordField id="registerPasswordTextField" fx:id="registerPasswordTextField" layoutX="183.0" layoutY="349.0" prefHeight="45.0" prefWidth="254.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="188.0">
+         <padding>
+            <Insets left="10.0" right="50.0" top="10.0" />
+         </padding>
+         <font>
+            <Font name="Roboto" size="16.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="55.0" top="35.0" />
+         </opaqueInsets>
+      </PasswordField>
+      <Text fx:id="registerUsernameLabel" layoutX="195.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="371.0556640625">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="registerPasswordLabel" layoutX="195.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="370.9309883117676" />
+      <Button fx:id="registerUsernameButton" layoutX="390.0" layoutY="243.0" minWidth="35.0" mnemonicParsing="false" onAction="#registerUsernameButtonClicked" prefHeight="34.0" prefWidth="35.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="181.5">
+         <graphic>
+            <FontAwesomeIconView fx:id="registerUsernameIcon" glyphName="TIMES_CIRCLE" size="24" />
+         </graphic>
+      </Button>
+      <Button fx:id="registerPasswordButton" layoutX="390.0" layoutY="355.0" minWidth="35.0" mnemonicParsing="false" onAction="#registerPasswordButtonClicked" prefHeight="34.0" prefWidth="35.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="181.5">
+         <graphic>
+            <FontAwesomeIconView fx:id="registerPasswordIcon" glyphName="TIMES_CIRCLE" size="24" />
+         </graphic>
+      </Button>
+      <Text fx:id="registerEmailLabel" layoutX="195.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Button fx:id="registerEmailButton" layoutX="390.0" layoutY="299.0" minWidth="35.0" mnemonicParsing="false" onAction="#registerEmailButtonClicked" prefHeight="34.0" prefWidth="35.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="181.5">
+         <graphic>
+            <FontAwesomeIconView fx:id="registerEmailIcon" glyphName="TIMES_CIRCLE" size="24" />
+         </graphic>
+      </Button>
+      <Button fx:id="registerBackButton" layoutX="183.0" layoutY="438.0" maxHeight="40.0" maxWidth="110.0" mnemonicParsing="false" onAction="#registerBackButtonClicked" prefHeight="40.0" prefWidth="110.0" text="BACK" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="332.0">
+         <font>
+            <Font name="Roboto" size="13.0" />
+         </font></Button>
+      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="576.0" layoutY="11.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="-4.5">
+         <graphic>
+            <FontAwesomeIconView fx:id="exitIcon" glyphName="TIMES_CIRCLE" size="24" wrappingWidth="20.571428298950195" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

@@ -46,7 +46,12 @@
 	-fx-opacity: 0.3;
 	-fx-stroke-borders: 20px;
 }
-
+#registerText:hover{
+	-fx-fill: #538EEA;
+}
+#registerText:pressed{
+	-fx-fill: #B4CEF6;
+}
 #textLabel{
 	-fx-font-family: "Buffalo";
 	-fx-fill: #FFFFFF;
@@ -65,11 +70,11 @@
 }
 
 #usernameIcon,#passwordIcon{
-	-fx-fill: #2E4EB8
+	-fx-fill: #2E4EB8;
 }
 
 #usernameIcon:hover, #passwordIcon:hover{
-	-fx-fill: #538EEA
+	-fx-fill: #538EEA;
 }
 
 

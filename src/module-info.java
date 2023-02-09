@@ -9,6 +9,7 @@ module BillingFy {
 	requires java.desktop;
 	requires java.sql;
 	opens application to javafx.graphics, javafx.fxml;
+	opens application.register to javafx.graphics, javafx.fxml;
 	opens application.billings to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.clients to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.business to javafx.graphics, javafx.fxml, javafx.base;

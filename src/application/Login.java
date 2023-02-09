@@ -1,6 +1,5 @@
 package application;
 import application.utilities.DraggableWindow;
-import application.utilities.ResizeWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -28,8 +27,6 @@ public class Login extends Application {
 			scene.getStylesheets().add(css);
 			scene.getStylesheets().add(fontCSS);
 			primaryStage.setScene(scene);
-			//ResizeWindow trigger = new ResizeWindow();
-			//trigger.resizeWindow(root, primaryStage);
 			primaryStage.show();
 		
 		} catch(Exception e) {
