@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import application.clients.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +26,7 @@ public class ClientDatabase {
 		}
 		
 		return databaseLink;
-		}
+	}
 	
 	public void insertData(String clientName
 			, String clientCUI

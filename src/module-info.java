@@ -8,6 +8,7 @@ module BillingFy {
 	requires javafx.base;
 	requires java.desktop;
 	requires java.sql;
+	requires jBCrypt;
 	opens application to javafx.graphics, javafx.fxml;
 	opens application.register to javafx.graphics, javafx.fxml;
 	opens application.billings to javafx.graphics, javafx.fxml, javafx.base;

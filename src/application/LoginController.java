@@ -1,12 +1,18 @@
 package application;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import application.register.backend.LoginDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.ResizeWindow;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +27,7 @@ import javafx.stage.Stage;
 
 
 
-public class LoginController{
+public class LoginController implements Initializable{
 	@FXML
 	private Button loginButton; 
 	@FXML 
@@ -50,8 +56,70 @@ public class LoginController{
 	protected Stage stage;
 	@FXML
 	protected Scene scene;
+    @FXML
+    private Text errorMessage;
+	
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		errorMessage.setVisible(false);
+	}
+    
 	@FXML
-	public void loginButtonClicked(ActionEvent event) throws IOException{
+	public void loginButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException{
+		LoginDatabase connection = new LoginDatabase();
+		String usernameText = usernameTextField.getText();
+		String passwordText = passwordTextField.getText();
+		boolean fieldsEmpty = fieldsAreEmpty(usernameText, passwordText);
+		if(!fieldsEmpty)
+			return;
+		String usernameOrEmail = null;
+		
+		if(isEmail(usernameText)) {
+			usernameOrEmail = connection.getEmail(usernameText);
+		}else {
+			usernameOrEmail = connection.getUsername(usernameText);
+		}
+		String hashedPassword = connection.getHashedPassword(usernameText);
+		
+		if(checkUsername(usernameText, usernameOrEmail)  && checkPassword(passwordText, hashedPassword))
+			enterApplication(event);
+	}
+	
+	private boolean checkUsername(String usernameText, String databaseUsername) {
+		if(!usernameText.equals(databaseUsername)) {
+			errorMessage.setText("Username or Email is not correct");
+			errorMessage.setVisible(true);
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean isEmail(String usernameText) {
+		return usernameText.contains("@");
+	}
+
+	private boolean checkPassword(String passwordText, String databasePassword) {
+		boolean isPasswordCorrect = BCrypt.checkpw(passwordText, databasePassword);
+		if(!isPasswordCorrect)
+		{
+			errorMessage.setText("Password is not correct");
+			errorMessage.setVisible(true);
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean fieldsAreEmpty(String username, String password) {
+		if(username.isEmpty() || password.isEmpty()) {
+			errorMessage.setText("One of the fields are empty");
+			errorMessage.setVisible(true);
+			return false;
+		}
+		return true;
+		
+	}
+	
+	private void enterApplication(ActionEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		DraggableWindow window = new DraggableWindow();
@@ -97,5 +165,7 @@ public class LoginController{
 	public void passwordButtonClicked(ActionEvent event) {
 		passwordTextField.clear();
 	}
+
+	
 	
 }

@@ -49,7 +49,7 @@
          <graphic>
             <FontAwesomeIconView fx:id="exitIcon" glyphName="TIMES_CIRCLE" size="24" wrappingWidth="20.571428298950195" />
          </graphic></Button>
-      <Text fx:id="usernameLabel" layoutX="114.95573043823242" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="451.0999336242676">
+      <Text fx:id="usernameLabel" layoutX="114.95573043823242" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username or Email" AnchorPane.leftAnchor="114.95573043823242" AnchorPane.rightAnchor="451.0999336242676">
          <font>
             <Font name="Roboto" size="13.0" />
          </font></Text>
@@ -67,5 +67,6 @@
             <Font name="Roboto" size="13.0" />
          </font>
       </Text>
+      <Text fx:id="errorMessage" fill="RED" layoutX="107.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" />
 	</children>
 </AnchorPane>
