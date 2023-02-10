@@ -1,7 +1,5 @@
 package application.register.backend;
 
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -79,14 +77,14 @@ public class LoginDatabase {
 		return responseEmail;
 	}
 	
-	public String getHashedPassword(String registerUsername) throws ClassNotFoundException {
+	public String getHashedPassword(String registerUsernameOrEmail) throws ClassNotFoundException {
 		String select = "SELECT PASSWORD FROM Users WHERE USERNAME = ? OR EMAIL = ?";
 		String hashedPassword = null;
 		try (Connection connection = getConnection();
 			 PreparedStatement preparedStatement = connection.prepareStatement(select))
 		{
-			preparedStatement.setString(1, registerUsername);
-			preparedStatement.setString(2, registerUsername);
+			preparedStatement.setString(1, registerUsernameOrEmail);
+			preparedStatement.setString(2, registerUsernameOrEmail);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				hashedPassword = resultSet.getString("PASSWORD");

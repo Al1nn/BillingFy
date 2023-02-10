@@ -68,6 +68,50 @@ public class ClientDatabase {
 		}
 	}
 	
+	public void updateData(String clientName, String clientCUI
+    		, String clientTradeRegisterNumber, String clientEUID
+    		, String clientCountry, String clientCity
+    		, String clientCounty, String clientStreet
+    		, String clientNumber, String clientZipcode
+    		, String clientEmail, String clientPhoneNumber
+    		,String oldClientZipCode) {
+		String update = "UPDATE Clients SET " +
+                "Client_Name = ?, " +
+                "CUI = ?, " +
+                "Trade_Register_Number = ?, " +
+                "EUID = ?, " +
+                "COUNTRY = ?, " +
+                "CITY = ?, " +
+                "COUNTY = ?, " +
+                "STREET = ?, " +
+                "NUMBER = ?, " +
+                "ZIPCODE = ?, " +
+                "EMAIL = ?, " +
+                "PHONE_NUMBER = ? " +
+        "WHERE ZIPCODE = ? ";
+		try (Connection connection = getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(update)){
+			preparedStatement.setString(1, clientName);
+			preparedStatement.setString(2, clientCUI);
+			preparedStatement.setString(3, clientTradeRegisterNumber);
+			preparedStatement.setString(4, clientEUID);
+			preparedStatement.setString(5, clientCountry);
+			preparedStatement.setString(6, clientCity);
+			preparedStatement.setString(7, clientCounty);
+			preparedStatement.setString(8, clientStreet);
+			preparedStatement.setString(9, clientNumber);
+			preparedStatement.setString(10, clientZipcode);
+			preparedStatement.setString(11, clientEmail);
+			preparedStatement.setString(12, clientPhoneNumber);
+			preparedStatement.setString(13, oldClientZipCode);
+			int rowsUpdated = preparedStatement.executeUpdate();
+			if(rowsUpdated > 0)
+				System.out.println("Data updated succesfully");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	public ObservableList<Client> retrieveData() throws ClassNotFoundException{
 		ObservableList<Client> clients = FXCollections.observableArrayList();
 		String retrieve = "SELECT * FROM Clients";
@@ -88,7 +132,12 @@ public class ClientDatabase {
 				String clientZipCode = resultSet.getString("ZIPCODE");
 				String clientEmail = resultSet.getString("EMAIL");
 				String clientPhoneNumber = resultSet.getString("PHONE_NUMBER");
-				Client client = new Client(clientNumber, clientName, clientCountry, clientCity, clientZipCode, clientEmail, clientPhoneNumber);
+				Client client = new Client(clientName, clientCUI
+						, clientTradeRegisterNumber, clientEUID
+						, clientCountry, clientCity
+						, clientCounty, clientStreet
+						, clientNumber, clientZipCode
+						, clientEmail, clientPhoneNumber);
 				clients.add(client);
 			}
 		} catch (SQLException e) {

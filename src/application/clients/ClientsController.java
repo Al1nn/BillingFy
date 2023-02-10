@@ -215,6 +215,8 @@ public class ClientsController implements Initializable {
 
 	private ObservableList<Client> clientData;
 	
+	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
@@ -245,7 +247,7 @@ public class ClientsController implements Initializable {
 		}
 
 		clientsTable.setItems(clientData);
-		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
+		clientLengthText.setText(String.valueOf(getClientsTable().getItems().size()));
 		
 	}
 
@@ -323,7 +325,7 @@ public class ClientsController implements Initializable {
 		refreshData(childStage);
 	}
 	
-	private void refreshData(Stage childStage) {
+	public void refreshData(Stage childStage) {
 		childStage.setOnHidden(evt -> {
 			ClientDatabase connection = new ClientDatabase();
 			try {
@@ -472,6 +474,20 @@ public class ClientsController implements Initializable {
 			sortZipCodeIcon.setGlyphName("ANGLE_UP");
 	}
 
-	
+	public TableView<Client> getClientsTable() {
+		return clientsTable;
+	}
+
+	public void setClientsTable(TableView<Client> clientsTable) {
+		this.clientsTable = clientsTable;
+	}
+
+	public ObservableList<Client> getClientData() {
+		return clientData;
+	}
+
+	public void setClientData(ObservableList<Client> clientData) {
+		this.clientData = clientData;
+	}
 
 }

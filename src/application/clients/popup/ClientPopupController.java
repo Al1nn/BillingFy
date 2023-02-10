@@ -1,19 +1,28 @@
 package application.clients.popup;
 
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import application.clients.Client;
 import application.clients.ClientsController;
 import application.clients.backend.ClientDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class ClientPopupController {
+public class ClientPopupController{
     @FXML
     private Button CUIButton;
 
@@ -37,7 +46,10 @@ public class ClientPopupController {
 
     @FXML
     private TextField cityTextField;
-
+    
+    @FXML
+    private Text clientPopupTitle;
+    
     @FXML
     private Button clientButton;
 
@@ -166,7 +178,71 @@ public class ClientPopupController {
 
     @FXML
     private TextField zipCodeTextField;
-
+    
+    private boolean isEditable;
+    
+    private String oldZipCode;
+    
+    public void initializeData(String clientName, String clientCUI
+    		, String clientTradeRegisterNumber, String clientEUID
+    		, String clientCountry, String clientCity
+    		, String clientCounty, String clientStreet
+    		, String clientNumber, String clientZipcode
+    		, String clientEmail, String clientPhoneNumber) {
+    	clientNameTextField.setText(clientName);
+    	CUITextField.setText(clientCUI);
+    	tradeRegisterTextField.setText(clientTradeRegisterNumber);
+    	euidTextField.setText(clientEUID);
+    	countryTextField.setText(clientCountry);
+    	cityTextField.setText(clientCity);
+    	countyTextField.setText(clientCounty);
+    	streetTextField.setText(clientStreet);
+    	numberTextField.setText(clientNumber);
+    	zipCodeTextField.setText(clientZipcode);
+    	emailTextField.setText(clientEmail);
+    	phoneNumberTextField.setText(clientPhoneNumber);
+    	oldZipCode = clientZipcode;
+    }
+    
+ 
+    @FXML
+    void saveDataClicked(ActionEvent event) throws ClassNotFoundException, IOException {
+    	//Add contents to database  !!!!!
+    	String clientName = clientNameTextField.getText();
+    	String clientCUI = CUITextField.getText();
+    	String clientTradeRegisterNumber = tradeRegisterTextField.getText();
+    	String clientEUID = euidTextField.getText();
+    	String clientCountry = countryTextField.getText();
+    	String clientCity = cityTextField.getText();
+    	String clientCounty = countyTextField.getText();
+    	String clientStreet = streetTextField.getText();
+    	String clientNumber = numberTextField.getText();
+    	String clientZipCode = zipCodeTextField.getText();
+    	String clientEmail = emailTextField.getText();
+    	String clientPhoneNumber = phoneNumberTextField.getText();
+    	if(!isEditable) {
+    		ClientDatabase connection = new ClientDatabase();
+    		connection.insertData(clientName, clientCUI
+    			, clientTradeRegisterNumber, clientEUID
+    			, clientCountry, clientCity
+    			, clientCounty, clientStreet
+    			, clientNumber, clientZipCode
+    			, clientEmail, clientPhoneNumber);
+    		saveData.getScene().getWindow().hide();
+    		return;
+    	}
+    	ClientDatabase connection = new ClientDatabase();
+    	connection.updateData(clientName, clientCUI
+    		, clientTradeRegisterNumber, clientEUID
+    		, clientCountry, clientCity
+    		, clientCounty, clientStreet
+    		, clientNumber, clientZipCode
+    		, clientEmail, clientPhoneNumber
+    		, oldZipCode
+    		);
+    	saveData.getScene().getWindow().hide();	
+    }
+    
     @FXML
     void CUIButtonClicked(ActionEvent event) {
     	CUITextField.clear();
@@ -216,34 +292,7 @@ public class ClientPopupController {
     void phoneNumberButtonClicked(ActionEvent event) {
     	phoneNumberTextField.clear();
     }
-
-    @FXML
-    void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
-    	//Add contents to database  !!!!!
-    	String clientName = clientNameTextField.getText();
-    	String clientCUI = CUITextField.getText();
-    	String clientTradeRegisterNumber = tradeRegisterTextField.getText();
-    	String clientEUID = euidTextField.getText();
-    	String clientCountry = countryTextField.getText();
-    	String clientCity = cityTextField.getText();
-    	String clientCounty = countyTextField.getText();
-    	String clientStreet = streetTextField.getText();
-    	String clientNumber = numberTextField.getText();
-    	String clientZipCode = zipCodeTextField.getText();
-    	String clientEmail = emailTextField.getText();
-    	String clientPhoneNumber = phoneNumberTextField.getText();
-    	ClientDatabase connection = new ClientDatabase();
-    	connection.insertData(clientName, clientCUI
-    			, clientTradeRegisterNumber, clientEUID
-    			, clientCountry, clientCity
-    			, clientCounty, clientStreet
-    			, clientNumber, clientZipCode
-    			, clientEmail, clientPhoneNumber);
-    	saveData.getScene().getWindow().hide();
     
-    	
-    }
-
     @FXML
     void streetButtonClicked(ActionEvent event) {
     	streetTextField.clear();
@@ -258,4 +307,10 @@ public class ClientPopupController {
     void zipCodeButtonClicked(ActionEvent event) {
     	zipCodeTextField.clear();
     }
+    
+    public void setEditable(boolean args) {
+    	clientPopupTitle.setText("Editare Client");
+    	isEditable = args;
+    }
+	
 }
