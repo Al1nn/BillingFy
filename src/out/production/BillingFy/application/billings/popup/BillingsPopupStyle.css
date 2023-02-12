@@ -1,0 +1,101 @@
+#exitButton{
+	-fx-background-color: transparent;
+}
+#exitIcon{
+	
+}
+
+#exitButtonIcon:hover{
+	-fx-fill: #538EEA;
+}
+
+#clientZipCodeField,#clientStreetField,#clientRegisterNumberField,#clientPhoneNumberField,#clientNumberField,#clientEmailField,#clientEUIDField,#clientCountyField,#clientCountryField,#clientCityField,#clientCUITextField
+,#issuerZipCodeField,#issuerStreetField,#issuerRegisterNumberField,#issuerPhoneNumberField,#issuerNumberField,#issuerEmailField,#issuerEUIDField,#issuerCountyField,#issuerCountryField,#issuerCityField,#issuerCUITextField
+,#calculationTotalField,#calculationTaxField,#calculationSubtotalField,#paymentSwiftField,#paymentReferenceField,#paymentIssueDateField,#paymentIBANField,#paymentExchangeField,#paymentDueDateField,#paymentBeneficiaryField,#paymentBankField
+{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+
+#clientEUIDButton,#clientCountyButton,#clientCountryButton,#clientCityButton,#clientCUIButton,#clientZipCodeButton,#clientStreetButton,#clientRegisterNumberButton,#clientPhoneNumberButton,#clientNumberButton,#clientEmailButton
+,#issuerZipCodeButton,#issuerRegisterNumberButton,#issuerPhoneNumberButton,#issuerNumberButton,#issuerPhoneNumberButton,#issuerRegisterNumberButton,#issuerStreetButton,#issuerZipCodeButton,#issuerEmailButton,#issuerEUIDButton,#issuerCountyButton,#issuerCountryButton,#issuerCityButton,#issuerCUIButton
+,#paymentSwiftButton,#paymentIReferenceButton,#paymentIIssueDateButton,#paymentIBANButton,#paymentExchangeButton,#paymentDueDateButton,#paymentBeneficiaryButton,#paymentBankButton
+,#calculationTotalButton,#calculationTaxButton,#calculationSubtotalButton
+{
+	-fx-background-color: transparent;
+}
+
+#clientZipCodeIcon:hover,#clientStreetIcon:hover,#clientRegisterNumberIcon:hover,#clientPhoneNumberIcon:hover,#clientNumberIcon:hover,#clientEmailIcon:hover,#clientEUIDIcon:hover,#clientCountyIcon:hover,#clientCountryIcon:hover,#clientCityIcon:hover,#clientCUIIcon:hover
+,#calculationTotalIcon:hover,#calculationTaxIcon:hover,#calculationSubtotalIcon:hover
+,#issuerZipCodeIcon:hover,#issuerStreetIcon:hover,#issuerRegisterNumberIcon:hover,#issuerPhoneNumberIcon:hover,#issuerNumberIcon:hover,#issuerEmailIcon:hover,#issuerEUIDIcon:hover,#issuerCountyIcon:hover,#issuerCountryIcon:hover,#issuerCityIcon:hover,#issuerCUIIcon:hover
+,#paymentSwiftIcon:hover,#paymentReferenceIcon:hover,#paymentIssueDateIcon:hover,#paymentIBANIcon:hover,#paymentExchangeIcon:hover,#paymentDueDateIcon:hover,#paymentBeneficiaryIcon:hover,#paymentBankIcon:hover
+{
+	-fx-fill: "#5283E9";
+}
+
+#issuerNameCmbBox,#serviceExchangeCmbBox,#paymentCurrencyCmbBox,#clientNameCmbBox{
+	-fx-background-color: "#CBDAFF";
+}
+#issuerNameCmbBox .text-field ,#issuerNameCmbBox > .arrow-button , #serviceExchangeCmbBox .text-field, #serviceExchangeCmbBox > .arrow-button , #paymentCurrencyCmbBox .text-field, #paymentCurrencyCmbBox > .arrow-button,#clientNameCmbBox .text-field,#clientNameCmbBox > .arrow-button{
+	-fx-background-color: transparent;
+}
+
+#issuerNameCmbBox .list-view,#serviceExchangeCmbBox .list-view,#paymentCurrencyCmbBox .list-view,#clientNameCmbBox .list-view
+{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5 5 5 5;
+	-fx-border-color: "#2e4eb8";
+}
+
+#issuerNameCmbBox .list-cell,#serviceExchangeCmbBox .list-cell,#paymentCurrencyCmbBox .list-cell,#clientNameCmbBox .list-cell
+{
+	-fx-background-color: transparent;
+	-fx-font-family: "Roboto";
+}
+
+#issuerNameCmbBox .list-cell:hover,#serviceExchangeCmbBox .list-cell:hover,#paymentCurrencyCmbBox .list-cell:hover,#clientNameCmbBox .list-cell:hover {
+	-fx-text-fill: "#538EEA";
+}
+#issuerNameCmbBox .list-cell:selected,#serviceExchangeCmbBox .list-cell:selected,#paymentCurrencyCmbBox .list-cell:selected,#clientNameCmbBox .list-cell:selected{
+	-fx-text-fill: "#000000";
+}
+
+#exitPopup{
+	-fx-background-color: transparent;
+	-fx-border-color: "#DC2C2C";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#DC2C2C";	
+}
+#exitPopup:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#b51e1e";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#b51e1e";	
+}
+#saveData{
+	-fx-background-color: transparent;
+	-fx-border-color: "#4AAB5A";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#4AAB5A";	
+}
+#saveData:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#3b8948";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#3b8948";	
+}
+#addTaxesButton,#addServiceButton,#addDiscountButton{
+	-fx-background-color: transparent;
+}
+#addDiscountIcon,#addServiceIcon,#addTaxIcon{
+	-fx-fill: "#2E4EB8";
+}
+
+#addTaxIcon:pressed,#addServiceIcon:pressed,#addDiscountIcon:pressed{
+	-fx-fill: "#5283E9";
+}

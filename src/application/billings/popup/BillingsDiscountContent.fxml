@@ -9,49 +9,77 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsDiscountContentController">
-   <children>
-      <TextField fx:id="billingDiscountNameField" prefHeight="45.0" prefWidth="185.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Text fill="#2e4eb8" layoutX="12.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Discount">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Line endX="100.0" layoutX="85.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button fx:id="billingDiscountNameButton" layoutX="144.0" layoutY="8.0" minWidth="38.0" mnemonicParsing="false" onAction="#billingDiscountNameButtonClicked" prefHeight="31.0" prefWidth="38.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="billingDiscountNameIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-         </graphic>
-      </Button>
-      <TextField fx:id="billingDiscountPercentageField" focusTraversable="false" layoutX="195.0" prefHeight="45.0" prefWidth="130.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Line endX="45.0" endY="7.62939453125E-6" layoutX="280.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Text fill="#2e4eb8" layoutX="207.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Procent">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Button fx:id="addPercentageButton" focusTraversable="false" layoutX="278.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#addPercentageButtonClicked" prefHeight="15.0" prefWidth="54.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="addPercentageIcon" glyphName="PLUS" size="15" />
-         </graphic>
-      </Button>
-      <Button fx:id="removePercentageButton" focusTraversable="false" layoutX="278.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#removePercentageButtonClicked" prefHeight="15.0" prefWidth="54.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="removePercentageIcon" glyphName="MINUS" size="15" />
-         </graphic>
-      </Button>
-      <Button fx:id="removeForm" layoutX="331.0" minWidth="43.0" mnemonicParsing="false" onAction="#removeFormClicked" prefHeight="45.0" prefWidth="43.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="removeFormIcon" glyphName="TRASH" size="30" />
-         </graphic>
-      </Button>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0"
+	prefWidth="376.0" xmlns="http://javafx.com/javafx/19"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.billings.popup.BillingsDiscountContentController">
+	<children>
+		<TextField fx:id="billingDiscountNameField"
+			prefHeight="45.0" prefWidth="185.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Text fill="#2e4eb8" layoutX="12.0" layoutY="17.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Discount">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Line endX="100.0" layoutX="85.0" layoutY="45.0" startX="-85.0"
+			startY="-1.52587890625E-5" stroke="#2e4eb8" />
+		<Button fx:id="billingDiscountNameButton" layoutX="144.0"
+			layoutY="8.0" minWidth="38.0" mnemonicParsing="false"
+			onAction="#billingDiscountNameButtonClicked" prefHeight="31.0"
+			prefWidth="38.0">
+			<graphic>
+				<FontAwesomeIconView
+					fx:id="billingDiscountNameIcon" glyphName="TIMES_CIRCLE" size="22"
+					text="" />
+			</graphic>
+		</Button>
+		<TextField fx:id="billingDiscountPercentageField"
+			focusTraversable="false" layoutX="195.0" prefHeight="45.0"
+			prefWidth="130.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Line endX="45.0" endY="7.62939453125E-6" layoutX="280.0"
+			layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5"
+			stroke="#2e4eb8" />
+		<Text fill="#2e4eb8" layoutX="207.0" layoutY="17.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Procent">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Button fx:id="addPercentageButton" focusTraversable="false"
+			layoutX="278.0" layoutY="8.0" minHeight="15.0" minWidth="38.0"
+			mnemonicParsing="false" onAction="#addPercentageButtonClicked"
+			prefHeight="15.0" prefWidth="54.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="addPercentageIcon"
+					glyphName="PLUS" size="15" />
+			</graphic>
+		</Button>
+		<Button fx:id="removePercentageButton" focusTraversable="false"
+			layoutX="278.0" layoutY="26.0" minHeight="15.0" minWidth="38.0"
+			mnemonicParsing="false" onAction="#removePercentageButtonClicked"
+			prefHeight="15.0" prefWidth="54.0">
+			<graphic>
+				<FontAwesomeIconView
+					fx:id="removePercentageIcon" glyphName="MINUS" size="15" />
+			</graphic>
+		</Button>
+		<Button fx:id="removeForm" layoutX="331.0" minWidth="43.0"
+			mnemonicParsing="false" onAction="#removeFormClicked"
+			prefHeight="45.0" prefWidth="43.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="removeFormIcon"
+					glyphName="TRASH" size="30" />
+			</graphic>
+		</Button>
+	</children>
 </AnchorPane>

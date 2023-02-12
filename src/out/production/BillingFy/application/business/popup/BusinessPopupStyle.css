@@ -1,0 +1,72 @@
+#anchorPane{
+	-fx-background-color: "#DAECF9";
+}
+#exitPopup{
+	-fx-background-color: transparent;
+	-fx-border-color: "#DC2C2C";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#DC2C2C";	
+}
+#exitPopup:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#b51e1e";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#b51e1e";	
+}
+#saveData{
+	-fx-background-color: transparent;
+	-fx-border-color: "#4AAB5A";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#4AAB5A";	
+}
+#saveData:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#3b8948";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#3b8948";	
+}
+
+#numberTextField,#euidTextField,#emailTextField,#countyTextField,#countryTextField,#businessNameTextField,#cityTextField,#CUITextField,#tradeRegisterTextField,#streetTextField,#zipCodeTextField,#phoneNumberTextField,#bankTextField, #beneficiaryTextField,#IBANTextField,#swiftTextField,#referenceTextField,#exchangeTextField,#currencyTextField{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+
+#currencyComboBox{
+	-fx-background-color: "#CBDAFF";
+}
+#currencyComboBox .text-field, #currencyComboBox > .arrow-button{
+	-fx-background-color: transparent;
+}
+
+#currencyComboBox .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#000000"
+}
+#currencyComboBox .list-view{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5 5 5 5;
+	-fx-border-color: "#2e4eb8";
+}
+
+#currencyComboBox .list-cell{
+	-fx-background-color: transparent;
+	-fx-font-family: "Roboto";
+}
+#currencyComboBox .list-cell:hover {
+	-fx-text-fill: "#538EEA";
+}
+#currencyComboBox .list-cell:selected{
+	-fx-text-fill: "#000000";
+}
+
+#phoneNumberButton,#emailButton,#zipCodeButton,#numberButton,#streetButton,#countyButton,#cityButton,#countryButton,#euidButton,#tradeRegisterButton,#CUIButton,#businessButton,#bankButton,#beneficiaryButton,#swiftButton,#IBANButton,#referenceButton,#exchangeButton,#currencyButton{
+	-fx-background-color: transparent;
+} 
+#exchangeIcon:hover,#referenceIcon:hover,#swiftIcon:hover,#IBANIcon:hover,#beneficiaryIcon:hover,#bankIcon:hover,#phoneNumberIcon:hover,#emailIcon:hover,#zipCodeIcon:hover,#numberIcon:hover,#streetIcon:hover,#countyIcon:hover,#cityIcon:hover,#countryIcon:hover,#euidIcon:hover,#tradeRegisterIcon:hover,#CUIIcon:hover,#businessIcon:hover{
+	-fx-fill: "#5283E9";
+}

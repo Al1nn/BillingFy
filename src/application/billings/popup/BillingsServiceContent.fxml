@@ -9,81 +9,123 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.billings.popup.BillingsServiceContentController">
-   <children>
-      <TextField fx:id="billingServiceNameField" prefHeight="45.0" prefWidth="185.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Text fill="#2e4eb8" layoutX="12.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Serviciu">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Line endX="100.0" layoutX="85.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button fx:id="billingServiceNameButton" layoutX="144.0" layoutY="8.0" minWidth="38.0" mnemonicParsing="false" onAction="#billingServiceNameButtonClicked" prefHeight="31.0" prefWidth="38.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="billingServiceIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-         </graphic>
-      </Button>
-      <TextField fx:id="billingServiceAmountField" focusTraversable="false" layoutX="196.0" prefHeight="45.0" prefWidth="130.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Line endX="45.0" endY="7.62939453125E-6" layoutX="281.0" layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Text fill="#2e4eb8" layoutX="208.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantitate">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Button fx:id="addAmountButton" focusTraversable="false" layoutX="279.0" layoutY="8.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#addAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="addAmountIcon" glyphName="PLUS" size="15" />
-         </graphic>
-      </Button>
-      <Button fx:id="removeAmountButton" focusTraversable="false" layoutX="279.0" layoutY="26.0" minHeight="15.0" minWidth="38.0" mnemonicParsing="false" onAction="#removeAmountButtonClicked" prefHeight="15.0" prefWidth="54.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="removeAmountIcon" glyphName="MINUS" size="15" />
-         </graphic>
-      </Button>
-      <Button fx:id="removeForm" layoutX="330.5" minWidth="43.0" mnemonicParsing="false" onAction="#removeFormClicked" prefHeight="45.0" prefWidth="43.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="removeFormIcon" glyphName="TRASH" size="30" />
-         </graphic>
-      </Button>
-      <TextField fx:id="billingPriceField" layoutY="51.0" prefHeight="45.0" prefWidth="185.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Text fill="#2e4eb8" layoutX="12.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pret">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Line endX="100.0" layoutX="85.0" layoutY="96.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button fx:id="billingPriceButton" layoutX="144.0" layoutY="59.0" minWidth="38.0" mnemonicParsing="false" onAction="#billingPriceButtonClicked" prefHeight="31.0" prefWidth="38.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="billingPriceIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-         </graphic>
-      </Button>
-      <TextField fx:id="billingDescriptionField" layoutX="195.0" layoutY="51.0" prefHeight="45.0" prefWidth="179.0">
-         <padding>
-            <Insets left="10.0" right="30.0" top="15.0" />
-         </padding>
-      </TextField>
-      <Text fill="#2e4eb8" layoutX="207.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descriere">
-         <font>
-            <Font name="Roboto" size="13.0" />
-         </font>
-      </Text>
-      <Line endX="100.0" layoutX="280.0" layoutY="96.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-      <Button fx:id="billingDescriptionButton" layoutX="332.5" layoutY="59.0" minWidth="38.0" mnemonicParsing="false" onAction="#billingDescriptionButtonClicked" prefHeight="31.0" prefWidth="38.0">
-         <graphic>
-            <FontAwesomeIconView fx:id="billingDescriptionIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-         </graphic>
-      </Button>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0"
+	prefWidth="376.0" xmlns="http://javafx.com/javafx/19"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.billings.popup.BillingsServiceContentController">
+	<children>
+		<TextField fx:id="billingServiceNameField" prefHeight="45.0"
+			prefWidth="185.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Text fill="#2e4eb8" layoutX="12.0" layoutY="17.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Serviciu">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Line endX="100.0" layoutX="85.0" layoutY="45.0" startX="-85.0"
+			startY="-1.52587890625E-5" stroke="#2e4eb8" />
+		<Button fx:id="billingServiceNameButton" layoutX="144.0"
+			layoutY="8.0" minWidth="38.0" mnemonicParsing="false"
+			onAction="#billingServiceNameButtonClicked" prefHeight="31.0"
+			prefWidth="38.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="billingServiceIcon"
+					glyphName="TIMES_CIRCLE" size="22" text="" />
+			</graphic>
+		</Button>
+		<TextField fx:id="billingServiceAmountField"
+			focusTraversable="false" layoutX="196.0" prefHeight="45.0"
+			prefWidth="130.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Line endX="45.0" endY="7.62939453125E-6" layoutX="281.0"
+			layoutY="45.0" startX="-85.0" startY="-1.52587890625E-5"
+			stroke="#2e4eb8" />
+		<Text fill="#2e4eb8" layoutX="208.0" layoutY="17.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Cantitate">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Button fx:id="addAmountButton" focusTraversable="false"
+			layoutX="279.0" layoutY="8.0" minHeight="15.0" minWidth="38.0"
+			mnemonicParsing="false" onAction="#addAmountButtonClicked"
+			prefHeight="15.0" prefWidth="54.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="addAmountIcon"
+					glyphName="PLUS" size="15" />
+			</graphic>
+		</Button>
+		<Button fx:id="removeAmountButton" focusTraversable="false"
+			layoutX="279.0" layoutY="26.0" minHeight="15.0" minWidth="38.0"
+			mnemonicParsing="false" onAction="#removeAmountButtonClicked"
+			prefHeight="15.0" prefWidth="54.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="removeAmountIcon"
+					glyphName="MINUS" size="15" />
+			</graphic>
+		</Button>
+		<Button fx:id="removeForm" layoutX="330.5" minWidth="43.0"
+			mnemonicParsing="false" onAction="#removeFormClicked"
+			prefHeight="45.0" prefWidth="43.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="removeFormIcon"
+					glyphName="TRASH" size="30" />
+			</graphic>
+		</Button>
+		<TextField fx:id="billingPriceField" layoutY="51.0"
+			prefHeight="45.0" prefWidth="185.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Text fill="#2e4eb8" layoutX="12.0" layoutY="68.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Pret">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Line endX="100.0" layoutX="85.0" layoutY="96.0" startX="-85.0"
+			startY="-1.52587890625E-5" stroke="#2e4eb8" />
+		<Button fx:id="billingPriceButton" layoutX="144.0"
+			layoutY="59.0" minWidth="38.0" mnemonicParsing="false"
+			onAction="#billingPriceButtonClicked" prefHeight="31.0"
+			prefWidth="38.0">
+			<graphic>
+				<FontAwesomeIconView fx:id="billingPriceIcon"
+					glyphName="TIMES_CIRCLE" size="22" text="" />
+			</graphic>
+		</Button>
+		<TextField fx:id="billingDescriptionField" layoutX="195.0"
+			layoutY="51.0" prefHeight="45.0" prefWidth="179.0">
+			<padding>
+				<Insets left="10.0" right="30.0" top="15.0" />
+			</padding>
+		</TextField>
+		<Text fill="#2e4eb8" layoutX="207.0" layoutY="68.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Descriere">
+			<font>
+				<Font name="Roboto" size="13.0" />
+			</font>
+		</Text>
+		<Line endX="100.0" layoutX="280.0" layoutY="96.0" startX="-85.0"
+			startY="-1.52587890625E-5" stroke="#2e4eb8" />
+		<Button fx:id="billingDescriptionButton" layoutX="332.5"
+			layoutY="59.0" minWidth="38.0" mnemonicParsing="false"
+			onAction="#billingDescriptionButtonClicked" prefHeight="31.0"
+			prefWidth="38.0">
+			<graphic>
+				<FontAwesomeIconView
+					fx:id="billingDescriptionIcon" glyphName="TIMES_CIRCLE" size="22"
+					text="" />
+			</graphic>
+		</Button>
+	</children>
 </AnchorPane>

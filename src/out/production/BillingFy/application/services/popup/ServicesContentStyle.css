@@ -1,0 +1,40 @@
+#anchorPane{
+	-fx-background-color: "#DAECF9";
+}
+#serviceNameField,#serviceAmountField,#serviceDescriptionField,#serviceExchangeField,#servicePriceField{
+	-fx-background-color: "#CBDAFF";
+}
+#removeForm{
+	-fx-background-color: transparent;
+}
+#removeFormIcon{
+	-fx-fill: "#942c5c";
+}
+#removeFormIcon:hover{
+	-fx-fill: "#b51e1e";
+}
+#serviceNameButton,#addAmountButton,#removeAmountButton,#serviceDescriptionButton,#servicePriceButton,#serviceNameButton{
+	-fx-background-color: transparent;
+}
+#servicePriceIcon:hover,#serviceNameIcon:hover,#serviceDescriptionIcon:hover,#removeAmountIcon:hover,#addAmountIcon:hover{
+	-fx-fill: "#2E4EB8";
+}
+#serviceExchangeField .list-view{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5 5 5 5;
+	-fx-border-color: "#2e4eb8";
+}
+#serviceExchangeField .text-field ,#serviceExchangeField > .arrow-button{
+	-fx-background-color: transparent;
+}
+#serviceExchangeField .list-cell{
+	-fx-background-color: transparent;
+	-fx-font-family: "Roboto";
+}
+#serviceExchangeField .list-cell:hover{
+	-fx-text-fill: "#538EEA";
+}
+#serviceExchangeField .list-cell:selected{
+	-fx-text-fill: "#000000";
+}

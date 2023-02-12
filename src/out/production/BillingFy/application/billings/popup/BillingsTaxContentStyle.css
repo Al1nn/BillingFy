@@ -1,0 +1,19 @@
+.root{
+	-fx-background-color: "#DAECF9";
+}
+#billingTaxValueField,#billingTaxNameField{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+#removeValueButton,#addValueButton,#billingTaxNameButton,#removeForm{
+	-fx-background-color: transparent;
+}
+#removeFormIcon{
+	-fx-fill: "#942c5c";
+}
+#removeFormIcon:hover{
+	-fx-fill: "#b51e1e";
+}
+#removeValueIcon:hover,#billingTaxNameIcon:hover,#addValueIcon:hover{
+	-fx-fill: "#5283E9";
+}

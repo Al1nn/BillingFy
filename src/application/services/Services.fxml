@@ -20,190 +20,349 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.services.ServicesController">
-   <children>
-      <AnchorPane fx:id="buttonLayout" layoutX="75.0" layoutY="66.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="66.0">
-         <children>
-            <Button fx:id="billingsButton" alignment="BOTTOM_CENTER" layoutX="35.0" layoutY="28.0" mnemonicParsing="false" onAction="#billingsButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Facturi" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="28.0">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font></Button>
-            <Button fx:id="clientsButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="127.0" mnemonicParsing="false" onAction="#clientsButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Clienti" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="123.0">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font>
-            </Button>
-            <Button fx:id="servicesButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="221.0" mnemonicParsing="false" onAction="#servicesButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Servicii" textAlignment="CENTER" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="220.0">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font>
-            </Button>
-            <Button fx:id="statisticsButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="317.0" mnemonicParsing="false" onAction="#statisticsButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Statistici" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="317.0">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font>
-            </Button>
-            <Button fx:id="businessButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="414.0" mnemonicParsing="false" onAction="#businessButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Lista Firme" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="414.0">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font>
-            </Button>
-            <Button fx:id="addBillingButton" alignment="BOTTOM_CENTER" cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="511.0" mnemonicParsing="false" onAction="#addBillingButtonClicked" prefHeight="85.0" prefWidth="85.0" text="Adauga Factura" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="511.0">
-               <font>
-                  <Font name="Roboto" size="9.75" />
-               </font>
-            </Button>
-            <Circle fx:id="billingsCircle" fill="#2e4eb8" layoutX="78.0" layoutY="60.0" radius="25.0" stroke="#dbdbdb00" strokeType="INSIDE" />
-            <OctIconView fx:id="billingsIcon" fill="WHITE" glyphName="FILE_TEXT" layoutX="63.0" layoutY="72.0" size="32" AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="43.0" />
-            <Circle fx:id="clientsCircle" fill="#2e4eb8" layoutX="78.0" layoutY="157.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" />
-            <FontAwesomeIconView fx:id="clientsIcon" fill="WHITE" glyphName="USER" layoutX="66.0" layoutY="150.0" size="32" textAlignment="CENTER" textOrigin="TOP" AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="141.0" />
-            <Circle fx:id="servicesCircle" fill="#dddddd" layoutX="78.0" layoutY="255.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="230.0" />
-            <FontAwesomeIconView fx:id="servicesIcon" fill="WHITE" glyphName="HANDSHAKE_ALT" layoutX="57.0" layoutY="266.0" size="32" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="238.5714282989502" />
-            <Circle fx:id="statisticsCircle" fill="#2e4eb8" layoutX="78.0" layoutY="352.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" />
-            <FontAwesomeIconView fx:id="statisticsIcon" fill="WHITE" glyphName="BAR_CHART" layoutX="60.0" layoutY="363.0" size="32" />
-            <Circle fx:id="businessCircle" fill="#2e4eb8" layoutX="78.0" layoutY="449.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" />
-            <FontAwesomeIconView fx:id="businessIcon" fill="WHITE" glyphName="BRIEFCASE" layoutX="62.0" layoutY="460.0" size="32" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="432.5714282989502" />
-            <Circle fx:id="addBillingCircle" fill="#2e4eb8" layoutX="78.0" layoutY="545.0" radius="25.0" stroke="#ffffff33" strokeType="INSIDE" />
-            <MaterialIconView fx:id="addBillingIcon" fill="WHITE" glyphName="NOTE_ADD" layoutX="62.0" layoutY="561.0" size="32" />
-         </children></AnchorPane>
-      <AnchorPane fx:id="servicesLayout" layoutX="245.0" layoutY="66.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="66.0">
-         <children>
-            <GridPane alignment="TOP_CENTER" layoutX="36.0" layoutY="702.0" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="36.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
-               </rowConstraints>
-               <children>
-                  <ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </ComboBox>
-               </children>
-            </GridPane>
-            <Text fx:id="servicesTitle" layoutX="21.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BillingFy">
-               <font>
-                  <Font name="Buffalo-Regular" size="48.0" />
-               </font>
-            </Text>
-            <Text layoutX="170.0" layoutY="722.763671875" strokeType="OUTSIDE" strokeWidth="0.0" text="per pagina" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="170.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Button fx:id="servicesNextPage" layoutX="605.5" layoutY="715.0" mnemonicParsing="false" onAction="#servicesNextPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="441.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="servicesNextPageIcon" glyphName="ANGLE_RIGHT" size="20" />
-               </graphic>
-            </Button>
-            <Button fx:id="servicesPreviousPage" layoutX="510.5" layoutY="715.0" mnemonicParsing="false" onAction="#servicesPreviousPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="536.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="servicesPreviousPageIcon" glyphName="ANGLE_LEFT" size="20" text="" />
-               </graphic>
-            </Button>
-            <Text layoutX="585.4853515625" layoutY="723.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="din" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="496.85546875">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="servicesCurrentPage" layoutX="573.4853515625" layoutY="723.560546875" strokeType="OUTSIDE" strokeWidth="0.0" text="1" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="519.21484375">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="servicesPages" layoutX="606.4033203125" layoutY="723.576171875" strokeType="OUTSIDE" strokeWidth="0.0" text="99" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="478.9970703125">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TableView fx:id="servicesTable" layoutX="35.0" layoutY="156.0" prefHeight="527.0" prefWidth="628.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="135.0">
-              <columns>
-                <TableColumn fx:id="servicesNumber" editable="false" minWidth="1.0" prefWidth="75.0" sortable="false" text="Numar" />
-                <TableColumn fx:id="servicesName" editable="false" minWidth="65.0" prefWidth="175.0" sortable="false" text="Nume" />
-                  <TableColumn fx:id="servicesDescription" editable="false" minWidth="65.0" prefWidth="100.0" sortable="false" text="Descriere" />
-                  <TableColumn fx:id="servicesPrice" editable="false" minWidth="15.0" prefWidth="100.0" sortable="false" text="Pret" />
-                  <TableColumn fx:id="servicesFunctions" editable="false" minWidth="25.0" prefWidth="75.0" sortable="false" text="Editare/Stergere" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <Text fx:id="servicesLengthText" layoutX="50.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="999">
-               <font>
-                  <Font name="Roboto" size="16.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="84.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Servicii Gasite">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Button fx:id="sortPriceButton" layoutX="624.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortPriceButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Pret" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="31.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <FontAwesomeIconView fx:id="sortPriceIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="844.7857151031494" layoutY="55.571428298950195" size="24" AnchorPane.rightAnchor="39.78571319580078" AnchorPane.topAnchor="34.0" />
-            <Button fx:id="sortServicesButton" layoutX="860.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortServicesButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Nume" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="31.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <FontAwesomeIconView fx:id="sortServicesIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="934.5000171661377" layoutY="54.571428298950195" size="24" AnchorPane.rightAnchor="150.0714111328125" AnchorPane.topAnchor="34.0" />
-            <Button fx:id="sortNumberButton" layoutX="750.0" layoutY="31.0" mnemonicParsing="false" onAction="#sortNumberButtonClicked" prefHeight="30.0" prefWidth="100.0" text="Numar" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="31.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <FontAwesomeIconView fx:id="sortNumberIcon" fill="#538eea" glyphName="ANGLE_DOWN" layoutX="824.5000171661377" layoutY="54.571428298950195" size="24" AnchorPane.rightAnchor="260.0714111328125" AnchorPane.topAnchor="34.0" />
-            <TextField fx:id="searchService" layoutX="789.0" layoutY="69.0" prefHeight="30.0" prefWidth="135.0" promptText="Nume " AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="69.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-            </TextField>
-            <FontAwesomeIconView glyphName="SEARCH" layoutX="798.1428203582764" layoutY="91.0" size="20" AnchorPane.rightAnchor="283.28575134277344" AnchorPane.topAnchor="73.85714340209961" />
-            <Button fx:id="addServicesButton" alignment="CENTER_RIGHT" layoutX="1015.0" layoutY="69.0" mnemonicParsing="false" onAction="#addServicesButtonClicked" prefHeight="30.0" prefWidth="135.0" text="    Adauga Serviciu" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="69.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <FontAwesomeIconView glyphName="HANDSHAKE_ALT" layoutX="937.8571434020996" layoutY="92.0" size="20" AnchorPane.rightAnchor="136.4285717010498" AnchorPane.topAnchor="74.85714340209961" />
-            <BarChart fx:id="servicesNumberChart" categoryGap="5.0" layoutX="681.0" layoutY="142.0" prefHeight="258.0" prefWidth="388.0" title="Numar de servicii vandute de pe pagina" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="142.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-               <padding>
-                  <Insets bottom="25.0" />
-               </padding>
-            </BarChart>
-            <BarChart fx:id="servicesIncomingsChart" layoutX="681.0" layoutY="492.0" legendSide="TOP" prefHeight="258.0" prefWidth="388.0" title="Incasari din serviciile de pe pagina" AnchorPane.bottomAnchor="61.0" AnchorPane.rightAnchor="31.0">
-               <xAxis>
-                  <CategoryAxis side="BOTTOM" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis side="LEFT" />
-               </yAxis>
-               <padding>
-                  <Insets bottom="25.0" />
-               </padding>
-            </BarChart>
-         </children>
-      </AnchorPane>
-      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1128.0" layoutY="19.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="18.5">
-         <graphic>
-            <FontAwesomeIconView fx:id="exitIcon" glyphName="TIMES_CIRCLE" size="24" wrappingWidth="20.571428298950195" />
-         </graphic>
-      </Button>
-   </children>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="900.0" prefWidth="1400.0"
+	xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.services.ServicesController">
+	<children>
+		<AnchorPane fx:id="buttonLayout" layoutX="75.0"
+			layoutY="66.0" AnchorPane.bottomAnchor="72.0"
+			AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="90.0"
+			AnchorPane.topAnchor="66.0">
+			<children>
+				<Button fx:id="billingsButton" alignment="BOTTOM_CENTER"
+					layoutX="35.0" layoutY="28.0" mnemonicParsing="false"
+					onAction="#billingsButtonClicked" prefHeight="85.0"
+					prefWidth="85.0" text="Lista Facturi" textAlignment="CENTER"
+					textFill="WHITE" AnchorPane.leftAnchor="35.0"
+					AnchorPane.topAnchor="28.0">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Button>
+				<Button fx:id="clientsButton" alignment="BOTTOM_CENTER"
+					cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="127.0"
+					mnemonicParsing="false" onAction="#clientsButtonClicked"
+					prefHeight="85.0" prefWidth="85.0" text="Lista Clienti"
+					textAlignment="CENTER" textFill="WHITE"
+					AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="123.0">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Button>
+				<Button fx:id="servicesButton" alignment="BOTTOM_CENTER"
+					cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="221.0"
+					mnemonicParsing="false" onAction="#servicesButtonClicked"
+					prefHeight="85.0" prefWidth="85.0" text="Lista Servicii"
+					textAlignment="CENTER" AnchorPane.leftAnchor="35.0"
+					AnchorPane.topAnchor="220.0">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Button>
+				<Button fx:id="statisticsButton" alignment="BOTTOM_CENTER"
+					cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="317.0"
+					mnemonicParsing="false" onAction="#statisticsButtonClicked"
+					prefHeight="85.0" prefWidth="85.0" text="Statistici"
+					textAlignment="CENTER" textFill="WHITE"
+					AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="317.0">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Button>
+				<Button fx:id="businessButton" alignment="BOTTOM_CENTER"
+					cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="414.0"
+					mnemonicParsing="false" onAction="#businessButtonClicked"
+					prefHeight="85.0" prefWidth="85.0" text="Lista Firme"
+					textAlignment="CENTER" textFill="WHITE"
+					AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="414.0">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Button>
+				<Button fx:id="addBillingButton" alignment="BOTTOM_CENTER"
+					cache="true" contentDisplay="TOP" layoutX="35.0" layoutY="511.0"
+					mnemonicParsing="false" onAction="#addBillingButtonClicked"
+					prefHeight="85.0" prefWidth="85.0" text="Adauga Factura"
+					textAlignment="CENTER" textFill="WHITE"
+					AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="511.0">
+					<font>
+						<Font name="Roboto" size="9.75" />
+					</font>
+				</Button>
+				<Circle fx:id="billingsCircle" fill="#2e4eb8" layoutX="78.0"
+					layoutY="60.0" radius="25.0" stroke="#dbdbdb00" strokeType="INSIDE" />
+				<OctIconView fx:id="billingsIcon" fill="WHITE"
+					glyphName="FILE_TEXT" layoutX="63.0" layoutY="72.0" size="32"
+					AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="43.0" />
+				<Circle fx:id="clientsCircle" fill="#2e4eb8" layoutX="78.0"
+					layoutY="157.0" radius="25.0" stroke="#ffffff33"
+					strokeType="INSIDE" />
+				<FontAwesomeIconView fx:id="clientsIcon"
+					fill="WHITE" glyphName="USER" layoutX="66.0" layoutY="150.0"
+					size="32" textAlignment="CENTER" textOrigin="TOP"
+					AnchorPane.leftAnchor="66.5" AnchorPane.topAnchor="141.0" />
+				<Circle fx:id="servicesCircle" fill="#dddddd" layoutX="78.0"
+					layoutY="255.0" radius="25.0" stroke="#ffffff33"
+					strokeType="INSIDE" AnchorPane.leftAnchor="53.0"
+					AnchorPane.topAnchor="230.0" />
+				<FontAwesomeIconView fx:id="servicesIcon"
+					fill="WHITE" glyphName="HANDSHAKE_ALT" layoutX="57.0"
+					layoutY="266.0" size="32" AnchorPane.leftAnchor="57.0"
+					AnchorPane.topAnchor="238.5714282989502" />
+				<Circle fx:id="statisticsCircle" fill="#2e4eb8"
+					layoutX="78.0" layoutY="352.0" radius="25.0" stroke="#ffffff33"
+					strokeType="INSIDE" />
+				<FontAwesomeIconView fx:id="statisticsIcon"
+					fill="WHITE" glyphName="BAR_CHART" layoutX="60.0" layoutY="363.0"
+					size="32" />
+				<Circle fx:id="businessCircle" fill="#2e4eb8" layoutX="78.0"
+					layoutY="449.0" radius="25.0" stroke="#ffffff33"
+					strokeType="INSIDE" />
+				<FontAwesomeIconView fx:id="businessIcon"
+					fill="WHITE" glyphName="BRIEFCASE" layoutX="62.0" layoutY="460.0"
+					size="32" AnchorPane.leftAnchor="62.0"
+					AnchorPane.topAnchor="432.5714282989502" />
+				<Circle fx:id="addBillingCircle" fill="#2e4eb8"
+					layoutX="78.0" layoutY="545.0" radius="25.0" stroke="#ffffff33"
+					strokeType="INSIDE" />
+				<MaterialIconView fx:id="addBillingIcon"
+					fill="WHITE" glyphName="NOTE_ADD" layoutX="62.0" layoutY="561.0"
+					size="32" />
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="servicesLayout" layoutX="245.0"
+			layoutY="66.0" AnchorPane.bottomAnchor="72.0"
+			AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="75.0"
+			AnchorPane.topAnchor="66.0">
+			<children>
+				<GridPane alignment="TOP_CENTER" layoutX="36.0"
+					layoutY="702.0" maxHeight="-Infinity" maxWidth="-Infinity"
+					AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="36.0">
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES"
+							minWidth="10.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+					</rowConstraints>
+					<children>
+						<ComboBox fx:id="itemsPerPage" cache="true"
+							maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0"
+							promptText="10 iteme">
+							<GridPane.margin>
+								<Insets />
+							</GridPane.margin>
+						</ComboBox>
+					</children>
+				</GridPane>
+				<Text fx:id="servicesTitle" layoutX="21.0" layoutY="62.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="BillingFy">
+					<font>
+						<Font name="Buffalo-Regular" size="48.0" />
+					</font>
+				</Text>
+				<Text layoutX="170.0" layoutY="722.763671875"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="per pagina"
+					AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="170.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Button fx:id="servicesNextPage" layoutX="605.5"
+					layoutY="715.0" mnemonicParsing="false"
+					onAction="#servicesNextPageClicked" prefHeight="20.0"
+					prefWidth="30.0" AnchorPane.bottomAnchor="25.0"
+					AnchorPane.rightAnchor="441.0">
+					<graphic>
+						<FontAwesomeIconView
+							fx:id="servicesNextPageIcon" glyphName="ANGLE_RIGHT" size="20" />
+					</graphic>
+				</Button>
+				<Button fx:id="servicesPreviousPage" layoutX="510.5"
+					layoutY="715.0" mnemonicParsing="false"
+					onAction="#servicesPreviousPageClicked" prefHeight="20.0"
+					prefWidth="30.0" AnchorPane.bottomAnchor="25.0"
+					AnchorPane.rightAnchor="536.0">
+					<graphic>
+						<FontAwesomeIconView
+							fx:id="servicesPreviousPageIcon" glyphName="ANGLE_LEFT" size="20"
+							text="" />
+					</graphic>
+				</Button>
+				<Text layoutX="585.4853515625" layoutY="723.107421875"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="din"
+					AnchorPane.bottomAnchor="33.0"
+					AnchorPane.rightAnchor="496.85546875">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fx:id="servicesCurrentPage" layoutX="573.4853515625"
+					layoutY="723.560546875" strokeType="OUTSIDE" strokeWidth="0.0"
+					text="1" AnchorPane.bottomAnchor="33.0"
+					AnchorPane.rightAnchor="519.21484375">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fx:id="servicesPages" layoutX="606.4033203125"
+					layoutY="723.576171875" strokeType="OUTSIDE" strokeWidth="0.0"
+					text="99" AnchorPane.bottomAnchor="33.0"
+					AnchorPane.rightAnchor="478.9970703125">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TableView fx:id="servicesTable" layoutX="35.0"
+					layoutY="156.0" prefHeight="527.0" prefWidth="628.0"
+					AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="42.0"
+					AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="135.0">
+					<columns>
+						<TableColumn fx:id="servicesNumber" editable="false"
+							minWidth="1.0" prefWidth="75.0" sortable="false" text="Numar" />
+						<TableColumn fx:id="servicesName" editable="false"
+							minWidth="65.0" prefWidth="175.0" sortable="false" text="Nume" />
+						<TableColumn fx:id="servicesDescription"
+							editable="false" minWidth="65.0" prefWidth="100.0"
+							sortable="false" text="Descriere" />
+						<TableColumn fx:id="servicesPrice" editable="false"
+							minWidth="15.0" prefWidth="100.0" sortable="false" text="Pret" />
+						<TableColumn fx:id="servicesFunctions"
+							editable="false" minWidth="25.0" prefWidth="75.0"
+							sortable="false" text="Editare/Stergere" />
+					</columns>
+					<columnResizePolicy>
+						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+					</columnResizePolicy>
+				</TableView>
+				<Text fx:id="servicesLengthText" layoutX="50.0" layoutY="123.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="999">
+					<font>
+						<Font name="Roboto" size="16.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="84.0" layoutY="123.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Servicii Gasite">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Text>
+				<Button fx:id="sortPriceButton" layoutX="624.0"
+					layoutY="31.0" mnemonicParsing="false"
+					onAction="#sortPriceButtonClicked" prefHeight="30.0"
+					prefWidth="100.0" text="Pret" AnchorPane.rightAnchor="30.0"
+					AnchorPane.topAnchor="31.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<FontAwesomeIconView fx:id="sortPriceIcon"
+					fill="#538eea" glyphName="ANGLE_DOWN" layoutX="844.7857151031494"
+					layoutY="55.571428298950195" size="24"
+					AnchorPane.rightAnchor="39.78571319580078"
+					AnchorPane.topAnchor="34.0" />
+				<Button fx:id="sortServicesButton" layoutX="860.0"
+					layoutY="31.0" mnemonicParsing="false"
+					onAction="#sortServicesButtonClicked" prefHeight="30.0"
+					prefWidth="100.0" text="Nume" AnchorPane.rightAnchor="140.0"
+					AnchorPane.topAnchor="31.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<FontAwesomeIconView fx:id="sortServicesIcon"
+					fill="#538eea" glyphName="ANGLE_DOWN" layoutX="934.5000171661377"
+					layoutY="54.571428298950195" size="24"
+					AnchorPane.rightAnchor="150.0714111328125"
+					AnchorPane.topAnchor="34.0" />
+				<Button fx:id="sortNumberButton" layoutX="750.0"
+					layoutY="31.0" mnemonicParsing="false"
+					onAction="#sortNumberButtonClicked" prefHeight="30.0"
+					prefWidth="100.0" text="Numar" AnchorPane.rightAnchor="250.0"
+					AnchorPane.topAnchor="31.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<FontAwesomeIconView fx:id="sortNumberIcon"
+					fill="#538eea" glyphName="ANGLE_DOWN" layoutX="824.5000171661377"
+					layoutY="54.571428298950195" size="24"
+					AnchorPane.rightAnchor="260.0714111328125"
+					AnchorPane.topAnchor="34.0" />
+				<TextField fx:id="searchService" layoutX="789.0"
+					layoutY="69.0" prefHeight="30.0" prefWidth="135.0"
+					promptText="Nume " AnchorPane.rightAnchor="176.0"
+					AnchorPane.topAnchor="69.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+					<padding>
+						<Insets left="30.0" />
+					</padding>
+				</TextField>
+				<FontAwesomeIconView glyphName="SEARCH"
+					layoutX="798.1428203582764" layoutY="91.0" size="20"
+					AnchorPane.rightAnchor="283.28575134277344"
+					AnchorPane.topAnchor="73.85714340209961" />
+				<Button fx:id="addServicesButton" alignment="CENTER_RIGHT"
+					layoutX="1015.0" layoutY="69.0" mnemonicParsing="false"
+					onAction="#addServicesButtonClicked" prefHeight="30.0"
+					prefWidth="135.0" text="    Adauga Serviciu"
+					AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="69.0">
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<FontAwesomeIconView glyphName="HANDSHAKE_ALT"
+					layoutX="937.8571434020996" layoutY="92.0" size="20"
+					AnchorPane.rightAnchor="136.4285717010498"
+					AnchorPane.topAnchor="74.85714340209961" />
+				<BarChart fx:id="servicesNumberChart" categoryGap="5.0"
+					layoutX="681.0" layoutY="142.0" prefHeight="258.0"
+					prefWidth="388.0" title="Numar de servicii vandute de pe pagina"
+					AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="142.0">
+					<xAxis>
+						<CategoryAxis side="BOTTOM" />
+					</xAxis>
+					<yAxis>
+						<NumberAxis side="LEFT" />
+					</yAxis>
+					<padding>
+						<Insets bottom="25.0" />
+					</padding>
+				</BarChart>
+				<BarChart fx:id="servicesIncomingsChart" layoutX="681.0"
+					layoutY="492.0" legendSide="TOP" prefHeight="258.0"
+					prefWidth="388.0" title="Incasari din serviciile de pe pagina"
+					AnchorPane.bottomAnchor="61.0" AnchorPane.rightAnchor="31.0">
+					<xAxis>
+						<CategoryAxis side="BOTTOM" />
+					</xAxis>
+					<yAxis>
+						<NumberAxis side="LEFT" />
+					</yAxis>
+					<padding>
+						<Insets bottom="25.0" />
+					</padding>
+				</BarChart>
+			</children>
+		</AnchorPane>
+		<Button fx:id="exitButton" alignment="CENTER"
+			contentDisplay="CENTER" layoutX="1128.0" layoutY="19.0"
+			mnemonicParsing="false" onAction="#exitButtonClicked"
+			prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT"
+			textFill="WHITE" AnchorPane.rightAnchor="18.5">
+			<graphic>
+				<FontAwesomeIconView fx:id="exitIcon"
+					glyphName="TIMES_CIRCLE" size="24"
+					wrappingWidth="20.571428298950195" />
+			</graphic>
+		</Button>
+	</children>
 </AnchorPane>

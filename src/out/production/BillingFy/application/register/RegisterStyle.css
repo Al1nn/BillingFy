@@ -1,0 +1,80 @@
+#anchorPane{
+	-fx-background-image : url("../resources/background.png");
+	-fx-background-size: cover; 
+}
+
+#rectangleForm{
+	-fx-fill: #49454F;
+	-fx-stroke: gray;
+	-fx-border-color: red;
+	-fx-opacity: 0.3;
+	-fx-stroke-borders: 20px;
+}
+
+#exitButton{
+	-fx-background-color: transparent;
+}
+#exitButton:hover{
+	-fx-background-color: transparent;
+}
+
+#exitIcon{
+	-fx-fill: "white";
+}
+
+#exitIcon:hover{
+	-fx-fill: #538EEA;
+}
+
+#registerUsernameTextField,#registerPasswordTextField,#registerEmailTextField
+{	
+	-fx-border-radius: 5 5 0 0;
+ 	-fx-background-radius: 5 5 0 0;
+}
+
+#registerMessage{
+	-fx-fill: #60f55d;
+}
+
+#registerButton{
+	-fx-background-color: transparent;
+	-fx-border-color: "white";
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: "white";
+}
+#registerButton:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: #538EEA;
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: #538EEA;
+}
+#registerBackButton{
+	-fx-background-color: transparent;
+	-fx-border-color: "white";
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: "white";
+}
+#registerBackButton:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: #538EEA;
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: #538EEA;
+}
+
+#registerEmailButton,#registerPasswordButton,#registerUsernameButton{
+	-fx-background-color: transparent;
+}
+
+
+#registerEmailIcon,#registerPasswordIcon,#registerUsernameIcon{
+	-fx-fill: #2E4EB8;
+}
+#registerEmailIcon:hover,#registerPasswordIcon:hover,#registerUsernameIcon:hover{
+	-fx-fill: #538EEA;
+}
+
+

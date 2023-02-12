@@ -1,0 +1,81 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#anchorPane{
+	-fx-background-image : url("resources/background.png");
+	-fx-background-size: cover; 
+}
+#loginButton{
+	-fx-background-color: transparent;
+	-fx-border-color: "white";
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: "white";
+}
+#loginButton:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: #538EEA;
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: #538EEA;
+}
+#loginButton:pressed{
+	-fx-background-color: transparent;
+	-fx-border-color: #B4CEF6;
+	-fx-border-radius: 100px;
+	-fx-stroke: solid;
+	-fx-text-fill: #B4CEF6;
+}
+#exitButton{
+	-fx-background-color: transparent;
+}
+#exitButton:hover{
+	-fx-background-color: transparent;
+}
+
+#exitIcon{
+	-fx-fill: "white";
+}
+
+#exitIcon:hover{
+	-fx-fill: #538EEA;
+}
+#rectangleForm{
+	-fx-fill: #49454F;
+	-fx-stroke: gray;
+	-fx-border-color: red;
+	-fx-opacity: 0.3;
+	-fx-stroke-borders: 20px;
+}
+#registerText:hover{
+	-fx-fill: #538EEA;
+}
+#registerText:pressed{
+	-fx-fill: #B4CEF6;
+}
+#textLabel{
+	-fx-font-family: "Buffalo";
+	-fx-fill: #FFFFFF;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 15 15 0 0;
+}
+
+#passwordTextField,#usernameTextField
+{
+ 	-fx-border-radius: 5 5 0 0;
+ 	-fx-background-radius: 5 5 0 0;
+}
+
+#usernameButton,#passwordButton{
+	-fx-background-color: transparent;
+}
+
+#usernameIcon,#passwordIcon{
+	-fx-fill: #2E4EB8;
+}
+
+#usernameIcon:hover, #passwordIcon:hover{
+	-fx-fill: #538EEA;
+}
+
+
+

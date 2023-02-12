@@ -1,0 +1,163 @@
+.root{
+	-fx-background-image : url("../resources/background.png");
+	-fx-background-size: cover; 
+}
+
+#buttonLayout{
+	-fx-background-color: "#5283E9";
+	-fx-background-radius: 25 0 0 25;
+	-fx-border-radius: 25 0 0 25;
+}
+
+#billingLayout{
+	-fx-background-color: "#DAECF9";
+	-fx-background-radius: 25 25 25 25;
+	-fx-border-radius: 25 25 25 25;
+}
+
+#exitButton{
+	-fx-background-color: transparent;
+}
+
+#exitButton:hover{
+	-fx-background-color: transparent;
+}
+
+#exitIcon{
+	-fx-fill: "white";
+}
+
+#exitIcon:hover{
+	-fx-fill: #538EEA;
+}
+#itemsPerPage, #itemsPerPage .list-view{
+	-fx-background-color: "#DAECF9";
+	-fx-background-radius: 15px;
+	-fx-border-color: "#436A86";
+	-fx-border-radius: 15px;
+}
+
+#itemsPerPage .list-cell{
+	-fx-background-color: transparent;
+	-fx-alignment: center;
+	-fx-font-family: "Roboto";
+}
+#itemsPerPage .list-cell:hover {
+	-fx-text-fill: "#538EEA";
+}
+#itemsPerPage .list-cell:selected{
+	-fx-text-fill: "#000000";
+}
+
+#itemsPerPage:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#538EEA";
+}
+#itemsPerPage .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#538EEA"
+}
+
+#billingPreviousPage, #billingNextPage{
+	-fx-background-color: transparent;
+	-fx-border-color: "#436A86";
+	-fx-border-radius: 40px;
+}
+#billingPreviousPage:hover, #billingNextPage:hover{
+	-fx-background-color: transparent;
+ 	-fx-border-color: "#538EEA";
+	-fx-border-radius: 40px;
+}
+#billingNextPageIcon:hover, #billingPreviousPageIcon:hover{
+	-fx-fill: "#538EEA";
+}
+
+.table-view, .table-view .corner{
+	-fx-background-color: transparent;
+}
+.table-view .column-header{
+	-fx-background-color: "#B4CEF6";
+	-fx-background-radius: 3px 3px 3px 3px; 
+	-fx-border-color: "#9DBCEB";
+	-fx-border-radius: 3px 3px 3px 3px;
+	-fx-padding: 0 0 4px 0;
+}
+.table-view .column-header .label{
+	-fx-text-fill: "#538EEA";
+	-fx-font-family: "Roboto";
+}
+
+.table-view .table-row-cell{
+	-fx-background-color: transparent;
+	-fx-cell-size: 35px;
+}
+
+
+.table-row-cell:selected .text{
+	-fx-fill: "#000000";
+}
+/* 
+.table-view .table-cell:hover{
+	-fx-background-color: "#538EEA";
+}
+*/
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #1dbbdd44, #538EEA);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, #1dbbdd44, #538EEA);
+}
+
+#sortTaxButton,#sortSumButton,#sortStatusButton,#sortNumberButton,#sortIssueDateButton,#sortDueDateButton,#sortClientButton{
+	-fx-background-color: transparent;
+	-fx-border-color: "#436A86";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+}
+#sortTaxButton:hover,#sortSumButton:hover,#sortStatusButton:hover,#sortNumberButton:hover,#sortIssueDateButton:hover,#sortDueDateButton:hover,#sortClientButton:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#538EEA";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+}
+
+#searchNumber, #searchIssueDate, #searchDueDate,#searchClient{
+	-fx-background-color: "#7EAAEF";
+	-fx-background-radius: 25px;
+	-fx-border-radius: 25px;
+	-fx-border-color: "#436A86";
+	-fx-prompt-text-fill: "#6B6B6B";
+}
+#searchStatus , #searchStatus .list-view{
+	-fx-background-color: "#7EAAEF";
+	-fx-background-radius: 15px;
+	-fx-border-radius: 15px;
+	-fx-border-color: "#436A86";
+}
+#searchStatus .list-cell{
+	-fx-background-color: transparent;
+	-fx-alignment: center;
+	-fx-font-family: "Roboto";
+}
+#itemsPerPage .arrow{
+	-fx-shape: "M 0 0 H 7 L 3.5 4 z";
+	-fx-background-color: "#000000"
+}
+
+
+
+
+

@@ -1,0 +1,42 @@
+.root{
+	-fx-background-color: "#DAECF9";
+}
+#exitPopup{
+	-fx-background-color: transparent;
+	-fx-border-color: "#DC2C2C";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#DC2C2C";	
+}
+#exitPopup:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#b51e1e";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#b51e1e";	
+}
+#saveData{
+	-fx-background-color: transparent;
+	-fx-border-color: "#4AAB5A";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#4AAB5A";	
+}
+#saveData:hover{
+	-fx-background-color: transparent;
+	-fx-border-color: "#3b8948";
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-text-fill: "#3b8948";	
+}
+
+#numberTextField,#euidTextField,#emailTextField,#countyTextField,#countryTextField,#clientNameTextField,#cityTextField,#CUITextField,#tradeRegisterTextField,#streetTextField,#zipCodeTextField,#phoneNumberTextField{
+	-fx-background-color: "#CBDAFF";
+	-fx-background-radius: 5 5 0 0;
+}
+#phoneNumberButton,#emailButton,#zipCodeButton,#numberButton,#streetButton,#countyButton,#cityButton,#countryButton,#euidButton,#tradeRegisterButton,#CUIButton,#clientButton{
+	-fx-background-color: transparent;
+} 
+#phoneNumberIcon:hover,#emailIcon:hover,#zipCodeIcon:hover,#numberIcon:hover,#streetIcon:hover,#countyIcon:hover,#cityIcon:hover,#countryIcon:hover,#euidIcon:hover,#tradeRegisterIcon:hover,#CUIIcon:hover,#clientIcon:hover{
+	-fx-fill: "#2E4EB8";
+}

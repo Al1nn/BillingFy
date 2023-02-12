@@ -11,338 +11,523 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="415.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.business.popup.BusinessPopupController">
-   <content>
-      <AnchorPane fx:id="anchorPane" prefHeight="850.0" prefWidth="400.0">
-         <children>
-            <Line endX="273.5" layoutX="115.0" layoutY="77.0" startX="-100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.5" />
-            <Text fill="#2e4eb8" layoutX="29.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firma" AnchorPane.topAnchor="100.30078125">
-               <font>
-                  <Font name="Roboto Bold" size="18.0" />
-               </font>
-            </Text>
-            <Line endX="273.5" layoutX="115.0" layoutY="131.0" startX="-100.0" stroke="#2e4eb8" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.5" />
-            <Text layoutX="29.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adauga Firma" AnchorPane.topAnchor="39.0">
-               <font>
-                  <Font name="Roboto Bold" size="24.0" />
-               </font>
-            </Text>
-            <Button fx:id="exitPopup" focusTraversable="false" layoutX="325.0" layoutY="555.0" mnemonicParsing="false" onAction="#exitPopupClicked" prefHeight="30.0" prefWidth="100.0" text="Renunta" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="saveData" focusTraversable="false" layoutX="19.0" layoutY="555.0" mnemonicParsing="false" onAction="#saveDataClicked" prefHeight="30.0" prefWidth="100.0" text="Salveaza" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Button>
-            <FontAwesomeIconView fx:id="passwordIcon" glyphName="TIMES_CIRCLE" layoutX="-81.0" layoutY="-211.0" size="24" />
-            <TextField fx:id="CUITextField" focusTraversable="false" layoutX="223.0" layoutY="144.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="businessNameTextField" focusTraversable="false" layoutX="20.0" layoutY="145.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="234.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUI">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="tradeRegisterTextField" focusTraversable="false" layoutX="20.0" layoutY="200.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="31.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr. Registrul Comertului">
-               <font>
-                  <Font name="Roboto" size="11.0" />
-               </font>
-            </Text>
-            <TextField fx:id="euidTextField" focusTraversable="false" layoutX="223.0" layoutY="200.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="234.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EUID">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="countryTextField" focusTraversable="false" layoutX="20.0" layoutY="255.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="31.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tara">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="cityTextField" focusTraversable="false" layoutX="223.0" layoutY="255.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="234.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oras">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="countyTextField" focusTraversable="false" layoutX="20.0" layoutY="310.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="31.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Judet">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="streetTextField" focusTraversable="false" layoutX="223.0" layoutY="310.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="234.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strada">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="numberTextField" focusTraversable="false" layoutX="20.0" layoutY="365.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="31.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numar">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="zipCodeTextField" focusTraversable="false" layoutX="223.0" layoutY="365.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Text fill="#2e4eb8" layoutX="234.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cod Postal">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <TextField fx:id="emailTextField" focusTraversable="false" layoutX="20.0" layoutY="420.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="phoneNumberTextField" focusTraversable="false" layoutX="223.0" layoutY="420.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="245.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="245.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="300.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="300.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="103.0" layoutY="355.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="355.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="410.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="410.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="465.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="465.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Button fx:id="businessButton" focusTraversable="false" layoutX="153.0" layoutY="152.0" minWidth="38.0" mnemonicParsing="false" onAction="#businessButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="businessIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="CUIButton" focusTraversable="false" layoutX="356.0" layoutY="152.0" minWidth="38.0" mnemonicParsing="false" onAction="#CUIButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="CUIIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="tradeRegisterButton" focusTraversable="false" layoutX="153.0" layoutY="207.0" minWidth="38.0" mnemonicParsing="false" onAction="#tradeRegisterButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="tradeRegisterIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-               </graphic>
-            </Button>
-            <Button fx:id="euidButton" focusTraversable="false" layoutX="356.0" layoutY="207.0" minWidth="38.0" mnemonicParsing="false" onAction="#euidButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="euidIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-               </graphic>
-            </Button>
-            <Button fx:id="countryButton" focusTraversable="false" layoutX="153.0" layoutY="261.0" minWidth="38.0" mnemonicParsing="false" onAction="#countryButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="countryIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="cityButton" focusTraversable="false" layoutX="356.0" layoutY="261.0" minWidth="38.0" mnemonicParsing="false" onAction="#cityButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="cityIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-               </graphic>
-            </Button>
-            <Button fx:id="countyButton" focusTraversable="false" layoutX="153.0" layoutY="316.0" minWidth="38.0" mnemonicParsing="false" onAction="#countyButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="countyIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="streetButton" focusTraversable="false" layoutX="356.0" layoutY="316.0" minWidth="38.0" mnemonicParsing="false" onAction="#streetButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="streetIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-               </graphic>
-            </Button>
-            <Button fx:id="numberButton" focusTraversable="false" layoutX="153.0" layoutY="372.0" minWidth="38.0" mnemonicParsing="false" onAction="#numberButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="numberIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="zipCodeButton" focusTraversable="false" layoutX="356.0" layoutY="372.0" minWidth="38.0" mnemonicParsing="false" onAction="#zipCodeButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="zipCodeIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="emailButton" focusTraversable="false" layoutX="153.0" layoutY="427.0" minWidth="38.0" mnemonicParsing="false" onAction="#emailButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="emailIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="phoneNumberButton" focusTraversable="false" layoutX="356.0" layoutY="427.0" minWidth="38.0" mnemonicParsing="false" onAction="#phoneNumberButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="phoneNumberIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Text fill="#2e4eb8" layoutX="34.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalii Plata">
-               <font>
-                  <Font name="Roboto Bold" size="18.0" />
-               </font>
-            </Text>
-            <Line endX="273.5" layoutX="120.0" layoutY="522.0" startX="-100.0" stroke="#2e4eb8" />
-            <TextField fx:id="beneficiaryTextField" focusTraversable="false" layoutX="223.0" layoutY="535.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="bankTextField" focusTraversable="false" layoutX="20.0" layoutY="536.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="IBANTextField" focusTraversable="false" layoutX="20.0" layoutY="591.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="swiftTextField" focusTraversable="false" layoutX="223.0" layoutY="591.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="referenceTextField" focusTraversable="false" layoutX="20.0" layoutY="646.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <TextField fx:id="exchangeTextField" focusTraversable="false" layoutX="223.0" layoutY="646.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="15.0" />
-               </padding>
-            </TextField>
-            <ComboBox fx:id="currencyComboBox" editable="true" focusTraversable="false" layoutX="20.0" layoutY="699.0" prefHeight="45.0" prefWidth="172.0">
-               <padding>
-                  <Insets top="15.0" />
-               </padding></ComboBox>
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="581.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="581.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="636.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="636.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="691.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0" layoutY="691.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0" layoutY="744.0" startX="-85.0" startY="-1.52587890625E-5" stroke="#2e4eb8" />
-            <Button fx:id="bankButton" focusTraversable="false" layoutX="153.0" layoutY="543.0" minWidth="38.0" mnemonicParsing="false" onAction="#bankButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="bankIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="beneficiaryButton" focusTraversable="false" layoutX="356.0" layoutY="543.0" minWidth="38.0" mnemonicParsing="false" onAction="#beneficiaryButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="beneficiaryIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="IBANButton" focusTraversable="false" layoutX="153.0" layoutY="598.0" minWidth="38.0" mnemonicParsing="false" onAction="#IBANButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="IBANIcon" glyphName="TIMES_CIRCLE" size="22" text="" />
-               </graphic>
-            </Button>
-            <Button fx:id="swiftButton" focusTraversable="false" layoutX="356.0" layoutY="598.0" minWidth="38.0" mnemonicParsing="false" onAction="#swiftButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="swiftIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="referenceButton" focusTraversable="false" layoutX="153.0" layoutY="652.0" minWidth="38.0" mnemonicParsing="false" onAction="#referenceButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="referenceIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Button fx:id="exchangeButton" focusTraversable="false" layoutX="356.0" layoutY="652.0" minWidth="38.0" mnemonicParsing="false" onAction="#exchangeButtonClicked" prefHeight="31.0" prefWidth="38.0">
-               <graphic>
-                  <FontAwesomeIconView fx:id="exchangeIcon" glyphName="TIMES_CIRCLE" size="22" />
-               </graphic>
-            </Button>
-            <Text fill="#2e4eb8" layoutX="32.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Firma">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="31.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="235.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="29.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Banca">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="232.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beneficiar">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="30.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="232.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Swift">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="29.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Referinta">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="232.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Curs Valutar">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-            <Text fill="#2e4eb8" layoutX="29.0" layoutY="718.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valuta">
-               <font>
-                  <Font name="Roboto" size="13.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-   </content>
+<ScrollPane fx:id="scrollPane" focusTraversable="false"
+	hbarPolicy="NEVER" prefHeight="500.0" prefWidth="415.0"
+	vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.business.popup.BusinessPopupController">
+	<content>
+		<AnchorPane fx:id="anchorPane" prefHeight="850.0"
+			prefWidth="400.0">
+			<children>
+				<Line endX="273.5" layoutX="115.0" layoutY="77.0"
+					startX="-100.0" AnchorPane.leftAnchor="20.0"
+					AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.5" />
+				<Text fill="#2e4eb8" layoutX="29.0" layoutY="117.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Firma"
+					AnchorPane.topAnchor="100.30078125">
+					<font>
+						<Font name="Roboto Bold" size="18.0" />
+					</font>
+				</Text>
+				<Line endX="273.5" layoutX="115.0" layoutY="131.0"
+					startX="-100.0" stroke="#2e4eb8" AnchorPane.leftAnchor="20.0"
+					AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.5" />
+				<Text layoutX="29.0" layoutY="62.0" strokeType="OUTSIDE"
+					strokeWidth="0.0" text="Adauga Firma" AnchorPane.topAnchor="39.0">
+					<font>
+						<Font name="Roboto Bold" size="24.0" />
+					</font>
+				</Text>
+				<Button fx:id="exitPopup" focusTraversable="false"
+					layoutX="325.0" layoutY="555.0" mnemonicParsing="false"
+					onAction="#exitPopupClicked" prefHeight="30.0" prefWidth="100.0"
+					text="Renunta" AnchorPane.bottomAnchor="14.0"
+					AnchorPane.rightAnchor="20.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<Button fx:id="saveData" focusTraversable="false"
+					layoutX="19.0" layoutY="555.0" mnemonicParsing="false"
+					onAction="#saveDataClicked" prefHeight="30.0" prefWidth="100.0"
+					text="Salveaza" AnchorPane.bottomAnchor="14.0"
+					AnchorPane.leftAnchor="20.0">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Button>
+				<FontAwesomeIconView fx:id="passwordIcon"
+					glyphName="TIMES_CIRCLE" layoutX="-81.0" layoutY="-211.0" size="24" />
+				<TextField fx:id="CUITextField" focusTraversable="false"
+					layoutX="223.0" layoutY="144.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="businessNameTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="145.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="234.0" layoutY="163.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="CUI">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="tradeRegisterTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="200.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="31.0" layoutY="217.0"
+					strokeType="OUTSIDE" strokeWidth="0.0"
+					text="Nr. Registrul Comertului">
+					<font>
+						<Font name="Roboto" size="11.0" />
+					</font>
+				</Text>
+				<TextField fx:id="euidTextField" focusTraversable="false"
+					layoutX="223.0" layoutY="200.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="234.0" layoutY="218.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="EUID">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="countryTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="255.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="31.0" layoutY="273.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Tara">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="cityTextField" focusTraversable="false"
+					layoutX="223.0" layoutY="255.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="234.0" layoutY="273.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Oras">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="countyTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="310.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="31.0" layoutY="328.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Judet">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="streetTextField"
+					focusTraversable="false" layoutX="223.0" layoutY="310.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="234.0" layoutY="328.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Strada">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="numberTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="365.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="31.0" layoutY="383.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Numar">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="zipCodeTextField"
+					focusTraversable="false" layoutX="223.0" layoutY="365.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Text fill="#2e4eb8" layoutX="234.0" layoutY="383.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Cod Postal">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<TextField fx:id="emailTextField" focusTraversable="false"
+					layoutX="20.0" layoutY="420.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="phoneNumberTextField"
+					focusTraversable="false" layoutX="223.0" layoutY="420.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="190.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="245.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="245.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="300.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="300.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="103.0"
+					layoutY="355.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="355.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="410.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="410.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="465.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="465.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Button fx:id="businessButton" focusTraversable="false"
+					layoutX="153.0" layoutY="152.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#businessButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="businessIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="CUIButton" focusTraversable="false"
+					layoutX="356.0" layoutY="152.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#CUIButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="CUIIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="tradeRegisterButton" focusTraversable="false"
+					layoutX="153.0" layoutY="207.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#tradeRegisterButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="tradeRegisterIcon"
+							glyphName="TIMES_CIRCLE" size="22" text="" />
+					</graphic>
+				</Button>
+				<Button fx:id="euidButton" focusTraversable="false"
+					layoutX="356.0" layoutY="207.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#euidButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="euidIcon"
+							glyphName="TIMES_CIRCLE" size="22" text="" />
+					</graphic>
+				</Button>
+				<Button fx:id="countryButton" focusTraversable="false"
+					layoutX="153.0" layoutY="261.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#countryButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="countryIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="cityButton" focusTraversable="false"
+					layoutX="356.0" layoutY="261.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#cityButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="cityIcon"
+							glyphName="TIMES_CIRCLE" size="22" text="" />
+					</graphic>
+				</Button>
+				<Button fx:id="countyButton" focusTraversable="false"
+					layoutX="153.0" layoutY="316.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#countyButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="countyIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="streetButton" focusTraversable="false"
+					layoutX="356.0" layoutY="316.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#streetButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="streetIcon"
+							glyphName="TIMES_CIRCLE" size="22" text="" />
+					</graphic>
+				</Button>
+				<Button fx:id="numberButton" focusTraversable="false"
+					layoutX="153.0" layoutY="372.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#numberButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="numberIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="zipCodeButton" focusTraversable="false"
+					layoutX="356.0" layoutY="372.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#zipCodeButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="zipCodeIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="emailButton" focusTraversable="false"
+					layoutX="153.0" layoutY="427.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#emailButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="emailIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="phoneNumberButton" focusTraversable="false"
+					layoutX="356.0" layoutY="427.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#phoneNumberButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="phoneNumberIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Text fill="#2e4eb8" layoutX="34.0" layoutY="508.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Detalii Plata">
+					<font>
+						<Font name="Roboto Bold" size="18.0" />
+					</font>
+				</Text>
+				<Line endX="273.5" layoutX="120.0" layoutY="522.0"
+					startX="-100.0" stroke="#2e4eb8" />
+				<TextField fx:id="beneficiaryTextField"
+					focusTraversable="false" layoutX="223.0" layoutY="535.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="bankTextField" focusTraversable="false"
+					layoutX="20.0" layoutY="536.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="IBANTextField" focusTraversable="false"
+					layoutX="20.0" layoutY="591.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="swiftTextField" focusTraversable="false"
+					layoutX="223.0" layoutY="591.0" prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="referenceTextField"
+					focusTraversable="false" layoutX="20.0" layoutY="646.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<TextField fx:id="exchangeTextField"
+					focusTraversable="false" layoutX="223.0" layoutY="646.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets left="10.0" right="30.0" top="15.0" />
+					</padding>
+				</TextField>
+				<ComboBox fx:id="currencyComboBox" editable="true"
+					focusTraversable="false" layoutX="20.0" layoutY="699.0"
+					prefHeight="45.0" prefWidth="172.0">
+					<padding>
+						<Insets top="15.0" />
+					</padding>
+				</ComboBox>
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="581.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="581.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="636.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="636.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="691.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="308.0"
+					layoutY="691.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Line endX="87.0" endY="-1.52587890625E-5" layoutX="105.0"
+					layoutY="744.0" startX="-85.0" startY="-1.52587890625E-5"
+					stroke="#2e4eb8" />
+				<Button fx:id="bankButton" focusTraversable="false"
+					layoutX="153.0" layoutY="543.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#bankButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="bankIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="beneficiaryButton" focusTraversable="false"
+					layoutX="356.0" layoutY="543.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#beneficiaryButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="beneficiaryIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="IBANButton" focusTraversable="false"
+					layoutX="153.0" layoutY="598.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#IBANButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="IBANIcon"
+							glyphName="TIMES_CIRCLE" size="22" text="" />
+					</graphic>
+				</Button>
+				<Button fx:id="swiftButton" focusTraversable="false"
+					layoutX="356.0" layoutY="598.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#swiftButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="swiftIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="referenceButton" focusTraversable="false"
+					layoutX="153.0" layoutY="652.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#referenceButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="referenceIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Button fx:id="exchangeButton" focusTraversable="false"
+					layoutX="356.0" layoutY="652.0" minWidth="38.0"
+					mnemonicParsing="false" onAction="#exchangeButtonClicked"
+					prefHeight="31.0" prefWidth="38.0">
+					<graphic>
+						<FontAwesomeIconView fx:id="exchangeIcon"
+							glyphName="TIMES_CIRCLE" size="22" />
+					</graphic>
+				</Button>
+				<Text fill="#2e4eb8" layoutX="32.0" layoutY="162.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Nume Firma">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="31.0" layoutY="439.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="235.0" layoutY="438.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="29.0" layoutY="555.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Banca">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="232.0" layoutY="555.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Beneficiar">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="30.0" layoutY="610.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="232.0" layoutY="610.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Swift">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="29.0" layoutY="664.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Referinta">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="232.0" layoutY="664.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Curs Valutar">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+				<Text fill="#2e4eb8" layoutX="29.0" layoutY="718.0"
+					strokeType="OUTSIDE" strokeWidth="0.0" text="Valuta">
+					<font>
+						<Font name="Roboto" size="13.0" />
+					</font>
+				</Text>
+			</children>
+		</AnchorPane>
+	</content>
 </ScrollPane>
