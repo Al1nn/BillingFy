@@ -1,0 +1,32 @@
+.root{
+    -fx-background-color: "#DAECF9";
+}
+
+#exitDeletePopup{
+    -fx-background-color: transparent;
+    -fx-border-color: "#DC2C2C";
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: "#DC2C2C";
+}
+#exitDeletePopup:hover{
+    -fx-background-color: transparent;
+    -fx-border-color: "#b51e1e";
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: "#b51e1e";
+}
+#deleteData{
+    -fx-background-color: transparent;
+    -fx-border-color: "#4AAB5A";
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: "#4AAB5A";
+}
+#deleteData:hover{
+    -fx-background-color: transparent;
+    -fx-border-color: "#3b8948";
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: "#3b8948";
+}

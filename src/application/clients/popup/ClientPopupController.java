@@ -3,6 +3,7 @@ package application.clients.popup;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -10,6 +11,7 @@ import application.clients.Client;
 import application.clients.ClientsController;
 import application.clients.backend.ClientDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -181,8 +183,9 @@ public class ClientPopupController{
     
     private boolean isEditable;
     
-    private String oldZipCode;
-    
+    private String oldClientNumber;
+    private String oldClientName;
+
     public void initializeData(String clientName, String clientCUI
     		, String clientTradeRegisterNumber, String clientEUID
     		, String clientCountry, String clientCity
@@ -201,13 +204,17 @@ public class ClientPopupController{
     	zipCodeTextField.setText(clientZipcode);
     	emailTextField.setText(clientEmail);
     	phoneNumberTextField.setText(clientPhoneNumber);
-    	oldZipCode = clientZipcode;
+    	oldClientNumber = clientNumber;
+        oldClientName = clientName;
     }
     
  
     @FXML
     void saveDataClicked(ActionEvent event) throws ClassNotFoundException, IOException {
-    	//Add contents to database  !!!!!
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/clients/Clients.fxml"));
+        Parent root = loader.load();
+        ClientsController clientsController = loader.getController();
+
     	String clientName = clientNameTextField.getText();
     	String clientCUI = CUITextField.getText();
     	String clientTradeRegisterNumber = tradeRegisterTextField.getText();
@@ -220,8 +227,11 @@ public class ClientPopupController{
     	String clientZipCode = zipCodeTextField.getText();
     	String clientEmail = emailTextField.getText();
     	String clientPhoneNumber = phoneNumberTextField.getText();
+
     	if(!isEditable) {
-    		ClientDatabase connection = new ClientDatabase();
+            Client newClient = new Client(clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber);
+            System.out.println(newClient.getClientName() + " " + newClient.getClientCUI());
+            ClientDatabase connection = new ClientDatabase();
     		connection.insertData(clientName, clientCUI
     			, clientTradeRegisterNumber, clientEUID
     			, clientCountry, clientCity
@@ -238,11 +248,13 @@ public class ClientPopupController{
     		, clientCounty, clientStreet
     		, clientNumber, clientZipCode
     		, clientEmail, clientPhoneNumber
-    		, oldZipCode
+    		, oldClientName, oldClientNumber
     		);
-    	saveData.getScene().getWindow().hide();	
+    	saveData.getScene().getWindow().hide();
     }
-    
+
+
+
     @FXML
     void CUIButtonClicked(ActionEvent event) {
     	CUITextField.clear();
@@ -280,7 +292,8 @@ public class ClientPopupController{
 
     @FXML
     void exitPopupClicked(ActionEvent event) {
-    	exitPopup.getScene().getWindow().hide();
+        Stage childStage = (Stage) exitPopup.getScene().getWindow();
+        childStage.close();
     }
 
     @FXML

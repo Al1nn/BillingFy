@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import application.clients.backend.ClientDatabase;
 import application.clients.popup.ClientPopupController;
+import application.resources.DeletePopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Client {
-	
 	private String clientName;
 	private String clientCUI;
 	private String clientTradeRegisterNumber;
@@ -37,6 +36,7 @@ public class Client {
 	private String clientPhoneNumber;
 	private HBox buttonPane;
 
+	private TableView tableView;
 	public Client(String clientName, String clientCUI
 			, String clientTradeRegisterNumber, String clientEUID
 			, String clientCountry, String clientCity
@@ -60,13 +60,14 @@ public class Client {
 		// Edit button
 		Button editButton = new Button();
 		styleButtons(editButton,FontAwesomeIcon.PENCIL);
-		buttonFunctions(editButton);
+		editButtonFunction(editButton);
 		// Delete button
 		Button deleteButton = new Button();
 		styleButtons(deleteButton,FontAwesomeIcon.TRASH);
-
+		deleteButtonFunction(deleteButton);
 		this.setButtonPane(new HBox(editButton, deleteButton));
 	}
+
 	private void styleButtons(Button button, FontAwesomeIcon icon){
 		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css").toExternalForm();
 		FontAwesomeIconView buttonIcon = new FontAwesomeIconView(icon);
@@ -76,11 +77,9 @@ public class Client {
 		button.getStylesheets().add(buttonStyle);
 		setIconFills(button, buttonIcon);
 	}
-	private void buttonFunctions(Button button) {
-		button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+
+	private void editButtonFunction(Button button) {
+		button.setOnMouseClicked(evt ->{
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/clients/popup/ClientPopup.fxml"));
 					//Parent root = FXMLLoader.load(getClass().getResource("/application/clients/popup/ClientPopup.fxml"));
@@ -88,7 +87,8 @@ public class Client {
 					ClientPopupController clientPopupController = loader.getController();
 					clientPopupController.setEditable(true);
 					clientPopupController.initializeData(clientName, clientCUI, clientTradeRegisterNumber, clientEUID, clientCountry, clientCity, clientCounty, clientStreet, clientNumber, clientZipCode, clientEmail, clientPhoneNumber);
-					Stage parentStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
+					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+					tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -101,18 +101,68 @@ public class Client {
 					double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 					childStage.setX(x);
 					childStage.setY(y);
+					refreshData(childStage);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		});
+	}
 
+	private void deleteButtonFunction(Button button){
+		button.setOnMouseClicked(evt -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resources/DeletePopup.fxml"));
+				Parent root = loader.load();
+				DeletePopupController deletePopupController = loader.getController();
+				deletePopupController.getDeletePopupTitle().setText("Stergere Client");
+				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
+				Stage childStage = new Stage();
+				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
+				childStage.setScene(new Scene(root));
+				childStage.getScene().getStylesheets().add(popupCSS);
+				childStage.initModality(Modality.APPLICATION_MODAL);
+				childStage.initOwner(parentStage);
+				childStage.initStyle(StageStyle.UNDECORATED);
+				childStage.show();
+				double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+				double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+				childStage.setX(x);
+				childStage.setY(y);
+				refreshAfterDelete(childStage);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 
 		});
 	}
-	
+	private void refreshAfterDelete(Stage childStage){
+		ClientDatabase connection = new ClientDatabase();
+		childStage.setOnHidden(evt -> {
+			try {
+				connection.deleteData(clientName,clientNumber);
+				tableView.getItems().clear();
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 
-	
+		});
+	}
+	private void refreshData(Stage childStage) {
+		ClientDatabase connection = new ClientDatabase();
+		childStage.setOnHidden(evt -> {
+			tableView.getItems().clear();
+			try {
+				tableView.getItems().clear();
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
+
 	private void setIconFills(Button button, FontAwesomeIconView buttonIcon) {
 		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 

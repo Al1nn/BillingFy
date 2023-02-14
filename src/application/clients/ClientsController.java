@@ -73,28 +73,28 @@ public class ClientsController implements Initializable {
 	private AnchorPane buttonLayout;
 
 	@FXML
-	private TableColumn<?, ?> clientCity;
+	private TableColumn<Client, String> clientCity;
 
 	@FXML
-	private TableColumn<?, ?> clientCountry;
+	private TableColumn<Client, String> clientCountry;
 
 	@FXML
 	private Text clientCurrentPage;
 
 	@FXML
-	private TableColumn<?, ?> clientEmail;
+	private TableColumn<Client, String> clientEmail;
 
 	@FXML
-	private TableColumn<?, ?> clientFunctions;
+	private TableColumn<Client, String> clientFunctions;
 
 	@FXML
 	private AnchorPane clientLayout;
 
 	@FXML
-	private Text clientLengthText;
+	public Text clientLengthText;
 
 	@FXML
-	private TableColumn<?, ?> clientName;
+	private TableColumn<Client, String> clientName;
 
 	@FXML
 	private Button clientNextPage;
@@ -103,13 +103,13 @@ public class ClientsController implements Initializable {
 	private FontAwesomeIconView clientNextPageIcon;
 
 	@FXML
-	private TableColumn<?, ?> clientNumber;
+	private TableColumn<Client, String> clientNumber;
 
 	@FXML
 	private Text clientPages;
 
 	@FXML
-	private TableColumn<?, ?> clientPhoneNumber;
+	private TableColumn<Client, String> clientPhoneNumber;
 
 	@FXML
 	private Button clientPreviousPage;
@@ -121,7 +121,7 @@ public class ClientsController implements Initializable {
 	private Text clientTitle;
 
 	@FXML
-	private TableColumn<?, ?> clientZipCode;
+	private TableColumn<Client, String> clientZipCode;
 
 	@FXML
 	private Button clientsButton;
@@ -133,7 +133,7 @@ public class ClientsController implements Initializable {
 	private FontAwesomeIconView clientsIcon;
 
 	@FXML
-	private TableView<Client> clientsTable;
+	public TableView<Client> clientsTable;
 
 	@FXML
 	private Button exitButton;
@@ -213,12 +213,17 @@ public class ClientsController implements Initializable {
 	@FXML
 	private FontAwesomeIconView statisticsIcon;
 
-	private ObservableList<Client> clientData;
-	
-	
+	public ObservableList<Client> clientData;
+
+	private static ClientsController instance;
+
+	public static ClientsController getInstance() {
+		return instance;
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		instance = this;
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		setInitialDesignButtons();
@@ -229,7 +234,11 @@ public class ClientsController implements Initializable {
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		///Initialize contents from table with Database from MySQL !!!!!!!!
-		
+		updateTable();
+	}
+
+
+	public void updateTable(){
 		clientNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
 		clientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
 		clientCountry.setCellValueFactory(new PropertyValueFactory<>("clientCountry"));
@@ -238,17 +247,16 @@ public class ClientsController implements Initializable {
 		clientEmail.setCellValueFactory(new PropertyValueFactory<>("clientEmail"));
 		clientPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("clientPhoneNumber"));
 		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
-		ClientDatabase connection = new ClientDatabase();
+ 		ClientDatabase connection = new ClientDatabase();
 		try {
-			clientData = connection.retrieveData();
+			clientData= connection.retrieveData();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		clientsTable.setEditable(true);
 		clientsTable.setItems(clientData);
-		clientLengthText.setText(String.valueOf(getClientsTable().getItems().size()));
-		
+		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
 	}
 
 	public void setInitialDesignButtons() {
@@ -324,19 +332,12 @@ public class ClientsController implements Initializable {
 		childStage.setY(y);
 		refreshData(childStage);
 	}
-	
-	public void refreshData(Stage childStage) {
+	private void refreshData(Stage childStage){
 		childStage.setOnHidden(evt -> {
-			ClientDatabase connection = new ClientDatabase();
-			try {
-				clientData = connection.retrieveData();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			clientsTable.setItems(clientData);
+			updateTable();
 		});
 	}
+
 	@FXML
 	void businessButtonClicked(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/application/business/Business.fxml"));
@@ -474,20 +475,8 @@ public class ClientsController implements Initializable {
 			sortZipCodeIcon.setGlyphName("ANGLE_UP");
 	}
 
-	public TableView<Client> getClientsTable() {
-		return clientsTable;
-	}
 
-	public void setClientsTable(TableView<Client> clientsTable) {
-		this.clientsTable = clientsTable;
-	}
 
-	public ObservableList<Client> getClientData() {
-		return clientData;
-	}
 
-	public void setClientData(ObservableList<Client> clientData) {
-		this.clientData = clientData;
-	}
 
 }

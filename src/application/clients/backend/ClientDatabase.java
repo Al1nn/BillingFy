@@ -1,4 +1,5 @@
 package application.clients.backend;
+import java.io.IOException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -74,7 +75,7 @@ public class ClientDatabase {
     		, String clientCounty, String clientStreet
     		, String clientNumber, String clientZipcode
     		, String clientEmail, String clientPhoneNumber
-    		,String oldClientZipCode) {
+    		,String oldClientName, String oldClientNumber) {
 		String update = "UPDATE Clients SET " +
                 "Client_Name = ?, " +
                 "CUI = ?, " +
@@ -88,7 +89,8 @@ public class ClientDatabase {
                 "ZIPCODE = ?, " +
                 "EMAIL = ?, " +
                 "PHONE_NUMBER = ? " +
-        "WHERE ZIPCODE = ? ";
+        		"WHERE Client_Name = ? " +
+				"AND NUMBER = ?";
 		try (Connection connection = getConnection();
 			 PreparedStatement preparedStatement = connection.prepareStatement(update)){
 			preparedStatement.setString(1, clientName);
@@ -103,19 +105,33 @@ public class ClientDatabase {
 			preparedStatement.setString(10, clientZipcode);
 			preparedStatement.setString(11, clientEmail);
 			preparedStatement.setString(12, clientPhoneNumber);
-			preparedStatement.setString(13, oldClientZipCode);
+			preparedStatement.setString(13, oldClientName);
+			preparedStatement.setString(14,oldClientNumber);
 			int rowsUpdated = preparedStatement.executeUpdate();
 			if(rowsUpdated > 0)
 				System.out.println("Data updated succesfully");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
-	
+
+	public void deleteData(String clientName, String clientNumber) throws  ClassNotFoundException{
+		String delete = "DELETE FROM Clients WHERE Client_Name = ? AND NUMBER = ?";
+		try(Connection conn = getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(delete);
+		){
+			preparedStatement.setString(1,clientName);
+			preparedStatement.setString(2,clientNumber);
+			int rowsDelete = preparedStatement.executeUpdate();
+			System.out.println("Rows deleted "+rowsDelete);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public ObservableList<Client> retrieveData() throws ClassNotFoundException{
 		ObservableList<Client> clients = FXCollections.observableArrayList();
 		String retrieve = "SELECT * FROM Clients";
-		
 		try (Connection connection = getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(retrieve)){
