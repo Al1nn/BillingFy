@@ -132,7 +132,7 @@ public class Client {
 				childStage.setY(y);
 				refreshAfterDelete(childStage);
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				e.printStackTrace();
 			}
 
 		});
@@ -140,6 +140,7 @@ public class Client {
 	private void refreshAfterDelete(Stage childStage){
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
+			System.out.println("Delete Popup Closed !!!");
 			try {
 				connection.deleteData(clientName,clientNumber);
 				tableView.getItems().clear();
@@ -147,7 +148,6 @@ public class Client {
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
-
 		});
 	}
 	private void refreshData(Stage childStage) {

@@ -19,16 +19,21 @@ public class DeletePopupController {
 
     @FXML
     void deleteDataClicked(ActionEvent event) {
-        deleteData.getScene().getWindow().hide();
+        Stage childStage = (Stage) deleteData.getScene().getWindow();
+        childStage.hide();
     }
 
     @FXML
     void exitDeletePopupClicked(ActionEvent event) {
-        Stage childStage = (Stage) exitDeletePopup.getScene().getWindow();
-        childStage.close();
+        exitDeletePopup.getScene().getWindow().setOnHidden(evt -> {
+            System.out.println("Exited");
+        });
+        exitDeletePopup.getScene().getWindow().hide();
     }
 
     public Text getDeletePopupTitle() {
         return deletePopupTitle;
     }
+
+
 }
