@@ -13,6 +13,7 @@ import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -216,6 +217,7 @@ public class ClientsController implements Initializable {
 
 	private ObservableList<Client> clientData;
 
+
 	@FXML
 	private FontAwesomeIconView searchByClientIcon;
 
@@ -240,6 +242,8 @@ public class ClientsController implements Initializable {
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		///Initialize contents from table with Database from MySQL !!!!!!!!
 		updateTable();
+
+
 	}
 
 
@@ -259,6 +263,8 @@ public class ClientsController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 		clientsTable.setEditable(true);
 		clientsTable.setItems(clientData);
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
@@ -520,17 +526,35 @@ public class ClientsController implements Initializable {
 
 	@FXML
 	void searchByClientIconClicked(MouseEvent event) {
-		System.out.println("Search By Client Clicked !!");
+		String searchText = searchClient.getText();
+		FilteredList<Client> filteredList = clientData.filtered(Client -> {
+			return Client.getClientName().contains(searchText);
+		});
+		clientsTable.setItems(filteredList);
+		if (searchText == null || searchText.isEmpty())
+			clientsTable.setItems(clientData);
 	}
 
 	@FXML
 	void searchByEmailIconClicked(MouseEvent event) {
-		System.out.println("Search By Email Clicked !!");
+		String searchText = searchEmail.getText();
+		FilteredList<Client> filteredList = clientData.filtered(Client -> {
+			return Client.getClientEmail().contains(searchText);
+		});
+		clientsTable.setItems(filteredList);
+		if(searchText == null || searchText.isEmpty())
+			clientsTable.setItems(clientData);
 	}
 
 	@FXML
 	void searchByPhoneNumberIconClicked(MouseEvent event) {
-		System.out.println("Search By Phone Number Clicked !!!");
+		String searchText = searchPhoneNumber.getText();
+		FilteredList<Client> filteredList = clientData.filtered(Client ->{
+			return Client.getClientPhoneNumber().contains(searchText);
+		});
+		clientsTable.setItems(filteredList);
+		if (searchText == null || searchText.isEmpty())
+			clientsTable.setItems(clientData);
 	}
 
 
