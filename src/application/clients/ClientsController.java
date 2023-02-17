@@ -443,6 +443,9 @@ public class ClientsController implements Initializable {
 		String selectedItemPerPage = itemsPerPage.getValue().toString();
 		String[] tokens = selectedItemPerPage.split(" ");
 		ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
+		numPages = (int) Math.ceil((double) clientData.size() / ITEMS_PER_PAGE);
+		clientPages.setText(String.valueOf(numPages));
+		currentPage = 0;
 		updateTable();
 	}
 	@FXML
