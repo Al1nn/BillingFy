@@ -75,7 +75,7 @@
 						<RowConstraints minHeight="10.0" vgrow="ALWAYS" />
 					</rowConstraints>
 					<children>
-						<ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
+						<ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#itemsPerPageSelected" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
 							<GridPane.margin>
 								<Insets />
 							</GridPane.margin>

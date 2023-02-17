@@ -12,6 +12,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -226,13 +227,12 @@ public class ClientsController implements Initializable {
 
 	@FXML
 	private FontAwesomeIconView searchByPhoneNumberIcon;
-
-
-
+	private static int ITEMS_PER_PAGE = 10;
+	private int numPages = 1;
+	private int currentPage = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
-		itemsPerPage.getItems().addAll(itemPerPageOptions);
+
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
 		style.styleButtons(billingsButton, billingsIcon, billingsCircle);
@@ -242,7 +242,8 @@ public class ClientsController implements Initializable {
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		///Initialize contents from table with Database from MySQL !!!!!!!!
 		updateTable();
-
+		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
+		itemsPerPage.getItems().addAll(itemPerPageOptions);
 
 	}
 
@@ -264,10 +265,13 @@ public class ClientsController implements Initializable {
 			e.printStackTrace();
 		}
 
-
 		clientsTable.setEditable(true);
-		clientsTable.setItems(clientData);
+		ObservableList<Client> paginatedData = createPage(currentPage);
+		clientsTable.setItems(paginatedData);
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
+		clientCurrentPage.setText(String.valueOf(currentPage + 1));
+		numPages = (int) Math.ceil((double) clientData.size() / ITEMS_PER_PAGE);
+		clientPages.setText(String.valueOf(numPages));
 	}
 
 	public void setInitialDesignButtons() {
@@ -408,11 +412,25 @@ public class ClientsController implements Initializable {
 	
 	@FXML
 	void clientNextPageClicked(ActionEvent event) {
+		if(currentPage + 1< numPages )
+		{
+			currentPage++;
+			clientCurrentPage.setText(String.valueOf(currentPage + 1));
+			ObservableList<Client> paginatedData = createPage(currentPage);
+			clientsTable.setItems(paginatedData);
+		}
 
 	}
 
 	@FXML
 	void clientPreviousPageClicked(ActionEvent event) {
+		if(currentPage + 1 > 1)
+			{
+				currentPage--;
+				clientCurrentPage.setText(String.valueOf(currentPage + 1));
+				ObservableList<Client> paginatedData = createPage(currentPage);
+				clientsTable.setItems(paginatedData);
+			}
 
 	}
 
@@ -420,7 +438,13 @@ public class ClientsController implements Initializable {
 	void clientsButtonClicked(ActionEvent event) {
 
 	}
-
+	@FXML
+	void itemsPerPageSelected(ActionEvent event) {
+		String selectedItemPerPage = itemsPerPage.getValue().toString();
+		String[] tokens = selectedItemPerPage.split(" ");
+		ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
+		updateTable();
+	}
 	@FXML
 	void exitButtonClicked(ActionEvent event) {
 		Platform.exit();
@@ -557,6 +581,10 @@ public class ClientsController implements Initializable {
 			clientsTable.setItems(clientData);
 	}
 
-
+	private ObservableList<Client> createPage(int pageIndex){
+		int startIndex = pageIndex * ITEMS_PER_PAGE;
+		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, clientData.size());
+		return FXCollections.observableArrayList(clientData.subList(startIndex,endIndex));
+	}
 
 }
