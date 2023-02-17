@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -213,17 +214,21 @@ public class ClientsController implements Initializable {
 	@FXML
 	private FontAwesomeIconView statisticsIcon;
 
-	public ObservableList<Client> clientData;
+	private ObservableList<Client> clientData;
 
-	private static ClientsController instance;
+	@FXML
+	private FontAwesomeIconView searchByClientIcon;
 
-	public static ClientsController getInstance() {
-		return instance;
-	}
+	@FXML
+	private FontAwesomeIconView searchByEmailIcon;
+
+	@FXML
+	private FontAwesomeIconView searchByPhoneNumberIcon;
+
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		instance = this;
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		setInitialDesignButtons();
@@ -247,7 +252,7 @@ public class ClientsController implements Initializable {
 		clientEmail.setCellValueFactory(new PropertyValueFactory<>("clientEmail"));
 		clientPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("clientPhoneNumber"));
 		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
- 		ClientDatabase connection = new ClientDatabase();
+		ClientDatabase connection = new ClientDatabase();
 		try {
 			clientData= connection.retrieveData();
 		} catch (ClassNotFoundException e) {
@@ -415,67 +420,118 @@ public class ClientsController implements Initializable {
 		Platform.exit();
 	}
 
-	
-
 	@FXML
 	void sortCityButtonClicked(ActionEvent event) {
 		if (sortCityIcon.getGlyphName() == "ANGLE_UP") {
 			sortCityIcon.setGlyphName("ANGLE_DOWN");
-		} else
+			clientCity.setSortType(TableColumn.SortType.DESCENDING);
+		} else{
 			sortCityIcon.setGlyphName("ANGLE_UP");
+			clientCity.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientCity.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientCity);
 	}
 
 	@FXML
 	void sortClientButtonClicked(ActionEvent event) {
 		if (sortClientIcon.getGlyphName() == "ANGLE_UP") {
 			sortClientIcon.setGlyphName("ANGLE_DOWN");
-		} else
+			clientName.setSortType(TableColumn.SortType.DESCENDING);
+		} else {
 			sortClientIcon.setGlyphName("ANGLE_UP");
+			clientName.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientName.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientName);
 	}
 
 	@FXML
 	void sortCountryButtonClicked(ActionEvent event) {
-		if (sortCountryIcon.getGlyphName() == "ANGLE_UP")
-			sortCountryIcon.setGlyphName("ANGLE_DOWN");
-		else
-			sortCountryIcon.setGlyphName("ANGLE_UP");
+		if (sortCountryIcon.getGlyphName() == "ANGLE_UP") {
+				sortCountryIcon.setGlyphName("ANGLE_DOWN");
+				clientCountry.setSortType(TableColumn.SortType.DESCENDING);
+			} else {
+				sortCountryIcon.setGlyphName("ANGLE_UP");
+				clientCountry.setSortType(TableColumn.SortType.ASCENDING);
+			}
+		clientCountry.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientCountry);
 	}
 
 	@FXML
 	void sortEmailButtonClicked(ActionEvent event) {
-		if (sortEmailIcon.getGlyphName() == "ANGLE_UP")
+		if (sortEmailIcon.getGlyphName() == "ANGLE_UP") {
 			sortEmailIcon.setGlyphName("ANGLE_DOWN");
-		else
+			clientEmail.setSortType(TableColumn.SortType.DESCENDING);
+		}else{
 			sortEmailIcon.setGlyphName("ANGLE_UP");
+			clientEmail.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientEmail.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientEmail);
 	}
 
 	@FXML
 	void sortNumberButtonClicked(ActionEvent event) {
-		if (sortNumberIcon.getGlyphName() == "ANGLE_UP")
+		if (sortNumberIcon.getGlyphName() == "ANGLE_UP") {
 			sortNumberIcon.setGlyphName("ANGLE_DOWN");
-		else
+			clientNumber.setSortType(TableColumn.SortType.DESCENDING);
+		}else {
 			sortNumberIcon.setGlyphName("ANGLE_UP");
-
+			clientNumber.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientNumber.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientNumber);
 	}
 
 	@FXML
 	void sortPhoneNumberButtonClicked(ActionEvent event) {
-		if (sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP")
+		if (sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP") {
 			sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
-		else
+			clientPhoneNumber.setSortType(TableColumn.SortType.DESCENDING);
+		}else {
 			sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
-
+			clientPhoneNumber.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientPhoneNumber.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientPhoneNumber);
 	}
 
 	@FXML
 	void sortZipCodeButtonClicked(ActionEvent event) {
-		if (sortZipCodeIcon.getGlyphName() == "ANGLE_UP")
+		if (sortZipCodeIcon.getGlyphName() == "ANGLE_UP") {
 			sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
-		else
+			clientZipCode.setSortType(TableColumn.SortType.DESCENDING);
+		}else{
 			sortZipCodeIcon.setGlyphName("ANGLE_UP");
+			clientZipCode.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		clientZipCode.setSortable(true);
+		clientsTable.getSortOrder().clear();
+		clientsTable.getSortOrder().add(clientZipCode);
 	}
 
+	@FXML
+	void searchByClientIconClicked(MouseEvent event) {
+		System.out.println("Search By Client Clicked !!");
+	}
 
+	@FXML
+	void searchByEmailIconClicked(MouseEvent event) {
+		System.out.println("Search By Email Clicked !!");
+	}
+
+	@FXML
+	void searchByPhoneNumberIconClicked(MouseEvent event) {
+		System.out.println("Search By Phone Number Clicked !!!");
+	}
 
 
 

@@ -82,6 +82,13 @@
 	-fx-border-radius: 3px 3px 3px 3px;
 	-fx-padding: 0 0 4px 0;
 }
+.table-view .arrow
+{
+    -fx-background-insets: 0;
+    -fx-background-color: "#B4CEF6";
+    -fx-padding: 0;
+    -fx-shape: " ";
+}
 .table-view .column-header .label{
 	-fx-text-fill: "#538EEA";
 	-fx-font-family: "Roboto";
@@ -164,5 +171,10 @@
 	-fx-border-color: rgba(255,255,255,0.2);
 }
 
+#searchByPhoneNumberIcon:hover,#searchByEmailIcon:hover,#searchByClientIcon:hover{
+    -fx-fill: "#5283E9";
+}
 
-
+#searchByPhoneNumberIcon:pressed,#searchByEmailIcon:pressed,#searchByClientIcon:pressed{
+    -fx-fill: "#2E4EB8";
+}
