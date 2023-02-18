@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="155ee840-fb06-436b-9f9c-f71a5394d0cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/application/LoginForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/LoginForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/billings/Billings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/billings/Billings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/billings/popup/BillingsDiscountContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/billings/popup/BillingsDiscountContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/billings/popup/BillingsPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/billings/popup/BillingsPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/billings/popup/BillingsServiceContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/billings/popup/BillingsServiceContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/billings/popup/BillingsTaxContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/billings/popup/BillingsTaxContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/business/Business.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/business/Business.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/business/popup/BusinessPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/business/popup/BusinessPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/clients/Clients.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/clients/Clients.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/clients/popup/ClientPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/clients/popup/ClientPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/register/RegisterForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/register/RegisterForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/services/Services.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/services/Services.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/services/popup/ServicesContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/services/popup/ServicesContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/services/popup/ServicesPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/services/popup/ServicesPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/application/statistics/Statistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/statistics/Statistics.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/LoginForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/LoginForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/billings/Billings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/billings/Billings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/billings/popup/BillingsDiscountContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/billings/popup/BillingsDiscountContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/billings/popup/BillingsPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/billings/popup/BillingsPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/billings/popup/BillingsServiceContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/billings/popup/BillingsServiceContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/billings/popup/BillingsTaxContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/billings/popup/BillingsTaxContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/business/Business.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/business/Business.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/business/popup/BusinessPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/business/popup/BusinessPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/clients/Clients.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/clients/Clients.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/clients/popup/ClientPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/clients/popup/ClientPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/register/RegisterForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/register/RegisterForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/services/Services.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/services/Services.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/services/popup/ServicesContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/services/popup/ServicesContent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/services/popup/ServicesPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/services/popup/ServicesPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/statistics/Statistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/statistics/Statistics.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LcAjf8loeK8vxMSL7XhDsbCwhP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/alingeorgian/eclipse-workspace/BillingFy"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="155ee840-fb06-436b-9f9c-f71a5394d0cb" name="Changes" comment="" />
+      <created>1676160135790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676160135790</updated>
+    </task>
+    <servers />
+  </component>
+</project>
