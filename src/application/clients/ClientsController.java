@@ -227,12 +227,14 @@ public class ClientsController implements Initializable {
 
 	@FXML
 	private FontAwesomeIconView searchByPhoneNumberIcon;
+	private ObservableList<Client> paginatedData;
 	private static int ITEMS_PER_PAGE = 10;
 	private int numPages = 1;
 	private int currentPage = 0;
+
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
 		style.styleButtons(billingsButton, billingsIcon, billingsCircle);
@@ -266,7 +268,7 @@ public class ClientsController implements Initializable {
 		}
 
 		clientsTable.setEditable(true);
-		ObservableList<Client> paginatedData = createPage(currentPage);
+		paginatedData = createPage(currentPage);
 		clientsTable.setItems(paginatedData);
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
 		clientCurrentPage.setText(String.valueOf(currentPage + 1));
@@ -557,9 +559,11 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientName().contains(searchText);
 		});
+		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			clientsTable.setItems(getPaginatedData());
 	}
 
 	@FXML
@@ -568,9 +572,11 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientEmail().contains(searchText);
 		});
+		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if(searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			clientsTable.setItems(getPaginatedData());
 	}
 
 	@FXML
@@ -579,9 +585,11 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client ->{
 			return Client.getClientPhoneNumber().contains(searchText);
 		});
+		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			clientsTable.setItems(getPaginatedData());
 	}
 
 	private ObservableList<Client> createPage(int pageIndex){
@@ -590,4 +598,11 @@ public class ClientsController implements Initializable {
 		return FXCollections.observableArrayList(clientData.subList(startIndex,endIndex));
 	}
 
+	public ObservableList<Client> getPaginatedData() {
+		return paginatedData;
+	}
+
+	public void setPaginatedData(ObservableList<Client> paginatedData) {
+		this.paginatedData = paginatedData;
+	}
 }

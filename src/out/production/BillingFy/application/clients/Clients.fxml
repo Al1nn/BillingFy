@@ -102,7 +102,7 @@
 						<FontAwesomeIconView fx:id="clientPreviousPageIcon" glyphName="ANGLE_LEFT" size="20" />
 					</graphic>
 				</Button>
-				<Text layoutX="786.45703125" layoutY="723.123046875" strokeType="OUTSIDE" strokeWidth="0.0" text="din" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="85.0">
+				<Text layoutX="999.6142578125" layoutY="728.140625" strokeType="OUTSIDE" strokeWidth="0.0" text="din" AnchorPane.bottomAnchor="30.685546875" AnchorPane.rightAnchor="82.7265625">
 					<font>
 						<Font name="Roboto" size="13.0" />
 					</font>

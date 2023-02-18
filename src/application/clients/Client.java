@@ -7,16 +7,20 @@ import application.clients.popup.ClientPopupController;
 import application.resources.DeletePopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,6 +41,9 @@ public class Client {
 	private HBox buttonPane;
 
 	private TableView tableView;
+	private Text clientCurrentPage;
+	private Text clientNumPages;
+	private int ITEMS_PER_PAGE ;
 	public Client(String clientName, String clientCUI
 			, String clientTradeRegisterNumber, String clientEUID
 			, String clientCountry, String clientCity
@@ -89,6 +96,8 @@ public class Client {
 					clientPopupController.initializeData(clientName, clientCUI, clientTradeRegisterNumber, clientEUID, clientCountry, clientCity, clientCounty, clientStreet, clientNumber, clientZipCode, clientEmail, clientPhoneNumber);
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
+					clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
+					ITEMS_PER_PAGE = tableView.getItems().size();
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -118,6 +127,8 @@ public class Client {
 				deletePopupController.getDeletePopupTitle().setText("Stergere Client");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
+				clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
+				ITEMS_PER_PAGE = tableView.getItems().size();
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -144,7 +155,7 @@ public class Client {
 			try {
 				connection.deleteData(clientName,clientNumber);
 				tableView.getItems().clear();
-				tableView.setItems(connection.retrieveData());
+				tableView.setItems(createPage(0));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -152,11 +163,11 @@ public class Client {
 	}
 	private void refreshData(Stage childStage) {
 		ClientDatabase connection = new ClientDatabase();
+
 		childStage.setOnHidden(evt -> {
-			tableView.getItems().clear();
 			try {
 				tableView.getItems().clear();
-				tableView.setItems(connection.retrieveData());
+				tableView.setItems(createPage(0));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -287,5 +298,13 @@ public class Client {
 	public void setClientStreet(String clientStreet) {
 		this.clientStreet = clientStreet;
 	}
+
+	private ObservableList<Client> createPage(int pageIndex) throws ClassNotFoundException {
+		ClientDatabase connection = new ClientDatabase();
+		int startIndex = pageIndex * ITEMS_PER_PAGE;
+		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, connection.retrieveData().size());
+		return FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+	}
+
 
 }
