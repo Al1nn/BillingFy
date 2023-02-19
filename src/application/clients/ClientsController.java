@@ -345,8 +345,27 @@ public class ClientsController implements Initializable {
 		refreshData(childStage);
 	}
 	private void refreshData(Stage childStage){
+		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
-			updateTable();
+			ObservableList<Client> allData;
+			try {
+				allData = connection.retrieveData();
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+			ObservableList<Client> pageData = FXCollections.observableArrayList();
+			int currentPageIndex = pagination.getCurrentPageIndex();
+			int itemsPerPage = ITEMS_PER_PAGE;
+			int start = currentPageIndex * itemsPerPage;
+			int end = Math.min(start + itemsPerPage, allData.size());
+			if(start < end){
+				pageData.setAll(allData.subList(start,end));
+			}
+			clientsTable.getItems().clear();
+			clientsTable.setItems(pageData);
+			int pageCount = (int) Math.ceil((double) allData.size() / itemsPerPage);
+			pagination.setPageCount(pageCount);
+			pagination.setCurrentPageIndex(currentPageIndex);
 		});
 	}
 
