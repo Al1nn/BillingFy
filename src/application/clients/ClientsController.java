@@ -246,7 +246,7 @@ public class ClientsController implements Initializable {
 		updateTable();
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
-
+		itemsPerPage.getSelectionModel().selectFirst();
 	}
 
 
@@ -268,7 +268,7 @@ public class ClientsController implements Initializable {
 		}
 
 		clientsTable.setEditable(true);
-		paginatedData = createPage(currentPage);
+		paginatedData = createPage(currentPage,clientData);
 		clientsTable.setItems(paginatedData);
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
 		clientCurrentPage.setText(String.valueOf(currentPage + 1));
@@ -413,24 +413,27 @@ public class ClientsController implements Initializable {
 	}
 	
 	@FXML
-	void clientNextPageClicked(ActionEvent event) {
-		if(currentPage + 1< numPages )
+	void clientNextPageClicked(ActionEvent event) throws ClassNotFoundException {
+		ClientDatabase connection = new ClientDatabase();
+		if(currentPage + 1< Integer.valueOf(clientPages.getText()) )
 		{
 			currentPage++;
 			clientCurrentPage.setText(String.valueOf(currentPage + 1));
-			ObservableList<Client> paginatedData = createPage(currentPage);
+			ObservableList<Client> paginatedData = createPage(currentPage,connection.retrieveData());
 			clientsTable.setItems(paginatedData);
 		}
+
 
 	}
 
 	@FXML
-	void clientPreviousPageClicked(ActionEvent event) {
+	void clientPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
+		ClientDatabase connection = new ClientDatabase();
 		if(currentPage + 1 > 1)
 			{
 				currentPage--;
 				clientCurrentPage.setText(String.valueOf(currentPage + 1));
-				ObservableList<Client> paginatedData = createPage(currentPage);
+				ObservableList<Client> paginatedData = createPage(currentPage,connection.retrieveData());
 				clientsTable.setItems(paginatedData);
 			}
 
@@ -592,10 +595,10 @@ public class ClientsController implements Initializable {
 			clientsTable.setItems(getPaginatedData());
 	}
 
-	private ObservableList<Client> createPage(int pageIndex){
+	private ObservableList<Client> createPage(int pageIndex, ObservableList<Client> data){
 		int startIndex = pageIndex * ITEMS_PER_PAGE;
-		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, clientData.size());
-		return FXCollections.observableArrayList(clientData.subList(startIndex,endIndex));
+		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, data.size());
+		return FXCollections.observableArrayList(data.subList(startIndex,endIndex));
 	}
 
 	public ObservableList<Client> getPaginatedData() {

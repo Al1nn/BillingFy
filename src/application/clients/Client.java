@@ -42,7 +42,10 @@ public class Client {
 
 	private TableView tableView;
 	private Text clientCurrentPage;
+	private int currentPage = 0;
 	private Text clientNumPages;
+	private int numPages;
+	private ComboBox<String> itemsPerPage;
 	private int ITEMS_PER_PAGE ;
 	public Client(String clientName, String clientCUI
 			, String clientTradeRegisterNumber, String clientEUID
@@ -97,7 +100,14 @@ public class Client {
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 					clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
-					ITEMS_PER_PAGE = tableView.getItems().size();
+					currentPage = Integer.valueOf(clientCurrentPage.getText()) - 1;
+					clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
+					numPages = Integer.valueOf(clientNumPages.getText()) - 1;
+					System.out.println(currentPage+ "of" + numPages);
+					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+					String selectedItemPerPage = itemsPerPage.getValue().toString();
+					String[] tokens = selectedItemPerPage.split(" ");
+					ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -128,7 +138,14 @@ public class Client {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 				clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
-				ITEMS_PER_PAGE = tableView.getItems().size();
+				currentPage = Integer.valueOf(clientCurrentPage.getText()) - 1;
+				clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
+				numPages = Integer.valueOf(clientNumPages.getText()) - 1;
+				System.out.println(currentPage+ "of" + numPages);
+				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+				String selectedItemPerPage = itemsPerPage.getValue().toString();
+				String[] tokens = selectedItemPerPage.split(" ");
+				ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -155,7 +172,15 @@ public class Client {
 			try {
 				connection.deleteData(clientName,clientNumber);
 				tableView.getItems().clear();
-				tableView.setItems(createPage(0));
+				ObservableList<Client> paginatedData;
+				if(tableView.getItems().isEmpty()){
+					paginatedData = createPage(--currentPage);
+					clientNumPages.setText(String.valueOf(--numPages + 1));
+					clientCurrentPage.setText(String.valueOf(currentPage + 1));
+				}else{
+					paginatedData = createPage(currentPage);
+				}
+				tableView.setItems(paginatedData);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -163,11 +188,11 @@ public class Client {
 	}
 	private void refreshData(Stage childStage) {
 		ClientDatabase connection = new ClientDatabase();
-
 		childStage.setOnHidden(evt -> {
 			try {
 				tableView.getItems().clear();
-				tableView.setItems(createPage(0));
+				ObservableList<Client> paginatedData = createPage(currentPage);
+				tableView.setItems(paginatedData);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -302,6 +327,7 @@ public class Client {
 	private ObservableList<Client> createPage(int pageIndex) throws ClassNotFoundException {
 		ClientDatabase connection = new ClientDatabase();
 		int startIndex = pageIndex * ITEMS_PER_PAGE;
+		System.out.println(pageIndex + "  " + ITEMS_PER_PAGE);
 		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, connection.retrieveData().size());
 		return FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
 	}
