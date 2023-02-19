@@ -172,15 +172,7 @@ public class Client {
 			try {
 				connection.deleteData(clientName,clientNumber);
 				tableView.getItems().clear();
-				ObservableList<Client> paginatedData;
-				if(tableView.getItems().isEmpty()){
-					paginatedData = createPage(--currentPage);
-					clientNumPages.setText(String.valueOf(--numPages + 1));
-					clientCurrentPage.setText(String.valueOf(currentPage + 1));
-				}else{
-					paginatedData = createPage(currentPage);
-				}
-				tableView.setItems(paginatedData);
+				tableView.setItems(connection.retrieveData());
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -191,8 +183,7 @@ public class Client {
 		childStage.setOnHidden(evt -> {
 			try {
 				tableView.getItems().clear();
-				ObservableList<Client> paginatedData = createPage(currentPage);
-				tableView.setItems(paginatedData);
+				tableView.setItems(connection.retrieveData());
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}

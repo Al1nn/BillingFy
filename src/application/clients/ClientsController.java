@@ -22,11 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -218,7 +214,6 @@ public class ClientsController implements Initializable {
 
 	private ObservableList<Client> clientData;
 
-
 	@FXML
 	private FontAwesomeIconView searchByClientIcon;
 
@@ -227,11 +222,9 @@ public class ClientsController implements Initializable {
 
 	@FXML
 	private FontAwesomeIconView searchByPhoneNumberIcon;
-	private ObservableList<Client> paginatedData;
-	private static int ITEMS_PER_PAGE = 10;
-	private int numPages = 1;
-	private int currentPage = 0;
 
+	Pagination pagination;
+	private  int ITEMS_PER_PAGE = 10;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -243,10 +236,17 @@ public class ClientsController implements Initializable {
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		///Initialize contents from table with Database from MySQL !!!!!!!!
+		pagination = new Pagination();
+		pagination.setCurrentPageIndex(0);
 		updateTable();
+		pagination.setPageCount((int) Math.ceil((double) clientData.size() / ITEMS_PER_PAGE));
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		itemsPerPage.getSelectionModel().selectFirst();
+		System.out.println(pagination.getCurrentPageIndex());
+		clientPages.setText(String.valueOf(pagination.getPageCount()));
+		clientCurrentPage.setText(String.valueOf(pagination.getCurrentPageIndex() + 1));
+		createPage();
 	}
 
 
@@ -266,14 +266,9 @@ public class ClientsController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		clientsTable.setEditable(true);
-		paginatedData = createPage(currentPage,clientData);
-		clientsTable.setItems(paginatedData);
+		clientsTable.setItems(FXCollections.observableArrayList(clientData.subList(0,ITEMS_PER_PAGE)));
 		clientLengthText.setText(String.valueOf(clientsTable.getItems().size()));
-		clientCurrentPage.setText(String.valueOf(currentPage + 1));
-		numPages = (int) Math.ceil((double) clientData.size() / ITEMS_PER_PAGE);
-		clientPages.setText(String.valueOf(numPages));
 	}
 
 	public void setInitialDesignButtons() {
@@ -414,29 +409,24 @@ public class ClientsController implements Initializable {
 	
 	@FXML
 	void clientNextPageClicked(ActionEvent event) throws ClassNotFoundException {
-		ClientDatabase connection = new ClientDatabase();
-		if(currentPage + 1< Integer.valueOf(clientPages.getText()) )
-		{
-			currentPage++;
-			clientCurrentPage.setText(String.valueOf(currentPage + 1));
-			ObservableList<Client> paginatedData = createPage(currentPage,connection.retrieveData());
-			clientsTable.setItems(paginatedData);
+		int currentPage = pagination.getCurrentPageIndex();
+		if(currentPage < pagination.getPageCount() - 1){
+			pagination.setCurrentPageIndex(currentPage + 1);
+			clientCurrentPage.setText(String.valueOf(currentPage + 2));
 		}
 
-
+		System.out.println(currentPage);
 	}
 
 	@FXML
 	void clientPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
-		ClientDatabase connection = new ClientDatabase();
-		if(currentPage + 1 > 1)
-			{
-				currentPage--;
-				clientCurrentPage.setText(String.valueOf(currentPage + 1));
-				ObservableList<Client> paginatedData = createPage(currentPage,connection.retrieveData());
-				clientsTable.setItems(paginatedData);
-			}
+		int currentPage = pagination.getCurrentPageIndex();
+		if(currentPage > 0){
+			pagination.setCurrentPageIndex(currentPage - 1);
+			clientCurrentPage.setText(String.valueOf(currentPage));
+		}
 
+		System.out.println(currentPage);
 	}
 
 	@FXML
@@ -447,11 +437,17 @@ public class ClientsController implements Initializable {
 	void itemsPerPageSelected(ActionEvent event) {
 		String selectedItemPerPage = itemsPerPage.getValue().toString();
 		String[] tokens = selectedItemPerPage.split(" ");
-		ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
-		numPages = (int) Math.ceil((double) clientData.size() / ITEMS_PER_PAGE);
-		clientPages.setText(String.valueOf(numPages));
-		currentPage = 0;
-		updateTable();
+		int NEW_ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
+		ITEMS_PER_PAGE = clientsTable.getItems().size();
+		int newIndex = pagination.getCurrentPageIndex() * ITEMS_PER_PAGE / NEW_ITEMS_PER_PAGE;
+		pagination.setCurrentPageIndex(newIndex);
+		pagination.setPageCount((int) Math.ceil((double) clientData.size() / NEW_ITEMS_PER_PAGE));
+		clientPages.setText(String.valueOf(pagination.getPageCount()));
+		int start = newIndex * NEW_ITEMS_PER_PAGE;
+		int end = Math.min(start + NEW_ITEMS_PER_PAGE, clientData.size());
+		clientsTable.setItems(FXCollections.observableArrayList(clientData.subList(start,end)));
+		clientCurrentPage.setText(String.valueOf(pagination.getCurrentPageIndex() + 1));
+		ITEMS_PER_PAGE = NEW_ITEMS_PER_PAGE;
 	}
 	@FXML
 	void exitButtonClicked(ActionEvent event) {
@@ -562,11 +558,9 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientName().contains(searchText);
 		});
-		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
-		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(getPaginatedData());
+			clientsTable.setItems(clientData);
 	}
 
 	@FXML
@@ -575,11 +569,9 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientEmail().contains(searchText);
 		});
-		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
-		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if(searchText == null || searchText.isEmpty())
-			clientsTable.setItems(getPaginatedData());
+			clientsTable.setItems(clientData);
 	}
 
 	@FXML
@@ -588,24 +580,17 @@ public class ClientsController implements Initializable {
 		FilteredList<Client> filteredList = clientData.filtered(Client ->{
 			return Client.getClientPhoneNumber().contains(searchText);
 		});
-		numPages = numPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
-		clientPages.setText(String.valueOf(numPages));
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(getPaginatedData());
+			clientsTable.setItems(clientData);
 	}
 
-	private ObservableList<Client> createPage(int pageIndex, ObservableList<Client> data){
-		int startIndex = pageIndex * ITEMS_PER_PAGE;
-		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, data.size());
-		return FXCollections.observableArrayList(data.subList(startIndex,endIndex));
+	private void  createPage(){
+		pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> {
+			int start = newIndex.intValue() * ITEMS_PER_PAGE;
+			int end = Math.min(start + ITEMS_PER_PAGE, clientData.size());
+			clientsTable.setItems(FXCollections.observableArrayList(clientData.subList(start,end)));
+		});
 	}
 
-	public ObservableList<Client> getPaginatedData() {
-		return paginatedData;
-	}
-
-	public void setPaginatedData(ObservableList<Client> paginatedData) {
-		this.paginatedData = paginatedData;
-	}
 }
