@@ -42,11 +42,11 @@ public class Client {
 
 	private TableView tableView;
 	private Text clientCurrentPage;
-	private int currentPage = 0;
+	
 	private Text clientNumPages;
-	private int numPages;
+
 	private ComboBox<String> itemsPerPage;
-	private int ITEMS_PER_PAGE ;
+
 	public Client(String clientName, String clientCUI
 			, String clientTradeRegisterNumber, String clientEUID
 			, String clientCountry, String clientCity

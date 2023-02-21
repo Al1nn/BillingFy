@@ -263,10 +263,8 @@ public class ClientsController implements Initializable {
 		}
 
 		clientsTable.setEditable(true);
-		clientsTable.setItems(clientData);
+		displayTable(1,pageSize);
 		clientLengthText.setText(String.valueOf(clientData.size()));
-
-
 
 	}
 
@@ -346,7 +344,12 @@ public class ClientsController implements Initializable {
 	private void refreshData(Stage childStage){
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
-			updateTable();
+			try {
+				clientData = connection.retrieveData();
+				displayTable(currentPage,pageSize);
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 		});
 	}
 
