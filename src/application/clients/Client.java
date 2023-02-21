@@ -172,15 +172,6 @@ public class Client {
 		childStage.setOnHidden(evt -> {
 			try {
 				connection.deleteData(clientName,clientNumber);
-				if(tableView.getItems().isEmpty())
-					{
-						--currentPage;
-						clientCurrentPage.setText(String.valueOf(currentPage));
-						--totalPages;
-						clientNumPages.setText(String.valueOf(totalPages));
-						displayTable(currentPage,pageSize);
-						return;
-					}
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
