@@ -350,10 +350,8 @@ public class ClientsController implements Initializable {
 		childStage.setOnHidden(evt -> {
 			try {
 				if(clientsTable.getItems().size() == pageSize){
-					totalPages++;
+					totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
 					clientPages.setText(String.valueOf(totalPages));
-					displayTable(currentPage,pageSize);
-					return;
 				}
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
@@ -424,7 +422,9 @@ public class ClientsController implements Initializable {
 		if (currentPage < totalPages)
 		{
 			currentPage++;
+			totalPages = (int) Math.ceil((double) clientData.size() / pageSize);
 			clientCurrentPage.setText(String.valueOf(currentPage));
+			clientPages.setText(String.valueOf(totalPages));
 			displayTable(currentPage,pageSize);
 		}
 	}
@@ -433,7 +433,9 @@ public class ClientsController implements Initializable {
 	void clientPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
 		if(currentPage > 1){
 			currentPage--;
+			totalPages = (int) Math.ceil((double) clientData.size() / pageSize);
 			clientCurrentPage.setText(String.valueOf(currentPage));
+			clientPages.setText(String.valueOf(totalPages));
 			displayTable(currentPage,pageSize);
 		}
 	}

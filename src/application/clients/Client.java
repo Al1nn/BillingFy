@@ -171,6 +171,12 @@ public class Client {
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
+				if(tableView.getItems().size() == 1){
+					--totalPages;
+					clientNumPages.setText(String.valueOf(totalPages));
+					--currentPage;
+					clientCurrentPage.setText(String.valueOf(currentPage));
+				}
 				connection.deleteData(clientName,clientNumber);
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
