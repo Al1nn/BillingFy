@@ -110,9 +110,6 @@ public class Client {
 					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 					String selectedValue = itemsPerPage.getValue();
 					pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
-					System.out.println("Current Page :" +currentPage);
-					System.out.println("Total Pages : "+ totalPages);
-					System.out.println("Page Size : " + pageSize);
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -143,15 +140,14 @@ public class Client {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 				clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
+				System.out.println(clientCurrentPage);
 				currentPage = Integer.parseInt(clientCurrentPage.getText());
 				clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
+				System.out.println(clientNumPages);
 				totalPages = Integer.parseInt(clientNumPages.getText());
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 				String selectedValue = itemsPerPage.getValue();
 				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
-				System.out.println("Current Page :" +currentPage);
-				System.out.println("Total Pages : "+ totalPages);
-				System.out.println("Page Size : " + pageSize);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -176,6 +172,15 @@ public class Client {
 		childStage.setOnHidden(evt -> {
 			try {
 				connection.deleteData(clientName,clientNumber);
+				if(tableView.getItems().isEmpty())
+					{
+						--currentPage;
+						clientCurrentPage.setText(String.valueOf(currentPage));
+						--totalPages;
+						clientNumPages.setText(String.valueOf(totalPages));
+						displayTable(currentPage,pageSize);
+						return;
+					}
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);

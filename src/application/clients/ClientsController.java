@@ -349,7 +349,12 @@ public class ClientsController implements Initializable {
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				clientData = connection.retrieveData();
+				if(clientsTable.getItems().size() == pageSize){
+					totalPages++;
+					clientPages.setText(String.valueOf(totalPages));
+					displayTable(currentPage,pageSize);
+					return;
+				}
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
