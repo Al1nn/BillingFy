@@ -42,10 +42,14 @@ public class Client {
 
 	private TableView tableView;
 	private Text clientCurrentPage;
-	
+
 	private Text clientNumPages;
 
 	private ComboBox<String> itemsPerPage;
+
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
 
 	public Client(String clientName, String clientCUI
 			, String clientTradeRegisterNumber, String clientEUID
@@ -100,14 +104,15 @@ public class Client {
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 					clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
-					currentPage = Integer.valueOf(clientCurrentPage.getText()) - 1;
+					currentPage = Integer.parseInt(clientCurrentPage.getText());
 					clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
-					numPages = Integer.valueOf(clientNumPages.getText()) - 1;
-					System.out.println(currentPage+ "of" + numPages);
+					totalPages = Integer.parseInt(clientNumPages.getText());
 					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
-					String selectedItemPerPage = itemsPerPage.getValue().toString();
-					String[] tokens = selectedItemPerPage.split(" ");
-					ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
+					String selectedValue = itemsPerPage.getValue();
+					pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+					System.out.println("Current Page :" +currentPage);
+					System.out.println("Total Pages : "+ totalPages);
+					System.out.println("Page Size : " + pageSize);
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -138,14 +143,15 @@ public class Client {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 				clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
-				currentPage = Integer.valueOf(clientCurrentPage.getText()) - 1;
+				currentPage = Integer.parseInt(clientCurrentPage.getText());
 				clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
-				numPages = Integer.valueOf(clientNumPages.getText()) - 1;
-				System.out.println(currentPage+ "of" + numPages);
+				totalPages = Integer.parseInt(clientNumPages.getText());
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
-				String selectedItemPerPage = itemsPerPage.getValue().toString();
-				String[] tokens = selectedItemPerPage.split(" ");
-				ITEMS_PER_PAGE = Integer.parseInt(tokens[0]);
+				String selectedValue = itemsPerPage.getValue();
+				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+				System.out.println("Current Page :" +currentPage);
+				System.out.println("Total Pages : "+ totalPages);
+				System.out.println("Page Size : " + pageSize);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -168,11 +174,9 @@ public class Client {
 	private void refreshAfterDelete(Stage childStage){
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
-			System.out.println("Delete Popup Closed !!!");
 			try {
 				connection.deleteData(clientName,clientNumber);
-				tableView.getItems().clear();
-				tableView.setItems(connection.retrieveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -182,8 +186,7 @@ public class Client {
 		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				tableView.getItems().clear();
-				tableView.setItems(connection.retrieveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -315,13 +318,11 @@ public class Client {
 		this.clientStreet = clientStreet;
 	}
 
-	private ObservableList<Client> createPage(int pageIndex) throws ClassNotFoundException {
+	private void displayTable(int page, int size) throws ClassNotFoundException {
 		ClientDatabase connection = new ClientDatabase();
-		int startIndex = pageIndex * ITEMS_PER_PAGE;
-		System.out.println(pageIndex + "  " + ITEMS_PER_PAGE);
-		int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, connection.retrieveData().size());
-		return FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
+		ObservableList<Client> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+		tableView.setItems(currentPageData);
 	}
-
-
 }

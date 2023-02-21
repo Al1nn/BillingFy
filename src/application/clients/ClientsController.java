@@ -239,13 +239,17 @@ public class ClientsController implements Initializable {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		itemsPerPage.getSelectionModel().selectFirst();
-		updateTable();
+		try {
+			updateTable();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 		totalPages = (int) Math.ceil((double) clientData.size() / pageSize);
 		clientPages.setText(String.valueOf(totalPages));
 	}
 
 
-	public void updateTable(){
+	public void updateTable() throws ClassNotFoundException {
 		clientNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
 		clientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
 		clientCountry.setCellValueFactory(new PropertyValueFactory<>("clientCountry"));
@@ -434,12 +438,13 @@ public class ClientsController implements Initializable {
 
 	}
 	@FXML
-	void itemsPerPageSelected(ActionEvent event) {
+	void itemsPerPageSelected(ActionEvent event) throws ClassNotFoundException {
 		String selectedValue = itemsPerPage.getValue();
 		pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
 		totalPages = (int) Math.ceil((double) clientData.size() / pageSize);
 		clientPages.setText(String.valueOf(totalPages));
 		currentPage = 1;
+		clientCurrentPage.setText(String.valueOf(currentPage));
 		displayTable(currentPage,pageSize);
 	}
 	@FXML
@@ -578,7 +583,9 @@ public class ClientsController implements Initializable {
 			clientsTable.setItems(clientData);
 	}
 
-	private void displayTable(int page, int size){
+	private void displayTable(int page, int size) throws ClassNotFoundException {
+		ClientDatabase connection = new ClientDatabase();
+		clientData = connection.retrieveData();
 		int startIndex = (page - 1) * size;
 		int endIndex = Math.min(startIndex + size, clientData.size());
 		ObservableList<Client> currentPageData = FXCollections.observableArrayList(clientData.subList(startIndex,endIndex));
