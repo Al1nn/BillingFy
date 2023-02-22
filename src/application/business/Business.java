@@ -2,9 +2,11 @@ package application.business;
 
 import java.io.IOException;
 
+import application.business.popup.BusinessPopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -36,28 +38,26 @@ public class Business {
 		this.businessZipCode = businessZipCode;
 		this.businessEmail = businessEmail;
 		this.businessPhoneNumber = businessPhoneNumber;
-		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css")
-				.toExternalForm();
+
 		// Edit button
 		Button editButton = new Button();
-		FontAwesomeIconView editButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
-		editButtonIcon.setFill(Color.web("#547cbc"));
-		editButtonIcon.setSize("20");
-		editButton.setGraphic(editButtonIcon);
-		editButton.getStylesheets().add(buttonStyle);
-		setIconFills(editButton, editButtonIcon);
+		styleButtons(editButton,FontAwesomeIcon.PENCIL);
 		buttonFunctions(editButton);
 		// Delete button
 		Button deleteButton = new Button();
-		FontAwesomeIconView deleteButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-		deleteButtonIcon.setFill(Color.web("#547cbc"));
-		deleteButtonIcon.setSize("20");
-		deleteButton.setGraphic(deleteButtonIcon);
-		deleteButton.getStylesheets().add(buttonStyle);
-		setIconFills(deleteButton, deleteButtonIcon);
+		styleButtons(deleteButton,FontAwesomeIcon.TRASH);
+
 		this.setButtonPane(new HBox(editButton,deleteButton));
 	}
-
+	private void styleButtons(Button button, FontAwesomeIcon icon){
+		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css").toExternalForm();
+		FontAwesomeIconView buttonIcon = new FontAwesomeIconView(icon);
+		buttonIcon.setFill(Color.web("#547cbc"));
+		buttonIcon.setSize("20");
+		button.setGraphic(buttonIcon);
+		button.getStylesheets().add(buttonStyle);
+		setIconFills(button, buttonIcon);
+	}
 	private void setIconFills(Button button, FontAwesomeIconView buttonIcon) {
 		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -80,31 +80,34 @@ public class Business {
 	}
 	
 	public void buttonFunctions(Button button) {
-		button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				try {
-					Parent root = FXMLLoader.load(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
-					Stage stage = new Stage();
-					String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
-					stage.setScene(new Scene(root));
-					stage.getScene().getStylesheets().add(popupCSS);
-					stage.initModality(Modality.APPLICATION_MODAL);
-					stage.initOwner((Stage) ((Node) arg0.getSource()).getScene().getWindow());
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.centerOnScreen();
-					stage.show();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+		button.setOnMouseClicked(evt -> {
+			try {
+				FXMLLoader loader =  new FXMLLoader(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
+				Parent root = loader.load();
+				BusinessPopupController businessPopupController = loader.getController();
+				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				Stage childStage = new Stage();
+				String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
+				childStage.setScene(new Scene(root));
+				childStage.getScene().getStylesheets().add(popupCSS);
+				childStage.initModality(Modality.APPLICATION_MODAL);
+				childStage.initOwner(parentStage);
+				childStage.initStyle(StageStyle.UNDECORATED);
+				childStage.show();
+				double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+				double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+				childStage.setX(x);
+				childStage.setY(y);
+				refreshData(childStage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
 		});
 	}
-	
+	private void refreshData(Stage childStage){
+
+	}
 	public String getBusinessNumber() {
 		return businessNumber;
 	}

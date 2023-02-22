@@ -69,8 +69,6 @@ public class Client {
 		this.clientZipCode = clientZipCode;
 		this.clientEmail = clientEmail;
 		this.clientPhoneNumber = clientPhoneNumber;
-		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css")
-				.toExternalForm();
 		// Edit button
 		Button editButton = new Button();
 		styleButtons(editButton,FontAwesomeIcon.PENCIL);
