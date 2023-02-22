@@ -235,9 +235,8 @@ public class BusinessController implements Initializable{
 		businessFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
 		
 		final ObservableList<Business> businessData = FXCollections.observableArrayList(
-				new Business("1", "SC COMPANY NAME", "Romania", "Pitesti", "142424", "csgo@gmail.com", "0724636474"),
-				new Business("2", "SC COMPANY NAME", "Romania", "Pitesti", "163263", "atwg@gmail.com", "0742523623")
-				);
+            new Business("SC COMPANIE","4523425","J4/1234/2022","ROONRC.J4/1234/2022","Romania","Costesti", "Arges", "Strada Progresului", "1","115255","alingeorgian987@gmail.com","0745642636","Raiffeisen","SC COMPANIE","ROZRB XXXX XXXX XXXX XXXX","ROZRVBSF","REFERENCE","2000","EUR")
+        );
 		businessTable.setItems(businessData);
 		businessLengthText.setText(String.valueOf(businessTable.getItems().size()));
     }

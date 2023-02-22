@@ -20,33 +20,59 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Business {
-	private String businessNumber;
 	private String businessName;
+	private String businessCUI;
+	private String businessTradeRegisterNumber;
+	private String businessEUID;
 	private String businessCountry;
 	private String businessCity;
+	private String businessCounty;
+	private String businessStreet;
+	private String businessNumber;
 	private String businessZipCode;
 	private String businessEmail;
 	private String businessPhoneNumber;
+	private String businessPaymentBank;
+	private String businessPaymentBeneficiary;
+	private String businessPaymentIBAN;
+	private String businessPaymentSwift;
+	private String businessPaymentReference;
+	private String businessPaymentExchange;
+	private String businessPaymentCurrency;
+
 	private HBox buttonPane;
 	
 	
-	public Business(String businessNumber, String businessName, String businessCountry, String businessCity, String businessZipCode, String businessEmail, String businessPhoneNumber) {
-		this.businessNumber = businessNumber;
+	public Business(String businessName, String businessCUI, String businessTradeRegisterNumber, String businessEUID, String businessCountry, String businessCity, String businessCounty, String businessStreet, String businessNumber, String businessZipCode, String businessEmail, String businessPhoneNumber
+	, String businessPaymentBank, String businessPaymentBeneficiary, String businessPaymentIBAN, String businessPaymentSwift, String businessPaymentReference, String businessPaymentExchange, String businessPaymentCurrency) {
 		this.businessName = businessName;
+		this.businessCUI = businessCUI;
+		this.businessTradeRegisterNumber = businessTradeRegisterNumber;
+		this.businessEUID = businessEUID;
 		this.businessCountry = businessCountry;
 		this.businessCity = businessCity;
+		this.businessCounty = businessCounty;
+		this.businessStreet = businessStreet;
+		this.businessNumber = businessNumber;
 		this.businessZipCode = businessZipCode;
 		this.businessEmail = businessEmail;
 		this.businessPhoneNumber = businessPhoneNumber;
+		this.businessPaymentBank = businessPaymentBank;
+		this.businessPaymentBeneficiary = businessPaymentBeneficiary;
+		this.businessPaymentIBAN = businessPaymentIBAN;
+		this.businessPaymentSwift = businessPaymentSwift;
+		this.businessPaymentReference = businessPaymentReference;
+		this.businessPaymentExchange = businessPaymentExchange;
+		this.businessPaymentCurrency = businessPaymentCurrency;
 
 		// Edit button
 		Button editButton = new Button();
 		styleButtons(editButton,FontAwesomeIcon.PENCIL);
-		buttonFunctions(editButton);
+		editButtonFunction(editButton);
 		// Delete button
 		Button deleteButton = new Button();
 		styleButtons(deleteButton,FontAwesomeIcon.TRASH);
-
+		deleteButtonFunction(deleteButton);
 		this.setButtonPane(new HBox(editButton,deleteButton));
 	}
 	private void styleButtons(Button button, FontAwesomeIcon icon){
@@ -79,7 +105,7 @@ public class Business {
 		});
 	}
 	
-	public void buttonFunctions(Button button) {
+	private void editButtonFunction(Button button) {
 		button.setOnMouseClicked(evt -> {
 			try {
 				FXMLLoader loader =  new FXMLLoader(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
@@ -103,6 +129,11 @@ public class Business {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		});
+	}
+	private void deleteButtonFunction(Button button){
+		button.setOnMouseClicked(evt -> {
+			System.out.println("Delete popup opened !");
 		});
 	}
 	private void refreshData(Stage childStage){
@@ -187,4 +218,99 @@ public class Business {
 		this.buttonPane = buttonPane;
 	}
 
+	public String getBusinessCUI() {
+		return businessCUI;
+	}
+
+	public void setBusinessCUI(String businessCUI) {
+		this.businessCUI = businessCUI;
+	}
+
+	public String getBusinessTradeRegisterNumber() {
+		return businessTradeRegisterNumber;
+	}
+
+	public void setBusinessTradeRegisterNumber(String businessTradeRegisterNumber) {
+		this.businessTradeRegisterNumber = businessTradeRegisterNumber;
+	}
+
+	public String getBusinessEUID() {
+		return businessEUID;
+	}
+
+	public void setBusinessEUID(String businessEUID) {
+		this.businessEUID = businessEUID;
+	}
+
+	public String getBusinessCounty() {
+		return businessCounty;
+	}
+
+	public void setBusinessCounty(String businessCounty) {
+		this.businessCounty = businessCounty;
+	}
+
+	public String getBusinessStreet() {
+		return businessStreet;
+	}
+
+	public void setBusinessStreet(String businessStreet) {
+		this.businessStreet = businessStreet;
+	}
+
+	public String getBusinessPaymentBank() {
+		return businessPaymentBank;
+	}
+
+	public void setBusinessPaymentBank(String businessPaymentBank) {
+		this.businessPaymentBank = businessPaymentBank;
+	}
+
+	public String getBusinessPaymentBeneficiary() {
+		return businessPaymentBeneficiary;
+	}
+
+	public void setBusinessPaymentBeneficiary(String businessPaymentBeneficiary) {
+		this.businessPaymentBeneficiary = businessPaymentBeneficiary;
+	}
+
+	public String getBusinessPaymentIBAN() {
+		return businessPaymentIBAN;
+	}
+
+	public void setBusinessPaymentIBAN(String businessPaymentIBAN) {
+		this.businessPaymentIBAN = businessPaymentIBAN;
+	}
+
+	public String getBusinessPaymentSwift() {
+		return businessPaymentSwift;
+	}
+
+	public void setBusinessPaymentSwift(String businessPaymentSwift) {
+		this.businessPaymentSwift = businessPaymentSwift;
+	}
+
+	public String getBusinessPaymentReference() {
+		return businessPaymentReference;
+	}
+
+	public void setBusinessPaymentReference(String businessPaymentReference) {
+		this.businessPaymentReference = businessPaymentReference;
+	}
+
+	public String getBusinessPaymentExchange() {
+		return businessPaymentExchange;
+	}
+
+	public void setBusinessPaymentExchange(String businessPaymentExchange) {
+		this.businessPaymentExchange = businessPaymentExchange;
+	}
+
+	public String getBusinessPaymentCurrency() {
+		return businessPaymentCurrency;
+	}
+
+	public void setBusinessPaymentCurrency(String businessPaymentCurrency) {
+		this.businessPaymentCurrency = businessPaymentCurrency;
+	}
 }

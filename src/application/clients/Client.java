@@ -138,10 +138,8 @@ public class Client {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Client>) parentStage.getScene().lookup("#clientsTable");
 				clientCurrentPage = (Text) parentStage.getScene().lookup("#clientCurrentPage");
-				System.out.println(clientCurrentPage);
 				currentPage = Integer.parseInt(clientCurrentPage.getText());
 				clientNumPages = (Text) parentStage.getScene().lookup("#clientPages");
-				System.out.println(clientNumPages);
 				totalPages = Integer.parseInt(clientNumPages.getText());
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 				String selectedValue = itemsPerPage.getValue();
