@@ -598,36 +598,36 @@ public class ClientsController implements Initializable {
 	}
 
 	@FXML
-	void searchByClientIconClicked(MouseEvent event) {
+	void searchByClientIconClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchText = searchClient.getText();
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientName().contains(searchText);
 		});
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			displayTable(currentPage,pageSize);
 	}
 
 	@FXML
-	void searchByEmailIconClicked(MouseEvent event) {
+	void searchByEmailIconClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchText = searchEmail.getText();
 		FilteredList<Client> filteredList = clientData.filtered(Client -> {
 			return Client.getClientEmail().contains(searchText);
 		});
 		clientsTable.setItems(filteredList);
 		if(searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			displayTable(currentPage,pageSize);
 	}
 
 	@FXML
-	void searchByPhoneNumberIconClicked(MouseEvent event) {
+	void searchByPhoneNumberIconClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchText = searchPhoneNumber.getText();
 		FilteredList<Client> filteredList = clientData.filtered(Client ->{
 			return Client.getClientPhoneNumber().contains(searchText);
 		});
 		clientsTable.setItems(filteredList);
 		if (searchText == null || searchText.isEmpty())
-			clientsTable.setItems(clientData);
+			displayTable(currentPage,pageSize);
 	}
 
 	private void displayTable(int page, int size) throws ClassNotFoundException {
