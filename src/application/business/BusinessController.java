@@ -17,17 +17,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -68,19 +66,19 @@ public class BusinessController implements Initializable{
     private Circle businessCircle;
 
     @FXML
-    private TableColumn<?, ?> businessCity;
+    private TableColumn<Business, String> businessCity;
 
     @FXML
-    private TableColumn<?, ?> businessCountry;
+    private TableColumn<Business, String> businessCountry;
 
     @FXML
     private Text businessCurrentPage;
 
     @FXML
-    private TableColumn<?, ?> businessEmail;
+    private TableColumn<Business, String> businessEmail;
 
     @FXML
-    private TableColumn<?, ?> businessFunctions;
+    private TableColumn<Business, HBox> businessFunctions;
 
     @FXML
     private FontAwesomeIconView businessIcon;
@@ -92,7 +90,7 @@ public class BusinessController implements Initializable{
     private Text businessLengthText;
 
     @FXML
-    private TableColumn<?, ?> businessName;
+    private TableColumn<Business, String> businessName;
 
     @FXML
     private Button businessNextPage;
@@ -101,13 +99,13 @@ public class BusinessController implements Initializable{
     private FontAwesomeIconView businessNextPageIcon;
 
     @FXML
-    private TableColumn<?, ?> businessNumber;
+    private TableColumn<Business, String> businessNumber;
 
     @FXML
     private Text businessPages;
 
     @FXML
-    private TableColumn<?, ?> businessPhoneNumber;
+    private TableColumn<Business, String> businessPhoneNumber;
 
     @FXML
     private Button businessPreviousPage;
@@ -122,7 +120,7 @@ public class BusinessController implements Initializable{
     private Text businessTitle;
 
     @FXML
-    private TableColumn<?, ?> businessZipCode;
+    private TableColumn<Business, String> businessZipCode;
 
     @FXML
     private AnchorPane buttonLayout;
@@ -236,13 +234,21 @@ public class BusinessController implements Initializable{
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		
 		businessNumber.setCellValueFactory(new PropertyValueFactory<>("businessNumber"));
+        centerCellsOnColumn(businessNumber);
 		businessName.setCellValueFactory(new PropertyValueFactory<>("businessName"));
+        centerCellsOnColumn(businessName);
 		businessCountry.setCellValueFactory(new PropertyValueFactory<>("businessCountry"));
+        centerCellsOnColumn(businessCountry);
 		businessCity.setCellValueFactory(new PropertyValueFactory<>("businessCity"));
+        centerCellsOnColumn(businessCity);
 		businessZipCode.setCellValueFactory(new PropertyValueFactory<>("businessZipCode"));
+        centerCellsOnColumn(businessZipCode);
 		businessEmail.setCellValueFactory(new PropertyValueFactory<>("businessEmail"));
+        centerCellsOnColumn(businessEmail);
 		businessPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("businessPhoneNumber"));
+        centerCellsOnColumn(businessPhoneNumber);
 		businessFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
+        centerBusinessFunctionColumn(businessFunctions);
 		
 		final ObservableList<Business> businessData = FXCollections.observableArrayList(
             new Business("SC COMPANIE","4523425","J4/1234/2022","ROONRC.J4/1234/2022","Romania","Costesti", "Arges", "Strada Progresului", "1","115255","alingeorgian987@gmail.com","0745642636","Raiffeisen","SC COMPANIE","ROZRB XXXX XXXX XXXX XXXX","ROZRVBSF","REFERENCE","2000","EUR")
@@ -266,7 +272,37 @@ public class BusinessController implements Initializable{
     	addBillingButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
 	}
-    
+    private void centerCellsOnColumn(TableColumn<Business,String> tableColumn){
+        tableColumn.setCellFactory(column -> new TableCell<Business,String>(){
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setAlignment(Pos.CENTER);
+                } else {
+                    setText(item);
+                    setAlignment(Pos.CENTER);
+                }
+            }
+        });
+    }
+    private void centerBusinessFunctionColumn(TableColumn<Business,HBox> tableColumn){
+        tableColumn.setCellFactory(column-> new TableCell<Business,HBox>(){
+            @Override
+            protected void updateItem(HBox item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    Business business = businessTable.getItems().get(getIndex());
+                    item = business.getButtonPane();
+                    item.setAlignment(Pos.CENTER);
+                    setGraphic(item);
+                }
+            }
+        });
+    }
     @FXML
     void addBillingButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsPopup.fxml"));

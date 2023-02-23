@@ -19,19 +19,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -108,10 +106,10 @@ public class ServicesController implements Initializable{
     private Text servicesCurrentPage;
 
     @FXML
-    private TableColumn<?, ?> servicesDescription;
+    private TableColumn<Service, String> servicesDescription;
 
     @FXML
-    private TableColumn<?, ?> servicesFunctions;
+    private TableColumn<Service, HBox> servicesFunctions;
 
     @FXML
     private FontAwesomeIconView servicesIcon;
@@ -123,7 +121,7 @@ public class ServicesController implements Initializable{
     private Text servicesLengthText;
 
     @FXML
-    private TableColumn<?, ?> servicesName;
+    private TableColumn<Service, String> servicesName;
 
     @FXML
     private Button servicesNextPage;
@@ -132,7 +130,7 @@ public class ServicesController implements Initializable{
     private FontAwesomeIconView servicesNextPageIcon;
 
     @FXML
-    private TableColumn<?, ?> servicesNumber;
+    private TableColumn<Service, String> servicesNumber;
 
     @FXML
     private Text servicesPages;
@@ -144,7 +142,7 @@ public class ServicesController implements Initializable{
     private FontAwesomeIconView servicesPreviousPageIcon;
 
     @FXML
-    private TableColumn<?, ?> servicesPrice;
+    private TableColumn<Service, String> servicesPrice;
 
     @FXML
     private TableView<Service> servicesTable;
@@ -196,36 +194,74 @@ public class ServicesController implements Initializable{
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		
+		updateCharts();
+		updateTable();
+	}
+	private void updateCharts(){
 		XYChart.Series series1 = new XYChart.Series();
 		series1.setName("data1");
 		series1.getData().add(new XYChart.Data("caca",50));
 		series1.getData().add(new XYChart.Data("pisu",100));
-		
+
 		XYChart.Series series2 = new XYChart.Series();
 		series2.setName("data2");
 		series2.getData().add(new XYChart.Data("caca",250));
 		series2.getData().add(new XYChart.Data("Muia",50));
-		
+
 		XYChart.Series series3 = new XYChart.Series();
 		series3.setName("data3");
 		series3.getData().add(new XYChart.Data("pisu",400));
 		series3.getData().add(new XYChart.Data("Muia",500));
 		servicesNumberChart.getData().addAll(series1,series2,series3);
-		
+	}
+    private void updateTable(){
 		servicesNumber.setCellValueFactory(new PropertyValueFactory<>("servicesNumber"));
+		centerCellsOnColumn(servicesNumber);
 		servicesName.setCellValueFactory(new PropertyValueFactory<>("servicesName"));
+		centerCellsOnColumn(servicesName);
 		servicesDescription.setCellValueFactory(new PropertyValueFactory<>("servicesDescription"));
+		centerCellsOnColumn(servicesDescription);
 		servicesPrice.setCellValueFactory(new PropertyValueFactory<>("servicesPrice"));
+		centerCellsOnColumn(servicesPrice);
 		servicesFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
-		
+		centerServiceFunctionsColumn(servicesFunctions);
 		final ObservableList<Service> servicesData = FXCollections.observableArrayList(
 				new Service("1", "SC COMPANY NAME", "Descriere","5000"),
 				new Service("1", "SC CACA NAME", "Descriere","2500"));
-		
+
 		servicesTable.setItems(servicesData);
 	}
-    
+	private void centerCellsOnColumn(TableColumn<Service,String> tableColumn){
+		tableColumn.setCellFactory(column -> new TableCell<Service,String>(){
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setAlignment(Pos.CENTER);
+				} else {
+					setText(item);
+					setAlignment(Pos.CENTER);
+				}
+			}
+		});
+	}
+	private void centerServiceFunctionsColumn(TableColumn<Service,HBox> tableColumn){
+		tableColumn.setCellFactory(column-> new TableCell<Service,HBox>(){
+			@Override
+			protected void updateItem(HBox item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setGraphic(null);
+				} else {
+					Service service = servicesTable.getItems().get(getIndex());
+					item = service.getButtonPane();
+					item.setAlignment(Pos.CENTER);
+					setGraphic(item);
+				}
+			}
+		});
+	}
     public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
