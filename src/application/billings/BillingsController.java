@@ -21,15 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,19 +43,19 @@ public class BillingsController implements Initializable {
     private AnchorPane anchorPane;
 
     @FXML
-    private TableColumn<Void, Void> billingClient;
+    private TableColumn<Billing, String> billingClient;
 
     @FXML
     private Text billingCurrentPage;
 
     @FXML
-    private TableColumn<Void, Void> billingDueDate;
+    private TableColumn<Billing, String> billingDueDate;
 
     @FXML
-    private TableColumn<Void, Void> billingFunctions;
+    private TableColumn<Billing, HBox> billingFunctions;
 
     @FXML
-    private TableColumn<Void, Void> billingIssueDate;
+    private TableColumn<Billing, String> billingIssueDate;
 
     @FXML
     private AnchorPane billingLayout;
@@ -72,7 +70,7 @@ public class BillingsController implements Initializable {
     private FontAwesomeIconView billingNextPageIcon;
 
     @FXML
-    private TableColumn<Void, Void> billingNumber;
+    private TableColumn<Billing, String> billingNumber;
 
     @FXML
     private Text billingPages;
@@ -84,22 +82,22 @@ public class BillingsController implements Initializable {
     private FontAwesomeIconView billingPreviousPageIcon;
 
     @FXML
-    private TableColumn<Void, Void> billingStatus;
+    private TableColumn<Billing, HBox> billingStatus;
 
     @FXML
-    private TableColumn<Void, Void> billingSum;
+    private TableColumn<Billing, String> billingSum;
 
     @FXML
     private TableView<Billing> billingTable;
 
     @FXML
-    private TableColumn<Void, Void> billingTax;
+    private TableColumn<Billing, String> billingTax;
 
     @FXML
     private Text billingTitle;
 
     @FXML
-    private TableColumn<Void, Void> billingTotal;
+    private TableColumn<Billing, String> billingTotal;
 
     @FXML
     private AnchorPane buttonLayout;
@@ -234,26 +232,35 @@ public class BillingsController implements Initializable {
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		
+		updateTable();
+	}
+	private void updateTable(){
 		billingNumber.setCellValueFactory(new PropertyValueFactory<>("billingNumber"));
+		centerCellsOnColumn(billingNumber);
 		billingClient.setCellValueFactory(new PropertyValueFactory<>("billingClient"));
+		centerCellsOnColumn(billingClient);
 		billingIssueDate.setCellValueFactory(new PropertyValueFactory<>("billingIssueDate"));
+		centerCellsOnColumn(billingIssueDate);
 		billingDueDate.setCellValueFactory(new PropertyValueFactory<>("billingDueDate"));
+		centerCellsOnColumn(billingDueDate);
 		billingSum.setCellValueFactory(new PropertyValueFactory<>("billingSum"));
+		centerCellsOnColumn(billingSum);
 		billingTax.setCellValueFactory(new PropertyValueFactory<>("billingTax"));
+		centerCellsOnColumn(billingTax);
 		billingTotal.setCellValueFactory(new PropertyValueFactory<>("billingTotal"));
+		centerCellsOnColumn(billingTotal);
 		billingStatus.setCellValueFactory(new PropertyValueFactory<>("statusPane"));
+		centerStatusColumn(billingStatus);
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
-
+		centerBillingFunctionsColumn(billingFunctions);
 		final ObservableList<Billing> billingsData = FXCollections.observableArrayList(
 				new Billing("1", "SC COMPANY NAME", "12.12.2O22", "12.12.2022", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Neplatit"),
 				new Billing("1", "SC CACA S.R.L", "12.11.2020", "12.12.2020", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Platit")
-				);
-		
+		);
+
 		billingTable.setItems(billingsData);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 	}
-	
 	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15; "
 				+ "-fx-text-fill: #5283E9");
@@ -269,7 +276,54 @@ public class BillingsController implements Initializable {
 		addBillingButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
 	}
-	
+	private void centerCellsOnColumn(TableColumn<Billing,String> tableColumn){
+		tableColumn.setCellFactory(column -> new TableCell<Billing,String>(){
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setAlignment(Pos.CENTER);
+				} else {
+					setText(item);
+					setAlignment(Pos.CENTER);
+				}
+			}
+		});
+	}
+
+	private void centerStatusColumn(TableColumn<Billing,HBox> tableColumn){
+		tableColumn.setCellFactory(column-> new TableCell<Billing,HBox>(){
+			@Override
+			protected void updateItem(HBox item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setGraphic(null);
+				} else {
+					Billing billing = billingTable.getItems().get(getIndex());
+					item = billing.getStatusPane();
+					item.setAlignment(Pos.CENTER);
+					setGraphic(item);
+				}
+			}
+		});
+	}
+	private void centerBillingFunctionsColumn(TableColumn<Billing,HBox> tableColumn){
+		tableColumn.setCellFactory(column-> new TableCell<Billing,HBox>(){
+			@Override
+			protected void updateItem(HBox item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setGraphic(null);
+				} else {
+					Billing billing = billingTable.getItems().get(getIndex());
+					item = billing.getPane();
+					item.setAlignment(Pos.CENTER);
+					setGraphic(item);
+				}
+			}
+		});
+	}
 	@FXML
 	public void exitButtonClicked(ActionEvent event) {
 		Platform.exit();
