@@ -210,7 +210,7 @@ public class ClientPopupController{
     
  
     @FXML
-    void saveDataClicked(ActionEvent event) throws ClassNotFoundException, IOException {
+    void saveDataClicked(ActionEvent event) throws ClassNotFoundException{
     	String clientName = clientNameTextField.getText();
     	String clientCUI = CUITextField.getText();
     	String clientTradeRegisterNumber = tradeRegisterTextField.getText();

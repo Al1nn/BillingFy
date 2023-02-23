@@ -1,6 +1,6 @@
 package application.clients.backend;
-import java.io.IOException;
-import java.io.PipedReader;
+
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,6 @@ import application.clients.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.swing.plaf.nimbus.State;
 
 public class ClientDatabase {
 	public Connection databaseLink;
@@ -31,20 +30,7 @@ public class ClientDatabase {
 		
 		return databaseLink;
 	}
-	public int totalRows() throws ClassNotFoundException{
-		int totalRows = 0;
-		String select = "SELECT COUNT(*) FROM Clients";
-		try(Connection connection = getConnection();
-			PreparedStatement statement = connection.prepareStatement(select);
-			ResultSet resultSet = statement.executeQuery()
-		) {
-			resultSet.next();
-			totalRows = resultSet.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return totalRows;
-	}
+
 	public void insertData(String clientName
 			, String clientCUI
 			, String clientTradeRegisterNumber
@@ -59,7 +45,8 @@ public class ClientDatabase {
 			, String clientPhoneNumber) throws ClassNotFoundException {
 		String insert = "INSERT INTO Clients("
 				+ "Client_Name,CUI"
-				+ ",Trade_Register_Number,EUID"
+				+ ",Trade_Register_Number"
+				+ ",EUID"
 				+ ",COUNTRY,CITY"
 				+ ",COUNTY,STREET"
 				+ ",NUMBER,ZIPCODE"

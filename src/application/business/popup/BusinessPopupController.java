@@ -310,7 +310,7 @@ public class BusinessPopupController implements Initializable{
 
     @FXML
     void saveDataClicked(ActionEvent event) {
-    	saveData.getScene().getWindow();
+        
     }
 
     @FXML
