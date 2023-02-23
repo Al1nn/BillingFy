@@ -3,6 +3,8 @@ package application.business;
 import java.io.IOException;
 
 import application.business.popup.BusinessPopupController;
+import application.clients.Client;
+import application.resources.DeletePopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
@@ -12,9 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -135,11 +140,39 @@ public class Business {
 	}
 	private void deleteButtonFunction(Button button){
 		button.setOnMouseClicked(evt -> {
-			System.out.println("Delete popup opened !");
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resources/DeletePopup.fxml"));
+				Parent root = loader.load();
+				DeletePopupController deletePopupController = loader.getController();
+				deletePopupController.getDeletePopupTitle().setText("Stergere Firma");
+				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				//Proprietati din Business Form mai jos ( de implementat)
+				Stage childStage = new Stage();
+				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
+				childStage.setScene(new Scene(root));
+				childStage.getScene().getStylesheets().add(popupCSS);
+				childStage.initModality(Modality.APPLICATION_MODAL);
+				childStage.initOwner(parentStage);
+				childStage.initStyle(StageStyle.UNDECORATED);
+				childStage.show();
+				double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+				double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+				childStage.setX(x);
+				childStage.setY(y);
+				refreshAfterDelete(childStage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		});
 	}
 	private void refreshData(Stage childStage){
 
+	}
+	private void refreshAfterDelete(Stage childStage){
+		childStage.setOnHidden(evt -> {
+			System.out.println("Not on Client Form");
+		});
 	}
 	public String getBusinessNumber() {
 		return businessNumber;

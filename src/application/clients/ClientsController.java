@@ -19,12 +19,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -84,7 +86,7 @@ public class ClientsController implements Initializable {
 	private TableColumn<Client, String> clientEmail;
 
 	@FXML
-	private TableColumn<Client, String> clientFunctions;
+	private TableColumn<Client, HBox> clientFunctions;
 
 	@FXML
 	private AnchorPane clientLayout;
@@ -251,13 +253,21 @@ public class ClientsController implements Initializable {
 
 	public void updateTable() throws ClassNotFoundException {
 		clientNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
+		centerCellsOnColumn(clientNumber);
 		clientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+		centerCellsOnColumn(clientName);
 		clientCountry.setCellValueFactory(new PropertyValueFactory<>("clientCountry"));
+		centerCellsOnColumn(clientCountry);
 		clientCity.setCellValueFactory(new PropertyValueFactory<>("clientCity"));
+		centerCellsOnColumn(clientCity);
 		clientZipCode.setCellValueFactory(new PropertyValueFactory<>("clientZipCode"));
+		centerCellsOnColumn(clientZipCode);
 		clientEmail.setCellValueFactory(new PropertyValueFactory<>("clientEmail"));
+		centerCellsOnColumn(clientEmail);
 		clientPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("clientPhoneNumber"));
+		centerCellsOnColumn(clientPhoneNumber);
 		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
+		centerButtonFunctionColumn(clientFunctions);
 		ClientDatabase connection = new ClientDatabase();
 		try {
 			clientData= connection.retrieveData();
@@ -271,7 +281,37 @@ public class ClientsController implements Initializable {
 		clientLengthText.setText(String.valueOf(clientData.size()));
 
 	}
-
+	private void centerCellsOnColumn(TableColumn<Client,String> tableColumn){
+		tableColumn.setCellFactory(column -> new TableCell<Client,String>(){
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setAlignment(Pos.CENTER);
+				} else {
+					setText(item);
+					setAlignment(Pos.CENTER);
+				}
+			}
+		});
+	}
+	private void centerButtonFunctionColumn(TableColumn<Client,HBox> tableColumn){
+		tableColumn.setCellFactory(column-> new TableCell<Client,HBox>(){
+			@Override
+			protected void updateItem(HBox item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setGraphic(null);
+				} else {
+					Client client = clientsTable.getItems().get(getIndex());
+					item = client.getButtonPane();
+					item.setAlignment(Pos.CENTER);
+					setGraphic(item);
+				}
+			}
+		});
+	}
 	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");

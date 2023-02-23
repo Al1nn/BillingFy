@@ -211,10 +211,6 @@ public class ClientPopupController{
  
     @FXML
     void saveDataClicked(ActionEvent event) throws ClassNotFoundException, IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/clients/Clients.fxml"));
-        Parent root = loader.load();
-        ClientsController clientsController = loader.getController();
-
     	String clientName = clientNameTextField.getText();
     	String clientCUI = CUITextField.getText();
     	String clientTradeRegisterNumber = tradeRegisterTextField.getText();

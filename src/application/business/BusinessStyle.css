@@ -164,5 +164,10 @@
 	-fx-border-color: rgba(255,255,255,0.2);
 }
 
-
+#SearchByBusinessEmail:hover,#SearchByBusinessName:hover,#SearchByBusinessPhoneNumber:hover{
+    -fx-fill: "#5283E9";
+}
+#SearchByBusinessEmail:pressed,#SearchByBusinessName:pressed,#SearchByBusinessPhoneNumber:pressed{
+    -fx-fill: "#2E4EB8";
+}
 

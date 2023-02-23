@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -203,6 +204,15 @@ public class BusinessController implements Initializable{
 
     @FXML
     private FontAwesomeIconView sortZipCodeIcon;
+
+    @FXML
+    private FontAwesomeIconView SearchByBusinessEmail;
+
+    @FXML
+    private FontAwesomeIconView SearchByBusinessName;
+
+    @FXML
+    private FontAwesomeIconView SearchByBusinessPhoneNumber;
 
     @FXML
     private Button statisticsButton;
@@ -473,7 +483,20 @@ public class BusinessController implements Initializable{
     		sortZipCodeIcon.setGlyphName("ANGLE_UP");
     }
 
-   
+    @FXML
+    void SearchByBusinessEmailClicked(MouseEvent event) {
+        System.out.println("Search By Business Email");
+    }
+
+    @FXML
+    void SearchByBusinessNameClicked(MouseEvent event) {
+        System.out.println("Search By Business Name");
+    }
+
+    @FXML
+    void SearchByBusinessPhoneNumberClicked(MouseEvent event) {
+        System.out.println("Search By Phone Number");
+    }
 
 	
 

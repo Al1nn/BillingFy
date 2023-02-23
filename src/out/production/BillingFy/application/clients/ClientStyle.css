@@ -99,7 +99,6 @@
 	-fx-cell-size: 35px;
 }
 
-
 .table-row-cell:selected .text{
 	-fx-fill: "#000000";
 }
