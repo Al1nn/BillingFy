@@ -229,8 +229,6 @@ public class ClientPopupController{
     	String clientPhoneNumber = phoneNumberTextField.getText();
 
     	if(!isEditable) {
-            Client newClient = new Client(clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber);
-            System.out.println(newClient.getClientName() + " " + newClient.getClientCUI());
             ClientDatabase connection = new ClientDatabase();
     		connection.insertData(clientName, clientCUI
     			, clientTradeRegisterNumber, clientEUID
@@ -322,8 +320,8 @@ public class ClientPopupController{
     }
     
     public void setEditable(boolean args) {
-    	clientPopupTitle.setText("Editare Client");
     	isEditable = args;
+        clientPopupTitle.setText("Editare Client");
     }
 	
 }

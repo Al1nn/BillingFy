@@ -111,6 +111,8 @@ public class Business {
 				FXMLLoader loader =  new FXMLLoader(getClass().getResource("/application/business/popup/BusinessPopup.fxml"));
 				Parent root = loader.load();
 				BusinessPopupController businessPopupController = loader.getController();
+				businessPopupController.setEditable(true);
+				businessPopupController.initializeData(businessName,businessCUI,businessTradeRegisterNumber,businessEUID,businessCountry,businessCity,businessCounty,businessStreet,businessNumber,businessZipCode,businessEmail,businessPhoneNumber,businessPaymentBank,businessPaymentBeneficiary,businessPaymentIBAN,businessPaymentSwift,businessPaymentReference,businessPaymentExchange,businessPaymentCurrency);
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();

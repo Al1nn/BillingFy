@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class BusinessPopupController implements Initializable{
 
@@ -63,6 +64,8 @@ public class BusinessPopupController implements Initializable{
     @FXML
     private TextField businessNameTextField;
 
+    @FXML
+    private Text businessTitle;
     @FXML
     private Button cityButton;
 
@@ -194,14 +197,42 @@ public class BusinessPopupController implements Initializable{
 
     @FXML
     private TextField zipCodeTextField;
-    
+
+    private boolean isEditable;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] currencyOptions = {"RON","EUR"};
 		currencyComboBox.getItems().addAll(currencyOptions);
 		
 	}
-    
+    public void initializeData(String businessName, String businessCUI, String businessTradeRegisterNumber,
+                               String businessEUID, String businessCountry, String businessCity,
+                               String businessCounty, String businessStreet, String businessNumber,
+                               String businessZipCode, String businessEmail, String businessPhoneNumber,
+                               String businessPaymentBank, String businessPaymentBeneficiary,
+                               String businessPaymentIBAN, String businessPaymentSwift,
+                               String businessPaymentReference, String businessPaymentExchange,
+                               String businessPaymentCurrency){
+        businessNameTextField.setText(businessName);
+        CUITextField.setText(businessCUI);
+        tradeRegisterTextField.setText(businessTradeRegisterNumber);
+        euidTextField.setText(businessEUID);
+        countryTextField.setText(businessCountry);
+        cityTextField.setText(businessCity);
+        countyTextField.setText(businessCounty);
+        streetTextField.setText(businessStreet);
+        numberTextField.setText(businessNumber);
+        zipCodeTextField.setText(businessZipCode);
+        emailTextField.setText(businessEmail);
+        phoneNumberTextField.setText(businessPhoneNumber);
+        bankTextField.setText(businessPaymentBank);
+        beneficiaryTextField.setText(businessPaymentBeneficiary);
+        IBANTextField.setText(businessPaymentIBAN);
+        swiftTextField.setText(businessPaymentSwift);
+        referenceTextField.setText(businessPaymentReference);
+        exchangeTextField.setText(businessPaymentExchange);
+        currencyComboBox.setValue(businessPaymentCurrency);
+    }
     @FXML
     void CUIButtonClicked(ActionEvent event) {
     	CUITextField.clear();
@@ -302,6 +333,13 @@ public class BusinessPopupController implements Initializable{
     	zipCodeTextField.clear();
     }
 
-	
 
+    public boolean isEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.isEditable = editable;
+        businessTitle.setText("Editare Firma");
+    }
 }
