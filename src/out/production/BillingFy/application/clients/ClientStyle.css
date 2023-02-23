@@ -145,7 +145,8 @@
 	-fx-background-radius: 25px;
 	-fx-border-radius: 25px;
 	-fx-border-color: "#436A86";
-	-fx-prompt-text-fill: "#6B6B6B";
+	-fx-prompt-text-fill: "#FBFCF8";
+	-fx-text-fill: "#FBFCF8";
 }
 
 #itemsPerPage .arrow{
