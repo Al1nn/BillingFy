@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.business.backend.BusinessDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -220,6 +221,8 @@ public class BusinessController implements Initializable{
 
     @FXML
     private FontAwesomeIconView statisticsIcon;
+
+    private ObservableList<Business> businessData;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -232,31 +235,34 @@ public class BusinessController implements Initializable{
 		style.styleButtons(servicesButton, servicesIcon, servicesCircle);
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		
-		businessNumber.setCellValueFactory(new PropertyValueFactory<>("businessNumber"));
-        centerCellsOnColumn(businessNumber);
-		businessName.setCellValueFactory(new PropertyValueFactory<>("businessName"));
-        centerCellsOnColumn(businessName);
-		businessCountry.setCellValueFactory(new PropertyValueFactory<>("businessCountry"));
-        centerCellsOnColumn(businessCountry);
-		businessCity.setCellValueFactory(new PropertyValueFactory<>("businessCity"));
-        centerCellsOnColumn(businessCity);
-		businessZipCode.setCellValueFactory(new PropertyValueFactory<>("businessZipCode"));
-        centerCellsOnColumn(businessZipCode);
-		businessEmail.setCellValueFactory(new PropertyValueFactory<>("businessEmail"));
-        centerCellsOnColumn(businessEmail);
-		businessPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("businessPhoneNumber"));
-        centerCellsOnColumn(businessPhoneNumber);
-		businessFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
-        centerBusinessFunctionColumn(businessFunctions);
-		
-		final ObservableList<Business> businessData = FXCollections.observableArrayList(
-            new Business("SC COMPANIE","4523425","J4/1234/2022","ROONRC.J4/1234/2022","Romania","Costesti", "Arges", "Strada Progresului", "1","115255","alingeorgian987@gmail.com","0745642636","Raiffeisen","SC COMPANIE","ROZRB XXXX XXXX XXXX XXXX","ROZRVBSF","REFERENCE","2000","EUR")
-        );
-		businessTable.setItems(businessData);
-		businessLengthText.setText(String.valueOf(businessTable.getItems().size()));
+        try {
+            updateTable();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
-    
+    private void updateTable() throws ClassNotFoundException {
+        businessNumber.setCellValueFactory(new PropertyValueFactory<>("businessNumber"));
+        centerCellsOnColumn(businessNumber);
+        businessName.setCellValueFactory(new PropertyValueFactory<>("businessName"));
+        centerCellsOnColumn(businessName);
+        businessCountry.setCellValueFactory(new PropertyValueFactory<>("businessCountry"));
+        centerCellsOnColumn(businessCountry);
+        businessCity.setCellValueFactory(new PropertyValueFactory<>("businessCity"));
+        centerCellsOnColumn(businessCity);
+        businessZipCode.setCellValueFactory(new PropertyValueFactory<>("businessZipCode"));
+        centerCellsOnColumn(businessZipCode);
+        businessEmail.setCellValueFactory(new PropertyValueFactory<>("businessEmail"));
+        centerCellsOnColumn(businessEmail);
+        businessPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("businessPhoneNumber"));
+        centerCellsOnColumn(businessPhoneNumber);
+        businessFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
+        centerBusinessFunctionColumn(businessFunctions);
+        BusinessDatabase connection = new BusinessDatabase();
+        businessData = connection.retriveData();
+        businessTable.setItems(businessData);
+        businessLengthText.setText(String.valueOf(businessTable.getItems().size()));
+    }
     public void setInitialDesignButtons() {
     	billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
 				+ " -fx-border-radius: 15px; -fx-border-color: rgba(255,255,255,0.2);");
@@ -320,7 +326,6 @@ public class BusinessController implements Initializable{
 		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
-
 		childStage.setX(x);
 		childStage.setY(y);
 		}
@@ -342,8 +347,18 @@ public class BusinessController implements Initializable{
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
 		childStage.setY(y);
+        refreshData(childStage);
     }
 
+    private void refreshData(Stage childStage){
+        childStage.setOnHidden(evt -> {
+            try {
+                updateTable();
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
     @FXML
     void billingsButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));

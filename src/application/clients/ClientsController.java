@@ -269,13 +269,7 @@ public class ClientsController implements Initializable {
 		clientFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
 		centerButtonFunctionColumn(clientFunctions);
 		ClientDatabase connection = new ClientDatabase();
-		try {
-			clientData= connection.retrieveData();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		clientData= connection.retrieveData();
 		clientsTable.setEditable(true);
 		displayTable(1,pageSize);
 		clientLengthText.setText(String.valueOf(clientData.size()));

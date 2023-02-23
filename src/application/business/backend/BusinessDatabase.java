@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import application.business.Business;
 import application.clients.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,4 +88,51 @@ public class BusinessDatabase {
             e.printStackTrace();
         }
     }
+
+    public ObservableList<Business> retriveData() throws ClassNotFoundException {
+        ObservableList<Business> businesses = FXCollections.observableArrayList();
+        String retrieve = "SELECT * FROM Business";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(retrieve)){
+            while (resultSet.next()){
+                String businessName = resultSet.getString("Business_Name");
+                String businessCUI = resultSet.getString("CUI");
+                String businessTradeRegisterNumber = resultSet.getString("Trade_Register_Number");
+                String businessEUID = resultSet.getString("EUID");
+                String businessCountry = resultSet.getString("COUNTRY");
+                String businessCity = resultSet.getString("CITY");
+                String businessCounty = resultSet.getString("COUNTY");
+                String businessStreet = resultSet.getString("STREET");
+                String businessNumber = resultSet.getString("NUMBER");
+                String businessZipCode = resultSet.getString("ZIPCODE");
+                String businessEmail = resultSet.getString("EMAIL");
+                String businessPhoneNumber = resultSet.getString("PHONE_NUMBER");
+                String businessPaymentBank = resultSet.getString("BANK");
+                String businessPaymentBeneficiary = resultSet.getString("BENEFICIARY");
+                String businessPaymentIBAN = resultSet.getString("IBAN");
+                String businessPaymentSwift = resultSet.getString("SWIFT");
+                String businessPaymentReference = resultSet.getString("REFERENCE");
+                String businessPaymentExchange = resultSet.getString("EXCHANGE");
+                String businessPaymentCurrency = resultSet.getString("CURRENCY");
+                Business business = new Business(
+                        businessName,businessCUI
+                        ,businessTradeRegisterNumber
+                        ,businessEUID, businessCountry
+                        ,businessCity, businessCounty
+                        ,businessStreet, businessNumber
+                        ,businessZipCode, businessEmail
+                        ,businessPhoneNumber
+                        ,businessPaymentBank, businessPaymentBeneficiary
+                        ,businessPaymentIBAN, businessPaymentSwift
+                        ,businessPaymentReference, businessPaymentExchange
+                        ,businessPaymentCurrency);
+                businesses.add(business);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return businesses;
+    }
+
 }

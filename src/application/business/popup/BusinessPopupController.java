@@ -3,6 +3,7 @@ package application.business.popup;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.business.backend.BusinessDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -309,8 +310,41 @@ public class BusinessPopupController implements Initializable{
     }
 
     @FXML
-    void saveDataClicked(ActionEvent event) {
-        
+    void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
+        String businessName = businessNameTextField.getText();
+        String businessCUI = CUITextField.getText();
+        String businessTradeRegisterNumber = tradeRegisterTextField.getText();
+        String businessEUID = euidTextField.getText();
+        String businessCountry = countryTextField.getText();
+        String businessCity = cityTextField.getText();
+        String businessCounty = countyTextField.getText();
+        String businessStreet = streetTextField.getText();
+        String businessNumber = numberTextField.getText();
+        String businessZipCode = zipCodeTextField.getText();
+        String businessEmail = emailTextField.getText();
+        String businessPhoneNumber = phoneNumberTextField.getText();
+        String businessPaymentBank = bankTextField.getText();
+        String businessPaymentBeneficiary = beneficiaryTextField.getText();
+        String businessPaymentIBAN = IBANTextField.getText();
+        String businessPaymentSwift = swiftTextField.getText();
+        String businessPaymentReference = referenceTextField.getText();
+        String businessPaymentExchange = exchangeTextField.getText();
+        String businessPaymentCurrency = currencyComboBox.getValue().toString();
+        if (!isEditable){
+            BusinessDatabase connection = new BusinessDatabase();
+            connection.insertData(businessName,businessCUI
+                    ,businessTradeRegisterNumber,businessEUID
+                    ,businessCountry,businessCity
+                    ,businessCounty,businessStreet
+                    ,businessNumber,businessZipCode
+                    ,businessEmail,businessPhoneNumber
+                    ,businessPaymentBank,businessPaymentBeneficiary
+                    ,businessPaymentIBAN,businessPaymentSwift
+                    ,businessPaymentReference,businessPaymentExchange
+                    ,businessPaymentCurrency);
+            saveData.getScene().getWindow().hide();
+            return;
+        }
     }
 
     @FXML
