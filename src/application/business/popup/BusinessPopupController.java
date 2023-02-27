@@ -276,7 +276,7 @@ public class BusinessPopupController implements Initializable{
 
     @FXML
     void countyButtonClicked(ActionEvent event) {
-    	countryTextField.clear();
+    	countyTextField.clear();
     }
 
     @FXML

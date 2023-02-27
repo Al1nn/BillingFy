@@ -44,7 +44,7 @@ public class Client {
 	private Text clientCurrentPage;
 
 	private Text clientNumPages;
-
+	private Text clientLengthText;
 	private ComboBox<String> itemsPerPage;
 
 	private int pageSize = 10;
@@ -108,6 +108,7 @@ public class Client {
 					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 					String selectedValue = itemsPerPage.getValue();
 					pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+					clientLengthText = (Text) parentStage.getScene().lookup("#clientLengthText");
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/clients/popup/ClientPopupStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
@@ -144,6 +145,7 @@ public class Client {
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 				String selectedValue = itemsPerPage.getValue();
 				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+				clientLengthText = (Text) parentStage.getScene().lookup("#clientLengthText");
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -174,6 +176,7 @@ public class Client {
 					clientCurrentPage.setText(String.valueOf(currentPage));
 				}
 				connection.deleteData(clientName,clientNumber);
+				clientLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);

@@ -56,6 +56,7 @@ public class Business {
 
 	private Text businessNumPages;
 
+	private Text businessLengthText;
 	private ComboBox<String> itemsPerPage;
 
 	private int pageSize = 10;
@@ -140,6 +141,7 @@ public class Business {
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 				String selectedValue = itemsPerPage.getValue();
 				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+				businessLengthText = (Text) parentStage.getScene().lookup("#businessLengthText");
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -186,6 +188,7 @@ public class Business {
 				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
 				String selectedValue = itemsPerPage.getValue();
 				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+				businessLengthText = (Text) parentStage.getScene().lookup("#businessLengthText");
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -217,6 +220,7 @@ public class Business {
 					businessCurrentPage.setText(String.valueOf(currentPage));
 				}
 				connection.deleteData(businessName,businessNumber);
+				businessLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
