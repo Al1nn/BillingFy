@@ -161,6 +161,7 @@ public class Business {
 				DeletePopupController deletePopupController = loader.getController();
 				deletePopupController.getDeletePopupTitle().setText("Stergere Firma");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				tableView = (TableView<Business>) parentStage.getScene().lookup("#businessTable");
 				//Proprietati din Business Form mai jos ( de implementat)
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
@@ -183,8 +184,16 @@ public class Business {
 	}
 
 	private void refreshAfterDelete(Stage childStage){
+		BusinessDatabase connection = new BusinessDatabase();
 		childStage.setOnHidden(evt -> {
-			System.out.println("Not on Client Form");
+			try {
+				tableView.getItems().clear();
+				connection.deleteData(businessName,businessNumber);
+				tableView.setItems(connection.retriveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+
 		});
 	}
 	public String getBusinessNumber() {

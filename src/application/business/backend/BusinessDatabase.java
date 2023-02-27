@@ -151,6 +151,20 @@ public class BusinessDatabase {
         }
     }
 
+    public void deleteData(String businessName, String businessNumber) throws ClassNotFoundException{
+        String delete = "DELETE FROM Business WHERE Business_Name = ? AND NUMBER = ?";
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(delete)
+        ){
+            preparedStatement.setString(1,businessName);
+            preparedStatement.setString(2,businessNumber);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Business Rows Deleted : " + rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ObservableList<Business> retriveData() throws ClassNotFoundException {
         ObservableList<Business> businesses = FXCollections.observableArrayList();
         String retrieve = "SELECT * FROM Business";
