@@ -165,7 +165,7 @@ public class BusinessDatabase {
         }
     }
 
-    public ObservableList<Business> retriveData() throws ClassNotFoundException {
+    public ObservableList<Business> retrieveData() throws ClassNotFoundException {
         ObservableList<Business> businesses = FXCollections.observableArrayList();
         String retrieve = "SELECT * FROM Business";
         try (Connection connection = getConnection();

@@ -181,7 +181,6 @@ public class Client {
 		});
 	}
 	private void refreshData(Stage childStage) {
-		ClientDatabase connection = new ClientDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
 				displayTable(currentPage,pageSize);

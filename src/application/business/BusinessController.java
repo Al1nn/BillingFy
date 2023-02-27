@@ -233,6 +233,7 @@ public class BusinessController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
+        itemsPerPage.getSelectionModel().selectFirst();
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
 		style.styleButtons(billingsButton, billingsIcon, billingsCircle);
@@ -266,7 +267,7 @@ public class BusinessController implements Initializable{
         businessFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
         centerBusinessFunctionColumn(businessFunctions);
         BusinessDatabase connection = new BusinessDatabase();
-        businessData = connection.retriveData();
+        businessData = connection.retrieveData();
         businessTable.setEditable(true);
         displayTable(1,pageSize);
         businessLengthText.setText(String.valueOf(businessData.size()));
@@ -362,9 +363,10 @@ public class BusinessController implements Initializable{
         childStage.setOnHidden(evt -> {
             try {
                 if(businessTable.getItems().size() == pageSize){
-                    totalPages = (int) Math.ceil((double) connection.retriveData().size() / pageSize);
+                    totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
                     businessPages.setText(String.valueOf(totalPages));
                 }
+                businessLengthText.setText(String.valueOf(connection.retrieveData().size()));
                 displayTable(currentPage,pageSize);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
@@ -641,7 +643,7 @@ public class BusinessController implements Initializable{
 
 	private void displayTable(int page, int size) throws ClassNotFoundException{
         BusinessDatabase connection = new BusinessDatabase();
-        businessData = connection.retriveData();
+        businessData = connection.retrieveData();
         int startIndex = (page - 1) * size;
         int endIndex = Math.min(startIndex + size, businessData.size());
         ObservableList<Business> currentPageData = FXCollections.observableArrayList(businessData.subList(startIndex,endIndex));

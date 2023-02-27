@@ -5,9 +5,12 @@ import java.io.IOException;
 import application.business.backend.BusinessDatabase;
 import application.business.popup.BusinessPopupController;
 import application.clients.Client;
+import application.clients.backend.ClientDatabase;
 import application.resources.DeletePopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +51,16 @@ public class Business {
 
 	private HBox buttonPane;
 	private TableView<Business> tableView;
-	
+
+	private Text businessCurrentPage;
+
+	private Text businessNumPages;
+
+	private ComboBox<String> itemsPerPage;
+
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
 	public Business(String businessName, String businessCUI, String businessTradeRegisterNumber, String businessEUID, String businessCountry, String businessCity, String businessCounty, String businessStreet, String businessNumber, String businessZipCode, String businessEmail, String businessPhoneNumber
 	, String businessPaymentBank, String businessPaymentBeneficiary, String businessPaymentIBAN, String businessPaymentSwift, String businessPaymentReference, String businessPaymentExchange, String businessPaymentCurrency) {
 		this.businessName = businessName;
@@ -121,6 +133,13 @@ public class Business {
 				businessPopupController.initializeData(businessName,businessCUI,businessTradeRegisterNumber,businessEUID,businessCountry,businessCity,businessCounty,businessStreet,businessNumber,businessZipCode,businessEmail,businessPhoneNumber,businessPaymentBank,businessPaymentBeneficiary,businessPaymentIBAN,businessPaymentSwift,businessPaymentReference,businessPaymentExchange,businessPaymentCurrency);
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Business>) parentStage.getScene().lookup("#businessTable");
+				businessCurrentPage = (Text) parentStage.getScene().lookup("#businessCurrentPage");
+				currentPage = Integer.parseInt(businessCurrentPage.getText());
+				businessNumPages = (Text) parentStage.getScene().lookup("#businessPages");
+				totalPages = Integer.parseInt(businessNumPages.getText());
+				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+				String selectedValue = itemsPerPage.getValue();
+				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -142,11 +161,9 @@ public class Business {
 	}
 
 	private void refreshData(Stage childStage){
-		BusinessDatabase connection = new BusinessDatabase();
 		childStage.setOnHidden(evt -> {
-			tableView.getItems().clear();
 			try {
-				tableView.setItems(connection.retriveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -162,7 +179,13 @@ public class Business {
 				deletePopupController.getDeletePopupTitle().setText("Stergere Firma");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Business>) parentStage.getScene().lookup("#businessTable");
-				//Proprietati din Business Form mai jos ( de implementat)
+				businessCurrentPage = (Text) parentStage.getScene().lookup("#businessCurrentPage");
+				currentPage = Integer.parseInt(businessCurrentPage.getText());
+				businessNumPages = (Text) parentStage.getScene().lookup("#businessPages");
+				totalPages = Integer.parseInt(businessNumPages.getText());
+				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+				String selectedValue = itemsPerPage.getValue();
+				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -187,9 +210,14 @@ public class Business {
 		BusinessDatabase connection = new BusinessDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				tableView.getItems().clear();
+				if (tableView.getItems().size() == 1){
+					--totalPages;
+					businessNumPages.setText(String.valueOf(totalPages));
+					--currentPage;
+					businessCurrentPage.setText(String.valueOf(currentPage));
+				}
 				connection.deleteData(businessName,businessNumber);
-				tableView.setItems(connection.retriveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -369,5 +397,12 @@ public class Business {
 
 	public void setBusinessPaymentCurrency(String businessPaymentCurrency) {
 		this.businessPaymentCurrency = businessPaymentCurrency;
+	}
+	private void displayTable(int page, int size) throws ClassNotFoundException {
+		BusinessDatabase connection = new BusinessDatabase();
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
+		ObservableList<Business> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+		tableView.setItems(currentPageData);
 	}
 }

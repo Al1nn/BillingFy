@@ -387,6 +387,7 @@ public class ClientsController implements Initializable {
 					totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
 					clientPages.setText(String.valueOf(totalPages));
 				}
+				clientLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
