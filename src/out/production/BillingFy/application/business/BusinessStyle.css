@@ -82,6 +82,13 @@
 	-fx-border-radius: 3px 3px 3px 3px;
 	-fx-padding: 0 0 4px 0;
 }
+.table-view .arrow
+{
+    -fx-background-insets: 0;
+    -fx-background-color: "#B4CEF6";
+    -fx-padding: 0;
+    -fx-shape: " ";
+}
 .table-view .column-header .label{
 	-fx-text-fill: "#538EEA";
 	-fx-font-family: "Roboto";

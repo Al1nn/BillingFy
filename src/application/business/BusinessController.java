@@ -260,6 +260,7 @@ public class BusinessController implements Initializable{
         centerBusinessFunctionColumn(businessFunctions);
         BusinessDatabase connection = new BusinessDatabase();
         businessData = connection.retriveData();
+        businessTable.setEditable(true);
         businessTable.setItems(businessData);
         businessLengthText.setText(String.valueOf(businessTable.getItems().size()));
     }
@@ -479,59 +480,100 @@ public class BusinessController implements Initializable{
 
     @FXML
     void sortBusinessButtonClicked(ActionEvent event) {
-    	if(sortBusinessIcon.getGlyphName() == "ANGLE_UP")
-    		sortBusinessIcon.setGlyphName("ANGLE_DOWN");
-    	else
+    	if(sortBusinessIcon.getGlyphName() == "ANGLE_UP") {
+            sortBusinessIcon.setGlyphName("ANGLE_DOWN");
+            businessName.setSortType(TableColumn.SortType.DESCENDING);
+        }else{
     		sortBusinessIcon.setGlyphName("ANGLE_UP");
+            businessName.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessName.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessName);
     }
 
     @FXML
     void sortCityButtonClicked(ActionEvent event) {
     	if (sortCityIcon.getGlyphName() == "ANGLE_UP") {
 			sortCityIcon.setGlyphName("ANGLE_DOWN");
-		} else
-			sortCityIcon.setGlyphName("ANGLE_UP");
+	        businessCity.setSortType(TableColumn.SortType.DESCENDING);
+		} else {
+            sortCityIcon.setGlyphName("ANGLE_UP");
+            businessCity.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessCity.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessCity);
     }
 
     @FXML
     void sortCountryButtonClicked(ActionEvent event) {
-    	if(sortCountryIcon.getGlyphName() == "ANGLE_UP")
-    		sortCountryIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortCountryIcon.setGlyphName("ANGLE_UP");
+    	if(sortCountryIcon.getGlyphName() == "ANGLE_UP") {
+            sortCountryIcon.setGlyphName("ANGLE_DOWN");
+            businessCountry.setSortType(TableColumn.SortType.DESCENDING);
+        }else {
+            sortCountryIcon.setGlyphName("ANGLE_UP");
+            businessCountry.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessCountry.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessCountry);
     }
 
     @FXML
     void sortEmailButtonClicked(ActionEvent event) {
-    	if (sortEmailIcon.getGlyphName() == "ANGLE_UP")
-    		sortEmailIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortEmailIcon.setGlyphName("ANGLE_UP");
+    	if (sortEmailIcon.getGlyphName() == "ANGLE_UP") {
+            sortEmailIcon.setGlyphName("ANGLE_DOWN");
+            businessEmail.setSortType(TableColumn.SortType.DESCENDING);
+        }else {
+            sortEmailIcon.setGlyphName("ANGLE_UP");
+            businessEmail.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessEmail.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessEmail);
     }
 
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {
-    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else {
+    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP") {
+            sortNumberIcon.setGlyphName("ANGLE_DOWN");
+            businessNumber.setSortType(TableColumn.SortType.DESCENDING);
+        }else {
 			sortNumberIcon.setGlyphName("ANGLE_UP");
+            businessNumber.setSortType(TableColumn.SortType.ASCENDING);
 		}
+        businessNumber.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessNumber);
     }
 
     @FXML
     void sortPhoneNumberButtonClicked(ActionEvent event) {
-    	if(sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
+    	if(sortPhoneNumberIcon.getGlyphName() == "ANGLE_UP") {
+            sortPhoneNumberIcon.setGlyphName("ANGLE_DOWN");
+            businessPhoneNumber.setSortType(TableColumn.SortType.DESCENDING);
+        }else {
+            sortPhoneNumberIcon.setGlyphName("ANGLE_UP");
+            businessPhoneNumber.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessPhoneNumber.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessPhoneNumber);
     }
 
     @FXML
     void sortZipCodeButtonClicked(ActionEvent event) {
-    	if(sortZipCodeIcon.getGlyphName() == "ANGLE_UP")
-    		sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortZipCodeIcon.setGlyphName("ANGLE_UP");
+    	if(sortZipCodeIcon.getGlyphName() == "ANGLE_UP") {
+            sortZipCodeIcon.setGlyphName("ANGLE_DOWN");
+            businessZipCode.setSortType(TableColumn.SortType.DESCENDING);
+        }else {
+            sortZipCodeIcon.setGlyphName("ANGLE_UP");
+            businessZipCode.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        businessZipCode.setSortable(true);
+        businessTable.getSortOrder().clear();
+        businessTable.getSortOrder().add(businessZipCode);
     }
 
     @FXML
