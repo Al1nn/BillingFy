@@ -224,7 +224,11 @@ public class BusinessController implements Initializable{
     private FontAwesomeIconView statisticsIcon;
 
     private ObservableList<Business> businessData;
-    
+
+    private int pageSize = 10;
+    private int currentPage = 1;
+    private int totalPages;
+
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
@@ -241,6 +245,8 @@ public class BusinessController implements Initializable{
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        totalPages = (int) Math.ceil((double) businessData.size() / pageSize);
+        businessPages.setText(String.valueOf(totalPages));
     }
     private void updateTable() throws ClassNotFoundException {
         businessNumber.setCellValueFactory(new PropertyValueFactory<>("businessNumber"));
@@ -262,8 +268,8 @@ public class BusinessController implements Initializable{
         BusinessDatabase connection = new BusinessDatabase();
         businessData = connection.retriveData();
         businessTable.setEditable(true);
-        businessTable.setItems(businessData);
-        businessLengthText.setText(String.valueOf(businessTable.getItems().size()));
+        displayTable(1,pageSize);
+        businessLengthText.setText(String.valueOf(businessData.size()));
     }
     public void setInitialDesignButtons() {
     	billingsButton.setStyle("-fx-background-color: transparent; -fx-background-radius: 15px;"
@@ -325,7 +331,6 @@ public class BusinessController implements Initializable{
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
 		childStage.show();
-		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
@@ -353,9 +358,14 @@ public class BusinessController implements Initializable{
     }
 
     private void refreshData(Stage childStage){
+        BusinessDatabase connection = new BusinessDatabase();
         childStage.setOnHidden(evt -> {
             try {
-                updateTable();
+                if(businessTable.getItems().size() == pageSize){
+                    totalPages = (int) Math.ceil((double) connection.retriveData().size() / pageSize);
+                    businessPages.setText(String.valueOf(totalPages));
+                }
+                displayTable(currentPage,pageSize);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -459,19 +469,38 @@ public class BusinessController implements Initializable{
     void businessButtonClicked(ActionEvent event) {
 
     }
-
     @FXML
-    void clientNextPageClicked(ActionEvent event) {
-
+    void itemsPerPageSelected(ActionEvent event) throws ClassNotFoundException {
+        String selectedValue = itemsPerPage.getValue();
+        pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+        totalPages = (int) Math.ceil((double) businessData.size() / pageSize);
+        businessPages.setText(String.valueOf(totalPages));
+        currentPage = 1;
+        businessCurrentPage.setText(String.valueOf(currentPage));
+        displayTable(currentPage,pageSize);
     }
 
     @FXML
-    void clientPreviousPageClicked(ActionEvent event) {
-
+    void businessNextPageClicked(ActionEvent event) throws ClassNotFoundException {
+        if(currentPage < totalPages){
+            currentPage++;
+            totalPages = (int) Math.ceil((double) businessData.size() / pageSize);
+            businessCurrentPage.setText(String.valueOf(currentPage));
+            businessPages.setText(String.valueOf(currentPage));
+            displayTable(currentPage,pageSize);
+        }
     }
 
-    
-
+    @FXML
+    void businessPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
+        if(currentPage > 1){
+            currentPage--;
+            totalPages = (int) Math.ceil((double) businessData.size() / pageSize);
+            businessCurrentPage.setText(String.valueOf(currentPage));
+            businessPages.setText(String.valueOf(totalPages));
+            displayTable(currentPage,pageSize);
+        }
+    }
     @FXML
     void exitButtonClicked(ActionEvent event) {
     	Platform.exit();
@@ -610,6 +639,13 @@ public class BusinessController implements Initializable{
             businessTable.setItems(businessData);
     }
 
-	
+	private void displayTable(int page, int size) throws ClassNotFoundException{
+        BusinessDatabase connection = new BusinessDatabase();
+        businessData = connection.retriveData();
+        int startIndex = (page - 1) * size;
+        int endIndex = Math.min(startIndex + size, businessData.size());
+        ObservableList<Business> currentPageData = FXCollections.observableArrayList(businessData.subList(startIndex,endIndex));
+        businessTable.setItems(currentPageData);
+    }
 
 }

@@ -75,7 +75,7 @@
 						<RowConstraints minHeight="10.0" vgrow="ALWAYS" />
 					</rowConstraints>
 					<children>
-						<ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
+						<ComboBox fx:id="itemsPerPage" cache="true" maxHeight="50.0" maxWidth="150.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#itemsPerPageSelected" prefHeight="30.0" prefWidth="120.0" promptText="10 iteme">
 							<GridPane.margin>
 								<Insets />
 							</GridPane.margin>
@@ -92,12 +92,12 @@
 						<Font name="Roboto" size="13.0" />
 					</font>
 				</Text>
-				<Button fx:id="businessNextPage" layoutX="823.5" layoutY="702.0" mnemonicParsing="false" onAction="#clientNextPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0">
+				<Button fx:id="businessNextPage" layoutX="823.5" layoutY="702.0" mnemonicParsing="false" onAction="#businessNextPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0">
 					<graphic>
 						<FontAwesomeIconView fx:id="businessNextPageIcon" glyphName="ANGLE_RIGHT" size="20" />
 					</graphic>
 				</Button>
-				<Button fx:id="businessPreviousPage" layoutX="700.5" layoutY="702.0" mnemonicParsing="false" onAction="#clientPreviousPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="125.0">
+				<Button fx:id="businessPreviousPage" layoutX="700.5" layoutY="702.0" mnemonicParsing="false" onAction="#businessPreviousPageClicked" prefHeight="20.0" prefWidth="30.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="125.0">
 					<graphic>
 						<FontAwesomeIconView fx:id="businessPreviousPageIcon" glyphName="ANGLE_LEFT" size="20" />
 					</graphic>
