@@ -89,6 +89,68 @@ public class BusinessDatabase {
         }
     }
 
+    public void updateData(String businessName, String businessCUI
+            ,String businessTradeRegisterNumber,String businessEUID
+            ,String businessCountry, String businessCity
+            , String businessCounty, String businessStreet
+            , String businessNumber, String businessZipCode
+            , String businessEmail, String businessPhoneNumber
+            , String businessPaymentBank, String businessPaymentBeneficiary
+            , String businessPaymentIBAN, String businessPaymentSwift
+            , String businessPaymentReference, String businessPaymentExchange
+            , String businessPaymentCurrency
+            , String oldBusinessName, String oldBusinessNumber){
+        String update = "UPDATE Business SET " +
+                "Business_Name = ?, " +
+                "CUI = ?, " +
+                "Trade_Register_Number = ?, " +
+                "EUID = ?, " +
+                "COUNTRY = ?, " +
+                "CITY = ?, " +
+                "COUNTY = ?, " +
+                "STREET = ?, " +
+                "NUMBER = ?, " +
+                "ZIPCODE = ?, " +
+                "EMAIL = ?, " +
+                "PHONE_NUMBER = ?, " +
+                "BANK = ?, " +
+                "BENEFICIARY = ?, " +
+                "IBAN = ?, " +
+                "SWIFT = ?, " +
+                "REFERENCE = ?, " +
+                "EXCHANGE = ?, " +
+                "CURRENCY = ? " +
+                "WHERE Business_Name = ? " +
+                "AND NUMBER = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,businessName);
+            preparedStatement.setString(2,businessCUI);
+            preparedStatement.setString(3,businessTradeRegisterNumber);
+            preparedStatement.setString(4,businessEUID);
+            preparedStatement.setString(5,businessCountry);
+            preparedStatement.setString(6,businessCity);
+            preparedStatement.setString(7,businessCounty);
+            preparedStatement.setString(8,businessStreet);
+            preparedStatement.setString(9,businessNumber);
+            preparedStatement.setString(10,businessZipCode);
+            preparedStatement.setString(11,businessEmail);
+            preparedStatement.setString(12,businessPhoneNumber);
+            preparedStatement.setString(13,businessPaymentBank);
+            preparedStatement.setString(14,businessPaymentBeneficiary);
+            preparedStatement.setString(15,businessPaymentIBAN);
+            preparedStatement.setString(16,businessPaymentSwift);
+            preparedStatement.setString(17,businessPaymentReference);
+            preparedStatement.setString(18,businessPaymentExchange);
+            preparedStatement.setString(19,businessPaymentCurrency);
+            preparedStatement.setString(20,oldBusinessName);
+            preparedStatement.setString(21,oldBusinessNumber);
+            preparedStatement.executeUpdate();
+        }catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
     public ObservableList<Business> retriveData() throws ClassNotFoundException {
         ObservableList<Business> businesses = FXCollections.observableArrayList();
         String retrieve = "SELECT * FROM Business";

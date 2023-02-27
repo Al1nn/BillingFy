@@ -3,6 +3,7 @@ package application.business.popup;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.business.Business;
 import application.business.backend.BusinessDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
@@ -199,6 +200,8 @@ public class BusinessPopupController implements Initializable{
     @FXML
     private TextField zipCodeTextField;
 
+    private String oldBusinessName;
+    private String oldBusinessNumber;
     private boolean isEditable;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -233,6 +236,8 @@ public class BusinessPopupController implements Initializable{
         referenceTextField.setText(businessPaymentReference);
         exchangeTextField.setText(businessPaymentExchange);
         currencyComboBox.setValue(businessPaymentCurrency);
+        oldBusinessName = businessName;
+        oldBusinessNumber = businessNumber;
     }
     @FXML
     void CUIButtonClicked(ActionEvent event) {
@@ -345,6 +350,18 @@ public class BusinessPopupController implements Initializable{
             saveData.getScene().getWindow().hide();
             return;
         }
+        BusinessDatabase connection = new BusinessDatabase();
+        connection.updateData(businessName,businessCUI
+        ,businessTradeRegisterNumber,businessEUID
+        ,businessCountry,businessCity
+        ,businessCounty, businessStreet
+        ,businessNumber, businessZipCode
+        ,businessEmail, businessPhoneNumber
+        ,businessPaymentBank, businessPaymentBeneficiary
+        ,businessPaymentIBAN, businessPaymentSwift
+        ,businessPaymentReference, businessPaymentExchange
+        ,businessPaymentCurrency,oldBusinessName,oldBusinessNumber);
+        saveData.getScene().getWindow().hide();
     }
 
     @FXML

@@ -511,7 +511,6 @@ public class BillingsController implements Initializable {
 		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
-
 		childStage.setX(x);
 		childStage.setY(y);
 		}

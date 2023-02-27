@@ -2,6 +2,7 @@ package application.business;
 
 import java.io.IOException;
 
+import application.business.backend.BusinessDatabase;
 import application.business.popup.BusinessPopupController;
 import application.clients.Client;
 import application.resources.DeletePopupController;
@@ -46,7 +47,7 @@ public class Business {
 	private String businessPaymentCurrency;
 
 	private HBox buttonPane;
-	
+	private TableView<Business> tableView;
 	
 	public Business(String businessName, String businessCUI, String businessTradeRegisterNumber, String businessEUID, String businessCountry, String businessCity, String businessCounty, String businessStreet, String businessNumber, String businessZipCode, String businessEmail, String businessPhoneNumber
 	, String businessPaymentBank, String businessPaymentBeneficiary, String businessPaymentIBAN, String businessPaymentSwift, String businessPaymentReference, String businessPaymentExchange, String businessPaymentCurrency) {
@@ -119,6 +120,7 @@ public class Business {
 				businessPopupController.setEditable(true);
 				businessPopupController.initializeData(businessName,businessCUI,businessTradeRegisterNumber,businessEUID,businessCountry,businessCity,businessCounty,businessStreet,businessNumber,businessZipCode,businessEmail,businessPhoneNumber,businessPaymentBank,businessPaymentBeneficiary,businessPaymentIBAN,businessPaymentSwift,businessPaymentReference,businessPaymentExchange,businessPaymentCurrency);
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				tableView = (TableView<Business>) parentStage.getScene().lookup("#businessTable");
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/business/popup/BusinessPopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -138,6 +140,19 @@ public class Business {
 			}
 		});
 	}
+
+	private void refreshData(Stage childStage){
+		BusinessDatabase connection = new BusinessDatabase();
+		childStage.setOnHidden(evt -> {
+			tableView.getItems().clear();
+			try {
+				tableView.setItems(connection.retriveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
+
 	private void deleteButtonFunction(Button button){
 		button.setOnMouseClicked(evt -> {
 			try {
@@ -166,9 +181,7 @@ public class Business {
 
 		});
 	}
-	private void refreshData(Stage childStage){
 
-	}
 	private void refreshAfterDelete(Stage childStage){
 		childStage.setOnHidden(evt -> {
 			System.out.println("Not on Client Form");
