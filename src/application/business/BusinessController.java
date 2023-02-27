@@ -14,6 +14,7 @@ import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -578,17 +579,35 @@ public class BusinessController implements Initializable{
 
     @FXML
     void SearchByBusinessEmailClicked(MouseEvent event) {
-        System.out.println("Search By Business Email");
+        String searchText = searchEmail.getText();
+        FilteredList<Business> filteredList = businessData.filtered(Business -> {
+            return Business.getBusinessEmail().contains(searchText);
+        });
+        businessTable.setItems(filteredList);
+        if (searchText == null || searchText.isEmpty())
+            businessTable.setItems(businessData);
     }
 
     @FXML
     void SearchByBusinessNameClicked(MouseEvent event) {
-        System.out.println("Search By Business Name");
+        String searchText = searchBusiness.getText();
+        FilteredList<Business> filteredList = businessData.filtered(Business -> {
+            return Business.getBusinessName().contains(searchText);
+        });
+        businessTable.setItems(filteredList);
+        if (searchText == null || searchText.isEmpty())
+            businessTable.setItems(businessData);
     }
 
     @FXML
     void SearchByBusinessPhoneNumberClicked(MouseEvent event) {
-        System.out.println("Search By Phone Number");
+        String searchText = searchPhoneNumber.getText();
+        FilteredList<Business> filteredList = businessData.filtered(Business -> {
+            return Business.getBusinessPhoneNumber().contains(searchText);
+        });
+        businessTable.setItems(filteredList);
+        if (searchText == null || searchText.isEmpty())
+            businessTable.setItems(businessData);
     }
 
 	
