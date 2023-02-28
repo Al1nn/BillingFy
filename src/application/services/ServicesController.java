@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.clients.Client;
+import application.services.backend.ServicesDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -182,7 +183,7 @@ public class ServicesController implements Initializable{
     
     @FXML
     private BarChart<?, ?> servicesIncomingsChart;
-    
+    private ObservableList<Service> servicesData;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
@@ -194,8 +195,13 @@ public class ServicesController implements Initializable{
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		updateCharts();
-		updateTable();
+
+		try {
+			updateCharts();
+			updateTable();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	private void updateCharts(){
 		XYChart.Series series1 = new XYChart.Series();
@@ -214,7 +220,8 @@ public class ServicesController implements Initializable{
 		series3.getData().add(new XYChart.Data("Muia",500));
 		servicesNumberChart.getData().addAll(series1,series2,series3);
 	}
-    private void updateTable(){
+    private void updateTable() throws ClassNotFoundException {
+		ServicesDatabase connection = new ServicesDatabase();
 		servicesNumber.setCellValueFactory(new PropertyValueFactory<>("serviceNumber"));
 		centerCellsOnColumn(servicesNumber);
 		servicesName.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
@@ -225,9 +232,7 @@ public class ServicesController implements Initializable{
 		centerCellsOnColumn(servicesPrice);
 		servicesFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
 		centerServiceFunctionsColumn(servicesFunctions);
-		final ObservableList<Service> servicesData = FXCollections.observableArrayList(
-				new Service("ALL IN TECHNOLOGIES","40","5000","EUR","Descriere" , "1"),
-				new Service("ALL IN TECHNOLOGIES", "5","1000","RON","Descriere","2"));
+		servicesData = connection.retrieveData();
 		servicesTable.setItems(servicesData);
 	}
 	private void centerCellsOnColumn(TableColumn<Service,String> tableColumn){
@@ -316,7 +321,9 @@ public class ServicesController implements Initializable{
 		childStage.setX(x);
 		childStage.setY(y);
     }
+	private void refreshData(Stage childStage){
 
+	}
     @FXML
     void billingsButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/Billings.fxml"));

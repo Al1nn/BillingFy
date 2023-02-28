@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.services.Service;
+import application.services.backend.ServicesDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
@@ -110,7 +111,8 @@ public class ServicesPopupController implements Initializable{
     }
 
     @FXML
-    void saveDataClicked(ActionEvent event) {
+    void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
+        ServicesDatabase connection = new ServicesDatabase();
         if(!isEditable) {
             for (Node node : contentPane.getChildren()) {
                 serviceNameField = (TextField) node.lookup("#serviceNameField");
@@ -125,13 +127,9 @@ public class ServicesPopupController implements Initializable{
                 String serviceCurrency = serviceCurrencyField.getValue();
                 String serviceDescription = serviceDescriptionField.getText();
                 String serviceNumber = serviceNumberField.getText();
-                System.out.println("Service Name " + serviceName);
-                System.out.println("Service Amount " + serviceAmount);
-                System.out.println("Service Price" + servicePrice);
-                System.out.println("Service Currency " + serviceCurrency);
-                System.out.println("Service Description " + serviceDescription);
-                System.out.println("Service Number " + serviceNumber);
+                connection.insertData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
             }
+            saveData.getScene().getWindow().hide();
             return;
         }
     }

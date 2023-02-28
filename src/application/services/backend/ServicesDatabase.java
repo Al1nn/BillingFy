@@ -1,0 +1,75 @@
+package application.services.backend;
+
+import application.services.Service;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
+
+public class ServicesDatabase {
+    public Connection databaseLink;
+
+    public Connection getConnection() throws ClassNotFoundException {
+        String databaseName = "BillingFy";
+        String databaseUser = "root";
+        String databasePassword = "FRES-123";
+        String url = "jdbc:mysql://localhost:3306/" + databaseName;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            databaseLink = DriverManager.getConnection(url,databaseUser,databasePassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return databaseLink;
+    }
+
+    public void insertData(String serviceName, String serviceAmount
+            , String servicePrice, String serviceCurrency
+            , String serviceDescription, String serviceNumber) throws ClassNotFoundException{
+        String insert = "INSERT INTO Services(" +
+                "Service_Name" +
+                ",AMOUNT" +
+                ",PRICE" +
+                ",CURRENCY" +
+                ",DESCRIPTION" +
+                ",NUMBER) " +
+                "VALUES (?,?,?,?,?,?)";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(insert)){
+            preparedStatement.setString(1,serviceName);
+            preparedStatement.setInt(2,Integer.valueOf(serviceAmount));
+            preparedStatement.setDouble(3,Double.valueOf(servicePrice));
+            preparedStatement.setString(4,serviceCurrency);
+            preparedStatement.setString(5,serviceDescription);
+            preparedStatement.setString(6,serviceNumber);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<Service> retrieveData() throws ClassNotFoundException{
+        ObservableList<Service> services = FXCollections.observableArrayList();
+        String retrieve = "SELECT * FROM Services";
+        try(Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(retrieve)){
+            while(resultSet.next()){
+                String serviceName = resultSet.getString("Service_Name");
+                String serviceAmount = String.valueOf(resultSet.getInt("AMOUNT"));
+                String servicePrice = String.valueOf(resultSet.getDouble("PRICE"));
+                String serviceCurrency = resultSet.getString("CURRENCY");
+                String serviceDescription = resultSet.getString("DESCRIPTION");
+                String serviceNumber = resultSet.getString("NUMBER");
+                Service service = new Service(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
+                services.add(service);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return services;
+    }
+}
