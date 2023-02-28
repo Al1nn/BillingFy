@@ -63,7 +63,6 @@ public class Service {
 	}
 	private void setIconFills(Button button, FontAwesomeIconView buttonIcon) {
 		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
@@ -72,7 +71,6 @@ public class Service {
 
 		});
 		button.setOnMouseExited(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub

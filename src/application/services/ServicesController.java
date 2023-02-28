@@ -232,6 +232,7 @@ public class ServicesController implements Initializable{
 		centerCellsOnColumn(servicesPrice);
 		servicesFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
 		centerServiceFunctionsColumn(servicesFunctions);
+		servicesTable.setEditable(true);
 		servicesData = connection.retrieveData();
 		servicesTable.setItems(servicesData);
 	}
@@ -440,27 +441,45 @@ public class ServicesController implements Initializable{
 
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {
-    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortNumberIcon.setGlyphName("ANGLE_UP");
+    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP") {
+			sortNumberIcon.setGlyphName("ANGLE_DOWN");
+			servicesNumber.setSortType(TableColumn.SortType.DESCENDING);
+		}else {
+			sortNumberIcon.setGlyphName("ANGLE_UP");
+			servicesNumber.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		servicesNumber.setSortable(true);
+		servicesTable.getSortOrder().clear();
+		servicesTable.getSortOrder().add(servicesNumber);
     }
 
     @FXML
     void sortPriceButtonClicked(ActionEvent event) {
-    	if(sortPriceIcon.getGlyphName() == "ANGLE_UP")
-    		sortPriceIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    		sortPriceIcon.setGlyphName("ANGLE_UP");
-    }
+    	if(sortPriceIcon.getGlyphName() == "ANGLE_UP") {
+			sortPriceIcon.setGlyphName("ANGLE_DOWN");
+			servicesPrice.setSortType(TableColumn.SortType.DESCENDING);
+		}else {
+			sortPriceIcon.setGlyphName("ANGLE_UP");
+			servicesPrice.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		servicesPrice.setSortable(true);
+		servicesTable.getSortOrder().clear();
+		servicesTable.getSortOrder().add(servicesPrice);
+	}
 
     @FXML
     void sortServicesButtonClicked(ActionEvent event) {
     	if (sortServicesIcon.getGlyphName() == "ANGLE_UP") {
 			sortServicesIcon.setGlyphName("ANGLE_DOWN");
-		}else
+			servicesName.setSortType(TableColumn.SortType.DESCENDING);
+		}else {
 			sortServicesIcon.setGlyphName("ANGLE_UP");
-    }
+			servicesName.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		servicesName.setSortable(true);
+		servicesTable.getSortOrder().clear();
+		servicesTable.getSortOrder().add(servicesName);
+	}
 
 	
 
