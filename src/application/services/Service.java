@@ -2,6 +2,7 @@ package application.services;
 
 import java.io.IOException;
 
+import application.services.backend.ServicesDatabase;
 import application.services.popup.ServicesPopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -26,7 +28,7 @@ public class Service {
 	private String serviceDescription;
 	private String serviceNumber;
 	private HBox buttonPane;
-	
+	private TableView<Service> tableView;
 	public Service(String serviceName, String serviceAmount, String servicePrice, String serviceCurrency, String serviceDescription, String serviceNumber) {
 		this.serviceName = serviceName;
 		this.serviceAmount = serviceAmount;
@@ -84,6 +86,7 @@ public class Service {
 					servicesPopupController.setInvisibleAdd();
 					servicesPopupController.initializeData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+					tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
 					String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					Stage childStage = new Stage();
@@ -98,6 +101,7 @@ public class Service {
 					double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 					childStage.setX(x);
 					childStage.setY(y);
+					refreshData(childStage);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -105,7 +109,17 @@ public class Service {
 			}
 		);
 	}
-
+	private void refreshData(Stage childStage){
+		ServicesDatabase connection = new ServicesDatabase();
+		childStage.setOnHidden(evt -> {
+			tableView.getItems().clear();
+			try {
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
 
 	public String getServiceName() {
 		return serviceName;

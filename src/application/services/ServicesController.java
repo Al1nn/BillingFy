@@ -320,9 +320,17 @@ public class ServicesController implements Initializable{
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
 		childStage.setY(y);
-    }
+    	refreshData(childStage);
+	}
 	private void refreshData(Stage childStage){
-
+		childStage.setOnHidden(evt -> {
+			try {
+				updateCharts();
+				updateTable();
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
     @FXML
     void billingsButtonClicked(ActionEvent event) throws IOException {
