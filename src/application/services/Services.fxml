@@ -110,7 +110,7 @@
 						<Font name="Roboto" size="13.0" />
 					</font>
 				</Text>
-				<Text fx:id="servicesCurrentPage" layoutX="573.4853515625" layoutY="723.560546875" strokeType="OUTSIDE" strokeWidth="0.0" text="1" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="519.21484375">
+				<Text fx:id="servicesCurrentPage" layoutX="573.4853515625" layoutY="723.560546875" strokeType="OUTSIDE" strokeWidth="0.0" text="1" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="523.21484375">
 					<font>
 						<Font name="Roboto" size="13.0" />
 					</font>

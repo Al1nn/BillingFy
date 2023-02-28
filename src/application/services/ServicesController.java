@@ -519,14 +519,14 @@ public class ServicesController implements Initializable{
 	}
 
 	@FXML
-	void searchServiceNameIconClicked(MouseEvent event) {
+	void searchServiceNameIconClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchText = searchServiceName.getText();
 		FilteredList<Service> filteredList = servicesData.filtered(Service -> {
 			return Service.getServiceName().contains(searchText);
 		});
 		servicesTable.setItems(filteredList);
 		if(searchText == null || searchText.isEmpty())
-			servicesTable.setItems(servicesData);
+			displayTable(currentPage,pageSize);
 	}
 
     private void displayTable(int page, int size) throws ClassNotFoundException{
