@@ -2,6 +2,8 @@ package application.services;
 
 import java.io.IOException;
 
+import application.clients.Client;
+import application.resources.DeletePopupController;
 import application.services.backend.ServicesDatabase;
 import application.services.popup.ServicesPopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -12,10 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,6 +33,7 @@ public class Service {
 	private String serviceNumber;
 	private HBox buttonPane;
 	private TableView<Service> tableView;
+	private Text servicesLengthText;
 	public Service(String serviceName, String serviceAmount, String servicePrice, String serviceCurrency, String serviceDescription, String serviceNumber) {
 		this.serviceName = serviceName;
 		this.serviceAmount = serviceAmount;
@@ -44,6 +49,7 @@ public class Service {
 		// Delete button
 		Button deleteButton = new Button();
 		styleButtons(deleteButton,FontAwesomeIcon.TRASH);
+		deleteButtonFunction(deleteButton);
 		this.setButtonPane(new HBox(editButton,deleteButton));
 	}
 	private  void styleButtons(Button button, FontAwesomeIcon icon){
@@ -87,6 +93,7 @@ public class Service {
 					servicesPopupController.initializeData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
+					servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
 					String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					Stage childStage = new Stage();
@@ -109,6 +116,8 @@ public class Service {
 			}
 		);
 	}
+
+
 	private void refreshData(Stage childStage){
 		ServicesDatabase connection = new ServicesDatabase();
 		childStage.setOnHidden(evt -> {
@@ -121,6 +130,48 @@ public class Service {
 		});
 	}
 
+	public void deleteButtonFunction(Button button){
+		button.setOnMouseClicked(evt -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resources/DeletePopup.fxml"));
+				Parent root = loader.load();
+				DeletePopupController deletePopupController = loader.getController();
+				deletePopupController.getDeletePopupTitle().setText("Stergere Serviciu");
+				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+				tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
+				servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
+				Stage childStage = new Stage();
+				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
+				childStage.setScene(new Scene(root));
+				childStage.getScene().getStylesheets().add(popupCSS);
+				childStage.initModality(Modality.APPLICATION_MODAL);
+				childStage.initOwner(parentStage);
+				childStage.initStyle(StageStyle.UNDECORATED);
+				childStage.show();
+				double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+				double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+				childStage.setX(x);
+				childStage.setY(y);
+				refreshAfterDelete(childStage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
+	private void refreshAfterDelete(Stage childStage){
+		ServicesDatabase connection = new ServicesDatabase();
+		childStage.setOnHidden(evt ->{
+			try {
+				connection.deleteData(serviceName,serviceNumber);
+				servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
+				tableView.getItems().clear();
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
 	public String getServiceName() {
 		return serviceName;
 	}

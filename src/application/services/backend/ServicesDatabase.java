@@ -82,7 +82,18 @@ public class ServicesDatabase {
             e.printStackTrace();
         }
     }
-
+    public void deleteData(String serviceName, String servicenNumber) throws ClassNotFoundException {
+        String delete = "DELETE FROM Services WHERE Service_Name = ? AND NUMBER = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(delete)){
+            preparedStatement.setString(1,serviceName);
+            preparedStatement.setString(2,servicenNumber);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Service Rows Delete " +rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     public ObservableList<Service> retrieveData() throws ClassNotFoundException{
         ObservableList<Service> services = FXCollections.observableArrayList();
         String retrieve = "SELECT * FROM Services";
