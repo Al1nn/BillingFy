@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.services.Service;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,6 +64,7 @@ public class ServicesPopupController implements Initializable{
     private TextField serviceNumberField;
 
     private boolean isEditable;
+    ObservableList<Service> serviceData;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	try {
@@ -107,7 +111,29 @@ public class ServicesPopupController implements Initializable{
 
     @FXML
     void saveDataClicked(ActionEvent event) {
-        
+        if(!isEditable) {
+            for (Node node : contentPane.getChildren()) {
+                serviceNameField = (TextField) node.lookup("#serviceNameField");
+                serviceAmountField = (TextField) node.lookup("#serviceAmountField");
+                servicePriceField = (TextField) node.lookup("#servicePriceField");
+                serviceCurrencyField = (ComboBox<String>) node.lookup("#serviceCurrencyField");
+                serviceDescriptionField = (TextField) node.lookup("#serviceDescriptionField");
+                serviceNumberField = (TextField) node.lookup("#serviceNumberField");
+                String serviceName = serviceNameField.getText();
+                String serviceAmount = serviceAmountField.getText();
+                String servicePrice = servicePriceField.getText();
+                String serviceCurrency = serviceCurrencyField.getValue();
+                String serviceDescription = serviceDescriptionField.getText();
+                String serviceNumber = serviceNumberField.getText();
+                System.out.println("Service Name " + serviceName);
+                System.out.println("Service Amount " + serviceAmount);
+                System.out.println("Service Price" + servicePrice);
+                System.out.println("Service Currency " + serviceCurrency);
+                System.out.println("Service Description " + serviceDescription);
+                System.out.println("Service Number " + serviceNumber);
+            }
+            return;
+        }
     }
 
     public void setEditable(boolean args) {
