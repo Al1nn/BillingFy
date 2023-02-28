@@ -51,6 +51,38 @@ public class ServicesDatabase {
         }
     }
 
+    public void updateData(String serviceName, String serviceAmount
+            , String servicePrice, String serviceCurrency
+            , String serviceDescription, String serviceNumber
+            , String oldServiceName, String oldServiceNumber){
+        String update = "UPDATE Services SET " +
+                "Service_Name = ?, " +
+                "AMOUNT = ?, " +
+                "PRICE = ?, " +
+                "CURRENCY = ?, " +
+                "DESCRIPTION = ?, " +
+                "NUMBER = ? " +
+                "WHERE Service_Name = ? " +
+                "AND NUMBER = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,serviceName);
+            preparedStatement.setInt(2,Integer.valueOf(serviceAmount));
+            preparedStatement.setDouble(3,Double.valueOf(servicePrice));
+            preparedStatement.setString(4,serviceCurrency);
+            preparedStatement.setString(5,serviceDescription);
+            preparedStatement.setString(6,serviceNumber);
+            preparedStatement.setString(7,oldServiceName);
+            preparedStatement.setString(8,oldServiceNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if(rowsUpdated > 0){
+                System.out.println("Services Data Updated Succesfully");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public ObservableList<Service> retrieveData() throws ClassNotFoundException{
         ObservableList<Service> services = FXCollections.observableArrayList();
         String retrieve = "SELECT * FROM Services";

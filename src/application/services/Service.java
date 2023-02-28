@@ -34,28 +34,25 @@ public class Service {
 		this.serviceCurrency = serviceCurrency;
 		this.serviceDescription = serviceDescription;
 		this.serviceNumber = serviceNumber;
-		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css")
-				.toExternalForm();
+
 		// Edit button
 		Button editButton = new Button();
-		FontAwesomeIconView editButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
-		editButtonIcon.setFill(Color.web("#547cbc"));
-		editButtonIcon.setSize("20");
-		editButton.setGraphic(editButtonIcon);
-		editButton.getStylesheets().add(buttonStyle);
-		setIconFills(editButton, editButtonIcon);
-		buttonFunctions(editButton);
+		styleButtons(editButton,FontAwesomeIcon.PENCIL);
+		editButtonFunction(editButton);
 		// Delete button
 		Button deleteButton = new Button();
-		FontAwesomeIconView deleteButtonIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-		deleteButtonIcon.setFill(Color.web("#547cbc"));
-		deleteButtonIcon.setSize("20");
-		deleteButton.setGraphic(deleteButtonIcon);
-		deleteButton.getStylesheets().add(buttonStyle);
-		setIconFills(deleteButton, deleteButtonIcon);
+		styleButtons(deleteButton,FontAwesomeIcon.TRASH);
 		this.setButtonPane(new HBox(editButton,deleteButton));
 	}
-
+	private  void styleButtons(Button button, FontAwesomeIcon icon){
+		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css").toExternalForm();
+		FontAwesomeIconView buttonIcon = new FontAwesomeIconView(icon);
+		buttonIcon.setFill(Color.web("#547cbc"));
+		buttonIcon.setSize("20");
+		button.setGraphic(buttonIcon);
+		button.getStylesheets().add(buttonStyle);
+		setIconFills(button, buttonIcon);
+	}
 	private void setIconFills(Button button, FontAwesomeIconView buttonIcon) {
 		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -77,7 +74,7 @@ public class Service {
 		});
 	}
 	
-	public void buttonFunctions(Button button) {
+	public void editButtonFunction(Button button) {
 		button.setOnMouseClicked(evt -> {
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));

@@ -66,6 +66,8 @@ public class ServicesPopupController implements Initializable{
 
     private boolean isEditable;
     ObservableList<Service> serviceData;
+    private String oldServiceName;
+    private String oldServiceNumber;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	try {
@@ -95,6 +97,8 @@ public class ServicesPopupController implements Initializable{
         serviceCurrencyField.setValue(serviceCurrency);
         serviceDescriptionField.setText(serviceDescription);
         serviceNumberField.setText(serviceNumber);
+        oldServiceName = serviceName;
+        oldServiceNumber = serviceNumber;
     }
     @FXML
     void addServiceButtonClicked(ActionEvent event) throws IOException {
@@ -132,6 +136,14 @@ public class ServicesPopupController implements Initializable{
             saveData.getScene().getWindow().hide();
             return;
         }
+        String serviceName = serviceNameField.getText();
+        String serviceAmount = serviceAmountField.getText();
+        String servicePrice = servicePriceField.getText();
+        String serviceCurrency = serviceCurrencyField.getValue();
+        String serviceDescription = serviceDescriptionField.getText();
+        String serviceNumber = serviceNumberField.getText();
+        connection.updateData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber,oldServiceName,oldServiceNumber);
+        saveData.getScene().getWindow().hide();
     }
 
     public void setEditable(boolean args) {
