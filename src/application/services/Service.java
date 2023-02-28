@@ -8,6 +8,8 @@ import application.services.backend.ServicesDatabase;
 import application.services.popup.ServicesPopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,6 +36,13 @@ public class Service {
 	private HBox buttonPane;
 	private TableView<Service> tableView;
 	private Text servicesLengthText;
+	private Text servicesCurrentPage;
+	private Text servicesNumPages;
+	private ComboBox<String> itemsPerPage;
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
+
 	public Service(String serviceName, String serviceAmount, String servicePrice, String serviceCurrency, String serviceDescription, String serviceNumber) {
 		this.serviceName = serviceName;
 		this.serviceAmount = serviceAmount;
@@ -92,6 +101,13 @@ public class Service {
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
 					servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
+					servicesCurrentPage = (Text) parentStage.getScene().lookup("#servicesCurrentPage");
+					currentPage = Integer.parseInt(servicesCurrentPage.getText());
+					servicesNumPages = (Text) parentStage.getScene().lookup("#servicesPages");
+					totalPages = Integer.parseInt(servicesNumPages.getText());
+					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+					String selectedValue = itemsPerPage.getValue();
+					pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
 					String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					Stage childStage = new Stage();
@@ -117,11 +133,9 @@ public class Service {
 
 
 	private void refreshData(Stage childStage){
-		ServicesDatabase connection = new ServicesDatabase();
 		childStage.setOnHidden(evt -> {
-			tableView.getItems().clear();
 			try {
-				tableView.setItems(connection.retrieveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -138,6 +152,13 @@ public class Service {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
 				servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
+				servicesCurrentPage = (Text) parentStage.getScene().lookup("#servicesCurrentPage");
+				currentPage = Integer.parseInt(servicesCurrentPage.getText());
+				servicesNumPages = (Text) parentStage.getScene().lookup("#servicesPages");
+				totalPages = Integer.parseInt(servicesNumPages.getText());
+				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+				String selectedValue = itemsPerPage.getValue();
+				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -161,10 +182,15 @@ public class Service {
 		ServicesDatabase connection = new ServicesDatabase();
 		childStage.setOnHidden(evt ->{
 			try {
+				if(tableView.getItems().size() == 1){
+					--totalPages;
+					servicesNumPages.setText(String.valueOf(totalPages));
+					--currentPage;
+					servicesCurrentPage.setText(String.valueOf(currentPage));
+				}
 				connection.deleteData(serviceName,serviceNumber);
 				servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
-				tableView.getItems().clear();
-				tableView.setItems(connection.retrieveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -224,5 +250,13 @@ public class Service {
 
 	public void setServiceNumber(String serviceNumber) {
 		this.serviceNumber = serviceNumber;
+	}
+
+	private void displayTable(int page, int size) throws ClassNotFoundException{
+		ServicesDatabase connection = new ServicesDatabase();
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
+		ObservableList<Service> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+		tableView.setItems(currentPageData);
 	}
 }

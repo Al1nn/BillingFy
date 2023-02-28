@@ -188,10 +188,11 @@ public class ServicesController implements Initializable{
     @FXML
     private BarChart<?, ?> servicesIncomingsChart;
     private ObservableList<Service> servicesData;
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
-		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
 		style.styleButtons(billingsButton, billingsIcon, billingsCircle);
@@ -199,13 +200,17 @@ public class ServicesController implements Initializable{
 		style.styleButtons(statisticsButton, statisticsIcon, statisticsCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-
+		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
+		itemsPerPage.getItems().addAll(itemPerPageOptions);
+		itemsPerPage.getSelectionModel().selectFirst();
 		try {
 			updateCharts();
 			updateTable();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
+		totalPages = (int) Math.ceil((double) servicesData.size() / pageSize);
+		servicesPages.setText(String.valueOf(totalPages));
 	}
 	private void updateCharts(){
 		XYChart.Series series1 = new XYChart.Series();
@@ -238,7 +243,7 @@ public class ServicesController implements Initializable{
 		centerServiceFunctionsColumn(servicesFunctions);
 		servicesTable.setEditable(true);
 		servicesData = connection.retrieveData();
-		servicesTable.setItems(servicesData);
+		displayTable(1,pageSize);
 		servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
 	}
 	private void centerCellsOnColumn(TableColumn<Service,String> tableColumn){
@@ -329,10 +334,15 @@ public class ServicesController implements Initializable{
     	refreshData(childStage);
 	}
 	private void refreshData(Stage childStage){
+		ServicesDatabase connection = new ServicesDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				updateCharts();
-				updateTable();
+				if(servicesTable.getItems().size() == pageSize){
+					totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
+					servicesPages.setText(String.valueOf(totalPages));
+				}
+				servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -435,15 +445,37 @@ public class ServicesController implements Initializable{
     }
 
     @FXML
-    void servicesNextPageClicked(ActionEvent event) {
-
+    void servicesNextPageClicked(ActionEvent event) throws ClassNotFoundException {
+		if (currentPage < totalPages)
+		{
+			currentPage++;
+			totalPages = (int) Math.ceil((double) servicesData.size() / pageSize);
+			servicesCurrentPage.setText(String.valueOf(currentPage));
+			servicesPages.setText(String.valueOf(totalPages));
+			displayTable(currentPage,pageSize);
+		}
     }
 
     @FXML
-    void servicesPreviousPageClicked(ActionEvent event) {
-
+    void servicesPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
+		if(currentPage > 1){
+			currentPage--;
+			totalPages = (int) Math.ceil((double) servicesData.size() / pageSize);
+			servicesCurrentPage.setText(String.valueOf(currentPage));
+			servicesPages.setText(String.valueOf(totalPages));
+			displayTable(currentPage,pageSize);
+		}
     }
-
+	@FXML
+	void itemsPerPageSelected(ActionEvent event) throws ClassNotFoundException {
+		String selectedValue = itemsPerPage.getValue();
+		pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+		totalPages = (int) Math.ceil((double) servicesData.size() / pageSize);
+		servicesPages.setText(String.valueOf(totalPages));
+		currentPage = 1;
+		servicesCurrentPage.setText(String.valueOf(currentPage));
+		displayTable(currentPage,pageSize);
+	}
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {
     	if(sortNumberIcon.getGlyphName() == "ANGLE_UP") {
@@ -497,6 +529,13 @@ public class ServicesController implements Initializable{
 			servicesTable.setItems(servicesData);
 	}
 
-    
+    private void displayTable(int page, int size) throws ClassNotFoundException{
+		ServicesDatabase connection = new ServicesDatabase();
+		servicesData = connection.retrieveData();
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, servicesData.size());
+		ObservableList<Service> currentPageData = FXCollections.observableArrayList(servicesData.subList(startIndex,endIndex));
+		servicesTable.setItems(currentPageData);
+	}
 
 }
