@@ -49,25 +49,48 @@ public class ServicesPopupController implements Initializable{
     
     @FXML
     private GridPane contentPane;
-    
+
+    @FXML
+    private Text servicePopupTitle;
     private int nrPressed = 1;
-    
+    private TextField serviceNameField;
+    private TextField serviceAmountField;
+    private TextField servicePriceField;
+    private ComboBox<String> serviceCurrencyField;
+    private TextField serviceDescriptionField;
+    private TextField serviceNumberField;
+
+    private boolean isEditable;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	try {
     		contentPane = new GridPane();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesContent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesContent.fxml"));
 			String contentCSS = this.getClass().getResource("/application/services/popup/ServicesContentStyle.css").toExternalForm();
 			root.getStylesheets().add(contentCSS);
+            serviceNameField = (TextField) root.lookup("#serviceNameField");
+            serviceAmountField = (TextField) root.lookup("#serviceAmountField");
+            servicePriceField = (TextField) root.lookup("#servicePriceField");
+            serviceCurrencyField = (ComboBox<String>) root.lookup("#serviceCurrencyField");
+            serviceDescriptionField = (TextField) root.lookup("#serviceDescriptionField");
+            serviceNumberField = (TextField) root.lookup("#serviceNumberField");
 			contentPane.addRow(0, root);
 			scrollPane.setContent(contentPane);
 			scrollPane.setFitToWidth(true);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-    
+    public void initializeData(String serviceName, String serviceAmount, String servicePrice, String serviceCurrency, String serviceDescription, String serviceNumber){
+        serviceNameField.setText(serviceName);
+        serviceAmountField.setText(serviceAmount);
+        servicePriceField.setText(servicePrice);
+        serviceCurrencyField.setValue(serviceCurrency);
+        serviceDescriptionField.setText(serviceDescription);
+        serviceNumberField.setText(serviceNumber);
+    }
     @FXML
     void addServiceButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesContent.fxml"));
@@ -84,11 +107,16 @@ public class ServicesPopupController implements Initializable{
 
     @FXML
     void saveDataClicked(ActionEvent event) {
-
+        
     }
 
-	
-
+    public void setEditable(boolean args) {
+        servicePopupTitle.setText("Editare Serviciu");
+        isEditable = args;
+    }
+    public void setInvisibleAdd(){
+        addServiceButton.setVisible(false);
+    }
 }
 
 

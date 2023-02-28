@@ -155,6 +155,7 @@ public class StatisticsController implements Initializable{
 		
 		
 		servicesNumberChart.getData().addAll(series1,series2);
+
 		servicesIncomingsChart.getData().addAll(series1I,series2I);
 		
 		}

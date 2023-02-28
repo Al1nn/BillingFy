@@ -2,6 +2,7 @@ package application.services;
 
 import java.io.IOException;
 
+import application.services.popup.ServicesPopupController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
@@ -18,17 +19,21 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Service {
-	private String servicesNumber;
-	private String servicesName;
-	private String servicesDescription;
-	private String servicesPrice;
+	private String serviceName;
+	private String serviceAmount;
+	private String servicePrice;
+	private String serviceCurrency;
+	private String serviceDescription;
+	private String serviceNumber;
 	private HBox buttonPane;
 	
-	public Service(String servicesNumber, String servicesName, String servicesDescription, String servicesPrice) {
-		this.setServicesNumber(servicesNumber);
-		this.setServicesName(servicesName);
-		this.setServicesDescription(servicesDescription);
-		this.setServicesPrice(servicesPrice);
+	public Service(String serviceName, String serviceAmount, String servicePrice, String serviceCurrency, String serviceDescription, String serviceNumber) {
+		this.serviceName = serviceName;
+		this.serviceAmount = serviceAmount;
+		this.servicePrice = servicePrice;
+		this.serviceCurrency = serviceCurrency;
+		this.serviceDescription = serviceDescription;
+		this.serviceNumber = serviceNumber;
 		String buttonStyle = this.getClass().getResource("/application/resources/material-design-skin.css")
 				.toExternalForm();
 		// Edit button
@@ -73,33 +78,78 @@ public class Service {
 	}
 	
 	public void buttonFunctions(Button button) {
-		button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+		button.setOnMouseClicked(evt -> {
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/services/popup/ServicesPopup.fxml"));
+					Parent root = loader.load();
+					ServicesPopupController servicesPopupController = loader.getController();
+					servicesPopupController.setEditable(true);
+					servicesPopupController.setInvisibleAdd();
+					servicesPopupController.initializeData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
+					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					String popupCSS = this.getClass().getResource("/application/services/popup/ServicesPopupStyle.css").toExternalForm();
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
-					Stage stage = new Stage();
-					stage.setScene(new Scene(root));
-					stage.getScene().getStylesheets().add(popupCSS);
-					stage.getScene().getStylesheets().add(scrollPaneCSS);
-					stage.initModality(Modality.APPLICATION_MODAL);
-					stage.initOwner((Stage) ((Node) arg0.getSource()).getScene().getWindow());
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.centerOnScreen();
-					stage.show();
+					Stage childStage = new Stage();
+					childStage.setScene(new Scene(root));
+					childStage.getScene().getStylesheets().add(popupCSS);
+					childStage.getScene().getStylesheets().add(scrollPaneCSS);
+					childStage.initModality(Modality.APPLICATION_MODAL);
+					childStage.initOwner(parentStage);
+					childStage.initStyle(StageStyle.UNDECORATED);
+					childStage.show();
+					double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
+					double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
+					childStage.setX(x);
+					childStage.setY(y);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
-
-		});
+		);
 	}
-	
+
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public String getServiceAmount() {
+		return serviceAmount;
+	}
+
+	public void setServiceAmount(String serviceAmount) {
+		this.serviceAmount = serviceAmount;
+	}
+
+	public String getServicePrice() {
+		return servicePrice;
+	}
+
+	public void setServicePrice(String servicePrice) {
+		this.servicePrice = servicePrice;
+	}
+
+	public String getServiceCurrency() {
+		return serviceCurrency;
+	}
+
+	public void setServiceCurrency(String serviceCurrency) {
+		this.serviceCurrency = serviceCurrency;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
 	public HBox getButtonPane() {
 		return buttonPane;
 	}
@@ -108,36 +158,11 @@ public class Service {
 		this.buttonPane = buttonPane;
 	}
 
-	public String getServicesPrice() {
-		return servicesPrice;
+	public String getServiceNumber() {
+		return serviceNumber;
 	}
 
-	public void setServicesPrice(String servicesPrice) {
-		this.servicesPrice = servicesPrice;
+	public void setServiceNumber(String serviceNumber) {
+		this.serviceNumber = serviceNumber;
 	}
-
-	public String getServicesNumber() {
-		return servicesNumber;
-	}
-
-	public void setServicesNumber(String servicesNumber) {
-		this.servicesNumber = servicesNumber;
-	}
-
-	public String getServicesName() {
-		return servicesName;
-	}
-
-	public void setServicesName(String servicesName) {
-		this.servicesName = servicesName;
-	}
-
-	public String getServicesDescription() {
-		return servicesDescription;
-	}
-
-	public void setServicesDescription(String servicesDescription) {
-		this.servicesDescription = servicesDescription;
-	}
-
 }

@@ -48,7 +48,7 @@ public class ServicesContentController implements Initializable{
     private FontAwesomeIconView serviceDescriptionIcon;
     
     @FXML
-    private ComboBox<String> serviceExchangeField;
+    private ComboBox<String> serviceCurrencyField;
 
     @FXML
     private Button serviceNameButton;
@@ -58,7 +58,15 @@ public class ServicesContentController implements Initializable{
 
     @FXML
     private FontAwesomeIconView serviceNameIcon;
-    
+
+    @FXML
+    private Button serviceNumberButton;
+
+    @FXML
+    private TextField serviceNumberField;
+
+    @FXML
+    private FontAwesomeIconView serviceNumberIcon;
     @FXML
     private Button servicePriceButton;
 
@@ -74,7 +82,8 @@ public class ServicesContentController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	serviceAmountField.setText("1");
     	String[] serviceExchangeOptions = {"RON","EUR"};
-    	serviceExchangeField.getItems().addAll(serviceExchangeOptions);
+    	serviceCurrencyField.getItems().addAll(serviceExchangeOptions);
+        serviceCurrencyField.getSelectionModel().select("");
 	}
     
     @FXML
@@ -98,7 +107,8 @@ public class ServicesContentController implements Initializable{
     	serviceDescriptionField.clear();
     	amount = 1;
     	serviceAmountField.setText(String.valueOf(amount));
-    	serviceExchangeField.getSelectionModel().clearSelection();
+    	serviceCurrencyField.getSelectionModel().clearSelection();
+        serviceNumberField.clear();
     }
 
     @FXML
@@ -115,6 +125,7 @@ public class ServicesContentController implements Initializable{
     void servicePriceButtonClicked(ActionEvent event) {
     	servicePriceField.clear();
     }
-    
+    @FXML
+    void serviceNumberButtonClicked(ActionEvent event) {serviceNumberField.clear();}
 }
 

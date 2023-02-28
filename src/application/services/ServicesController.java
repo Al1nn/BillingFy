@@ -215,20 +215,19 @@ public class ServicesController implements Initializable{
 		servicesNumberChart.getData().addAll(series1,series2,series3);
 	}
     private void updateTable(){
-		servicesNumber.setCellValueFactory(new PropertyValueFactory<>("servicesNumber"));
+		servicesNumber.setCellValueFactory(new PropertyValueFactory<>("serviceNumber"));
 		centerCellsOnColumn(servicesNumber);
-		servicesName.setCellValueFactory(new PropertyValueFactory<>("servicesName"));
+		servicesName.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
 		centerCellsOnColumn(servicesName);
-		servicesDescription.setCellValueFactory(new PropertyValueFactory<>("servicesDescription"));
+		servicesDescription.setCellValueFactory(new PropertyValueFactory<>("serviceDescription"));
 		centerCellsOnColumn(servicesDescription);
-		servicesPrice.setCellValueFactory(new PropertyValueFactory<>("servicesPrice"));
+		servicesPrice.setCellValueFactory(new PropertyValueFactory<>("servicePrice"));
 		centerCellsOnColumn(servicesPrice);
 		servicesFunctions.setCellValueFactory(new PropertyValueFactory<>("buttonPane"));
 		centerServiceFunctionsColumn(servicesFunctions);
 		final ObservableList<Service> servicesData = FXCollections.observableArrayList(
-				new Service("1", "SC COMPANY NAME", "Descriere","5000"),
-				new Service("1", "SC CACA NAME", "Descriere","2500"));
-
+				new Service("ALL IN TECHNOLOGIES","40","5000","EUR","Descriere" , "1"),
+				new Service("ALL IN TECHNOLOGIES", "5","1000","RON","Descriere","2"));
 		servicesTable.setItems(servicesData);
 	}
 	private void centerCellsOnColumn(TableColumn<Service,String> tableColumn){
@@ -292,10 +291,8 @@ public class ServicesController implements Initializable{
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
 		childStage.show();
-		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
-
 		childStage.setX(x);
 		childStage.setY(y);
     }
@@ -313,9 +310,7 @@ public class ServicesController implements Initializable{
 		childStage.initModality(Modality.APPLICATION_MODAL);
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
-//		stage.centerOnScreen();
 		childStage.show();
-		
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
@@ -333,13 +328,11 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
 		if(!stage.isFullScreen())
 		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -356,13 +349,11 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
 		if(!stage.isFullScreen())
 		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -379,13 +370,11 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
 		if(!stage.isFullScreen())
 		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -404,13 +393,11 @@ public class ServicesController implements Initializable{
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);
-//		stage.centerOnScreen();
 		if(!stage.isFullScreen())
 		{
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
