@@ -15,6 +15,7 @@ import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -94,8 +95,11 @@ public class ServicesController implements Initializable{
     @FXML
     private ComboBox<String> itemsPerPage;
 
-    @FXML
-    private TextField searchService;
+	@FXML
+	private TextField searchServiceName;
+
+	@FXML
+	private FontAwesomeIconView searchServiceNameIcon;
 
     @FXML
     private Button servicesButton;
@@ -235,6 +239,7 @@ public class ServicesController implements Initializable{
 		servicesTable.setEditable(true);
 		servicesData = connection.retrieveData();
 		servicesTable.setItems(servicesData);
+		servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
 	}
 	private void centerCellsOnColumn(TableColumn<Service,String> tableColumn){
 		tableColumn.setCellFactory(column -> new TableCell<Service,String>(){
@@ -481,7 +486,16 @@ public class ServicesController implements Initializable{
 		servicesTable.getSortOrder().add(servicesName);
 	}
 
-	
+	@FXML
+	void searchServiceNameIconClicked(MouseEvent event) {
+		String searchText = searchServiceName.getText();
+		FilteredList<Service> filteredList = servicesData.filtered(Service -> {
+			return Service.getServiceName().contains(searchText);
+		});
+		servicesTable.setItems(filteredList);
+		if(searchText == null || searchText.isEmpty())
+			servicesTable.setItems(servicesData);
+	}
 
     
 
