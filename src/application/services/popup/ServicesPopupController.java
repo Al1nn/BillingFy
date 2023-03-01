@@ -111,7 +111,10 @@ public class ServicesPopupController implements Initializable{
 
     @FXML
     void exitPopupClicked(ActionEvent event) {
-    	exitPopup.getScene().getWindow().hide();
+        exitPopup.getScene().getWindow().setOnHidden(evt -> {
+            System.out.println("Exited");
+        });
+        exitPopup.getScene().getWindow().hide();
     }
 
     @FXML

@@ -530,8 +530,12 @@ public class ServicesController implements Initializable{
 			return Service.getServiceName().contains(searchText);
 		});
 		servicesTable.setItems(filteredList);
+		updateCharts();
 		if(searchText == null || searchText.isEmpty())
-			displayTable(currentPage,pageSize);
+			{
+				displayTable(currentPage,pageSize);
+				updateCharts();
+			}
 	}
 
     private void displayTable(int page, int size) throws ClassNotFoundException{
