@@ -156,29 +156,7 @@ public class StatisticsController implements Initializable{
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
-//		XYChart.Series series1 = new XYChart.Series();
-//		series1.setName("data1");
-//		series1.getData().add(new XYChart.Data("Caca",250));
-//		series1.getData().add(new XYChart.Data("Muie",500));
-//
-//		XYChart.Series series2 = new XYChart.Series();
-//		series2.setName("data2");
-//		series2.getData().add(new XYChart.Data("Caca",350));
-//		series2.getData().add(new XYChart.Data("Muie",750));
-//
-//		XYChart.Series series1I = new XYChart.Series();
-//		series1I.setName("data1");
-//		series1I.getData().add(new XYChart.Data("Caca",150));
-//		series1I.getData().add(new XYChart.Data("Muie",450));
-//
-//		XYChart.Series series2I = new XYChart.Series();
-//		series2I.setName("data2");
-//		series2I.getData().add(new XYChart.Data("Caca",350));
-//		series2I.getData().add(new XYChart.Data("Muie",150));
-		
-		
 
-		
 		}
     
     public void setInitialDesignButtons() {
@@ -211,10 +189,8 @@ public class StatisticsController implements Initializable{
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
 		childStage.show();
-		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
-
 		childStage.setX(x);
 		childStage.setY(y);
     }
