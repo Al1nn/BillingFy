@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.clients.Client;
+import application.clients.backend.ClientDatabase;
+import application.statistics.backend.StatisticsDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -115,8 +118,9 @@ public class StatisticsController implements Initializable{
     
     @FXML
     private PieChart clientsPieChart;
-    
-    @Override
+
+	ObservableList<PieChart.Data> pieChartData;
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setInitialDesignButtons();
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
@@ -125,38 +129,55 @@ public class StatisticsController implements Initializable{
 		style.styleButtons(servicesButton, servicesIcon, servicesCircle);
 		style.styleButtons(businessButton, businessIcon, businessCircle);
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
-		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-				new PieChart.Data("Grapefruit",13),
-				new PieChart.Data("Oranges", 25),
-				new PieChart.Data("Apples", 50)
-				);
+		pieChartData = FXCollections.observableArrayList();
+		StatisticsDatabase connection = new StatisticsDatabase();
+		try {
+			for (StatisticsPieModel model: connection.retrievePieData()) {
+				pieChartData.add(new PieChart.Data(model.getStatisticsName(),model.getStatisticsAppearance() * 100));
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 		clientsPieChart.setData(pieChartData);
-		
-		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("data1");
-		series1.getData().add(new XYChart.Data("Caca",250));
-		series1.getData().add(new XYChart.Data("Muie",500));
-		
-		XYChart.Series series2 = new XYChart.Series();
-		series2.setName("data2");
-		series2.getData().add(new XYChart.Data("Caca",350));
-		series2.getData().add(new XYChart.Data("Muie",750));
-		
-		XYChart.Series series1I = new XYChart.Series();
-		series1I.setName("data1");
-		series1I.getData().add(new XYChart.Data("Caca",150));
-		series1I.getData().add(new XYChart.Data("Muie",450));
-		
-		XYChart.Series series2I = new XYChart.Series();
-		series2I.setName("data2");
-		series2I.getData().add(new XYChart.Data("Caca",350));
-		series2I.getData().add(new XYChart.Data("Muie",150));
-		
-		
-		
-		servicesNumberChart.getData().addAll(series1,series2);
 
-		servicesIncomingsChart.getData().addAll(series1I,series2I);
+
+		try {
+			for(StatisticsBarChartModel model : connection.retrieveBarChartData()){
+				XYChart.Series amountSeries = new XYChart.Series();
+				amountSeries.setName(model.getStatisticsName());
+				amountSeries.getData().add(new XYChart.Data(model.getStatisticsName(),model.getStatisticsAmount()));
+				servicesNumberChart.getData().add(amountSeries);
+
+				XYChart.Series incomingsSeries = new XYChart.Series();
+				incomingsSeries.setName(model.getStatisticsName());
+				incomingsSeries.getData().add(new XYChart.Data(model.getStatisticsName(),model.getStatisticsPrice()));
+				servicesIncomingsChart.getData().add(incomingsSeries);
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+//		XYChart.Series series1 = new XYChart.Series();
+//		series1.setName("data1");
+//		series1.getData().add(new XYChart.Data("Caca",250));
+//		series1.getData().add(new XYChart.Data("Muie",500));
+//
+//		XYChart.Series series2 = new XYChart.Series();
+//		series2.setName("data2");
+//		series2.getData().add(new XYChart.Data("Caca",350));
+//		series2.getData().add(new XYChart.Data("Muie",750));
+//
+//		XYChart.Series series1I = new XYChart.Series();
+//		series1I.setName("data1");
+//		series1I.getData().add(new XYChart.Data("Caca",150));
+//		series1I.getData().add(new XYChart.Data("Muie",450));
+//
+//		XYChart.Series series2I = new XYChart.Series();
+//		series2I.setName("data2");
+//		series2I.getData().add(new XYChart.Data("Caca",350));
+//		series2I.getData().add(new XYChart.Data("Muie",150));
+		
+		
+
 		
 		}
     

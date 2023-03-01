@@ -1,8 +1,11 @@
 package application.statistics.backend;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import application.statistics.StatisticsBarChartModel;
+import application.statistics.StatisticsPieModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 public class StatisticsDatabase {
     public Connection databaseLink;
@@ -23,5 +26,43 @@ public class StatisticsDatabase {
         return databaseLink;
     }
 
-    
+    public ObservableList<StatisticsPieModel> retrievePieData() throws ClassNotFoundException {
+        String select = "SELECT Client_Name , COUNT(*) as Appearance_Count " +
+                "FROM Clients GROUP BY Client_Name";
+        ObservableList<StatisticsPieModel> models = FXCollections.observableArrayList();
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(select)){
+             while (resultSet.next()){
+                 String statisticsName = resultSet.getString("Client_Name");
+                 int statisticsAppearance = resultSet.getInt("Appearance_Count");
+                 StatisticsPieModel model = new StatisticsPieModel(statisticsName,statisticsAppearance);
+                 models.add(model);
+             }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return models;
+    }
+
+    public ObservableList<StatisticsBarChartModel> retrieveBarChartData() throws ClassNotFoundException {
+        String select = "SELECT Service_Name, SUM(AMOUNT) as Total_Amount, SUM(PRICE) as Total_Income " +
+                "FROM Services " +
+                "GROUP BY Service_Name";
+        ObservableList<StatisticsBarChartModel> models = FXCollections.observableArrayList();
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(select)){
+            while (resultSet.next()){
+                String statisticsName = resultSet.getString("Service_Name");
+                int statisticsAmount = resultSet.getInt("Total_Amount");
+                double statisticsPrice = resultSet.getDouble("Total_Income");
+                StatisticsBarChartModel model = new StatisticsBarChartModel(statisticsName,statisticsAmount,statisticsPrice);
+                models.add(model);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return models;
+    }
 }
