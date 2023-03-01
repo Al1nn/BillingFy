@@ -79,7 +79,7 @@
 						<Font name="Buffalo-Regular" size="48.0" />
 					</font>
 				</Text>
-				<PieChart fx:id="clientsPieChart" layoutX="22.0" layoutY="120.0" prefHeight="300.0" prefWidth="500.0" title="Clienti in ultima luna" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="120.0" />
+				<PieChart fx:id="clientsPieChart" layoutX="22.0" layoutY="120.0" prefHeight="300.0" prefWidth="500.0" title="Clienti de pe pagina" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="120.0" />
 				<BarChart fx:id="servicesNumberChart" layoutX="581.0" layoutY="122.0" prefHeight="300.0" prefWidth="500.0" title="Numar de servicii vandute de pe pagina" AnchorPane.leftAnchor="581.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="122.0">
 					<xAxis>
 						<CategoryAxis side="BOTTOM" />

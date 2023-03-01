@@ -440,8 +440,10 @@ public class ClientsController implements Initializable {
 		window.dragWindow(root, stage);
 		String billingCSS = this.getClass().getResource("/application/services/ServicesStyle.css").toExternalForm();
 		String chartCSS = this.getClass().getResource("/application/resources/chartStyle.css").toExternalForm();
+		String scrollCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 		stage.getScene().getStylesheets().add(billingCSS);
 		stage.getScene().getStylesheets().add(chartCSS);
+		stage.getScene().getStylesheets().add(scrollCSS);
 		window.fullscreenWindow(stage.getScene(), stage);
 		stage.setFullScreenExitHint("");
 		stage.getScene().setRoot(root);

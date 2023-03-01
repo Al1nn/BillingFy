@@ -11,10 +11,13 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -35,6 +38,10 @@ public class Service {
 	private String serviceNumber;
 	private HBox buttonPane;
 	private TableView<Service> tableView;
+
+	private BarChart<?, ?> servicesNumberChart;
+
+	private BarChart<?, ?> servicesIncomingsChart;
 	private Text servicesLengthText;
 	private Text servicesCurrentPage;
 	private Text servicesNumPages;
@@ -100,6 +107,8 @@ public class Service {
 					servicesPopupController.initializeData(serviceName,serviceAmount,servicePrice,serviceCurrency,serviceDescription,serviceNumber);
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
+					servicesNumberChart = (BarChart<?, ?> ) parentStage.getScene().lookup("#servicesNumberChart");
+					servicesIncomingsChart = (BarChart<?, ?>) parentStage.getScene().lookup("#servicesIncomingsChart");
 					servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
 					servicesCurrentPage = (Text) parentStage.getScene().lookup("#servicesCurrentPage");
 					currentPage = Integer.parseInt(servicesCurrentPage.getText());
@@ -136,6 +145,7 @@ public class Service {
 		childStage.setOnHidden(evt -> {
 			try {
 				displayTable(currentPage,pageSize);
+				updateCharts();
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -151,6 +161,8 @@ public class Service {
 				deletePopupController.getDeletePopupTitle().setText("Stergere Serviciu");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				tableView = (TableView<Service>) parentStage.getScene().lookup("#servicesTable");
+				servicesNumberChart = (BarChart<?, ?> ) parentStage.getScene().lookup("#servicesNumberChart");
+				servicesIncomingsChart = (BarChart<?, ?>) parentStage.getScene().lookup("#servicesIncomingsChart");
 				servicesLengthText = (Text) parentStage.getScene().lookup("#servicesLengthText");
 				servicesCurrentPage = (Text) parentStage.getScene().lookup("#servicesCurrentPage");
 				currentPage = Integer.parseInt(servicesCurrentPage.getText());
@@ -191,6 +203,7 @@ public class Service {
 				connection.deleteData(serviceName,serviceNumber);
 				servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				displayTable(currentPage,pageSize);
+				updateCharts();
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -258,5 +271,21 @@ public class Service {
 		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
 		ObservableList<Service> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
 		tableView.setItems(currentPageData);
+	}
+	private void updateCharts(){
+		servicesNumberChart.getData().clear();
+		servicesIncomingsChart.getData().clear();
+		for (Service service : tableView.getItems()) {
+			XYChart.Series series = new XYChart.Series();
+			series.setName(service.getServiceName());
+			series.getData().add(new XYChart.Data(service.getServiceName(),Integer.valueOf(service.getServiceAmount())));
+			servicesNumberChart.getData().add(series);
+
+			XYChart.Series incomingsSeries = new XYChart.Series();
+			incomingsSeries.setName(service.getServiceName());
+			incomingsSeries.getData().add(new XYChart.Data(service.getServiceName(),Double.valueOf(service.getServicePrice())));
+			servicesIncomingsChart.getData().add(incomingsSeries);
+		}
+
 	}
 }

@@ -4,3 +4,28 @@
 .scroll-pane{
 	-fx-background-color: "#DAECF9";
 }
+
+.scroll-bar:horizontal{
+    -fx-background-color:  linear-gradient(to bottom, #1dbbdd44, #538EEA);
+}
+.scroll-bar:vertical{
+    -fx-background-color:  linear-gradient(to bottom, #1dbbdd44, #538EEA);
+}
+
+.scroll-bar > .thumb{
+    -fx-background-color : "#538EEA";
+}
+
+.scroll-bar > .thumb:hover {
+    -fx-background-color : "#538EEA";
+}
+
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button {
+    -fx-background-color: transparent;
+    -fx-fill : transparent;
+}
+
+.scroll-bar > .increment-button:hover, .scroll-bar > .decrement-button:hover {
+    -fx-background-color: transparent;
+    -fx-fill : transparent;
+}

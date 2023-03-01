@@ -188,6 +188,8 @@ public class ServicesController implements Initializable{
     @FXML
     private BarChart<?, ?> servicesIncomingsChart;
     private ObservableList<Service> servicesData;
+	@FXML
+	private ScrollPane chartScrollPane;
 	private int pageSize = 10;
 	private int currentPage = 1;
 	private int totalPages;
@@ -204,8 +206,8 @@ public class ServicesController implements Initializable{
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		itemsPerPage.getSelectionModel().selectFirst();
 		try {
-			updateCharts();
 			updateTable();
+			updateCharts();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -213,21 +215,20 @@ public class ServicesController implements Initializable{
 		servicesPages.setText(String.valueOf(totalPages));
 	}
 	private void updateCharts(){
-		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("data1");
-		series1.getData().add(new XYChart.Data("caca",50));
-		series1.getData().add(new XYChart.Data("pisu",100));
+		servicesNumberChart.getData().clear();
+		servicesIncomingsChart.getData().clear();
+		for (Service service : servicesTable.getItems()) {
+			XYChart.Series series = new XYChart.Series();
+			series.setName(service.getServiceName());
+			series.getData().add(new XYChart.Data(service.getServiceName(),Integer.valueOf(service.getServiceAmount())));
+			servicesNumberChart.getData().add(series);
 
-		XYChart.Series series2 = new XYChart.Series();
-		series2.setName("data2");
-		series2.getData().add(new XYChart.Data("caca",250));
-		series2.getData().add(new XYChart.Data("Muia",50));
+			XYChart.Series incomingsSeries = new XYChart.Series();
+			incomingsSeries.setName(service.getServiceName());
+			incomingsSeries.getData().add(new XYChart.Data(service.getServiceName(),Double.valueOf(service.getServicePrice())));
+			servicesIncomingsChart.getData().add(incomingsSeries);
+		}
 
-		XYChart.Series series3 = new XYChart.Series();
-		series3.setName("data3");
-		series3.getData().add(new XYChart.Data("pisu",400));
-		series3.getData().add(new XYChart.Data("Muia",500));
-		servicesNumberChart.getData().addAll(series1,series2,series3);
 	}
     private void updateTable() throws ClassNotFoundException {
 		ServicesDatabase connection = new ServicesDatabase();
@@ -343,6 +344,7 @@ public class ServicesController implements Initializable{
 				}
 				servicesLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				displayTable(currentPage,pageSize);
+				updateCharts();
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -453,6 +455,7 @@ public class ServicesController implements Initializable{
 			servicesCurrentPage.setText(String.valueOf(currentPage));
 			servicesPages.setText(String.valueOf(totalPages));
 			displayTable(currentPage,pageSize);
+			updateCharts();
 		}
     }
 
@@ -464,6 +467,7 @@ public class ServicesController implements Initializable{
 			servicesCurrentPage.setText(String.valueOf(currentPage));
 			servicesPages.setText(String.valueOf(totalPages));
 			displayTable(currentPage,pageSize);
+			updateCharts();
 		}
     }
 	@FXML
@@ -475,6 +479,7 @@ public class ServicesController implements Initializable{
 		currentPage = 1;
 		servicesCurrentPage.setText(String.valueOf(currentPage));
 		displayTable(currentPage,pageSize);
+		updateCharts();
 	}
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {

@@ -9,6 +9,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -178,28 +179,36 @@
 					</font>
 				</Button>
 				<FontAwesomeIconView glyphName="HANDSHAKE_ALT" layoutX="937.8571434020996" layoutY="92.0" size="20" AnchorPane.rightAnchor="136.4285717010498" AnchorPane.topAnchor="74.85714340209961" />
-				<BarChart fx:id="servicesNumberChart" categoryGap="5.0" layoutX="681.0" layoutY="142.0" prefHeight="258.0" prefWidth="388.0" title="Numar de servicii vandute de pe pagina" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="142.0">
-					<xAxis>
-						<CategoryAxis side="BOTTOM" />
-					</xAxis>
-					<yAxis>
-						<NumberAxis side="LEFT" />
-					</yAxis>
-					<padding>
-						<Insets bottom="25.0" />
-					</padding>
-				</BarChart>
-				<BarChart fx:id="servicesIncomingsChart" layoutX="681.0" layoutY="492.0" legendSide="TOP" prefHeight="258.0" prefWidth="388.0" title="Incasari din serviciile de pe pagina" AnchorPane.bottomAnchor="61.0" AnchorPane.rightAnchor="31.0">
-					<xAxis>
-						<CategoryAxis side="BOTTOM" />
-					</xAxis>
-					<yAxis>
-						<NumberAxis side="LEFT" />
-					</yAxis>
-					<padding>
-						<Insets bottom="25.0" />
-					</padding>
-				</BarChart>
+            <ScrollPane fx:id="chartScrollPane" hvalue="0.45" layoutX="681.0" layoutY="135.0" prefHeight="600.0" prefWidth="415.0" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="135.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="800.0">
+                     <children>
+            				<BarChart fx:id="servicesNumberChart" barGap="2.0" categoryGap="2.0" layoutX="10.0" layoutY="14.0" legendSide="TOP" prefHeight="500.0" prefWidth="750.0" title="Numar de servicii vandute de pe pagina">
+            					<xAxis>
+            						<CategoryAxis side="BOTTOM" />
+            					</xAxis>
+            					<yAxis>
+            						<NumberAxis side="LEFT" />
+            					</yAxis>
+            					<padding>
+            						<Insets bottom="25.0" />
+            					</padding>
+            				</BarChart>
+            				<BarChart fx:id="servicesIncomingsChart" layoutX="10.0" layoutY="500.0" legendSide="TOP" prefHeight="500.0" prefWidth="750.0" title="Incasari din serviciile de pe pagina">
+            					<xAxis>
+            						<CategoryAxis side="BOTTOM" />
+            					</xAxis>
+            					<yAxis>
+            						<NumberAxis side="LEFT" />
+            					</yAxis>
+            					<padding>
+            						<Insets bottom="25.0" />
+            					</padding>
+            				</BarChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
 			</children>
 		</AnchorPane>
 		<Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1128.0" layoutY="19.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="18.5">

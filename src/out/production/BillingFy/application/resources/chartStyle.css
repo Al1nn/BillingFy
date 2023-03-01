@@ -24,7 +24,7 @@
 
 .axis-tick-mark {
     -fx-stroke: #637040;
-    -fx-stroke-width: 1; 
+    -fx-stroke-width: 1px;
 }
 
 .axis-minor-tick-mark {
@@ -45,23 +45,4 @@
 
 .default-color3.chart-pie{
 	-fx-pie-color: "#483FC4";
-}
-
-.data0.chart-bar{
-	-fx-background-color: "#343CBC";
-}
-.data1.chart-bar{
-	-fx-background-color: "#483FC4";
-}
-.data2.chart-bar{
-	-fx-background-color: "#6E44CC";
-}
-.data3.chart-bar{
-	-fx-background-color: "#3843C4";
-}
-.data4.chart-bar{
-	-fx-background-color: "#5C43C7";
-}
-.data5.chart-bar{
-	-fx-background-color: "#2867B7";
 }
