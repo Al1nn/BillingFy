@@ -235,26 +235,35 @@ public class BillingsController implements Initializable {
 		updateTable();
 	}
 	private void updateTable(){
-		billingNumber.setCellValueFactory(new PropertyValueFactory<>("billingNumber"));
+		billingNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
 		centerCellsOnColumn(billingNumber);
-		billingClient.setCellValueFactory(new PropertyValueFactory<>("billingClient"));
+		billingClient.setCellValueFactory(new PropertyValueFactory<>("clientName"));
 		centerCellsOnColumn(billingClient);
-		billingIssueDate.setCellValueFactory(new PropertyValueFactory<>("billingIssueDate"));
+		billingIssueDate.setCellValueFactory(new PropertyValueFactory<>("paymentIssueDate"));
 		centerCellsOnColumn(billingIssueDate);
-		billingDueDate.setCellValueFactory(new PropertyValueFactory<>("billingDueDate"));
+		billingDueDate.setCellValueFactory(new PropertyValueFactory<>("paymentDueDate"));
 		centerCellsOnColumn(billingDueDate);
-		billingSum.setCellValueFactory(new PropertyValueFactory<>("billingSum"));
+		billingSum.setCellValueFactory(new PropertyValueFactory<>("calculationSubtotal"));
 		centerCellsOnColumn(billingSum);
-		billingTax.setCellValueFactory(new PropertyValueFactory<>("billingTax"));
+		billingTax.setCellValueFactory(new PropertyValueFactory<>("calculationTax"));
 		centerCellsOnColumn(billingTax);
-		billingTotal.setCellValueFactory(new PropertyValueFactory<>("billingTotal"));
+		billingTotal.setCellValueFactory(new PropertyValueFactory<>("calculationTotal"));
 		centerCellsOnColumn(billingTotal);
 		billingStatus.setCellValueFactory(new PropertyValueFactory<>("statusPane"));
 		centerStatusColumn(billingStatus);
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
 		final ObservableList<Billing> billingsData = FXCollections.observableArrayList(
-				new Billing("1","SC COMPANY NAME","12.12.2020","01.01.2021","100 000 000 $","1000 $","100 001 000 $","Platit")
+				new Billing("SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
+						,"SC MGE Soft","4525626","J4/1243/2022","ROONRC.J4/1243/2022","Romania","Pitesti","Arges","Petros","1","152626","mge@gmail.com","0745262626"
+						,"RON",FXCollections.observableArrayList(new BillingService("SC MGE Soft",5,1200.25,"Servicii conform contracts")
+																				,new BillingService("SC MGE Soft",1,2000.50,"Servicii conform contracts 2"))
+						,FXCollections.observableArrayList(new BillingDiscount("Reducere",40),
+														   new BillingDiscount("Reducere 2",20))
+						,FXCollections.observableArrayList(new BillingTax("Taxa",2450.50),
+														   new BillingTax("Taxa 1",3000.50))
+						,"Raiffeisen","SC MGE Soft","IBAN","Swift","Reference",2450.50, "12.12.2020","01.01.2021","EUR","Neplatit"
+						,"100 000 000 $","1000 $","100 001 000 $")
 		);
 
 		billingTable.setItems(billingsData);
