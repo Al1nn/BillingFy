@@ -33,11 +33,11 @@
 	-fx-fill: "#5283E9";
 }
 
-#issuerNameCmbBox,#serviceExchangeCmbBox,#paymentCurrencyCmbBox,#clientNameCmbBox,#paymentStatusCmbBox{
+#issuerNameCmbBox,#serviceCurrencyCmbBox,#paymentCurrencyCmbBox,#clientNameCmbBox,#paymentStatusCmbBox{
 	-fx-background-color: "#CBDAFF";
 }
 #issuerNameCmbBox .text-field ,#issuerNameCmbBox > .arrow-button
-, #serviceExchangeCmbBox .text-field, #serviceExchangeCmbBox > .arrow-button
+, #serviceCurrencyCmbBox .text-field, #serviceCurrencyCmbBox > .arrow-button
 , #paymentCurrencyCmbBox .text-field, #paymentCurrencyCmbBox > .arrow-button
 , #clientNameCmbBox .text-field,#clientNameCmbBox > .arrow-button
 , #paymentStatusCmbBox .text-field, #paymentStatusCmbBox > .arrow-button{
@@ -45,7 +45,7 @@
 }
 
 #issuerNameCmbBox .list-view
-,#serviceExchangeCmbBox .list-view
+,#serviceCurrencyCmbBox .list-view
 ,#paymentCurrencyCmbBox .list-view
 ,#clientNameCmbBox .list-view
 ,#paymentStatusCmbBox .list-view
@@ -57,7 +57,7 @@
 }
 
 #issuerNameCmbBox .list-cell
-,#serviceExchangeCmbBox .list-cell
+,#serviceCurrencyCmbBox .list-cell
 ,#paymentCurrencyCmbBox .list-cell
 ,#clientNameCmbBox .list-cell
 ,#paymentStatusCmbBox .list-cell
@@ -67,7 +67,7 @@
 }
 
 #issuerNameCmbBox .list-cell:hover
-,#serviceExchangeCmbBox .list-cell:hover
+,#serviceCurrencyCmbBox .list-cell:hover
 ,#paymentCurrencyCmbBox .list-cell:hover
 ,#clientNameCmbBox .list-cell:hover
 ,#paymentStatusCmbBox .list-cell:hover{
@@ -75,7 +75,7 @@
 }
 
 #issuerNameCmbBox .list-cell:selected
-,#serviceExchangeCmbBox .list-cell:selected
+,#serviceCurrencyCmbBox .list-cell:selected
 , #paymentCurrencyCmbBox .list-cell:selected
 ,#clientNameCmbBox .list-cell:selected
 , #paymentStatusCmbBox .list-cell:selected

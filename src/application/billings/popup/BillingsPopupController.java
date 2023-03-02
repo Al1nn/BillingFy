@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.billings.BillingDiscount;
+import application.billings.BillingService;
+import application.billings.BillingTax;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -365,7 +369,7 @@ public class BillingsPopupController implements Initializable{
     private Button saveData;
 
     @FXML
-    private ComboBox<String> serviceExchangeCmbBox;
+    private ComboBox<String> serviceCurrencyCmbBox;;
     
     @FXML
     private ScrollPane serviceScrollPane;
@@ -396,6 +400,17 @@ public class BillingsPopupController implements Initializable{
 
     private boolean isEditable;
 
+    private TextField billingServiceNameField;
+    private TextField billingServiceAmountField;
+    private TextField billingPriceField;
+    private TextField billingDescriptionField;
+
+    private TextField billingDiscountNameField;
+    private TextField billingDiscountPercentageField;
+
+    private TextField billingTaxNameField;
+    private TextField billingTaxValueField;
+
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] clientNameOptions = {"Alin","Romy","Ionut","Edi"};
@@ -406,9 +421,12 @@ public class BillingsPopupController implements Initializable{
     	issuerNameCmbBox.getItems().addAll(issuerNameOptions);
         paymentCurrencyCmbBox.getItems().addAll(currencyOptions);
         paymentStatusCmbBox.getItems().addAll(statusOptions);
+        serviceCurrencyCmbBox.getItems().addAll(currencyOptions);
+
+
 
     	try {
-    		serviceContentPane = new GridPane();
+            serviceContentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
 			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
 			root.getStylesheets().add(contentCSS);
@@ -419,9 +437,9 @@ public class BillingsPopupController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+
     	try {
-    		discountContentPane = new GridPane();
+            discountContentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
 			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
 			root.getStylesheets().add(contentCSS);
@@ -432,9 +450,9 @@ public class BillingsPopupController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+
     	try {
-    		taxContentPane = new GridPane();
+            taxContentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
 			String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
 			root.getStylesheets().add(contentCSS);
@@ -446,7 +464,94 @@ public class BillingsPopupController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-    
+
+    public void initializeData(String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
+            , String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
+            , String serviceCurrency
+            , ObservableList<BillingService> services
+            , ObservableList<BillingDiscount> discounts
+            , ObservableList<BillingTax> taxes
+            , String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
+            , String calculationSubtotal, String calculationTax, String calculationTotal) throws IOException {
+        issuerNameCmbBox.setValue(issuerName);
+        issuerCUITextField.setText(issuerCUI);
+        issuerRegisterNumberField.setText(issuerTradeRegisterNumber);
+        issuerEUIDField.setText(issuerEUID);
+        issuerCountryField.setText(issuerCountry);
+        issuerCityField.setText(issuerCity);
+        issuerCountyField.setText(issuerCounty);
+        issuerStreetField.setText(issuerStreet);
+        issuerNumberField.setText(issuerNumber);
+        issuerZipCodeField.setText(issuerZipCode);
+        issuerEmailField.setText(issuerEmail);
+        issuerPhoneNumberField.setText(issuerPhoneNumber);
+        clientNameCmbBox.setValue(clientName);
+        clientCUITextField.setText(clientCUI);
+        clientRegisterNumberField.setText(clientTradeRegisterNumber);
+        clientEUIDField.setText(clientEUID);
+        clientCountryField.setText(clientCountry);
+        clientCityField.setText(clientCity);
+        clientCountyField.setText(clientCounty);
+        clientStreetField.setText(clientStreet);
+        clientNumberField.setText(clientNumber);
+        clientZipCodeField.setText(clientZipCode);
+        clientEmailField.setText(clientEmail);
+        clientPhoneNumberField.setText(clientPhoneNumber);
+        serviceCurrencyCmbBox.setValue(serviceCurrency);
+        serviceContentPane.getChildren().clear();
+        for (int i = 0 ; i < services.size() ; i++) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
+            Parent root = loader.load();
+            String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
+            root.getStylesheets().add(contentCSS);
+            billingServiceNameField = (TextField) root.lookup("#billingServiceNameField");
+            billingServiceAmountField = (TextField) root.lookup("#billingServiceAmountField");
+            billingPriceField = (TextField) root.lookup("#billingPriceField");
+            billingDescriptionField = (TextField) root.lookup("#billingDescriptionField");
+            billingServiceNameField.setText(services.get(i).getBillingServiceName());
+            billingServiceAmountField.setText(String.valueOf(services.get(i).getBillingServiceAmount()));
+            billingPriceField.setText(String.valueOf(services.get(i).getBillingServicePrice()));
+            billingDescriptionField.setText(services.get(i).getBillingServiceDescription());
+            serviceContentPane.addRow(i,root);
+        }
+        discountContentPane.getChildren().clear();
+        for(int i = 0; i < discounts.size() ; i++){
+            Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
+            String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
+            root.getStylesheets().add(contentCSS);
+            billingDiscountNameField = (TextField) root.lookup("#billingDiscountNameField");
+            billingDiscountPercentageField = (TextField) root.lookup("#billingDiscountPercentageField");
+            billingDiscountNameField.setText(discounts.get(i).getBillingDiscountName());
+            billingDiscountPercentageField.setText(String.valueOf(discounts.get(i).getBillingDiscountPercentage()));
+            discountContentPane.addRow(i, root);
+        }
+        taxContentPane.getChildren().clear();
+        for(int i = 0 ; i < taxes.size() ; i++){
+            Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
+            String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
+            root.getStylesheets().add(contentCSS);
+            billingTaxNameField = (TextField) root.lookup("#billingTaxNameField");
+            billingTaxValueField = (TextField) root.lookup("#billingTaxValueField");
+            billingTaxNameField.setText(taxes.get(i).getBillingTaxName());
+            billingTaxValueField.setText(String.valueOf(taxes.get(i).getBillingTaxValue()));
+            taxContentPane.addRow(i, root);
+
+        }
+        paymentBankField.setText(paymentBank);
+        paymentBeneficiaryField.setText(paymentBeneficiary);
+        paymentIBANField.setText(paymentIBAN);
+        paymentSwiftField.setText(paymentSwift);
+        paymentReferenceField.setText(paymentReference);
+        paymentExchangeField.setText(String.valueOf(paymentExchange));
+        paymentIssueDateField.setText(paymentIssueDate);
+        paymentDueDateField.setText(paymentDueDate);
+        paymentCurrencyCmbBox.setValue(paymentCurrency);
+        paymentStatusCmbBox.setValue(paymentStatus);
+        calculationSubtotalField.setText(calculationSubtotal);
+        calculationTaxField.setText(calculationTax);
+        calculationTotalField.setText(calculationTotal);
+    }
+
     @FXML
     void addDiscountButtonClicked(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));

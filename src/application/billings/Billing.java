@@ -230,7 +230,11 @@ public class Billing {
 					Parent root = loader.load();
 					BillingsPopupController billingsPopupController = loader.getController();
 					billingsPopupController.setEditable(true);
-
+					billingsPopupController.initializeData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+					,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
+					,serviceCurrency,services,discounts,taxes
+					,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
+					,calculationSubtotal,calculationTax,calculationTotal);
 					Stage childStage = new Stage();
 					String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
