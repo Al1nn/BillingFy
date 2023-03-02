@@ -254,8 +254,7 @@ public class BillingsController implements Initializable {
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
 		final ObservableList<Billing> billingsData = FXCollections.observableArrayList(
-				new Billing("1", "SC COMPANY NAME", "12.12.2O22", "12.12.2022", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Neplatit"),
-				new Billing("1", "SC CACA S.R.L", "12.11.2020", "12.12.2020", "100.000.000 $", "100.000.000 $", "100.000.000 $", "Platit")
+				new Billing("1","SC COMPANY NAME","12.12.2020","01.01.2021","100 000 000 $","1000 $","100 001 000 $","Platit")
 		);
 
 		billingTable.setItems(billingsData);

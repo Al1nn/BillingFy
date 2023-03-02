@@ -302,6 +302,12 @@ public class BillingsPopupController implements Initializable{
     private ComboBox<String> paymentCurrencyCmbBox;
 
     @FXML
+    private Text paymentStatus;
+
+    @FXML
+    private ComboBox<String> paymentStatusCmbBox;
+
+    @FXML
     private Button paymentDueDateButton;
 
     @FXML
@@ -382,15 +388,25 @@ public class BillingsPopupController implements Initializable{
     
     @FXML
     private GridPane taxContentPane;
-    
+
+    @FXML
+    private Text billingPopupTitle;
+
     private int taxButtonPressed = 1;
-    
+
+    private boolean isEditable;
+
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] clientNameOptions = {"Alin","Romy","Ionut","Edi"};
-		String[] issuerNameOptions = {"Endava","IBM","ALL TECHNOLOGIES"};	
+		String[] issuerNameOptions = {"Endava","IBM","ALL TECHNOLOGIES"};
+        String[] currencyOptions = {"RON","EUR"};
+        String[] statusOptions = {"Neplatit","Platit"};
     	clientNameCmbBox.getItems().addAll(clientNameOptions);
     	issuerNameCmbBox.getItems().addAll(issuerNameOptions);
+        paymentCurrencyCmbBox.getItems().addAll(currencyOptions);
+        paymentStatusCmbBox.getItems().addAll(statusOptions);
+
     	try {
     		serviceContentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
@@ -638,4 +654,15 @@ public class BillingsPopupController implements Initializable{
     	
     }
 
+    public boolean isEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(boolean editable) {
+        billingPopupTitle.setText("Editare Factura");
+        addServiceButton.setVisible(false);
+        addDiscountButton.setVisible(false);
+        addTaxesButton.setVisible(false);
+        isEditable = editable;
+    }
 }
