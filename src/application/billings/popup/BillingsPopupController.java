@@ -424,9 +424,6 @@ public class BillingsPopupController implements Initializable{
         paymentCurrencyCmbBox.getItems().addAll(currencyOptions);
         paymentStatusCmbBox.getItems().addAll(statusOptions);
         serviceCurrencyCmbBox.getItems().addAll(currencyOptions);
-
-
-
     	try {
             serviceContentPane = new GridPane();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
@@ -501,7 +498,7 @@ public class BillingsPopupController implements Initializable{
         clientPhoneNumberField.setText(clientPhoneNumber);
         serviceCurrencyCmbBox.setValue(serviceCurrency);
         serviceContentPane.getChildren().clear();
-        for (int i = 0 ; i < services.size() ; i++) {
+        for (int i = 0 * serviceButtonPressed; i < services.size(); i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
             Parent root = loader.load();
             String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
@@ -516,8 +513,9 @@ public class BillingsPopupController implements Initializable{
             billingDescriptionField.setText(services.get(i).getBillingServiceDescription());
             serviceContentPane.addRow(i,root);
         }
+
         discountContentPane.getChildren().clear();
-        for(int i = 0; i < discounts.size() ; i++){
+        for(int i = 0 ; i < discounts.size(); i++){
             Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
             String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
             root.getStylesheets().add(contentCSS);
@@ -528,7 +526,8 @@ public class BillingsPopupController implements Initializable{
             discountContentPane.addRow(i, root);
         }
         taxContentPane.getChildren().clear();
-        for(int i = 0 ; i < taxes.size() ; i++){
+
+        for(int i = 0 ; i < taxes.size(); i++){
             Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
             String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
             root.getStylesheets().add(contentCSS);
@@ -537,7 +536,6 @@ public class BillingsPopupController implements Initializable{
             billingTaxNameField.setText(taxes.get(i).getBillingTaxName());
             billingTaxValueField.setText(String.valueOf(taxes.get(i).getBillingTaxValue()));
             taxContentPane.addRow(i, root);
-
         }
         paymentBankField.setText(paymentBank);
         paymentBeneficiaryField.setText(paymentBeneficiary);
@@ -559,8 +557,9 @@ public class BillingsPopupController implements Initializable{
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
     	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
     	root.getStylesheets().add(contentCSS);
+        discountButtonPressed++;
     	discountContentPane.addRow(discountButtonPressed, root);
-    	discountButtonPressed++;
+        System.out.println("Discount Button Pressed : " + discountButtonPressed);
     }
 
     @FXML
@@ -568,8 +567,9 @@ public class BillingsPopupController implements Initializable{
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
     	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsServiceContentStyle.css").toExternalForm();
     	root.getStylesheets().add(contentCSS);
+        serviceButtonPressed++;
     	serviceContentPane.addRow(serviceButtonPressed, root);
-    	serviceButtonPressed++;
+        System.out.println("Service Button Pressed : "+serviceButtonPressed);
     }
 
     @FXML
@@ -577,8 +577,9 @@ public class BillingsPopupController implements Initializable{
     	Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
     	String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();
     	root.getStylesheets().add(contentCSS);
+        taxButtonPressed++;
     	taxContentPane.addRow(taxButtonPressed, root);
-    	taxButtonPressed++;
+        System.out.println("Tax button pressed : " + taxButtonPressed);
     }
 
     @FXML

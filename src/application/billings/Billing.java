@@ -130,7 +130,7 @@ public class Billing {
 		this.calculationSubtotal = calculationSubtotal;
 		this.calculationTax = calculationTax;
 		this.calculationTotal = calculationTotal;
-		updateStatusPane(this.paymentStatus);
+		updateStatusPane();
 
 		//Edit button
 		Button editButton = new Button();
@@ -148,15 +148,15 @@ public class Billing {
 
 		this.pane = new HBox(editButton,deleteButton,downloadButton);
 	}
-	private void updateStatusPane(String billingStatus){
+	private void updateStatusPane(){
 		Circle circle = new Circle();
 		Text text = new Text();
-		text.setText(billingStatus);
+		text.setText(paymentStatus);
 		circle.setRadius(10);
-		if (billingStatus == "Neplatit") {
+		if (paymentStatus.equals("Neplatit")) {
 			circle.setFill(Color.web("#E25F5F"));
 			text.setFill(Color.web("#E25F5F"));
-		}else if(billingStatus == "Platit") {
+		}else if(paymentStatus.equals("Platit")) {
 			circle.setFill(Color.web("#41A33F"));
 			text.setFill(Color.web("#41A33F"));
 		}
@@ -232,7 +232,10 @@ public class Billing {
 					billingsPopupController.setEditable(true);
 					billingsPopupController.initializeData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
 					,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
-					,serviceCurrency,services,discounts,taxes
+					,serviceCurrency
+							,services
+							,discounts
+							,taxes
 					,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
 					,calculationSubtotal,calculationTax,calculationTotal);
 					Stage childStage = new Stage();

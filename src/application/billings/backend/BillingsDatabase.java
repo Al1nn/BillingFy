@@ -1,14 +1,13 @@
 package application.billings.backend;
 
+import application.billings.Billing;
 import application.billings.BillingDiscount;
 import application.billings.BillingService;
 import application.billings.BillingTax;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class BillingsDatabase {
     public Connection databaseLink;
@@ -171,4 +170,120 @@ public class BillingsDatabase {
 
         }
     }
+
+    public ObservableList<Billing> retrieveData() throws ClassNotFoundException{
+        ObservableList<Billing> billings = FXCollections.observableArrayList();
+        ObservableList<BillingService> billingServices = FXCollections.observableArrayList();
+        ObservableList<BillingDiscount> billingDiscounts = FXCollections.observableArrayList() ;
+        ObservableList<BillingTax> billingTaxes = FXCollections.observableArrayList();
+
+        String retrieveBilling = "SELECT * FROM Billings";
+        String retrieveService = "SELECT * FROM BillingsService";
+        String retrieveDiscount = "SELECT * FROM BillingsDiscount";
+        String retrieveTax = "SELECT * FROM BillingsTax";
+
+        try(Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet servicesSet = statement.executeQuery(retrieveService);
+        ){
+            while (servicesSet.next()){
+                String serviceName = servicesSet.getString("Service_Name");
+                int serviceAmount = servicesSet.getInt("Service_Amount");
+                double servicePrice = servicesSet.getDouble("Service_Price");
+                String serviceDescription = servicesSet.getString("Service_Description");
+                BillingService billingService = new BillingService(serviceName,serviceAmount,servicePrice,serviceDescription);
+                billingServices.add(billingService);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        try (Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+             ResultSet discountsSet = statement.executeQuery(retrieveDiscount);
+            ){
+            while (discountsSet.next()){
+                String discountName = discountsSet.getString("Discount_Name");
+                int discountPercentage = discountsSet.getInt("Discount_Percentage");
+                BillingDiscount billingDiscount = new BillingDiscount(discountName,discountPercentage);
+                billingDiscounts.add(billingDiscount);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        try (Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+             ResultSet taxesSet = statement.executeQuery(retrieveTax)
+        ){
+            while (taxesSet.next()){
+                String taxName = taxesSet.getString("Tax_Name");
+                double taxValue = taxesSet.getDouble("Tax_Value");
+                BillingTax billingTax = new BillingTax(taxName,taxValue);
+                billingTaxes.add(billingTax);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet billingsSet = statement.executeQuery(retrieveBilling);
+             ){
+            while (billingsSet.next()){
+                String issuerName = billingsSet.getString("Issuer_Name");
+                String issuerCUI = billingsSet.getString("Issuer_CUI");
+                String issuerTradeRegisterNumber = billingsSet.getString("Issuer_Trade_Register_Number");
+                String issuerEUID = billingsSet.getString("Issuer_EUID");
+                String issuerCountry = billingsSet.getString("Issuer_Country");
+                String issuerCity = billingsSet.getString("Issuer_City");
+                String issuerCounty = billingsSet.getString("Issuer_County");
+                String issuerStreet = billingsSet.getString("Issuer_Street");
+                String issuerNumber = billingsSet.getString("Issuer_Number");
+                String issuerZipCode = billingsSet.getString("Issuer_Zipcode");
+                String issuerEmail = billingsSet.getString("Issuer_Email");
+                String issuerPhoneNumber = billingsSet.getString("Issuer_Phone_Number");
+                String clientName = billingsSet.getString("Client_Name");
+                String clientCUI = billingsSet.getString("Client_CUI");
+                String clientTradeRegisterNumber = billingsSet.getString("Client_Trade_Register_Number");
+                String clientEUID = billingsSet.getString("Client_EUID");
+                String clientCountry = billingsSet.getString("Client_Country");
+                String clientCity = billingsSet.getString("Client_City");
+                String clientCounty = billingsSet.getString("Client_County");
+                String clientStreet = billingsSet.getString("Client_Street");
+                String clientNumber = billingsSet.getString("Client_Number");
+                String clientZipCode = billingsSet.getString("Client_Zipcode");
+                String clientEmail = billingsSet.getString("Client_Email");
+                String clientPhoneNumber = billingsSet.getString("Client_Phone_Number");
+                String serviceCurrency = billingsSet.getString("Service_Currency");
+                String paymentBank = billingsSet.getString("Payment_Bank");
+                String paymentBeneficiary = billingsSet.getString("Payment_Beneficiary");
+                String paymentIBAN = billingsSet.getString("Payment_IBAN");
+                String paymentSwift = billingsSet.getString("Payment_Swift");
+                String paymentReference = billingsSet.getString("Payment_Reference");
+                double paymentExchange = billingsSet.getDouble("Payment_Exchange");
+                String paymentIssueDate = billingsSet.getString("Payment_Issue_Date");
+                String paymentDueDate = billingsSet.getString("Payment_Due_Date");
+                String paymentCurrency = billingsSet.getString("Payment_Currency");
+                String paymentStatus = billingsSet.getString("Payment_Status");
+                String calculationSubtotal = billingsSet.getString("Calculation_Subtotal");
+                String calculationTax = billingsSet.getString("Calculation_Tax");
+                String calculationTotal = billingsSet.getString("Calculation_Total");
+                Billing billing = new Billing(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+                                            ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
+                                            ,serviceCurrency
+                                            ,billingServices
+                                            ,billingDiscounts
+                                            ,billingTaxes
+                                            ,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,Double.valueOf(paymentExchange),paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
+                                            ,calculationSubtotal,calculationTax,calculationTotal);
+                billings.add(billing);
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return billings;
+    }
+
 }
