@@ -7,12 +7,14 @@ import java.util.ResourceBundle;
 import application.billings.BillingDiscount;
 import application.billings.BillingService;
 import application.billings.BillingTax;
+import application.billings.backend.BillingsDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -755,8 +757,79 @@ public class BillingsPopupController implements Initializable{
     }
 
     @FXML
-    void saveDataClicked(ActionEvent event) {
-    	
+    void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
+        BillingsDatabase connection = new BillingsDatabase();
+    	if(!isEditable){
+            String issuerName = issuerNameCmbBox.getValue();
+            String issuerCUI = issuerCUITextField.getText();
+            String issuerTradeRegisterNumber = issuerRegisterNumberField.getText();
+            String issuerEUID = issuerEUIDField.getText();
+            String issuerCountry = issuerCountryField.getText();
+            String issuerCity = issuerCityField.getText();
+            String issuerCounty = issuerCountyField.getText();
+            String issuerStreet = issuerStreetField.getText();
+            String issuerNumber = issuerNumberField.getText();
+            String issuerZipCode = issuerZipCodeField.getText();
+            String issuerEmail = issuerEmailField.getText();
+            String issuerPhoneNumber = issuerPhoneNumberField.getText();
+            String clientName = clientNameCmbBox.getValue();
+            String clientCUI = clientCUITextField.getText();
+            String clientTradeRegisterNumber = clientRegisterNumberField.getText();
+            String clientEUID = clientEUIDField.getText();
+            String clientCountry = clientCountryField.getText();
+            String clientCity = clientCityField.getText();
+            String clientCounty = clientCountyField.getText();
+            String clientStreet = clientStreetField.getText();
+            String clientNumber = clientNumberField.getText();
+            String clientZipCode = clientZipCodeField.getText();
+            String clientEmail = clientEmailField.getText();
+            String clientPhoneNumber = clientPhoneNumberField.getText();
+            String serviceCurrency = serviceCurrencyCmbBox.getValue();
+            for (Node node : serviceContentPane.getChildren()) {
+                billingServiceNameField = (TextField) node.lookup("#billingServiceNameField");
+                billingServiceAmountField = (TextField) node.lookup("#billingServiceAmountField");
+                billingPriceField = (TextField) node.lookup("#billingPriceField");
+                billingDescriptionField = (TextField) node.lookup("#billingDescriptionField");
+                String billingServiceName = billingServiceNameField.getText();
+                String billingServiceAmount = billingServiceAmountField.getText();
+                String billingServicePrice = billingPriceField.getText();
+                String billingServiceDescription = billingDescriptionField.getText();
+                connection.insertServiceData(billingServiceName,Integer.valueOf(billingServiceAmount),Double.valueOf(billingServicePrice),billingServiceDescription);
+            }
+            for (Node node: discountContentPane.getChildren()) {
+                billingDiscountNameField = (TextField) node.lookup("#billingDiscountNameField");
+                billingDiscountPercentageField = (TextField) node.lookup("#billingDiscountPercentageField");
+                String billingDiscountName = billingDiscountNameField.getText();
+                String billingDiscountPercentage = billingDiscountPercentageField.getText();
+                connection.insertDiscountData(billingDiscountName,Integer.valueOf(billingDiscountPercentage));
+            }
+            for (Node node : taxContentPane.getChildren()) {
+                billingTaxNameField = (TextField) node.lookup("#billingTaxNameField");
+                billingTaxValueField = (TextField) node.lookup("#billingTaxValueField");
+                String billingTaxName = billingTaxNameField.getText();
+                String billingTaxValue = billingTaxValueField.getText();
+                connection.insertTaxData(billingTaxName,Double.valueOf(billingTaxValue));
+            }
+            String paymentBank = paymentBankField.getText();
+            String paymentBeneficiary = paymentBeneficiaryField.getText();
+            String paymentIBAN = paymentIBANField.getText();
+            String paymentSwift = paymentSwiftField.getText();
+            String paymentReference = paymentReferenceField.getText();
+            String paymentExchange = paymentExchangeField.getText();
+            String paymentIssueDate = paymentIssueDateField.getText();
+            String paymentDueDate = paymentDueDateField.getText();
+            String paymentCurrency = paymentCurrencyCmbBox.getValue();
+            String paymentStatus = paymentStatusCmbBox.getValue();
+            String calculationSubtotal = calculationSubtotalField.getText();
+            String calculationTax = calculationTaxField.getText();
+            String calculationTotal = calculationTotalField.getText();
+            connection.insertBillingData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+            ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
+                    , serviceCurrency
+            ,paymentBank, paymentBeneficiary, paymentIBAN, paymentSwift, paymentReference, Double.valueOf(paymentExchange), paymentIssueDate, paymentDueDate, paymentCurrency, paymentStatus
+            , calculationSubtotal, calculationTax, calculationTotal);
+            saveData.getScene().getWindow().hide();
+        }
     }
 
     public boolean isEditable() {
