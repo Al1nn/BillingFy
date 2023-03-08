@@ -2,12 +2,14 @@ package application.billings;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.StandardOpenOption;
 
 import application.billings.popup.BillingsPopupController;
 import application.clients.Client;
 import application.resources.DeletePopupController;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
@@ -381,7 +383,8 @@ public class Billing {
 		jo.put("calculationTotal",calculationTotal);
 
 		FileWriter file = new FileWriter("../Billings.json");
-		file.write(jo.toString());
+		String jsonText = Jsoner.serialize(jo);
+		file.write(jsonText);
 
 		file.close();
 		return jo;
