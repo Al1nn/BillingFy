@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import application.billings.BillingDiscount;
 import application.billings.BillingService;
 import application.billings.BillingTax;
-import application.billings.backend.BillingsDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -759,7 +758,7 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
-        BillingsDatabase connection = new BillingsDatabase();
+
     	if(!isEditable){
             String issuerName = issuerNameCmbBox.getValue();
             String issuerCUI = issuerCUITextField.getText();
@@ -795,21 +794,21 @@ public class BillingsPopupController implements Initializable{
                 String billingServiceAmount = billingServiceAmountField.getText();
                 String billingServicePrice = billingPriceField.getText();
                 String billingServiceDescription = billingDescriptionField.getText();
-                connection.insertServiceData(billingServiceName,Integer.valueOf(billingServiceAmount),Double.valueOf(billingServicePrice),billingServiceDescription);
+
             }
             for (Node node: discountContentPane.getChildren()) {
                 billingDiscountNameField = (TextField) node.lookup("#billingDiscountNameField");
                 billingDiscountPercentageField = (TextField) node.lookup("#billingDiscountPercentageField");
                 String billingDiscountName = billingDiscountNameField.getText();
                 String billingDiscountPercentage = billingDiscountPercentageField.getText();
-                connection.insertDiscountData(billingDiscountName,Integer.valueOf(billingDiscountPercentage));
+
             }
             for (Node node : taxContentPane.getChildren()) {
                 billingTaxNameField = (TextField) node.lookup("#billingTaxNameField");
                 billingTaxValueField = (TextField) node.lookup("#billingTaxValueField");
                 String billingTaxName = billingTaxNameField.getText();
                 String billingTaxValue = billingTaxValueField.getText();
-                connection.insertTaxData(billingTaxName,Double.valueOf(billingTaxValue));
+
             }
             String paymentBank = paymentBankField.getText();
             String paymentBeneficiary = paymentBeneficiaryField.getText();
@@ -824,11 +823,7 @@ public class BillingsPopupController implements Initializable{
             String calculationSubtotal = calculationSubtotalField.getText();
             String calculationTax = calculationTaxField.getText();
             String calculationTotal = calculationTotalField.getText();
-            connection.insertBillingData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
-            ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
-                    , serviceCurrency
-            ,paymentBank, paymentBeneficiary, paymentIBAN, paymentSwift, paymentReference, Double.valueOf(paymentExchange), paymentIssueDate, paymentDueDate, paymentCurrency, paymentStatus
-            , calculationSubtotal, calculationTax, calculationTotal);
+
             saveData.getScene().getWindow().hide();
         }
     }
