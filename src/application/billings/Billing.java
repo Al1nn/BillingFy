@@ -1,10 +1,13 @@
 package application.billings;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 import application.billings.popup.BillingsPopupController;
 import application.clients.Client;
 import application.resources.DeletePopupController;
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
@@ -22,12 +25,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Billing {
+	private String billingID;
 	private String issuerName;
 	private String issuerCUI;
 	private String issuerTradeRegisterNumber;
@@ -80,7 +85,7 @@ public class Billing {
 	private HBox pane;
 	private HBox statusPane;
 	
-	public Billing(String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
+	public Billing(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
 				, String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
 				, String serviceCurrency
 				, ObservableList<BillingService> services
@@ -89,6 +94,7 @@ public class Billing {
 				, String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
 				, String calculationSubtotal, String calculationTax, String calculationTotal
 	) {
+		this.billingID = billingID;
 		this.issuerName = issuerName;
 		this.issuerCUI = issuerCUI;
 		this.issuerTradeRegisterNumber = issuerTradeRegisterNumber;
@@ -306,7 +312,80 @@ public class Billing {
 			System.out.println("Script Python on download");
 		});
 	}
+	public JsonObject toJsonObject() throws IOException {
+		JsonObject jo = new JsonObject();
+		jo.put("billingID",billingID);
+		jo.put("issuerName",issuerName);
+		jo.put("issuerCUI",issuerCUI);
+		jo.put("issuerTradeRegisterNumber",issuerTradeRegisterNumber);
+		jo.put("issuerEUID",issuerEUID);
+		jo.put("issuerCountry",issuerCountry);
+		jo.put("issuerCity",issuerCity);
+		jo.put("issuerCounty",issuerCounty);
+		jo.put("issuerStreet",issuerStreet);
+		jo.put("issuerNumber",issuerNumber);
+		jo.put("issuerZipCode",issuerZipCode);
+		jo.put("issuerEmail",issuerEmail);
+		jo.put("issuerPhoneNumber",issuerPhoneNumber);
+		jo.put("clientName",clientName);
+		jo.put("clientCUI",clientCUI);
+		jo.put("clientTradeRegisterNumber",clientTradeRegisterNumber);
+		jo.put("clientEUID",clientEUID);
+		jo.put("clientCountry",clientCountry);
+		jo.put("clientCity",clientCity);
+		jo.put("clientCounty",clientCounty);
+		jo.put("clientStreet",clientStreet);
+		jo.put("clientNumber",clientNumber);
+		jo.put("clientZipCode",clientZipCode);
+		jo.put("clientEmail",clientEmail);
+		jo.put("clientPhoneNumber",clientPhoneNumber);
+		jo.put("serviceCurrency",serviceCurrency);
+		JsonArray serviceJsonArray = new JsonArray();
+		for (BillingService service : services){
+			JsonObject serviceJsonObject = new JsonObject();
+			serviceJsonObject.put("serviceName",service.getBillingServiceName());
+			serviceJsonObject.put("serviceAmount",service.getBillingServiceAmount());
+			serviceJsonObject.put("servicePrice",service.getBillingServicePrice());
+			serviceJsonObject.put("serviceDescription",service.getBillingServiceDescription());
+			serviceJsonArray.add(serviceJsonObject);
+		}
+		jo.put("services",serviceJsonArray);
+		JsonArray discountJsonArray = new JsonArray();
+		for (BillingDiscount discount : discounts){
+			JsonObject discountJsonObject = new JsonObject();
+			discountJsonObject.put("discountName",discount.getBillingDiscountName());
+			discountJsonObject.put("discountPercentage",discount.getBillingDiscountPercentage());
+			discountJsonArray.add(discountJsonObject);
+		}
+		jo.put("discounts",discountJsonArray);
+		JsonArray taxesJsonArray = new JsonArray();
+		for (BillingTax tax : taxes){
+			JsonObject taxJsonObject = new JsonObject();
+			taxJsonObject.put("taxName",tax.getBillingTaxName());
+			taxJsonObject.put("taxValue",tax.getBillingTaxValue());
+			taxesJsonArray.add(taxJsonObject);
+		}
+		jo.put("taxes",taxesJsonArray);
+		jo.put("paymentBank",paymentBank);
+		jo.put("paymentBeneficiary",paymentBeneficiary);
+		jo.put("paymentIBAN",paymentIBAN);
+		jo.put("paymentSwift",paymentSwift);
+		jo.put("paymentReference",paymentReference);
+		jo.put("paymentExchange",paymentExchange);
+		jo.put("paymentIssueDate",paymentIssueDate);
+		jo.put("paymentDueDate",paymentDueDate);
+		jo.put("paymentCurrency",paymentCurrency);
+		jo.put("paymentStatus",paymentStatus);
+		jo.put("calculationSubtotal",calculationSubtotal);
+		jo.put("calculationTax",calculationTax);
+		jo.put("calculationTotal",calculationTotal);
 
+		FileWriter file = new FileWriter("../Billings.json");
+		file.write(jo.toString());
+
+		file.close();
+		return jo;
+	}
 	public HBox getPane() {
 		return pane;
 	}
@@ -324,17 +403,30 @@ public class Billing {
 	}
 
 
+	public String getBillingID() {
+		return billingID;
+	}
+
+
+	public void setBillingID(String billingID) {
+		this.billingID = billingID;
+	}
+
+
 	public String getIssuerName() {
 		return issuerName;
 	}
+
 
 	public void setIssuerName(String issuerName) {
 		this.issuerName = issuerName;
 	}
 
+
 	public String getIssuerCUI() {
 		return issuerCUI;
 	}
+
 
 	public void setIssuerCUI(String issuerCUI) {
 		this.issuerCUI = issuerCUI;
@@ -651,4 +743,6 @@ public class Billing {
 	public void setCalculationTotal(String calculationTotal) {
 		this.calculationTotal = calculationTotal;
 	}
+
+
 }

@@ -3,9 +3,12 @@ package application.billings;
 
 import java.io.IOException;
 import java.net.URL;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.print.attribute.standard.PrinterMakeAndModel;
+
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -257,8 +260,9 @@ public class BillingsController implements Initializable {
 		centerStatusColumn(billingStatus);
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
-		 billingsData = FXCollections.observableArrayList(
-				 new Billing("SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
+
+		billingsData = FXCollections.observableArrayList(
+				 new Billing("242sf","SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
 						 ,"SC MGE Soft","4525626","J4/1243/2022","ROONRC.J4/1243/2022","Romania","Pitesti","Arges","Petros","1","152626","mge@gmail.com","0745262626"
 						 ,"RON",FXCollections.observableArrayList(new BillingService("SC MGE Soft",5,1200.25,"Servicii conform contracts")
 						 ,new BillingService("SC MGE Soft",1,2000.50,"Servicii conform contracts 2"))
@@ -269,6 +273,14 @@ public class BillingsController implements Initializable {
 						 ,"Raiffeisen","SC MGE Soft","IBAN","Swift","Reference",2450.50, "12.12.2020","01.01.2021","EUR","Neplatit"
 						 ,"100 000 000 $","1000 $","100 001 000 $")
 		 );
+		for (Billing billing : billingsData){
+			try {
+				billing.toJsonObject();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
 
 		billingTable.setItems(billingsData);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
