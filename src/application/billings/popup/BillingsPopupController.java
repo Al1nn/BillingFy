@@ -760,6 +760,7 @@ public class BillingsPopupController implements Initializable{
     void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
 
     	if(!isEditable){
+
             String issuerName = issuerNameCmbBox.getValue();
             String issuerCUI = issuerCUITextField.getText();
             String issuerTradeRegisterNumber = issuerRegisterNumberField.getText();
