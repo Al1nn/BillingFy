@@ -9,6 +9,7 @@ import java.io.IOException;
 import application.billings.popup.BillingsPopupController;
 import application.clients.Client;
 import application.resources.DeletePopupController;
+import javafx.collections.FXCollections;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,6 +37,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Billing {
+	private String billingID;
 	private String issuerName;
 	private String issuerCUI;
 	private String issuerTradeRegisterNumber;
@@ -63,13 +65,6 @@ public class Billing {
 	private String clientPhoneNumber;
 
 	private String serviceCurrency;
-
-	private ObservableList<BillingService> services;
-
-	private ObservableList<BillingDiscount> discounts;
-
-	private ObservableList<BillingTax> taxes;
-
 	private String paymentBank;
 	private String paymentBeneficiary;
 	private String paymentIBAN;
@@ -88,16 +83,13 @@ public class Billing {
 	private HBox pane;
 	private HBox statusPane;
 	
-	public Billing(String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
+	public Billing(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
 				, String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
 				, String serviceCurrency
-				, ObservableList<BillingService> services
-				, ObservableList<BillingDiscount> discounts
-				, ObservableList<BillingTax> taxes
 				, String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
 				, String calculationSubtotal, String calculationTax, String calculationTotal
 	) {
-
+		this.billingID = billingID;
 		this.issuerName = issuerName;
 		this.issuerCUI = issuerCUI;
 		this.issuerTradeRegisterNumber = issuerTradeRegisterNumber;
@@ -123,9 +115,6 @@ public class Billing {
 		this.clientEmail = clientEmail;
 		this.clientPhoneNumber = clientPhoneNumber;
 		this.serviceCurrency = serviceCurrency;
-		this.services = services;
-		this.discounts = discounts;
-		this.taxes = taxes;
 		this.paymentBank = paymentBank;
 		this.paymentBeneficiary = paymentBeneficiary;
 		this.paymentIBAN = paymentIBAN;
@@ -239,12 +228,12 @@ public class Billing {
 					Parent root = loader.load();
 					BillingsPopupController billingsPopupController = loader.getController();
 					billingsPopupController.setEditable(true);
-					billingsPopupController.initializeData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+					billingsPopupController.initializeData(billingID,issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
 					,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
 					,serviceCurrency
-							,services
-							,discounts
-							,taxes
+							, FXCollections.observableArrayList()
+							,FXCollections.observableArrayList()
+							,FXCollections.observableArrayList()
 					,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
 					,calculationSubtotal,calculationTax,calculationTotal);
 					Stage childStage = new Stage();
@@ -286,7 +275,7 @@ public class Billing {
 				DeletePopupController deletePopupController = loader.getController();
 				deletePopupController.getDeletePopupTitle().setText("Stergere Factura");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
-
+				//Implement elements from parent stage
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -342,35 +331,6 @@ public class Billing {
 		jo.put("clientEmail",clientEmail);
 		jo.put("clientPhoneNumber",clientPhoneNumber);
 		jo.put("serviceCurrency",serviceCurrency);
-		JSONArray serviceJsonArray = new JSONArray();
-		for (BillingService service : services){
-			JSONObject serviceJsonObject = new JSONObject();
-			serviceJsonObject.put("serviceID",service.getServiceID());
-			serviceJsonObject.put("serviceName",service.getBillingServiceName());
-			serviceJsonObject.put("serviceAmount",service.getBillingServiceAmount());
-			serviceJsonObject.put("servicePrice",service.getBillingServicePrice());
-			serviceJsonObject.put("serviceDescription",service.getBillingServiceDescription());
-			serviceJsonArray.add(serviceJsonObject);
-		}
-		jo.put("services",serviceJsonArray);
-		JSONArray discountJsonArray = new JSONArray();
-		for (BillingDiscount discount : discounts){
-			JSONObject discountJsonObject = new JSONObject();
-			discountJsonObject.put("discountID",discount.getDiscountID());
-			discountJsonObject.put("discountName",discount.getBillingDiscountName());
-			discountJsonObject.put("discountPercentage",discount.getBillingDiscountPercentage());
-			discountJsonArray.add(discountJsonObject);
-		}
-		jo.put("discounts",discountJsonArray);
-		JSONArray taxesJsonArray = new JSONArray();
-		for (BillingTax tax : taxes){
-			JSONObject taxJsonObject = new JSONObject();
-			taxJsonObject.put("taxID",tax.getTaxID());
-			taxJsonObject.put("taxName",tax.getBillingTaxName());
-			taxJsonObject.put("taxValue",tax.getBillingTaxValue());
-			taxesJsonArray.add(taxJsonObject);
-		}
-		jo.put("taxes",taxesJsonArray);
 		jo.put("paymentBank",paymentBank);
 		jo.put("paymentBeneficiary",paymentBeneficiary);
 		jo.put("paymentIBAN",paymentIBAN);
@@ -384,7 +344,6 @@ public class Billing {
 		jo.put("calculationSubtotal",calculationSubtotal);
 		jo.put("calculationTax",calculationTax);
 		jo.put("calculationTotal",calculationTotal);
-
 		FileWriter file = new FileWriter("../Billings.json");
 
 		file.write(jo.toJSONString());
@@ -418,35 +377,6 @@ public class Billing {
 		 this.clientEmail = (String) jo.get("clientEmail");
 		 this.clientPhoneNumber = (String) jo.get("clientPhoneNumber");
 		 this.serviceCurrency = (String) jo.get("serviceCurrency");
-		 JSONArray servicesArray = (JSONArray) jo.get("services");
-		 for (int i = 0; i < servicesArray.size() ; i++){
-			 JSONObject serviceObject = (JSONObject) servicesArray.get(i);
-			 String serviceID = (String) serviceObject.get("serviceID");
-			 String serviceName = (String) serviceObject.get("serviceName");
-			 int serviceAmount = (int) serviceObject.get("serviceAmount");
-			 double servicePrice = (double) serviceObject.get("servicePrice");
-			 String serviceDescription = (String) serviceObject.get("serviceDescription");
-			 BillingService billingService = new BillingService(serviceID,serviceName,serviceAmount,servicePrice,serviceDescription);
-			 this.services.add(billingService);
-		 }
-		 JSONArray discountsArray = (JSONArray) jo.get("discounts");
-		 for (int i = 0 ; i < discountsArray.size() ; i++){
-			 JSONObject discountObject = (JSONObject) discountsArray.get(i);
-			 String discountID = (String) discountObject.get("discountID");
-			 String discountName = (String) discountObject.get("discountName");
-			 int discountPercentage = (int) discountObject.get("discountPercentage");
-			 BillingDiscount billingDiscount = new BillingDiscount(discountID,discountName,discountPercentage);
-			 this.discounts.add(billingDiscount);
-		 }
-		 JSONArray taxesArray = (JSONArray) jo.get("taxes");
-		 for (int i = 0 ; i < taxesArray.size(); i++){
-			 JSONObject taxObject = (JSONObject) taxesArray.get(i);
-			 String taxID = (String) taxObject.get("taxID");
-			 String taxName = (String) taxObject.get("taxName");
-			 double taxValue = (double) taxObject.get("taxValue");
-			 BillingTax billingTax = new BillingTax(taxID,taxName,taxValue);
-			 this.taxes.add(billingTax);
-		 }
 		 this.paymentBank = (String) jo.get("paymentBank");
 		 this.paymentBeneficiary = (String) jo.get("paymentBeneficiary");
 		 this.paymentIBAN = (String) jo.get("paymentIBAN");
@@ -681,29 +611,6 @@ public class Billing {
 		this.serviceCurrency = serviceCurrency;
 	}
 
-	public ObservableList<BillingService> getServices() {
-		return services;
-	}
-
-	public void setServices(ObservableList<BillingService> services) {
-		this.services = services;
-	}
-
-	public ObservableList<BillingDiscount> getDiscounts() {
-		return discounts;
-	}
-
-	public void setDiscounts(ObservableList<BillingDiscount> discounts) {
-		this.discounts = discounts;
-	}
-
-	public ObservableList<BillingTax> getTaxes() {
-		return taxes;
-	}
-
-	public void setTaxes(ObservableList<BillingTax> taxes) {
-		this.taxes = taxes;
-	}
 
 	public String getPaymentBank() {
 		return paymentBank;
@@ -810,4 +717,11 @@ public class Billing {
 	}
 
 
+	public String getBillingID() {
+		return billingID;
+	}
+
+	public void setBillingID(String billingID) {
+		this.billingID = billingID;
+	}
 }
