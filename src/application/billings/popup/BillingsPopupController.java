@@ -3,10 +3,12 @@ package application.billings.popup;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import application.billings.BillingDiscount;
 import application.billings.BillingService;
 import application.billings.BillingTax;
+import application.billings.backend.BillingsDatabase;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -412,6 +414,9 @@ public class BillingsPopupController implements Initializable{
     private TextField billingTaxNameField;
     private TextField billingTaxValueField;
 
+    private String serviceID;
+    private String discountID;
+    private String taxID;
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String[] clientNameOptions = {"Alin","Romy","Ionut","Edi"};
@@ -758,9 +763,8 @@ public class BillingsPopupController implements Initializable{
 
     @FXML
     void saveDataClicked(ActionEvent event) throws ClassNotFoundException {
-
+        BillingsDatabase connection = new BillingsDatabase();
     	if(!isEditable){
-
             String issuerName = issuerNameCmbBox.getValue();
             String issuerCUI = issuerCUITextField.getText();
             String issuerTradeRegisterNumber = issuerRegisterNumberField.getText();
@@ -786,6 +790,14 @@ public class BillingsPopupController implements Initializable{
             String clientEmail = clientEmailField.getText();
             String clientPhoneNumber = clientPhoneNumberField.getText();
             String serviceCurrency = serviceCurrencyCmbBox.getValue();
+            //Implement all IDs
+            UUID serviceID_uuid = UUID.randomUUID();
+            UUID discountID_uuid = UUID.randomUUID();
+            UUID taxID_uuid = UUID.randomUUID();
+            serviceID = serviceID_uuid.toString().substring(0,5);
+            discountID = discountID_uuid.toString().substring(0,5);
+            taxID = taxID_uuid.toString().substring(0,5);
+            //
             for (Node node : serviceContentPane.getChildren()) {
                 billingServiceNameField = (TextField) node.lookup("#billingServiceNameField");
                 billingServiceAmountField = (TextField) node.lookup("#billingServiceAmountField");
@@ -795,22 +807,25 @@ public class BillingsPopupController implements Initializable{
                 String billingServiceAmount = billingServiceAmountField.getText();
                 String billingServicePrice = billingPriceField.getText();
                 String billingServiceDescription = billingDescriptionField.getText();
-
+                connection.insertServiceData(serviceID,billingServiceName,Integer.valueOf(billingServiceAmount),Double.valueOf(billingServicePrice), billingServiceDescription);
             }
+
             for (Node node: discountContentPane.getChildren()) {
                 billingDiscountNameField = (TextField) node.lookup("#billingDiscountNameField");
                 billingDiscountPercentageField = (TextField) node.lookup("#billingDiscountPercentageField");
                 String billingDiscountName = billingDiscountNameField.getText();
                 String billingDiscountPercentage = billingDiscountPercentageField.getText();
-
+                connection.insertDiscountData(discountID,billingDiscountName,Integer.valueOf(billingDiscountPercentage));
             }
+
             for (Node node : taxContentPane.getChildren()) {
                 billingTaxNameField = (TextField) node.lookup("#billingTaxNameField");
                 billingTaxValueField = (TextField) node.lookup("#billingTaxValueField");
                 String billingTaxName = billingTaxNameField.getText();
                 String billingTaxValue = billingTaxValueField.getText();
-
+                connection.insertTaxData(taxID,billingTaxName,Double.valueOf(billingTaxValue));
             }
+
             String paymentBank = paymentBankField.getText();
             String paymentBeneficiary = paymentBeneficiaryField.getText();
             String paymentIBAN = paymentIBANField.getText();
@@ -824,7 +839,10 @@ public class BillingsPopupController implements Initializable{
             String calculationSubtotal = calculationSubtotalField.getText();
             String calculationTax = calculationTaxField.getText();
             String calculationTotal = calculationTotalField.getText();
-
+            connection.insertBillingData(issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+            ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
+            ,serviceCurrency,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,Double.valueOf(paymentExchange),paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
+            ,calculationSubtotal,calculationTax,calculationTotal);
             saveData.getScene().getWindow().hide();
         }
     }

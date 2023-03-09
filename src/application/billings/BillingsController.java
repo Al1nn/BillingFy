@@ -1,6 +1,9 @@
 package application.billings;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
@@ -8,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
@@ -38,6 +41,9 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class BillingsController implements Initializable {
@@ -237,11 +243,11 @@ public class BillingsController implements Initializable {
 		style.styleButtons(addBillingButton, addBillingIcon, addBillingCircle);
 		try {
 			updateTable();
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	private void updateTable() throws ClassNotFoundException {
+	private void updateTable() throws ClassNotFoundException, IOException {
 		billingNumber.setCellValueFactory(new PropertyValueFactory<>("clientNumber"));
 		centerCellsOnColumn(billingNumber);
 		billingClient.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -261,29 +267,39 @@ public class BillingsController implements Initializable {
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
 
-		billingsData = FXCollections.observableArrayList(
-				 new Billing("242sf","SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
-						 ,"SC MGE Soft","4525626","J4/1243/2022","ROONRC.J4/1243/2022","Romania","Pitesti","Arges","Petros","1","152626","mge@gmail.com","0745262626"
-						 ,"RON",FXCollections.observableArrayList(new BillingService("SC MGE Soft",5,1200.25,"Servicii conform contracts")
-						 ,new BillingService("SC MGE Soft",1,2000.50,"Servicii conform contracts 2"))
-						 ,FXCollections.observableArrayList(new BillingDiscount("Reducere",40),
-						 new BillingDiscount("Reducere 2",20))
-						 ,FXCollections.observableArrayList(new BillingTax("Taxa",2450.50),
-						 new BillingTax("Taxa 1",3000.50))
-						 ,"Raiffeisen","SC MGE Soft","IBAN","Swift","Reference",2450.50, "12.12.2020","01.01.2021","EUR","Neplatit"
-						 ,"100 000 000 $","1000 $","100 001 000 $")
-		 );
-		for (Billing billing : billingsData){
-			try {
-				billing.toJsonObject();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-
-		billingTable.setItems(billingsData);
-		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
+//		billingsData = FXCollections.observableArrayList(
+//				 new Billing("242sf","SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
+//						 ,"SC MGE Soft","4525626","J4/1243/2022","ROONRC.J4/1243/2022","Romania","Pitesti","Arges","Petros","1","152626","mge@gmail.com","0745262626"
+//						 ,"RON",FXCollections.observableArrayList(new BillingService(1,"SC MGE Soft",5,1200.25,"Servicii conform contracts")
+//						 ,new BillingService(1,"SC MGE Soft",1,2000.50,"Servicii conform contracts 2"))
+//						 ,FXCollections.observableArrayList(new BillingDiscount("Reducere",40),
+//						 new BillingDiscount("Reducere 2",20))
+//						 ,FXCollections.observableArrayList(new BillingTax("Taxa",2450.50),
+//						 new BillingTax("Taxa 1",3000.50))
+//						 ,"Raiffeisen","SC MGE Soft","IBAN","Swift","Reference",2450.50, "12.12.2020","01.01.2021","EUR","Neplatit"
+//						 ,"100 000 000 $","1000 $","100 001 000 $"),
+//				new Billing("242sf","SC ALL IN TECHNOLOGIES","4252525","J4/1242/2022","ROONRC.J4/1242/2022","Romania","Costesti","Arges","Progresului","1","115252","alingeorgian987@gmail.com","0745869864"
+//						,"SC MGE Soft","4525626","J4/1243/2022","ROONRC.J4/1243/2022","Romania","Pitesti","Arges","Petros","1","152626","mge@gmail.com","0745262626"
+//						,"RON",FXCollections.observableArrayList(new BillingService(2,"SC MGE Soft",5,1200.25,"Servicii conform contracts")
+//						,new BillingService(2,"SC MGE Soft",1,2000.50,"Servicii conform contracts 2"))
+//						,FXCollections.observableArrayList(new BillingDiscount("Reducere",40),
+//						new BillingDiscount("Reducere 2",20))
+//						,FXCollections.observableArrayList(new BillingTax("Taxa",2450.50),
+//						new BillingTax("Taxa 1",3000.50))
+//						,"Raiffeisen","SC MGE Soft","IBAN","Swift","Reference",2450.50, "12.12.2020","01.01.2021","EUR","Neplatit"
+//						,"100 000 000 $","1000 $","100 001 000 $")
+//		 );
+//		for (Billing billing : billingsData){
+//			try {
+//				billing.toJsonObject();
+//			} catch (IOException e) {
+//				throw new RuntimeException(e);
+//			}
+//		}
+//
+//
+//		billingTable.setItems(billingsData);
+//		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 	}
 	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15; "
@@ -545,7 +561,7 @@ public class BillingsController implements Initializable {
 		childStage.setOnHidden(evt -> {
 			try {
 				updateTable();
-			} catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException | IOException e) {
 				throw new RuntimeException(e);
 			}
 		});

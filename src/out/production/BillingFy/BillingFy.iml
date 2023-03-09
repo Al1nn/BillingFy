@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx-swt.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/fontawesomefx-commons-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.base.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/fontawesomefx-emojione-3.1.1-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.controls.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.fxml.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/fontawesomefx-materialicons-2.2.0-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +46,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.graphics.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/fontawesomefx-octicons-4.3.0-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -55,7 +55,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.media.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx-swt.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -64,7 +64,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.swing.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.base.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -73,7 +73,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19/lib/javafx.web.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.controls.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -82,7 +82,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/fontawesomefx-materialicons-2.2.0-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.fxml.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -91,7 +91,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/fontawesomefx-octicons-4.3.0-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.graphics.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -100,7 +100,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jBCrypt-0.4.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.media.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -109,7 +109,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jar_files/fontawesomefx-commons-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.swing.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -118,7 +118,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/fontawesomefx-emojione-3.1.1-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/javafx-sdk-19/lib/javafx.web.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -127,7 +127,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/jBCrypt-0.4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -136,7 +136,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.30/mysql-connector-java-8.0.30.jar!/" />
+          <root url="jar://$MODULE_DIR$/../external libraries/mysql-connector-java-8.0.30/mysql-connector-java-8.0.30.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../external libraries/json-simple-1.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -1,15 +1,18 @@
 package application.billings;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.StandardOpenOption;
+
 
 import application.billings.popup.BillingsPopupController;
 import application.clients.Client;
 import application.resources.DeletePopupController;
-import com.github.cliftonlabs.json_simple.JsonArray;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
@@ -27,14 +30,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Billing {
-	private String billingID;
 	private String issuerName;
 	private String issuerCUI;
 	private String issuerTradeRegisterNumber;
@@ -87,7 +88,7 @@ public class Billing {
 	private HBox pane;
 	private HBox statusPane;
 	
-	public Billing(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
+	public Billing(String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
 				, String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
 				, String serviceCurrency
 				, ObservableList<BillingService> services
@@ -96,7 +97,7 @@ public class Billing {
 				, String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
 				, String calculationSubtotal, String calculationTax, String calculationTotal
 	) {
-		this.billingID = billingID;
+
 		this.issuerName = issuerName;
 		this.issuerCUI = issuerCUI;
 		this.issuerTradeRegisterNumber = issuerTradeRegisterNumber;
@@ -314,9 +315,8 @@ public class Billing {
 			System.out.println("Script Python on download");
 		});
 	}
-	public JsonObject toJsonObject() throws IOException {
-		JsonObject jo = new JsonObject();
-		jo.put("billingID",billingID);
+	public JSONObject toJsonObject() throws IOException {
+		JSONObject jo = new JSONObject();
 		jo.put("issuerName",issuerName);
 		jo.put("issuerCUI",issuerCUI);
 		jo.put("issuerTradeRegisterNumber",issuerTradeRegisterNumber);
@@ -342,9 +342,10 @@ public class Billing {
 		jo.put("clientEmail",clientEmail);
 		jo.put("clientPhoneNumber",clientPhoneNumber);
 		jo.put("serviceCurrency",serviceCurrency);
-		JsonArray serviceJsonArray = new JsonArray();
+		JSONArray serviceJsonArray = new JSONArray();
 		for (BillingService service : services){
-			JsonObject serviceJsonObject = new JsonObject();
+			JSONObject serviceJsonObject = new JSONObject();
+			serviceJsonObject.put("serviceID",service.getServiceID());
 			serviceJsonObject.put("serviceName",service.getBillingServiceName());
 			serviceJsonObject.put("serviceAmount",service.getBillingServiceAmount());
 			serviceJsonObject.put("servicePrice",service.getBillingServicePrice());
@@ -352,17 +353,19 @@ public class Billing {
 			serviceJsonArray.add(serviceJsonObject);
 		}
 		jo.put("services",serviceJsonArray);
-		JsonArray discountJsonArray = new JsonArray();
+		JSONArray discountJsonArray = new JSONArray();
 		for (BillingDiscount discount : discounts){
-			JsonObject discountJsonObject = new JsonObject();
+			JSONObject discountJsonObject = new JSONObject();
+			discountJsonObject.put("discountID",discount.getDiscountID());
 			discountJsonObject.put("discountName",discount.getBillingDiscountName());
 			discountJsonObject.put("discountPercentage",discount.getBillingDiscountPercentage());
 			discountJsonArray.add(discountJsonObject);
 		}
 		jo.put("discounts",discountJsonArray);
-		JsonArray taxesJsonArray = new JsonArray();
+		JSONArray taxesJsonArray = new JSONArray();
 		for (BillingTax tax : taxes){
-			JsonObject taxJsonObject = new JsonObject();
+			JSONObject taxJsonObject = new JSONObject();
+			taxJsonObject.put("taxID",tax.getTaxID());
 			taxJsonObject.put("taxName",tax.getBillingTaxName());
 			taxJsonObject.put("taxValue",tax.getBillingTaxValue());
 			taxesJsonArray.add(taxJsonObject);
@@ -383,11 +386,81 @@ public class Billing {
 		jo.put("calculationTotal",calculationTotal);
 
 		FileWriter file = new FileWriter("../Billings.json");
-		String jsonText = Jsoner.serialize(jo);
-		file.write(jsonText);
+
+		file.write(jo.toJSONString());
 
 		file.close();
 		return jo;
+	}
+	public void fromJsonObject(JSONObject jo) throws IOException, ParseException {
+		 this.issuerName = (String) jo.get("issuerName");
+		 this.issuerCUI = (String) jo.get("issuerCUI");
+		 this.issuerTradeRegisterNumber = (String) jo.get("issuerTradeRegisterNumber");
+		 this.issuerEUID = (String) jo.get("issuerEUID");
+		 this.issuerCountry = (String) jo.get("issuerCountry");
+		 this.issuerCity = (String) jo.get("issuerCity");
+		 this.issuerCounty = (String) jo.get("issuerCounty");
+		 this.issuerStreet = (String) jo.get("issuerStreet");
+		 this.issuerNumber = (String) jo.get("issuerNumber");
+		 this.issuerZipCode = (String) jo.get("issuerZipCode");
+		 this.issuerEmail = (String) jo.get("issuerEmail");
+		 this.issuerPhoneNumber = (String) jo.get("issuerPhoneNumber");
+		 this.clientName = (String) jo.get("clientName");
+		 this.clientCUI = (String) jo.get("clientCUI");
+		 this.clientTradeRegisterNumber = (String) jo.get("clientTradeRegisterNumber");
+		 this.clientEUID = (String) jo.get("clientEUID");
+		 this.clientCountry = (String) jo.get("clientCountry");
+		 this.clientCity = (String) jo.get("clientCity");
+		 this.clientCounty = (String) jo.get("clientCounty");
+		 this.clientStreet = (String) jo.get("clientStreet");
+		 this.clientNumber = (String) jo.get("clientNumber");
+		 this.clientZipCode = (String) jo.get("clientZipCode");
+		 this.clientEmail = (String) jo.get("clientEmail");
+		 this.clientPhoneNumber = (String) jo.get("clientPhoneNumber");
+		 this.serviceCurrency = (String) jo.get("serviceCurrency");
+		 JSONArray servicesArray = (JSONArray) jo.get("services");
+		 for (int i = 0; i < servicesArray.size() ; i++){
+			 JSONObject serviceObject = (JSONObject) servicesArray.get(i);
+			 String serviceID = (String) serviceObject.get("serviceID");
+			 String serviceName = (String) serviceObject.get("serviceName");
+			 int serviceAmount = (int) serviceObject.get("serviceAmount");
+			 double servicePrice = (double) serviceObject.get("servicePrice");
+			 String serviceDescription = (String) serviceObject.get("serviceDescription");
+			 BillingService billingService = new BillingService(serviceID,serviceName,serviceAmount,servicePrice,serviceDescription);
+			 this.services.add(billingService);
+		 }
+		 JSONArray discountsArray = (JSONArray) jo.get("discounts");
+		 for (int i = 0 ; i < discountsArray.size() ; i++){
+			 JSONObject discountObject = (JSONObject) discountsArray.get(i);
+			 String discountID = (String) discountObject.get("discountID");
+			 String discountName = (String) discountObject.get("discountName");
+			 int discountPercentage = (int) discountObject.get("discountPercentage");
+			 BillingDiscount billingDiscount = new BillingDiscount(discountID,discountName,discountPercentage);
+			 this.discounts.add(billingDiscount);
+		 }
+		 JSONArray taxesArray = (JSONArray) jo.get("taxes");
+		 for (int i = 0 ; i < taxesArray.size(); i++){
+			 JSONObject taxObject = (JSONObject) taxesArray.get(i);
+			 String taxID = (String) taxObject.get("taxID");
+			 String taxName = (String) taxObject.get("taxName");
+			 double taxValue = (double) taxObject.get("taxValue");
+			 BillingTax billingTax = new BillingTax(taxID,taxName,taxValue);
+			 this.taxes.add(billingTax);
+		 }
+		 this.paymentBank = (String) jo.get("paymentBank");
+		 this.paymentBeneficiary = (String) jo.get("paymentBeneficiary");
+		 this.paymentIBAN = (String) jo.get("paymentIBAN");
+		 this.paymentSwift = (String) jo.get("paymentSwift");
+		 this.paymentReference = (String) jo.get("paymentReference");
+		 this.paymentExchange = (double) jo.get("paymentExchange");
+		 this.paymentIssueDate = (String) jo.get("paymentIssueDate");
+		 this.paymentDueDate = (String) jo.get("paymentDueDate");
+		 this.paymentCurrency = (String) jo.get("paymentCurrency");
+		 this.paymentStatus = (String) jo.get("paymentStatus");
+		 this.calculationSubtotal = (String) jo.get("calculationSubtotal");
+		 this.calculationTax = (String) jo.get("calculationTax");
+		 this.calculationTotal = (String) jo.get("calculationTotal");
+
 	}
 	public HBox getPane() {
 		return pane;
@@ -404,17 +477,6 @@ public class Billing {
 	public void setStatusPane(HBox statusPane) {
 		this.statusPane = statusPane;
 	}
-
-
-	public String getBillingID() {
-		return billingID;
-	}
-
-
-	public void setBillingID(String billingID) {
-		this.billingID = billingID;
-	}
-
 
 	public String getIssuerName() {
 		return issuerName;
