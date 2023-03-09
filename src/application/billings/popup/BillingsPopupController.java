@@ -500,12 +500,7 @@ public class BillingsPopupController implements Initializable{
         clientPhoneNumberField.setText(clientPhoneNumber);
         serviceCurrencyCmbBox.setValue(serviceCurrency);
         serviceContentPane.getChildren().clear();
-        BillingsDatabase connection = new BillingsDatabase();
-        try {
-            services = connection.retrieveServiceData(billingID);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
         for (int i = 0 * serviceButtonPressed; i < services.size(); i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/billings/popup/BillingsServiceContent.fxml"));
             Parent root = loader.load();
@@ -522,11 +517,7 @@ public class BillingsPopupController implements Initializable{
             serviceContentPane.addRow(i,root);
         }
         discountContentPane.getChildren().clear();
-        try {
-            discounts = connection.retrieveDiscountData(billingID);
-        }catch (ClassNotFoundException e){
-            throw  new RuntimeException(e);
-        }
+
         for(int i = 0 ; i < discounts.size(); i++){
             Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsDiscountContent.fxml"));
             String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsDiscountContentStyle.css").toExternalForm();
@@ -538,11 +529,7 @@ public class BillingsPopupController implements Initializable{
             discountContentPane.addRow(i, root);
         }
         taxContentPane.getChildren().clear();
-        try {
-            taxes = connection.retrieveTaxData(billingID);
-        }catch (ClassNotFoundException e){
-            throw new RuntimeException(e);
-        }
+
         for(int i = 0 ; i < taxes.size(); i++){
             Parent root = FXMLLoader.load(getClass().getResource("/application/billings/popup/BillingsTaxContent.fxml"));
             String contentCSS = this.getClass().getResource("/application/billings/popup/BillingsTaxContentStyle.css").toExternalForm();

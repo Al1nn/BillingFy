@@ -1,18 +1,14 @@
 package application.billings;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 
+import application.billings.backend.BillingsDatabase;
 import application.billings.popup.BillingsPopupController;
-import application.clients.Client;
 import application.resources.DeletePopupController;
-import javafx.collections.FXCollections;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -21,8 +17,6 @@ import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -65,6 +59,10 @@ public class Billing {
 	private String clientPhoneNumber;
 
 	private String serviceCurrency;
+
+	private ObservableList<BillingService> services;
+	private ObservableList<BillingDiscount> discounts;
+	private ObservableList<BillingTax> taxes;
 	private String paymentBank;
 	private String paymentBeneficiary;
 	private String paymentIBAN;
@@ -89,6 +87,7 @@ public class Billing {
 				, String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
 				, String calculationSubtotal, String calculationTax, String calculationTotal
 	) {
+		BillingsDatabase connection = new BillingsDatabase();
 		this.billingID = billingID;
 		this.issuerName = issuerName;
 		this.issuerCUI = issuerCUI;
@@ -115,6 +114,23 @@ public class Billing {
 		this.clientEmail = clientEmail;
 		this.clientPhoneNumber = clientPhoneNumber;
 		this.serviceCurrency = serviceCurrency;
+
+		try {
+			this.services = connection.retrieveServiceData(billingID);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			this.discounts = connection.retrieveDiscountData(billingID);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			this.taxes = connection.retrieveTaxData(billingID);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+
 		this.paymentBank = paymentBank;
 		this.paymentBeneficiary = paymentBeneficiary;
 		this.paymentIBAN = paymentIBAN;
@@ -231,9 +247,9 @@ public class Billing {
 					billingsPopupController.initializeData(billingID,issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
 					,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipCode,clientEmail,clientPhoneNumber
 					,serviceCurrency
-							, FXCollections.observableArrayList()
-							,FXCollections.observableArrayList()
-							,FXCollections.observableArrayList()
+							, services
+							, discounts
+							, taxes
 					,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
 					,calculationSubtotal,calculationTax,calculationTotal);
 					Stage childStage = new Stage();
@@ -331,6 +347,36 @@ public class Billing {
 		jo.put("clientEmail",clientEmail);
 		jo.put("clientPhoneNumber",clientPhoneNumber);
 		jo.put("serviceCurrency",serviceCurrency);
+		JSONArray serviceArray = new JSONArray();
+		for (BillingService service : services){
+			JSONObject serviceObject = new JSONObject();
+			serviceObject.put("serviceID",service.getServiceID());
+			serviceObject.put("serviceName",service.getBillingServiceName());
+			serviceObject.put("serviceAmount",service.getBillingServiceAmount());
+			serviceObject.put("servicePrice",service.getBillingServicePrice());
+			serviceObject.put("serviceDescription",service.getBillingServiceDescription());
+			serviceArray.add(serviceObject);
+		}
+		jo.put("services",serviceArray);
+		JSONArray discountArray = new JSONArray();
+		for(BillingDiscount discount : discounts){
+			JSONObject discountObject = new JSONObject();
+			discountObject.put("discountID",discount.getDiscountID());
+			discountObject.put("discountName",discount.getBillingDiscountName());
+			discountObject.put("discountPercentage",discount.getBillingDiscountPercentage());
+			discountArray.add(discountObject);
+		}
+		jo.put("discounts",discountArray);
+		JSONArray taxesArray = new JSONArray();
+		for (BillingTax tax : taxes){
+			JSONObject taxObject = new JSONObject();
+			taxObject.put("taxID",tax.getTaxID());
+			taxObject.put("taxName",tax.getBillingTaxName());
+			taxObject.put("taxValue",tax.getBillingTaxValue());
+			taxesArray.add(taxObject);
+		}
+		jo.put("taxes",taxesArray);
+
 		jo.put("paymentBank",paymentBank);
 		jo.put("paymentBeneficiary",paymentBeneficiary);
 		jo.put("paymentIBAN",paymentIBAN);
@@ -351,47 +397,7 @@ public class Billing {
 		file.close();
 		return jo;
 	}
-	public void fromJsonObject(JSONObject jo) throws IOException, ParseException {
-		 this.issuerName = (String) jo.get("issuerName");
-		 this.issuerCUI = (String) jo.get("issuerCUI");
-		 this.issuerTradeRegisterNumber = (String) jo.get("issuerTradeRegisterNumber");
-		 this.issuerEUID = (String) jo.get("issuerEUID");
-		 this.issuerCountry = (String) jo.get("issuerCountry");
-		 this.issuerCity = (String) jo.get("issuerCity");
-		 this.issuerCounty = (String) jo.get("issuerCounty");
-		 this.issuerStreet = (String) jo.get("issuerStreet");
-		 this.issuerNumber = (String) jo.get("issuerNumber");
-		 this.issuerZipCode = (String) jo.get("issuerZipCode");
-		 this.issuerEmail = (String) jo.get("issuerEmail");
-		 this.issuerPhoneNumber = (String) jo.get("issuerPhoneNumber");
-		 this.clientName = (String) jo.get("clientName");
-		 this.clientCUI = (String) jo.get("clientCUI");
-		 this.clientTradeRegisterNumber = (String) jo.get("clientTradeRegisterNumber");
-		 this.clientEUID = (String) jo.get("clientEUID");
-		 this.clientCountry = (String) jo.get("clientCountry");
-		 this.clientCity = (String) jo.get("clientCity");
-		 this.clientCounty = (String) jo.get("clientCounty");
-		 this.clientStreet = (String) jo.get("clientStreet");
-		 this.clientNumber = (String) jo.get("clientNumber");
-		 this.clientZipCode = (String) jo.get("clientZipCode");
-		 this.clientEmail = (String) jo.get("clientEmail");
-		 this.clientPhoneNumber = (String) jo.get("clientPhoneNumber");
-		 this.serviceCurrency = (String) jo.get("serviceCurrency");
-		 this.paymentBank = (String) jo.get("paymentBank");
-		 this.paymentBeneficiary = (String) jo.get("paymentBeneficiary");
-		 this.paymentIBAN = (String) jo.get("paymentIBAN");
-		 this.paymentSwift = (String) jo.get("paymentSwift");
-		 this.paymentReference = (String) jo.get("paymentReference");
-		 this.paymentExchange = (double) jo.get("paymentExchange");
-		 this.paymentIssueDate = (String) jo.get("paymentIssueDate");
-		 this.paymentDueDate = (String) jo.get("paymentDueDate");
-		 this.paymentCurrency = (String) jo.get("paymentCurrency");
-		 this.paymentStatus = (String) jo.get("paymentStatus");
-		 this.calculationSubtotal = (String) jo.get("calculationSubtotal");
-		 this.calculationTax = (String) jo.get("calculationTax");
-		 this.calculationTotal = (String) jo.get("calculationTotal");
 
-	}
 	public HBox getPane() {
 		return pane;
 	}
@@ -723,5 +729,29 @@ public class Billing {
 
 	public void setBillingID(String billingID) {
 		this.billingID = billingID;
+	}
+
+	public ObservableList<BillingService> getServices() {
+		return services;
+	}
+
+	public void setServices(ObservableList<BillingService> services) {
+		this.services = services;
+	}
+
+	public ObservableList<BillingDiscount> getDiscounts() {
+		return discounts;
+	}
+
+	public void setDiscounts(ObservableList<BillingDiscount> discounts) {
+		this.discounts = discounts;
+	}
+
+	public ObservableList<BillingTax> getTaxes() {
+		return taxes;
+	}
+
+	public void setTaxes(ObservableList<BillingTax> taxes) {
+		this.taxes = taxes;
 	}
 }
