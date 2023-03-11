@@ -342,7 +342,11 @@ public class Billing {
 	}
 	public void downloadButtonFunction(Button button){
 		button.setOnMouseClicked(evt -> {
-			System.out.println("Script Python on download");
+			try {
+				toJsonObject();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		});
 	}
 	public JSONObject toJsonObject() throws IOException {

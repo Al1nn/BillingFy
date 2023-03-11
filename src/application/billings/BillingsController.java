@@ -352,65 +352,107 @@ public class BillingsController implements Initializable {
     
     @FXML
     void sortClientButtonClicked(ActionEvent event) {
-    	if(sortClientIcon.getGlyphName() == "ANGLE_UP")
+    	if(sortClientIcon.getGlyphName() == "ANGLE_UP") {
     		sortClientIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortClientIcon.setGlyphName("ANGLE_UP");
-    
+			billingClient.setSortType(TableColumn.SortType.DESCENDING);
+		} else {
+			sortClientIcon.setGlyphName("ANGLE_UP");
+			billingClient.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingClient.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingClient);
     }
 
     @FXML
     void sortDueDateButtonClicked(ActionEvent event) {
     	if(sortDueDateIcon.getGlyphName() == "ANGLE_UP")
-    		sortDueDateIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortDueDateIcon.setGlyphName("ANGLE_UP");
-    
+		{
+			sortDueDateIcon.setGlyphName("ANGLE_DOWN");
+			billingDueDate.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortDueDateIcon.setGlyphName("ANGLE_UP");
+			billingDueDate.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingDueDate.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingDueDate);
     }
 
     @FXML
     void sortIssueDateButtonClicked(ActionEvent event) {
-    	if(sortIssueDateIcon.getGlyphName() == "ANGLE_UP")
-    		sortIssueDateIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortIssueDateIcon.setGlyphName("ANGLE_UP");
-    
+    	if(sortIssueDateIcon.getGlyphName() == "ANGLE_UP") {
+			sortIssueDateIcon.setGlyphName("ANGLE_DOWN");
+			billingIssueDate.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortIssueDateIcon.setGlyphName("ANGLE_UP");
+			billingIssueDate.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingIssueDate.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingIssueDate);
     }
 
     @FXML
     void sortNumberButtonClicked(ActionEvent event) {
-    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP")
-    		sortNumberIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortNumberIcon.setGlyphName("ANGLE_UP");
-    
+    	if(sortNumberIcon.getGlyphName() == "ANGLE_UP") {
+			sortNumberIcon.setGlyphName("ANGLE_DOWN");
+			billingNumber.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortNumberIcon.setGlyphName("ANGLE_UP");
+			billingNumber.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingNumber.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingNumber);
     }
 
     @FXML
     void sortStatusButtonClicked(ActionEvent event) {
-    	if(sortStatusIcon.getGlyphName() == "ANGLE_UP")
-    		sortStatusIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortStatusIcon.setGlyphName("ANGLE_UP");
-    
+    	if(sortStatusIcon.getGlyphName() == "ANGLE_UP") {
+			sortStatusIcon.setGlyphName("ANGLE_DOWN");
+			billingStatus.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortStatusIcon.setGlyphName("ANGLE_UP");
+			billingStatus.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingStatus.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingStatus);
     }
 
     @FXML
     void sortSumButtonClicked(ActionEvent event) {
-    	if(sortSumIcon.getGlyphName() == "ANGLE_UP")
-    		sortSumIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortSumIcon.setGlyphName("ANGLE_UP");
-    
+    	if(sortSumIcon.getGlyphName() == "ANGLE_UP") {
+			sortSumIcon.setGlyphName("ANGLE_DOWN");
+			billingSum.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortSumIcon.setGlyphName("ANGLE_UP");
+			billingSum.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingSum.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingSum);
     }
 
     @FXML
     void sortTaxButtonClicked(ActionEvent event) {
-    	if(sortTaxIcon.getGlyphName() == "ANGLE_UP")
-    		sortTaxIcon.setGlyphName("ANGLE_DOWN");
-    	else
-    	sortTaxIcon.setGlyphName("ANGLE_UP");
-    
+    	if(sortTaxIcon.getGlyphName() == "ANGLE_UP") {
+			sortTaxIcon.setGlyphName("ANGLE_DOWN");
+			billingTax.setSortType(TableColumn.SortType.DESCENDING);
+		}
+    	else {
+			sortTaxIcon.setGlyphName("ANGLE_UP");
+			billingTax.setSortType(TableColumn.SortType.ASCENDING);
+		}
+		billingTax.setSortable(true);
+		billingTable.getSortOrder().clear();
+		billingTable.getSortOrder().add(billingTax);
     }
     
     @FXML
