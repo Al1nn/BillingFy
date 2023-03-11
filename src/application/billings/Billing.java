@@ -326,8 +326,18 @@ public class Billing {
 		});
 	}
 	private void refreshAfterDelete(Stage childStage) {
+		BillingsDatabase connection = new BillingsDatabase();
 		childStage.setOnHidden(evt -> {
-			System.out.println("Not on any form");
+			try {
+				tableView.getItems().clear();
+				connection.deleteServiceData(billingID);
+				connection.deleteDiscountData(billingID);
+				connection.deleteTaxData(billingID);
+				connection.deleteBillingData(billingID);
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 		});
 	}
 	public void downloadButtonFunction(Button button){

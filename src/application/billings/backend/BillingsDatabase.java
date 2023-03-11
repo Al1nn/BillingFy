@@ -325,6 +325,53 @@ public class BillingsDatabase {
         }
     }
 
+    public void deleteServiceData(String serviceID) throws ClassNotFoundException{
+        String delete = "DELETE FROM BillingsService WHERE Service_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(delete)){
+            preparedStatement.setString(1,serviceID);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Service Rows Deleted : " + rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDiscountData(String discountID) throws ClassNotFoundException{
+        String delete = "DELETE FROM BillingsDiscount WHERE Discount_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(delete)){
+            preparedStatement.setString(1,discountID);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Discount Rows Deleted : " + rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTaxData(String taxID) throws ClassNotFoundException{
+        String delete = "DELETE FROM BillingsTax WHERE Tax_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(delete)){
+            preparedStatement.setString(1,taxID);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Tax Rows Deleted : " + rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteBillingData(String billingID) throws ClassNotFoundException{
+        String delete = "DELETE FROM Billings WHERE Billing_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(delete) ){
+            preparedStatement.setString(1,billingID);
+            int rowsDelete = preparedStatement.executeUpdate();
+            System.out.println("Billing Rows Deleted : "+rowsDelete);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     public ObservableList<BillingService> retrieveServiceData(String serviceID) throws ClassNotFoundException {
         String select = "SELECT * FROM BillingsService WHERE Service_ID = ?";
         ObservableList<BillingService> billingServices = FXCollections.observableArrayList();
