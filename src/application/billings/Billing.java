@@ -7,6 +7,7 @@ import java.io.IOException;
 import application.billings.backend.BillingsDatabase;
 import application.billings.popup.BillingsPopupController;
 import application.resources.DeletePopupController;
+import javafx.scene.control.TableView;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -80,7 +81,9 @@ public class Billing {
 	private String calculationTotal;
 	private HBox pane;
 	private HBox statusPane;
-	
+
+	private TableView<Billing> tableView;
+
 	public Billing(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
 				, String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
 				, String serviceCurrency
@@ -257,6 +260,7 @@ public class Billing {
 					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					//Implement elements from parentStage
+					tableView = (TableView<Billing>) parentStage.getScene().lookup("#billingTable");
 
 					childStage.setScene(new Scene(root));
 					childStage.getScene().getStylesheets().add(popupCSS);
@@ -279,8 +283,17 @@ public class Billing {
 		);
 	}
 	private void refreshData(Stage childStage){
+		BillingsDatabase connection = new BillingsDatabase();
 		childStage.setOnHidden(evt -> {
-
+			try {
+				tableView.getItems().clear();
+				this.services = connection.retrieveServiceData(billingID);
+				this.discounts = connection.retrieveDiscountData(billingID);
+				this.taxes = connection.retrieveTaxData(billingID);
+				tableView.setItems(connection.retrieveData());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 		});
 	}
 	public void deleteButtonFunction(Button button){
@@ -292,6 +305,8 @@ public class Billing {
 				deletePopupController.getDeletePopupTitle().setText("Stergere Factura");
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				//Implement elements from parent stage
+				tableView = (TableView<Billing>) parentStage.getScene().lookup("#billingTable");
+
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));

@@ -6,8 +6,6 @@ import application.billings.BillingService;
 import application.billings.BillingTax;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class BillingsDatabase {
@@ -173,7 +171,157 @@ public class BillingsDatabase {
             preparedStatement.setString(39,calculationTotal);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
+    public void updateServiceData(String serviceID, String serviceName, String serviceAmount, String servicePrice, String serviceDescription, String oldServiceName) throws ClassNotFoundException {
+        String update = "UPDATE BillingsService SET " +
+                "Service_Name = ?, " +
+                "Service_Amount = ?," +
+                "Service_Price = ?," +
+                "Service_Description = ? " +
+                "WHERE Service_ID = ? " +
+                "AND Service_Name = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,serviceName);
+            preparedStatement.setInt(2,Integer.valueOf(serviceAmount));
+            preparedStatement.setDouble(3,Double.valueOf(servicePrice));
+            preparedStatement.setString(4,serviceDescription);
+            preparedStatement.setString(5,serviceID);
+            preparedStatement.setString(6,oldServiceName);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateDiscountData(String discountID, String discountName, String discountPercentage, String oldDiscountName) throws ClassNotFoundException {
+        String update = "UPDATE BillingsDiscount SET " +
+                "Discount_Name = ?, " +
+                "Discount_Percentage = ? " +
+                "WHERE Discount_ID = ? " +
+                "AND Discount_Name = ?";
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,discountName);
+            preparedStatement.setInt(2,Integer.valueOf(discountPercentage));
+            preparedStatement.setString(3,discountID);
+            preparedStatement.setString(4,oldDiscountName);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTaxData(String taxID, String taxName, String taxValue, String oldTaxName) throws ClassNotFoundException {
+        String update = "UPDATE BillingsTax SET " +
+                "Tax_Name = ?, " +
+                "Tax_Value = ? " +
+                "WHERE Tax_ID = ? " +
+                "AND Tax_Name = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,taxName);
+            preparedStatement.setDouble(2,Double.valueOf(taxValue));
+            preparedStatement.setString(3,taxID);
+            preparedStatement.setString(4,oldTaxName);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBillingData(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
+            , String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
+            , String serviceCurrency
+            , String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
+            , String calculationSubtotal, String calculationTax, String calculationTotal) throws ClassNotFoundException {
+        String update = "UPDATE Billings SET " +
+                "Issuer_Name = ?, " +
+                "Issuer_CUI = ?, " +
+                "Issuer_Trade_Register_Number = ?, " +
+                "Issuer_EUID = ?, " +
+                "Issuer_Country = ?, " +
+                "Issuer_City = ?, " +
+                "Issuer_County = ?, " +
+                "Issuer_Street = ?, " +
+                "Issuer_Number = ?, " +
+                "Issuer_Zipcode = ?, " +
+                "Issuer_Email = ?, " +
+                "Issuer_Phone_Number = ?, " +
+                "Client_Name = ?, " +
+                "Client_CUI = ?, " +
+                "Client_Trade_Register_Number = ?, " +
+                "Client_EUID = ?, " +
+                "Client_Country = ?, " +
+                "Client_City = ?, " +
+                "Client_County = ?, " +
+                "Client_Street = ?, " +
+                "Client_Number = ?, " +
+                "Client_Zipcode = ?, " +
+                "Client_Email = ?, " +
+                "Client_Phone_Number = ?, " +
+                "Service_Currency = ?, " +
+                "Payment_Bank = ?, " +
+                "Payment_Beneficiary = ?, " +
+                "Payment_IBAN = ?, " +
+                "Payment_Swift = ?, " +
+                "Payment_Reference = ?, " +
+                "Payment_Exchange = ?, " +
+                "Payment_Issue_Date = ?, " +
+                "Payment_Due_Date = ?, " +
+                "Payment_Currency = ?, " +
+                "Payment_Status =?, " +
+                "Calculation_Subtotal = ?, " +
+                "Calculation_Tax = ?, " +
+                "Calculation_Total = ? " +
+                "WHERE Billing_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(update)){
+            preparedStatement.setString(1,issuerName);
+            preparedStatement.setString(2,issuerCUI);
+            preparedStatement.setString(3,issuerTradeRegisterNumber);
+            preparedStatement.setString(4,issuerEUID);
+            preparedStatement.setString(5,issuerCountry);
+            preparedStatement.setString(6,issuerCity);
+            preparedStatement.setString(7,issuerCounty);
+            preparedStatement.setString(8,issuerStreet);
+            preparedStatement.setString(9,issuerNumber);
+            preparedStatement.setString(10,issuerZipCode);
+            preparedStatement.setString(11,issuerEmail);
+            preparedStatement.setString(12,issuerPhoneNumber);
+            preparedStatement.setString(13,clientName);
+            preparedStatement.setString(14,clientCUI);
+            preparedStatement.setString(15,clientTradeRegisterNumber);
+            preparedStatement.setString(16,clientEUID);
+            preparedStatement.setString(17,clientCountry);
+            preparedStatement.setString(18,clientCity);
+            preparedStatement.setString(19,clientCounty);
+            preparedStatement.setString(20,clientStreet);
+            preparedStatement.setString(21,clientNumber);
+            preparedStatement.setString(22,clientZipCode);
+            preparedStatement.setString(23,clientEmail);
+            preparedStatement.setString(24,clientPhoneNumber);
+            preparedStatement.setString(25,serviceCurrency);
+            preparedStatement.setString(26,paymentBank);
+            preparedStatement.setString(27,paymentBeneficiary);
+            preparedStatement.setString(28,paymentIBAN);
+            preparedStatement.setString(29,paymentSwift);
+            preparedStatement.setString(30,paymentReference);
+            preparedStatement.setDouble(31,paymentExchange);
+            preparedStatement.setString(32,paymentIssueDate);
+            preparedStatement.setString(33,paymentDueDate);
+            preparedStatement.setString(34,paymentCurrency);
+            preparedStatement.setString(35,paymentStatus);
+            preparedStatement.setString(36,calculationSubtotal);
+            preparedStatement.setString(37,calculationTax);
+            preparedStatement.setString(38,calculationTotal);
+            preparedStatement.setString(39,billingID);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
     }
 

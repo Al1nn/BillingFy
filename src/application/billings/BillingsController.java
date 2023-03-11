@@ -269,9 +269,6 @@ public class BillingsController implements Initializable {
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
 		billingsData = connection.retrieveData();
-
-		
-
 		billingTable.setItems(billingsData);
 		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 	}
