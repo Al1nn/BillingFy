@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Filter;
 
 import application.billings.backend.BillingsDatabase;
 import application.utilities.DraggableWindow;
@@ -22,6 +23,7 @@ import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -33,6 +35,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -209,7 +212,18 @@ public class BillingsController implements Initializable {
 
     @FXML
     private FontAwesomeIconView statisticsIcon;
-    
+
+	@FXML
+	private FontAwesomeIconView searchClientButton;
+
+	@FXML
+	private FontAwesomeIconView searchDueDateButton;
+
+	@FXML
+	private FontAwesomeIconView searchIssueDateButton;
+
+	@FXML
+	private FontAwesomeIconView searchNumberButton;
     @FXML
     private Button businessButton;
 
@@ -454,7 +468,103 @@ public class BillingsController implements Initializable {
 		billingTable.getSortOrder().clear();
 		billingTable.getSortOrder().add(billingTax);
     }
-    
+
+
+	@FXML
+	void searchClientButtonClicked(MouseEvent event) {
+		String searchedClient = searchClient.getText();
+
+		if(searchedClient == null || searchedClient.isEmpty()){
+			billingTable.setItems(billingsData);
+			return;
+		}
+
+		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+			return Billing.getClientName().contains(searchedClient);
+		});
+
+		billingTable.setItems(filteredList);
+
+	}
+
+	@FXML
+	void searchDueDateButtonClicked(MouseEvent event) {
+		String searchedDueDate = searchDueDate.getText();
+
+		if (searchedDueDate == null || searchedDueDate.isEmpty()){
+			billingTable.setItems(billingsData);
+			return;
+		}
+
+		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+			return Billing.getPaymentDueDate().contains(searchedDueDate);
+		});
+
+		billingTable.setItems(filteredList);
+
+
+
+	}
+
+	@FXML
+	void searchIssueDateButtonClicked(MouseEvent event) {
+		String searchedIssueDate = searchIssueDate.getText();
+
+		if (searchedIssueDate == null || searchedIssueDate.isEmpty()){
+
+			billingTable.setItems(billingsData);
+			return;
+		}
+
+		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+			return Billing.getPaymentIssueDate().contains(searchedIssueDate);
+		});
+		billingTable.setItems(filteredList);
+
+
+
+
+
+	}
+
+	@FXML
+	void searchNumberButtonClicked(MouseEvent event) {
+		String searchedNumber = searchNumber.getText();
+
+		if (searchedNumber == null || searchedNumber.isEmpty()){
+			billingTable.setItems(billingsData);
+			return;
+		}
+
+		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+			return Billing.getClientNumber().contains(searchedNumber);
+		});
+
+		billingTable.setItems(filteredList);
+
+
+
+	}
+
+	@FXML
+	void searchStatusSelected(ActionEvent event) {
+		String searchedStatus = searchStatus.getValue();
+
+		if (searchedStatus == null || searchedStatus.isEmpty()){
+			billingTable.setItems(billingsData);
+			return;
+		}
+
+		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+			return Billing.getPaymentStatus().contains(searchedStatus);
+		});
+
+		billingTable.setItems(filteredList);
+
+
+
+	}
+
     @FXML
     void clientsButtonClicked(ActionEvent event) throws IOException{
     	Parent root = FXMLLoader.load(getClass().getResource("/application/clients/Clients.fxml"));
@@ -471,7 +581,6 @@ public class BillingsController implements Initializable {
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -497,7 +606,6 @@ public class BillingsController implements Initializable {
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -521,7 +629,6 @@ public class BillingsController implements Initializable {
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -543,7 +650,6 @@ public class BillingsController implements Initializable {
 		ResizeWindow trigger = new ResizeWindow();
 		trigger.resizeWindow(root, stage);
 		}
-		//stage.centerOnScreen();
 		stage.setMinWidth(1350);
 		stage.setMinHeight(750);
 		stage.show();
@@ -574,6 +680,7 @@ public class BillingsController implements Initializable {
 		childStage.setOnHidden(evt -> {
 			try {
 				updateTable();
+				billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
 			} catch (ClassNotFoundException | IOException e) {
 				throw new RuntimeException(e);
 			}
