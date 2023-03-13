@@ -471,6 +471,9 @@ public class BillingsDatabase {
                 String clientEmail = resultSet.getString("Client_Email");
                 String clientPhoneNumber = resultSet.getString("Client_Phone_Number");
                 String serviceCurrency = resultSet.getString("Service_Currency");
+                ObservableList<BillingService> services = retrieveServiceData(billingID);
+                ObservableList<BillingDiscount> discounts = retrieveDiscountData(billingID);
+                ObservableList<BillingTax> taxes = retrieveTaxData(billingID);
                 String paymentBank = resultSet.getString("Payment_Bank");
                 String paymentBeneficiary = resultSet.getString("Payment_Beneficiary");
                 String paymentIBAN = resultSet.getString("Payment_IBAN");
@@ -487,6 +490,9 @@ public class BillingsDatabase {
                 Billing billing = new Billing(billingID,issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
                         ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipcode,clientEmail,clientPhoneNumber
                         ,serviceCurrency
+                        , services
+                        , discounts
+                        , taxes
                         ,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
                         ,calculationSubtotal,calculationTax,calculationTotal);
                 billings.add(billing);

@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Filter;
 
 import application.billings.backend.BillingsDatabase;
+import application.business.Business;
+import application.business.backend.BusinessDatabase;
 import application.utilities.DraggableWindow;
 import application.utilities.MeniuButtonsStyle;
 import application.utilities.ResizeWindow;
@@ -243,10 +245,14 @@ public class BillingsController implements Initializable {
     private MaterialIconView addBillingIcon;
 
 	private ObservableList<Billing> billingsData;
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
+		itemsPerPage.getSelectionModel().selectFirst();
 		String[] statusOptions = {"Platit","Neplatit"};
 		searchStatus.getItems().addAll(statusOptions);
 		setInitialDesignButtons();
@@ -261,6 +267,8 @@ public class BillingsController implements Initializable {
 		} catch (ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
+		totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+		billingPages.setText(String.valueOf(totalPages));
 	}
 	private void updateTable() throws ClassNotFoundException, IOException {
 		BillingsDatabase connection = new BillingsDatabase();
@@ -283,8 +291,9 @@ public class BillingsController implements Initializable {
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
 		billingsData = connection.retrieveData();
-		billingTable.setItems(billingsData);
-		billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
+		billingTable.setEditable(true);
+		displayTable(1,pageSize);
+		billingLengthText.setText(String.valueOf(billingsData.size()));
 	}
 	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15; "
@@ -355,15 +364,36 @@ public class BillingsController implements Initializable {
 	}
 	
     @FXML
-    void billingNextPageClicked(ActionEvent event) {
-
+    void billingNextPageClicked(ActionEvent event) throws ClassNotFoundException {
+		if(currentPage < totalPages){
+			currentPage++;
+			totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+			billingCurrentPage.setText(String.valueOf(currentPage));
+			billingPages.setText(String.valueOf(currentPage));
+			displayTable(currentPage,pageSize);
+		}
     }
 
     @FXML
-    void billingPreviousPageClicked(ActionEvent event) {
-
+    void billingPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
+		if(currentPage > 1){
+			currentPage--;
+			totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+			billingCurrentPage.setText(String.valueOf(currentPage));
+			billingPages.setText(String.valueOf(totalPages));
+			displayTable(currentPage,pageSize);
+		}
     }
-    
+	@FXML
+	void itemsPerPageSelected(ActionEvent event) throws ClassNotFoundException {
+		String selectedValue = itemsPerPage.getValue();
+		pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+		totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+		billingPages.setText(String.valueOf(totalPages));
+		currentPage = 1;
+		billingCurrentPage.setText(String.valueOf(currentPage));
+		displayTable(currentPage,pageSize);
+	}
     @FXML
     void sortClientButtonClicked(ActionEvent event) {
     	if(sortClientIcon.getGlyphName() == "ANGLE_UP") {
@@ -677,13 +707,26 @@ public class BillingsController implements Initializable {
 		refreshData(childStage);
 		}
 		private void refreshData(Stage childStage){
+		BillingsDatabase connection = new BillingsDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				updateTable();
-				billingLengthText.setText(String.valueOf(billingTable.getItems().size()));
-			} catch (ClassNotFoundException | IOException e) {
+				if(billingTable.getItems().size() == pageSize){
+					totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
+					billingPages.setText(String.valueOf(totalPages));
+				}
+				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
+				displayTable(currentPage,pageSize);
+			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
 		});
-		}
+	}
+	private void displayTable(int page, int size) throws ClassNotFoundException{
+		BillingsDatabase connection = new BillingsDatabase();
+		billingsData = connection.retrieveData();
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, billingsData.size());
+		ObservableList<Billing> currentPageData = FXCollections.observableArrayList(billingsData.subList(startIndex,endIndex));
+		billingTable.setItems(currentPageData);
+	}
 }

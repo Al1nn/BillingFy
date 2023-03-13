@@ -7,6 +7,8 @@ import java.io.IOException;
 import application.billings.backend.BillingsDatabase;
 import application.billings.popup.BillingsPopupController;
 import application.resources.DeletePopupController;
+import javafx.collections.FXCollections;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -83,10 +85,22 @@ public class Billing {
 	private HBox statusPane;
 
 	private TableView<Billing> tableView;
+	private Text billingCurrentPage;
 
+	private Text billingNumPages;
+
+	private Text billingLengthText;
+	private ComboBox<String> itemsPerPage;
+
+	private int pageSize = 10;
+	private int currentPage = 1;
+	private int totalPages;
 	public Billing(String billingID,String issuerName, String issuerCUI, String issuerTradeRegisterNumber, String issuerEUID, String issuerCountry, String issuerCity, String issuerCounty, String issuerStreet, String issuerNumber, String issuerZipCode, String issuerEmail, String issuerPhoneNumber
 				, String clientName, String clientCUI, String clientTradeRegisterNumber, String clientEUID, String clientCountry, String clientCity, String clientCounty, String clientStreet, String clientNumber, String clientZipCode, String clientEmail, String clientPhoneNumber
 				, String serviceCurrency
+				, ObservableList<BillingService> services
+				, ObservableList<BillingDiscount> discounts
+				, ObservableList<BillingTax> taxes
 				, String paymentBank, String paymentBeneficiary, String paymentIBAN, String paymentSwift, String paymentReference, double paymentExchange, String paymentIssueDate, String paymentDueDate, String paymentCurrency, String paymentStatus
 				, String calculationSubtotal, String calculationTax, String calculationTotal
 	) {
@@ -117,23 +131,9 @@ public class Billing {
 		this.clientEmail = clientEmail;
 		this.clientPhoneNumber = clientPhoneNumber;
 		this.serviceCurrency = serviceCurrency;
-
-		try {
-			this.services = connection.retrieveServiceData(billingID);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		try {
-			this.discounts = connection.retrieveDiscountData(billingID);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		try {
-			this.taxes = connection.retrieveTaxData(billingID);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-
+		this.services = services;
+		this.discounts = discounts;
+		this.taxes = taxes;
 		this.paymentBank = paymentBank;
 		this.paymentBeneficiary = paymentBeneficiary;
 		this.paymentIBAN = paymentIBAN;
@@ -255,13 +255,20 @@ public class Billing {
 							, taxes
 					,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
 					,calculationSubtotal,calculationTax,calculationTotal);
-					Stage childStage = new Stage();
-					String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
-					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 					//Implement elements from parentStage
 					tableView = (TableView<Billing>) parentStage.getScene().lookup("#billingTable");
-
+					billingCurrentPage = (Text) parentStage.getScene().lookup("#billingCurrentPage");
+					currentPage = Integer.parseInt(billingCurrentPage.getText());
+					billingNumPages = (Text) parentStage.getScene().lookup("#billingPages");
+					totalPages = Integer.parseInt(billingNumPages.getText());
+					itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+					String selectedValue = itemsPerPage.getValue();
+					pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+					billingLengthText = (Text) parentStage.getScene().lookup("#billingLengthText");
+					Stage childStage = new Stage();
+					String popupCSS = this.getClass().getResource("/application/billings/popup/BillingsPopupStyle.css").toExternalForm();
+					String scrollPaneCSS = this.getClass().getResource("/application/resources/scrollPaneStyle.css").toExternalForm();
 					childStage.setScene(new Scene(root));
 					childStage.getScene().getStylesheets().add(popupCSS);
 					childStage.getScene().getStylesheets().add(scrollPaneCSS);
@@ -282,15 +289,11 @@ public class Billing {
 			}
 		);
 	}
-	private void refreshData(Stage childStage){
-		BillingsDatabase connection = new BillingsDatabase();
+	private void refreshData(Stage childStage)
+	{
 		childStage.setOnHidden(evt -> {
 			try {
-				tableView.getItems().clear();
-				this.services = connection.retrieveServiceData(billingID);
-				this.discounts = connection.retrieveDiscountData(billingID);
-				this.taxes = connection.retrieveTaxData(billingID);
-				tableView.setItems(connection.retrieveData());
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -306,7 +309,14 @@ public class Billing {
 				Stage parentStage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 				//Implement elements from parent stage
 				tableView = (TableView<Billing>) parentStage.getScene().lookup("#billingTable");
-
+				billingCurrentPage = (Text) parentStage.getScene().lookup("#billingCurrentPage");
+				currentPage = Integer.parseInt(billingCurrentPage.getText());
+				billingNumPages = (Text) parentStage.getScene().lookup("#billingPages");
+				totalPages = Integer.parseInt(billingNumPages.getText());
+				itemsPerPage = (ComboBox<String>) parentStage.getScene().lookup("#itemsPerPage");
+				String selectedValue = itemsPerPage.getValue();
+				pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
+				billingLengthText = (Text) parentStage.getScene().lookup("#billingLengthText");
 				Stage childStage = new Stage();
 				String popupCSS = this.getClass().getResource("/application/resources/DeletePopupStyle.css").toExternalForm();
 				childStage.setScene(new Scene(root));
@@ -329,12 +339,18 @@ public class Billing {
 		BillingsDatabase connection = new BillingsDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				tableView.getItems().clear();
+				if (tableView.getItems().size() == 1){
+					--totalPages;
+					billingNumPages.setText(String.valueOf(totalPages));
+					--currentPage;
+					billingCurrentPage.setText(String.valueOf(currentPage));
+				}
 				connection.deleteServiceData(billingID);
 				connection.deleteDiscountData(billingID);
 				connection.deleteTaxData(billingID);
 				connection.deleteBillingData(billingID);
-				tableView.setItems(connection.retrieveData());
+				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
+				displayTable(currentPage,pageSize);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -425,6 +441,14 @@ public class Billing {
 
 		file.close();
 		return jo;
+	}
+
+	private void displayTable(int page, int size) throws ClassNotFoundException{
+		BillingsDatabase connection = new BillingsDatabase();
+		int startIndex = (page - 1) * size;
+		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
+		ObservableList<Billing> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
+		tableView.setItems(currentPageData);
 	}
 
 	public HBox getPane() {
