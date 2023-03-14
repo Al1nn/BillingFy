@@ -291,9 +291,10 @@ public class Billing {
 	}
 	private void refreshData(Stage childStage)
 	{
+		BillingsDatabase connection = new BillingsDatabase();
 		childStage.setOnHidden(evt -> {
 			try {
-				displayTable(currentPage,pageSize);
+				tableView.setItems(connection.retrieveData(pageSize,currentPage));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -350,7 +351,7 @@ public class Billing {
 				connection.deleteTaxData(billingID);
 				connection.deleteBillingData(billingID);
 				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
-				displayTable(currentPage,pageSize);
+				tableView.setItems(connection.retrieveData(pageSize,currentPage));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -443,13 +444,6 @@ public class Billing {
 		return jo;
 	}
 
-	private void displayTable(int page, int size) throws ClassNotFoundException{
-		BillingsDatabase connection = new BillingsDatabase();
-		int startIndex = (page - 1) * size;
-		int endIndex = Math.min(startIndex + size, connection.retrieveData().size());
-		ObservableList<Billing> currentPageData = FXCollections.observableArrayList(connection.retrieveData().subList(startIndex,endIndex));
-		tableView.setItems(currentPageData);
-	}
 
 	public HBox getPane() {
 		return pane;

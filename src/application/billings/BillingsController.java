@@ -245,17 +245,24 @@ public class BillingsController implements Initializable {
     private MaterialIconView addBillingIcon;
 
 	private ObservableList<Billing> billingsData;
+	private ObservableList<Billing> totalData;
 	private int pageSize = 10;
 	private int currentPage = 1;
 	private int totalPages;
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		BillingsDatabase connection = new BillingsDatabase();
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		itemsPerPage.getSelectionModel().selectFirst();
 		String[] statusOptions = {"Platit","Neplatit"};
 		searchStatus.getItems().addAll(statusOptions);
 		setInitialDesignButtons();
+		try {
+			totalData = connection.retrieveData();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 		MeniuButtonsStyle style = new MeniuButtonsStyle();
 		style.styleButtons(clientsButton, clientsIcon, clientsCircle);
 		style.styleButtons(servicesButton, servicesIcon, servicesCircle);
@@ -267,7 +274,7 @@ public class BillingsController implements Initializable {
 		} catch (ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
-		totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+		totalPages = (int) Math.ceil((double) totalData.size() / pageSize);
 		billingPages.setText(String.valueOf(totalPages));
 	}
 	private void updateTable() throws ClassNotFoundException, IOException {
@@ -290,9 +297,8 @@ public class BillingsController implements Initializable {
 		centerStatusColumn(billingStatus);
 		billingFunctions.setCellValueFactory(new PropertyValueFactory<>("pane"));
 		centerBillingFunctionsColumn(billingFunctions);
-		billingsData = connection.retrieveData();
-		billingTable.setEditable(true);
-		displayTable(1,pageSize);
+		billingsData = connection.retrieveData(pageSize,currentPage);
+		billingTable.setItems(billingsData);
 		billingLengthText.setText(String.valueOf(billingsData.size()));
 	}
 	public void setInitialDesignButtons() {
@@ -365,34 +371,37 @@ public class BillingsController implements Initializable {
 	
     @FXML
     void billingNextPageClicked(ActionEvent event) throws ClassNotFoundException {
+		BillingsDatabase connection = new BillingsDatabase();
 		if(currentPage < totalPages){
 			currentPage++;
-			totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+			totalPages = (int) Math.ceil((double) totalData.size() / pageSize);
 			billingCurrentPage.setText(String.valueOf(currentPage));
 			billingPages.setText(String.valueOf(currentPage));
-			displayTable(currentPage,pageSize);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 		}
     }
 
     @FXML
     void billingPreviousPageClicked(ActionEvent event) throws ClassNotFoundException {
+		BillingsDatabase connection = new BillingsDatabase();
 		if(currentPage > 1){
 			currentPage--;
-			totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+			totalPages = (int) Math.ceil((double) totalData.size() / pageSize);
 			billingCurrentPage.setText(String.valueOf(currentPage));
 			billingPages.setText(String.valueOf(totalPages));
-			displayTable(currentPage,pageSize);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 		}
     }
 	@FXML
 	void itemsPerPageSelected(ActionEvent event) throws ClassNotFoundException {
+		BillingsDatabase connection = new BillingsDatabase();
 		String selectedValue = itemsPerPage.getValue();
 		pageSize = Integer.parseInt(selectedValue.split(" ")[0]);
-		totalPages = (int) Math.ceil((double) billingsData.size() / pageSize);
+		totalPages = (int) Math.ceil((double) totalData.size() / pageSize);
 		billingPages.setText(String.valueOf(totalPages));
 		currentPage = 1;
 		billingCurrentPage.setText(String.valueOf(currentPage));
-		displayTable(currentPage,pageSize);
+		billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 	}
     @FXML
     void sortClientButtonClicked(ActionEvent event) {
@@ -551,10 +560,6 @@ public class BillingsController implements Initializable {
 		});
 		billingTable.setItems(filteredList);
 
-
-
-
-
 	}
 
 	@FXML
@@ -590,9 +595,6 @@ public class BillingsController implements Initializable {
 		});
 
 		billingTable.setItems(filteredList);
-
-
-
 	}
 
     @FXML
@@ -711,22 +713,15 @@ public class BillingsController implements Initializable {
 		childStage.setOnHidden(evt -> {
 			try {
 				if(billingTable.getItems().size() == pageSize){
-					totalPages = (int) Math.ceil((double) connection.retrieveData().size() / pageSize);
+					totalPages = (int) Math.ceil((double) totalData.size() / pageSize);
 					billingPages.setText(String.valueOf(totalPages));
 				}
-				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
-				displayTable(currentPage,pageSize);
+				billingLengthText.setText(String.valueOf(totalData.size()));
+				billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
 		});
 	}
-	private void displayTable(int page, int size) throws ClassNotFoundException{
-		BillingsDatabase connection = new BillingsDatabase();
-		billingsData = connection.retrieveData();
-		int startIndex = (page - 1) * size;
-		int endIndex = Math.min(startIndex + size, billingsData.size());
-		ObservableList<Billing> currentPageData = FXCollections.observableArrayList(billingsData.subList(startIndex,endIndex));
-		billingTable.setItems(currentPageData);
-	}
+
 }

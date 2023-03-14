@@ -11,7 +11,7 @@ import java.sql.*;
 public class BillingsDatabase {
     public Connection databaseLink;
 
-    public Connection getConnection() throws ClassNotFoundException {
+    public synchronized Connection getConnection() throws ClassNotFoundException {
         String databaseName = "BillingFy";
         String databaseUser = "root";
         String databasePassword = "FRES-123";
@@ -186,8 +186,8 @@ public class BillingsDatabase {
         try (Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(update)){
             preparedStatement.setString(1,serviceName);
-            preparedStatement.setInt(2,Integer.valueOf(serviceAmount));
-            preparedStatement.setDouble(3,Double.valueOf(servicePrice));
+            preparedStatement.setInt(2,Integer.parseInt(serviceAmount));
+            preparedStatement.setDouble(3,Double.parseDouble(servicePrice));
             preparedStatement.setString(4,serviceDescription);
             preparedStatement.setString(5,serviceID);
             preparedStatement.setString(6,oldServiceName);
@@ -206,7 +206,7 @@ public class BillingsDatabase {
         try(Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(update)){
             preparedStatement.setString(1,discountName);
-            preparedStatement.setInt(2,Integer.valueOf(discountPercentage));
+            preparedStatement.setInt(2,Integer.parseInt(discountPercentage));
             preparedStatement.setString(3,discountID);
             preparedStatement.setString(4,oldDiscountName);
             preparedStatement.executeUpdate();
@@ -224,7 +224,7 @@ public class BillingsDatabase {
         try (Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(update)){
             preparedStatement.setString(1,taxName);
-            preparedStatement.setDouble(2,Double.valueOf(taxValue));
+            preparedStatement.setDouble(2,Double.parseDouble(taxValue));
             preparedStatement.setString(3,taxID);
             preparedStatement.setString(4,oldTaxName);
             preparedStatement.executeUpdate();
@@ -375,19 +375,13 @@ public class BillingsDatabase {
     public ObservableList<BillingService> retrieveServiceData(String serviceID) throws ClassNotFoundException {
         String select = "SELECT * FROM BillingsService WHERE Service_ID = ?";
         ObservableList<BillingService> billingServices = FXCollections.observableArrayList();
-        try(Connection connection = getConnection()
-        )
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(select))
         {
-            PreparedStatement preparedStatement = connection.prepareStatement(select);
             preparedStatement.setString(1,serviceID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                String billingServiceID = resultSet.getString("Service_ID");
-                String billingServiceName = resultSet.getString("Service_Name");
-                int billingServiceAmount = resultSet.getInt("Service_Amount");
-                double billingServicePrice = resultSet.getDouble("Service_Price");
-                String billingServiceDescription = resultSet.getString("Service_Description");
-                BillingService billingService = new BillingService(billingServiceID,billingServiceName,billingServiceAmount,billingServicePrice,billingServiceDescription);
+                BillingService billingService = mapServices(resultSet);
                 billingServices.add(billingService);
             }
         }catch (SQLException e){
@@ -400,15 +394,13 @@ public class BillingsDatabase {
     public ObservableList<BillingDiscount> retrieveDiscountData(String discountID) throws ClassNotFoundException{
         String select = "SELECT * FROM BillingsDiscount WHERE Discount_ID = ?";
         ObservableList<BillingDiscount> billingDiscounts = FXCollections.observableArrayList();
-        try (Connection connection = getConnection()){
-            PreparedStatement preparedStatement = connection.prepareStatement(select);
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(select))
+        {
             preparedStatement.setString(1,discountID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                String billingDiscountID = resultSet.getString("Discount_ID");
-                String billingDiscountName = resultSet.getString("Discount_Name");
-                int billingDiscountPercentage = resultSet.getInt("Discount_Percentage");
-                BillingDiscount billingDiscount = new BillingDiscount(billingDiscountID,billingDiscountName,billingDiscountPercentage);
+                BillingDiscount billingDiscount = mapDiscounts(resultSet);
                 billingDiscounts.add(billingDiscount);
             }
         }catch (SQLException e){
@@ -420,15 +412,13 @@ public class BillingsDatabase {
     public ObservableList<BillingTax> retrieveTaxData(String taxID) throws ClassNotFoundException{
         String select = "SELECT * FROM BillingsTax WHERE Tax_ID = ?";
         ObservableList<BillingTax> billingTaxes = FXCollections.observableArrayList();
-        try (Connection connection = getConnection()){
-            PreparedStatement preparedStatement = connection.prepareStatement(select);
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(select))
+        {
             preparedStatement.setString(1,taxID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                String billingTaxID = resultSet.getString("Tax_ID");
-                String billingTaxName = resultSet.getString("Tax_Name");
-                double billingTaxValue = resultSet.getInt("Tax_Value");
-                BillingTax billingTax = new BillingTax(billingTaxID,billingTaxName,billingTaxValue);
+                BillingTax billingTax = mapTaxes(resultSet);
                 billingTaxes.add(billingTax);
             }
         }catch (SQLException e){
@@ -437,69 +427,114 @@ public class BillingsDatabase {
         return billingTaxes;
     }
 
-    public ObservableList<Billing> retrieveData() throws ClassNotFoundException{
+    public ObservableList<Billing> retrieveData(int itemsPerPage, int page) throws ClassNotFoundException{
         ObservableList<Billing> billings = FXCollections.observableArrayList();
-        String retrieve = "SELECT * FROM Billings";
+        String retrieve = "SELECT * FROM Billings LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(retrieve))
+             PreparedStatement preparedStatement = connection.prepareStatement(retrieve)
+             )
         {
+            preparedStatement.setInt(1, itemsPerPage);
+            preparedStatement.setInt(2, (page - 1) * itemsPerPage);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                String billingID = resultSet.getString("Billing_ID");
-                String issuerName = resultSet.getString("Issuer_Name");
-                String issuerCUI = resultSet.getString("Issuer_CUI");
-                String issuerTradeRegisterNumber = resultSet.getString("Issuer_Trade_Register_Number");
-                String issuerEUID = resultSet.getString("Issuer_EUID");
-                String issuerCountry = resultSet.getString("Issuer_Country");
-                String issuerCity = resultSet.getString("Issuer_City");
-                String issuerCounty = resultSet.getString("Issuer_County");
-                String issuerStreet = resultSet.getString("Issuer_Street");
-                String issuerNumber = resultSet.getString("Issuer_Number");
-                String issuerZipCode = resultSet.getString("Issuer_Zipcode");
-                String issuerEmail = resultSet.getString("Issuer_Email");
-                String issuerPhoneNumber = resultSet.getString("Issuer_Phone_Number");
-                String clientName = resultSet.getString("Client_Name");
-                String clientCUI = resultSet.getString("Client_CUI");
-                String clientTradeRegisterNumber = resultSet.getString("Client_Trade_Register_Number");
-                String clientEUID = resultSet.getString("Client_EUID");
-                String clientCountry = resultSet.getString("Client_Country");
-                String clientCity = resultSet.getString("Client_City");
-                String clientCounty = resultSet.getString("Client_County");
-                String clientStreet = resultSet.getString("Client_Street");
-                String clientNumber = resultSet.getString("Client_Number");
-                String clientZipcode = resultSet.getString("Client_Zipcode");
-                String clientEmail = resultSet.getString("Client_Email");
-                String clientPhoneNumber = resultSet.getString("Client_Phone_Number");
-                String serviceCurrency = resultSet.getString("Service_Currency");
-                ObservableList<BillingService> services = retrieveServiceData(billingID);
-                ObservableList<BillingDiscount> discounts = retrieveDiscountData(billingID);
-                ObservableList<BillingTax> taxes = retrieveTaxData(billingID);
-                String paymentBank = resultSet.getString("Payment_Bank");
-                String paymentBeneficiary = resultSet.getString("Payment_Beneficiary");
-                String paymentIBAN = resultSet.getString("Payment_IBAN");
-                String paymentSwift = resultSet.getString("Payment_Swift");
-                String paymentReference = resultSet.getString("Payment_Reference");
-                double paymentExchange = resultSet.getDouble("Payment_Exchange");
-                String paymentIssueDate = resultSet.getString("Payment_Issue_Date");
-                String paymentDueDate = resultSet.getString("Payment_Due_Date");
-                String paymentCurrency = resultSet.getString("Payment_Currency");
-                String paymentStatus = resultSet.getString("Payment_Status");
-                String calculationSubtotal = resultSet.getString("Calculation_Subtotal");
-                String calculationTax = resultSet.getString("Calculation_Tax");
-                String calculationTotal = resultSet.getString("Calculation_Total");
-                Billing billing = new Billing(billingID,issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
-                        ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipcode,clientEmail,clientPhoneNumber
-                        ,serviceCurrency
-                        , services
-                        , discounts
-                        , taxes
-                        ,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
-                        ,calculationSubtotal,calculationTax,calculationTotal);
+                 Billing billing = mapBilling(resultSet);
                 billings.add(billing);
             }
+
         }catch (SQLException e){
             e.printStackTrace();
         }
         return billings;
+    }
+    public ObservableList<Billing> retrieveData() throws ClassNotFoundException{
+        ObservableList<Billing> billings = FXCollections.observableArrayList();
+        String retrieve = "SELECT * FROM Billings";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(retrieve)
+        )
+        {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Billing billing = mapBilling(resultSet);
+                billings.add(billing);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return billings;
+    }
+    private BillingService mapServices(ResultSet resultSet) throws SQLException{
+        String billingServiceID = resultSet.getString("Service_ID");
+        String billingServiceName = resultSet.getString("Service_Name");
+        int billingServiceAmount = resultSet.getInt("Service_Amount");
+        double billingServicePrice = resultSet.getDouble("Service_Price");
+        String billingServiceDescription = resultSet.getString("Service_Description");
+        return new BillingService(billingServiceID,billingServiceName,billingServiceAmount,billingServicePrice,billingServiceDescription);
+    }
+    private BillingDiscount mapDiscounts(ResultSet resultSet) throws SQLException{
+        String billingDiscountID = resultSet.getString("Discount_ID");
+        String billingDiscountName = resultSet.getString("Discount_Name");
+        int billingDiscountPercentage = resultSet.getInt("Discount_Percentage");
+        return new BillingDiscount(billingDiscountID,billingDiscountName,billingDiscountPercentage);
+    }
+    private BillingTax mapTaxes(ResultSet resultSet) throws SQLException{
+        String billingTaxID = resultSet.getString("Tax_ID");
+        String billingTaxName = resultSet.getString("Tax_Name");
+        double billingTaxValue = resultSet.getInt("Tax_Value");
+        return new BillingTax(billingTaxID,billingTaxName,billingTaxValue);
+    }
+    private Billing mapBilling(ResultSet resultSet) throws SQLException, ClassNotFoundException {
+        String billingID = resultSet.getString("Billing_ID");
+        String issuerName = resultSet.getString("Issuer_Name");
+        String issuerCUI = resultSet.getString("Issuer_CUI");
+        String issuerTradeRegisterNumber = resultSet.getString("Issuer_Trade_Register_Number");
+        String issuerEUID = resultSet.getString("Issuer_EUID");
+        String issuerCountry = resultSet.getString("Issuer_Country");
+        String issuerCity = resultSet.getString("Issuer_City");
+        String issuerCounty = resultSet.getString("Issuer_County");
+        String issuerStreet = resultSet.getString("Issuer_Street");
+        String issuerNumber = resultSet.getString("Issuer_Number");
+        String issuerZipCode = resultSet.getString("Issuer_Zipcode");
+        String issuerEmail = resultSet.getString("Issuer_Email");
+        String issuerPhoneNumber = resultSet.getString("Issuer_Phone_Number");
+        String clientName = resultSet.getString("Client_Name");
+        String clientCUI = resultSet.getString("Client_CUI");
+        String clientTradeRegisterNumber = resultSet.getString("Client_Trade_Register_Number");
+        String clientEUID = resultSet.getString("Client_EUID");
+        String clientCountry = resultSet.getString("Client_Country");
+        String clientCity = resultSet.getString("Client_City");
+        String clientCounty = resultSet.getString("Client_County");
+        String clientStreet = resultSet.getString("Client_Street");
+        String clientNumber = resultSet.getString("Client_Number");
+        String clientZipcode = resultSet.getString("Client_Zipcode");
+        String clientEmail = resultSet.getString("Client_Email");
+        String clientPhoneNumber = resultSet.getString("Client_Phone_Number");
+        String serviceCurrency = resultSet.getString("Service_Currency");
+        ObservableList<BillingService> services = retrieveServiceData(billingID);
+        ObservableList<BillingDiscount> discounts = retrieveDiscountData(billingID);
+        ObservableList<BillingTax> taxes = retrieveTaxData(billingID);
+        String paymentBank = resultSet.getString("Payment_Bank");
+        String paymentBeneficiary = resultSet.getString("Payment_Beneficiary");
+        String paymentIBAN = resultSet.getString("Payment_IBAN");
+        String paymentSwift = resultSet.getString("Payment_Swift");
+        String paymentReference = resultSet.getString("Payment_Reference");
+        double paymentExchange = resultSet.getDouble("Payment_Exchange");
+        String paymentIssueDate = resultSet.getString("Payment_Issue_Date");
+        String paymentDueDate = resultSet.getString("Payment_Due_Date");
+        String paymentCurrency = resultSet.getString("Payment_Currency");
+        String paymentStatus = resultSet.getString("Payment_Status");
+        String calculationSubtotal = resultSet.getString("Calculation_Subtotal");
+        String calculationTax = resultSet.getString("Calculation_Tax");
+        String calculationTotal = resultSet.getString("Calculation_Total");
+        return new Billing(billingID,issuerName,issuerCUI,issuerTradeRegisterNumber,issuerEUID,issuerCountry,issuerCity,issuerCounty,issuerStreet,issuerNumber,issuerZipCode,issuerEmail,issuerPhoneNumber
+                ,clientName,clientCUI,clientTradeRegisterNumber,clientEUID,clientCountry,clientCity,clientCounty,clientStreet,clientNumber,clientZipcode,clientEmail,clientPhoneNumber
+                ,serviceCurrency
+                , services
+                , discounts
+                , taxes
+                ,paymentBank,paymentBeneficiary,paymentIBAN,paymentSwift,paymentReference,paymentExchange,paymentIssueDate,paymentDueDate,paymentCurrency,paymentStatus
+                ,calculationSubtotal,calculationTax,calculationTotal);
     }
 }
