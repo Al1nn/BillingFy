@@ -299,7 +299,7 @@ public class BillingsController implements Initializable {
 		centerBillingFunctionsColumn(billingFunctions);
 		billingsData = connection.retrieveData(pageSize,currentPage);
 		billingTable.setItems(billingsData);
-		billingLengthText.setText(String.valueOf(billingsData.size()));
+		billingLengthText.setText(String.valueOf(totalData.size()));
 	}
 	public void setInitialDesignButtons() {
 		billingsButton.setStyle("-fx-background-color: white; -fx-background-radius: 15px; -fx-border-radius: 15 15 15 15; "
@@ -510,11 +510,11 @@ public class BillingsController implements Initializable {
 
 
 	@FXML
-	void searchClientButtonClicked(MouseEvent event) {
+	void searchClientButtonClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchedClient = searchClient.getText();
-
+		BillingsDatabase connection = new BillingsDatabase();
 		if(searchedClient == null || searchedClient.isEmpty()){
-			billingTable.setItems(billingsData);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
@@ -527,11 +527,11 @@ public class BillingsController implements Initializable {
 	}
 
 	@FXML
-	void searchDueDateButtonClicked(MouseEvent event) {
+	void searchDueDateButtonClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchedDueDate = searchDueDate.getText();
-
+		BillingsDatabase connection = new BillingsDatabase();
 		if (searchedDueDate == null || searchedDueDate.isEmpty()){
-			billingTable.setItems(billingsData);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
@@ -540,18 +540,14 @@ public class BillingsController implements Initializable {
 		});
 
 		billingTable.setItems(filteredList);
-
-
-
 	}
 
 	@FXML
-	void searchIssueDateButtonClicked(MouseEvent event) {
+	void searchIssueDateButtonClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchedIssueDate = searchIssueDate.getText();
-
+		BillingsDatabase connection = new BillingsDatabase();
 		if (searchedIssueDate == null || searchedIssueDate.isEmpty()){
-
-			billingTable.setItems(billingsData);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
@@ -563,11 +559,11 @@ public class BillingsController implements Initializable {
 	}
 
 	@FXML
-	void searchNumberButtonClicked(MouseEvent event) {
+	void searchNumberButtonClicked(MouseEvent event) throws ClassNotFoundException {
 		String searchedNumber = searchNumber.getText();
-
+		BillingsDatabase connection = new BillingsDatabase();
 		if (searchedNumber == null || searchedNumber.isEmpty()){
-			billingTable.setItems(billingsData);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
@@ -582,11 +578,11 @@ public class BillingsController implements Initializable {
 	}
 
 	@FXML
-	void searchStatusSelected(ActionEvent event) {
+	void searchStatusSelected(ActionEvent event) throws ClassNotFoundException {
 		String searchedStatus = searchStatus.getValue();
-
+		BillingsDatabase connection = new BillingsDatabase();
 		if (searchedStatus == null || searchedStatus.isEmpty()){
-			billingTable.setItems(billingsData);
+			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
@@ -701,7 +697,6 @@ public class BillingsController implements Initializable {
 		childStage.initOwner(parentStage);
 		childStage.initStyle(StageStyle.UNDECORATED);
 		childStage.show();
-		//stage.centerOnScreen();
 		double x = parentStage.getX() + (parentStage.getWidth() - childStage.getWidth()) / 2;
 		double y = parentStage.getY() + (parentStage.getHeight() - childStage.getHeight()) / 2;
 		childStage.setX(x);
@@ -718,6 +713,7 @@ public class BillingsController implements Initializable {
 				}
 				billingLengthText.setText(String.valueOf(totalData.size()));
 				billingTable.setItems(connection.retrieveData(pageSize,currentPage));
+
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}

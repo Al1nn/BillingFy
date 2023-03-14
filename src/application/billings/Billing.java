@@ -350,8 +350,8 @@ public class Billing {
 				connection.deleteDiscountData(billingID);
 				connection.deleteTaxData(billingID);
 				connection.deleteBillingData(billingID);
-				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
 				tableView.setItems(connection.retrieveData(pageSize,currentPage));
+				billingLengthText.setText(String.valueOf(connection.retrieveData().size()));
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
