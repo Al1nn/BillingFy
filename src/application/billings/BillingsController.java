@@ -255,7 +255,7 @@ public class BillingsController implements Initializable {
 		String[] itemPerPageOptions = { "10 iteme", "20 iteme", "30 iteme" };
 		itemsPerPage.getItems().addAll(itemPerPageOptions);
 		itemsPerPage.getSelectionModel().selectFirst();
-		String[] statusOptions = {"Platit","Neplatit"};
+		String[] statusOptions = {"Platit","Neplatit","Status"};
 		searchStatus.getItems().addAll(statusOptions);
 		setInitialDesignButtons();
 		try {
@@ -518,7 +518,7 @@ public class BillingsController implements Initializable {
 			return;
 		}
 
-		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+		FilteredList<Billing> filteredList = totalData.filtered(Billing -> {
 			return Billing.getClientName().contains(searchedClient);
 		});
 
@@ -535,7 +535,7 @@ public class BillingsController implements Initializable {
 			return;
 		}
 
-		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+		FilteredList<Billing> filteredList = totalData.filtered(Billing -> {
 			return Billing.getPaymentDueDate().contains(searchedDueDate);
 		});
 
@@ -551,7 +551,7 @@ public class BillingsController implements Initializable {
 			return;
 		}
 
-		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+		FilteredList<Billing> filteredList = totalData.filtered(Billing -> {
 			return Billing.getPaymentIssueDate().contains(searchedIssueDate);
 		});
 		billingTable.setItems(filteredList);
@@ -567,7 +567,7 @@ public class BillingsController implements Initializable {
 			return;
 		}
 
-		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+		FilteredList<Billing> filteredList = totalData.filtered(Billing -> {
 			return Billing.getClientNumber().contains(searchedNumber);
 		});
 
@@ -581,12 +581,12 @@ public class BillingsController implements Initializable {
 	void searchStatusSelected(ActionEvent event) throws ClassNotFoundException {
 		String searchedStatus = searchStatus.getValue();
 		BillingsDatabase connection = new BillingsDatabase();
-		if (searchedStatus == null || searchedStatus.isEmpty()){
+		if (searchedStatus == null || searchedStatus.isEmpty() || searchedStatus.equals("Status")){
 			billingTable.setItems(connection.retrieveData(pageSize,currentPage));
 			return;
 		}
 
-		FilteredList<Billing> filteredList = billingsData.filtered(Billing -> {
+		FilteredList<Billing> filteredList = totalData.filtered(Billing -> {
 			return Billing.getPaymentStatus().contains(searchedStatus);
 		});
 
