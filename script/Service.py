@@ -1,8 +1,9 @@
 
 class Service:
-    def __init__(self, serviceName, serviceAmount, servicePrice, serviceDescription):
+    def __init__(self, serviceName, serviceAmount, serviceCurrency, servicePrice, serviceDescription):
         self.serviceName = serviceName
         self.serviceAmount = serviceAmount
+        self.serviceCurrency = serviceCurrency
         self.servicePrice = servicePrice
         self.serviceDescription = serviceDescription
         
@@ -11,6 +12,9 @@ class Service:
         
     def get_serviceAmount(self):
         return self.serviceAmount
+        
+    def get_serviceCurrency(self):
+        return self.serviceCurrency
         
     def get_servicePrice(self):
         return self.servicePrice
