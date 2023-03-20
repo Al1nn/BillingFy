@@ -1,5 +1,6 @@
 body{
     background-color: #FFFFFF;
+    overflow: auto;
 }
 
 
@@ -44,6 +45,86 @@ body{
     background-color: #FFFFFF;
     text-align: right;
     font-family: 'Helvetica';
+}
+.service-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.tax-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.discount-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.payment-header{
+    background-color: rgb(235, 234, 234);
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 3px solid #c8c6c6;
+    height: 65px;
+    font-size: 20px;
+    font-family: 'Helvetica';
+    border-radius: 5px 5px 0 0;
+}
+.payment-title{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 65px;
+    font-weight: 500;
+    font-family: 'Helvetica';
+    font-size: 22px;
+}
+
+.payment-body{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-left: 1px solid #c8c6c6;
+    border-right: 1px solid #c8c6c6;
+    font-family: 'Helvetica';
+}
+.calculation-div{
+    background-color: #FFFFFF;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Helvetica';
+    font-size: 15px;
+}
+.calculation-body{
+    float: right;
+    background-color: #FFFFFF;
+    height: 100px;
+    width: 400px;
+    text-align: right;
+    font-size: 15px;
+    margin-top: -12px;
+    font-family: 'Helvetica';
+}
+table{
+    width: 100%;
+    font-family: 'Helvetica';
+    font-size: 17px;
+    border-spacing: 18px;
+    border-bottom: 3px solid #c8c6c6;
+}
+ th{
+    text-align: left;
+}
+footer{
+    height: 50px;
+    background-color: #6f9ade;
+    margin-top: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
 }
 .header-image{
     width: 145px;
