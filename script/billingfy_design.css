@@ -1,0 +1,41 @@
+body{
+    background-color: #FFFFFF;
+}
+
+
+.header{
+    height: 50px;
+    background-color: #2a73e8;
+    margin: -15px;
+}
+
+.issuer-header{
+    background-color: #FFFFFF;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 3px solid #c8c6c6;
+    height: 235px;
+}
+
+.issuer-info{
+    float: right;
+    background-color: #FFFFFF;
+    height: 235px;
+    width: 400px;
+    text-align: right;
+    font-size: 15px;
+    margin-top: -15px;
+    font-family: 'Helvetica';
+}
+
+.header-image{
+    width: 145px;
+}
+
+.header-title{
+    font-size: 45px;
+    margin-top: 5px;
+    font-family: 'Helvetica';
+}
+
