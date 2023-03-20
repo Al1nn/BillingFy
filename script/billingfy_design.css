@@ -28,7 +28,23 @@ body{
     margin-top: -15px;
     font-family: 'Helvetica';
 }
-
+.client-header{
+    height: 245px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Helvetica';
+    font-size: 15px;
+    border-bottom: 3px solid #c8c6c6;
+}
+.invoice-data{
+    float: right;
+    height: 245px;
+    width: 200px;
+    background-color: #FFFFFF;
+    text-align: right;
+    font-family: 'Helvetica';
+}
 .header-image{
     width: 145px;
 }
