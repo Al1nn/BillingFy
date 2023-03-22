@@ -1,7 +1,6 @@
 package application.billings;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 
 import application.billings.backend.BillingsDatabase;
@@ -361,6 +360,39 @@ public class Billing {
 		button.setOnMouseClicked(evt -> {
 			try {
 				toJsonObject();
+				String os = System.getProperty("os.name").toLowerCase();
+				boolean isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
+				boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+				boolean isLinux = System.getProperty("os.name").toLowerCase().startsWith("linux");
+				String srcPath = new File("").getAbsolutePath();
+				String projectPath = new File(srcPath).getParentFile().getAbsolutePath();
+
+				if (isMac){
+					try {
+						ProcessBuilder pb = new ProcessBuilder("/bin/bash", projectPath + "/generate_invoice_mac.sh");
+						Process process = pb.start();
+						int exitCode = process.waitFor();
+						System.out.println("Script executed exit code : "+exitCode);
+						BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+						BufferedReader errorStream = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+						String line;
+						while ((line = reader.readLine()) != null){
+							System.out.println(line);
+						}
+						String errorLine;
+						while ((errorLine = errorStream.readLine()) != null){
+							System.out.println(errorLine);
+						}
+					} catch (IOException | InterruptedException e){
+						e.printStackTrace();
+					}
+				}else if (isWindows){
+
+				}else if (isLinux){
+
+				}
+
+
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
