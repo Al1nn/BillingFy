@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Invoice</title>
+</head>
+<style>
+    body{
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+
+
+.header{
+    height: 50px;
+    background-color: #2a73e8;
+    margin: -15px;
+}
+
+.issuer-header{
+    background-color: #FFFFFF;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 3px solid #c8c6c6;
+    height: 260px;
+}
+
+.issuer-info{
+    float: right;
+    background-color: #FFFFFF;
+    height: 235px;
+    width: 450px;
+    text-align: right;
+    font-size: 15px;
+    margin-top: -15px;
+    font-family: 'Helvetica';
+}
+.client-header{
+    height: 275px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Helvetica';
+    font-size: 15px;
+    border-bottom: 3px solid #c8c6c6;
+}
+.invoice-data{
+    float: right;
+    height: 245px;
+    width: 200px;
+    background-color: #FFFFFF;
+    text-align: right;
+    font-family: 'Helvetica';
+}
+.service-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.tax-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.discount-div{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.payment-header{
+    background-color: rgb(235, 234, 234);
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 3px solid #c8c6c6;
+    height: 65px;
+    font-size: 20px;
+    font-family: 'Helvetica';
+    border-radius: 5px 5px 0 0;
+}
+.payment-title{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 65px;
+    font-weight: 500;
+    font-family: 'Helvetica';
+    font-size: 22px;
+}
+
+.payment-body{
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-left: 1px solid #c8c6c6;
+    border-right: 1px solid #c8c6c6;
+    font-family: 'Helvetica';
+}
+.calculation-div{
+    background-color: #FFFFFF;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Helvetica';
+    font-size: 15px;
+}
+.calculation-body{
+    float: right;
+    background-color: #FFFFFF;
+    height: 100px;
+    width: 400px;
+    text-align: right;
+    font-size: 15px;
+    margin-top: -12px;
+    font-family: 'Helvetica';
+}
+table{
+    width: 100%;
+    font-family: 'Helvetica';
+    font-size: 17px;
+    border-spacing: 18px;
+    border-bottom: 3px solid #c8c6c6;
+}
+ th{
+    text-align: left;
+}
+footer{
+    height: 50px;
+    background-color: #6f9ade;
+    margin-top: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.header-image{
+    width: 145px;
+}
+
+.header-title{
+    font-size: 45px;
+    margin-top: 5px;
+    font-family: 'Helvetica';
+}
+
+</style>
+<body>
+<div class="header">
+</div>
+<div class="issuer-header">
+    <div class="issuer-info">
+        <h2>{{issuer.issuerName}}</h2>
+        <p>{{issuer.issuerStreet}}</p>
+        <p>{{issuer.issuerCity}}, {{issuer.issuerCounty}}, {{issuer.issuerCountry}}</p>
+        <p>{{issuer.issuerZipcode}}</p>
+        <p>{{issuer.issuerCUI}} - {{issuer.issuerTradeRegisterNumber}}</p>
+        <p>{{issuer.issuerEUID}} - {{issuer.issuerPhoneNumber}} </p>
+        <p>{{issuer.issuerEmail}}</p>
+    </div>
+    <img class="header-image" src="{{ image_path }}">
+    <p class="header-title">Invoice</p>
+</div>
+
+<div class="client-header">
+    <div class="invoice-data">
+        <h4>{{payment.paymentReference}}</h4>
+        <p>INVOICE ISSUE DATE:</p>
+        <p>{{payment.paymentIssueDate}}</p>
+        <p>INVOICE DUE DATE:</p>
+        <p>{{payment.paymentDueDate}}</p>
+    </div>
+    <h4>BILL TO:</h4>
+    <h3>{{client.clientName}}</h3>
+    <p>{{client.clientStreet}}</p>
+    <p>{{client.clientCity}}, {{client.clientCounty}}, {{client.clientCountry}}</p>
+    <p>{{client.clientZipcode}}</p>
+    <p>{{client.clientCUI}} - {{client.clientTradeRegisterNumber}}</p>
+    <p>{{client.clientEUID}} - {{client.clientPhoneNumber}}</p>
+    <p>{{client.clientEmail}}</p>
+</div>
+<div class="service-div">
+<table>
+    <thead>
+        <tr>
+            <th>Services</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in services %}
+        <tr>
+            <td>{{item['serviceName']}}</td>
+            <td>{{item['serviceDescription']}}</td>
+            <td>{{item['serviceAmount']}}</td>
+            <td>{{item['servicePrice']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+<div class="tax-div">
+    <table>
+        <thead>
+            <tr>
+                <th>Tax</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in taxes %}
+            <tr>
+                <td>{{item['taxName']}}</td>
+                <td>{{item['taxValue']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="discount-div">
+    <table>
+        <thead>
+            <tr>
+                <th>Discount</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in discounts %}
+            <tr>
+                <td>{{item['discountName']}}</td>
+                <td>{{item['discountPercentage']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="payment-header">
+    <p class="payment-title">Payment Details</p>
+</div>
+<div class="payment-body">
+   <table class="payment-table">
+    <tr>
+        <th>Bank</th>
+        <td>{{payment.paymentBank}}</td>
+        <th>Beneficiary</th>
+        <td>{{payment.paymentBeneficiary}}</td>
+    </tr>
+    <tr>
+        <th>IBAN</th>
+        <td>{{payment.paymentIBAN}}</td>
+        <th>BIC/SWIFT</th>
+        <td>{{payment.paymentSwift}}</td>     
+    </tr>
+   </table>
+</div>
+
+<div class="calculation-div">
+    <div class="calculation-body">
+        <p>Subtotal : {{calculation.calculationSubtotal}} {{payment.paymentCurrency}}</p>
+        <p>Taxes : {{calculation.calculationTax}} {{payment.paymentCurrency}}</p>
+        <h3>Total : {{calculation.calculationTotal}} {{payment.paymentCurrency}}</h3>
+    </div>
+    <h3>Notes :</h3>
+    <p>Invoice digitally generated <br>
+    Does not require signature</p>
+</div>
+<footer>
+    
+</footer>
+
+</body>
+</html>

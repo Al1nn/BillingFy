@@ -16,21 +16,21 @@ body{
     margin-left: 20px;
     margin-right: 20px;
     border-bottom: 3px solid #c8c6c6;
-    height: 235px;
+    height: 260px;
 }
 
 .issuer-info{
     float: right;
     background-color: #FFFFFF;
     height: 235px;
-    width: 400px;
+    width: 450px;
     text-align: right;
     font-size: 15px;
     margin-top: -15px;
     font-family: 'Helvetica';
 }
 .client-header{
-    height: 245px;
+    height: 265px;
     background-color: #ffffff;
     margin-left: 20px;
     margin-right: 20px;
