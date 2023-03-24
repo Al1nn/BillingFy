@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.text.Font;
 import org.mindrot.jbcrypt.BCrypt;
 
 import application.register.backend.LoginDatabase;
@@ -61,9 +62,15 @@ public class LoginController implements Initializable{
 	
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		loadFonts();
 		errorMessage.setVisible(false);
 	}
-    
+
+	public void loadFonts(){
+		Font.loadFont(getClass().getResourceAsStream("/resources/Buffalo.otf"),12);
+
+	}
+
 	@FXML
 	public void loginButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException{
 		LoginDatabase connection = new LoginDatabase();

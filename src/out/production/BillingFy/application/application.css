@@ -11,6 +11,15 @@
 	-fx-stroke: solid;
 	-fx-text-fill: "white";
 }
+@font-face{
+    font-family: "Buffalo"
+    src: url("/resources/Buffalo.otf");
+}
+
+#textLabel{
+    -fx-font-family : "Buffalo"
+}
+
 #loginButton:hover{
 	-fx-background-color: transparent;
 	-fx-border-color: #538EEA;
