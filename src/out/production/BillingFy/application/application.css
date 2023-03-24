@@ -12,13 +12,26 @@
 	-fx-text-fill: "white";
 }
 @font-face{
-    font-family: "Buffalo"
-    src: url("/resources/Buffalo.otf");
+    font-family: "Buffalo";
+    src: url("resources/Buffalo.ttf");
+}
+
+@font-face{
+    font-family: "Roboto-Regular";
+    src: url("resources/Roboto-Regular.ttf");
 }
 
 #textLabel{
-    -fx-font-family : "Buffalo"
+    -fx-font-family : "Buffalo";
+    -fx-font-size : 45px;
 }
+
+#passwordLabel,#usernameLabel,#registerText{
+    -fx-font-family : "Roboto-Regular";
+    -fx-font-size : 14px;
+}
+
+
 
 #loginButton:hover{
 	-fx-background-color: transparent;

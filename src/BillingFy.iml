@@ -137,7 +137,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../windows external libraries/javafx-sdk-20/lib/javafx.base.jar!/" />
+          <root url="jar://$MODULE_DIR$/../windows external libraries/javafx-sdk-20/lib/javafx.controls.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -146,7 +146,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../windows external libraries/javafx-sdk-20/lib/javafx.controls.jar!/" />
+          <root url="jar://$MODULE_DIR$/../windows external libraries/javafx-sdk-20/lib/javafx.base.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

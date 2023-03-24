@@ -67,8 +67,9 @@ public class LoginController implements Initializable{
 	}
 
 	public void loadFonts(){
-		Font.loadFont(getClass().getResourceAsStream("/resources/Buffalo.otf"),12);
-
+		Font.loadFont(getClass().getResourceAsStream("resources/Buffalo.ttf"),16);
+		Font.loadFont(getClass().getResourceAsStream("resources/Roboto-Regular.ttf"),16);
+		Font.loadFont(getClass().getResourceAsStream("resources/Roboto-Black.ttf"),16);
 	}
 
 	@FXML
