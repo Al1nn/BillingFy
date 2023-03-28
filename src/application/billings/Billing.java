@@ -387,9 +387,9 @@ public class Billing {
 						e.printStackTrace();
 					}
 				}else if (isWindows){
-					
+					System.out.println("On Windows");
 				}else if (isLinux){
-
+					System.out.println("On Linux");
 				}
 
 
