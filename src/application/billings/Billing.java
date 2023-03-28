@@ -387,7 +387,16 @@ public class Billing {
 						e.printStackTrace();
 					}
 				}else if (isWindows){
-					System.out.println("On Windows");
+					try {
+						File directory = new File(projectPath);
+						String command = "cmd /c start /B generate_invoice_windows.bat";
+						Process process = Runtime.getRuntime().exec(command,null,directory);
+						process.waitFor();
+						int exitCode = process.exitValue();
+						System.out.println("Exit code : " + exitCode);
+					} catch (IOException | InterruptedException e){
+						e.printStackTrace();
+					}
 				}else if (isLinux){
 					System.out.println("On Linux");
 				}
