@@ -26,13 +26,15 @@
 }
 
 .issuer-info{
-    float: right;
+    position: absolute;
+    right: 0;
     background-color: #FFFFFF;
     height: 235px;
     width: 450px;
     text-align: right;
     font-size: 15px;
     margin-top: -15px;
+    margin-right: 20px;
     font-family: 'Helvetica';
 }
 .client-header{
@@ -45,7 +47,9 @@
     border-bottom: 3px solid #c8c6c6;
 }
 .invoice-data{
-    float: right;
+    position: absolute;
+    right: 0;
+    margin-right: 35px;
     height: 245px;
     width: 200px;
     background-color: #FFFFFF;
@@ -99,7 +103,7 @@
 }
 .calculation-div{
     background-color: #FFFFFF;
-    height: 100px;
+    height: 200px;
     margin-left: 20px;
     margin-right: 20px;
     font-family: 'Helvetica';
@@ -156,7 +160,6 @@ footer{
         <p>{{issuer.issuerEUID}} - {{issuer.issuerPhoneNumber}} </p>
         <p>{{issuer.issuerEmail}}</p>
     </div>
-    <img width="150" src="{{ image }}" alt="Logo">
     <p class="header-title">Invoice</p>
 </div>
 

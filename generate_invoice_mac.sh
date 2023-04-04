@@ -18,6 +18,7 @@ if [[ -z "$pipv" ]]
 then
     brew install pip3
     pip3 install jinja2
+    pip3 install xhtml2pdf
 else
     echo "$pipv"
 fi

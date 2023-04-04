@@ -8,6 +8,7 @@ from Issuer import Issuer
 from Client import Client
 from Payment import Payment
 from jinja2 import Environment, FileSystemLoader
+from xhtml2pdf import pisa
 
 template_loader = FileSystemLoader(searchpath="./templates")
 env = Environment(loader=template_loader)
@@ -22,12 +23,19 @@ services = data['services']
 taxes = data['taxes']
 payment = Payment(data['paymentBank'],data['paymentBeneficiary'],data['paymentIBAN'],data['paymentSwift'],data['paymentReference'],data['paymentExchange'],data['paymentIssueDate'],data['paymentDueDate'],data['paymentCurrency'],data['paymentStatus'])
 calculation = Calculation(data['calculationSubtotal'],data['calculationTax'],data['calculationTotal'])
-image_filename = 'logo.jpg'
+#image_filename = 'templates/logo.jpg'
 template = env.get_template('billingfy_invoice.html')
-html = template.render(issuer=issuer, client=client, discounts=discounts, services=services, taxes=taxes, payment=payment, calculation=calculation, image_filename=image_filename)
-output_path = os.path.join(os.path.expanduser("~"), 'Desktop',  payment.get_paymentReference()+'.html')
+html = template.render(issuer=issuer, client=client, discounts=discounts, services=services, taxes=taxes, payment=payment, calculation=calculation)
+
+output_path = os.path.join(os.path.expanduser("~"), 'Desktop', client.get_clientName()+" "+payment.get_paymentReference()+ ".html" )
+
+pdf_path = os.path.join(os.path.expanduser("~"), 'Desktop', client.get_clientName()+" "+payment.get_paymentReference()+ ".pdf" )
+
 with open(output_path, 'w') as f:
     f.write(html)
+
+with open(pdf_path, 'wb') as f:
+    pisa.CreatePDF(html, dest=f)
 
 print(f"Invoice generated: {output_path}")
 
