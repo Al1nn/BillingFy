@@ -12,10 +12,10 @@ public class BillingsDatabase {
     public Connection databaseLink;
 
     public synchronized Connection getConnection() throws ClassNotFoundException {
-        String databaseName = "sql8609226";
-        String databaseUser = "sql8609226";
-        String databasePassword = "kgLt77sjJF";
-        String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/" + databaseName;
+        String databaseName = "BillingFy";
+        String databaseUser = "root";
+        String databasePassword = "FRES-123";
+        String url = "jdbc:mysql://localhost:3306/" + databaseName;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             databaseLink = DriverManager.getConnection(url,databaseUser,databasePassword);
@@ -26,7 +26,7 @@ public class BillingsDatabase {
         return databaseLink;
     }
 
-    public void insertServiceData(String serviceID, String billingServiceName, int billingServiceAmount, double billingServicePrice, String billingServiceDescription) throws ClassNotFoundException {
+    public void insertServiceData(String serviceID, String billingServiceName, int billingServiceAmount, String billingServicePrice, String billingServiceDescription) throws ClassNotFoundException {
         String insert = "INSERT INTO BillingsService(" +
                 "Service_ID" +
                 ", Service_Name" +
@@ -39,7 +39,7 @@ public class BillingsDatabase {
             preparedStatement.setString(1,serviceID);
             preparedStatement.setString(2,billingServiceName);
             preparedStatement.setInt(3,billingServiceAmount);
-            preparedStatement.setDouble(4,billingServicePrice);
+            preparedStatement.setString(4,billingServicePrice);
             preparedStatement.setString(5,billingServiceDescription);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -186,7 +186,7 @@ public class BillingsDatabase {
             PreparedStatement preparedStatement = connection.prepareStatement(update)){
             preparedStatement.setString(1,serviceName);
             preparedStatement.setInt(2,Integer.parseInt(serviceAmount));
-            preparedStatement.setDouble(3,Double.parseDouble(servicePrice));
+            preparedStatement.setString(3,servicePrice);
             preparedStatement.setString(4,serviceDescription);
             preparedStatement.setString(5,serviceID);
             preparedStatement.setString(6,oldServiceName);
@@ -468,7 +468,7 @@ public class BillingsDatabase {
         String billingServiceID = resultSet.getString("Service_ID");
         String billingServiceName = resultSet.getString("Service_Name");
         int billingServiceAmount = resultSet.getInt("Service_Amount");
-        double billingServicePrice = resultSet.getDouble("Service_Price");
+        String billingServicePrice = resultSet.getString("Service_Price");
         String billingServiceDescription = resultSet.getString("Service_Description");
         return new BillingService(billingServiceID,billingServiceName,billingServiceAmount,billingServicePrice,billingServiceDescription);
     }

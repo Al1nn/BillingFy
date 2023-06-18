@@ -273,7 +273,6 @@ public class ClientsController implements Initializable {
 		clientsTable.setEditable(true);
 		displayTable(1,pageSize);
 		clientLengthText.setText(String.valueOf(clientData.size()));
-
 	}
 	private void centerCellsOnColumn(TableColumn<Client,String> tableColumn){
 		tableColumn.setCellFactory(column -> new TableCell<Client,String>(){

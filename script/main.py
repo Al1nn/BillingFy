@@ -8,7 +8,6 @@ from Issuer import Issuer
 from Client import Client
 from Payment import Payment
 from jinja2 import Environment, FileSystemLoader
-from xhtml2pdf import pisa
 
 template_loader = FileSystemLoader(searchpath="./templates")
 env = Environment(loader=template_loader)
@@ -29,13 +28,11 @@ html = template.render(issuer=issuer, client=client, discounts=discounts, servic
 
 output_path = os.path.join(os.path.expanduser("~"), 'Desktop', client.get_clientName()+" "+payment.get_paymentReference()+ ".html" )
 
-pdf_path = os.path.join(os.path.expanduser("~"), 'Desktop', client.get_clientName()+" "+payment.get_paymentReference()+ ".pdf" )
+#pdf_path = os.path.join(os.path.expanduser("~"), 'Desktop', client.get_clientName()+" "+payment.get_paymentReference()+ ".pdf" )
 
 with open(output_path, 'w') as f:
     f.write(html)
 
-with open(pdf_path, 'wb') as f:
-    pisa.CreatePDF(html, dest=f)
 
 print(f"Invoice generated: {output_path}")
 

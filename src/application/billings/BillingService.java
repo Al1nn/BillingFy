@@ -4,10 +4,10 @@ public class BillingService {
     private String serviceID;
     private String billingServiceName;
     private int billingServiceAmount;
-    private double billingServicePrice;
+    private String billingServicePrice;
     private String billingServiceDescription;
 
-    public BillingService(String serviceID, String billingServiceName, int billingServiceAmount, double billingServicePrice, String billingServiceDescription){
+    public BillingService(String serviceID, String billingServiceName, int billingServiceAmount, String billingServicePrice, String billingServiceDescription){
         this.serviceID = serviceID;
         this.billingServiceName = billingServiceName;
         this.billingServiceAmount = billingServiceAmount;
@@ -31,11 +31,11 @@ public class BillingService {
         this.billingServiceAmount = billingServiceAmount;
     }
 
-    public double getBillingServicePrice() {
+    public String getBillingServicePrice() {
         return billingServicePrice;
     }
 
-    public void setBillingServicePrice(double billingServicePrice) {
+    public void setBillingServicePrice(String billingServicePrice) {
         this.billingServicePrice = billingServicePrice;
     }
 

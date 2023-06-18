@@ -16,10 +16,10 @@ public class ClientDatabase {
 	public Connection databaseLink;
 	
 	public Connection getConnection() throws ClassNotFoundException {
-		String databaseName = "sql8609226";
-		String databaseUser = "sql8609226";
-		String databasePassword = "kgLt77sjJF";
-		String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/" + databaseName;
+		String databaseName = "BillingFy";
+		String databaseUser = "root";
+		String databasePassword = "FRES-123";
+		String url = "jdbc:mysql://localhost:3306/" + databaseName;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

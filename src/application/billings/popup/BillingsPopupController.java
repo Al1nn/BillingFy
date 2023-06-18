@@ -178,6 +178,8 @@ public class BillingsPopupController implements Initializable{
     private Button exitButton;
 
     @FXML
+    private Text errorText;
+    @FXML
     private FontAwesomeIconView exitButtonIcon;
 
     @FXML
@@ -825,8 +827,29 @@ public class BillingsPopupController implements Initializable{
              //Implement all IDs
             UUID billingID_uuid = UUID.randomUUID();
             billingID = billingID_uuid.toString().substring(0,5);
+            if(!verifyFields(issuerName,issuerCUI
+                    ,issuerTradeRegisterNumber,issuerEUID
+                    ,issuerCountry,issuerCity
+                    ,issuerCounty,issuerStreet
+                    ,issuerNumber,issuerZipCode
+                    ,issuerEmail,issuerPhoneNumber
+                    ,clientName,clientCUI
+                    ,clientTradeRegisterNumber,clientEUID
+                    ,clientCountry,clientCity
+                    ,clientCounty,clientStreet
+                    ,clientNumber,clientZipCode
+                    ,clientEmail,clientPhoneNumber
+                    ,serviceCurrency
+                    ,paymentBank,paymentBeneficiary
+                    ,paymentIBAN,paymentSwift
+                    ,paymentReference,paymentExchange
+                    ,paymentIssueDate,paymentDueDate
+                    ,paymentCurrency,paymentStatus
+                    ,calculationSubtotal,calculationTax
+                    ,calculationTotal)){
+                return;
+            }
 
-            //
             for (Node node : serviceContentPane.getChildren()) {
                 billingServiceNameField = (TextField) node.lookup("#billingServiceNameField");
                 billingServiceAmountField = (TextField) node.lookup("#billingServiceAmountField");
@@ -836,7 +859,7 @@ public class BillingsPopupController implements Initializable{
                 String billingServiceAmount = billingServiceAmountField.getText();
                 String billingServicePrice = billingPriceField.getText();
                 String billingServiceDescription = billingDescriptionField.getText();
-                connection.insertServiceData(billingID,billingServiceName,Integer.valueOf(billingServiceAmount),Double.valueOf(billingServicePrice), billingServiceDescription);
+                connection.insertServiceData(billingID,billingServiceName,Integer.valueOf(billingServiceAmount),billingServicePrice, billingServiceDescription);
             }
 
             for (Node node: discountContentPane.getChildren()) {
@@ -873,6 +896,7 @@ public class BillingsPopupController implements Initializable{
             String billingServiceAmount = billingServiceAmountField.getText();
             String billingServicePrice = billingPriceField.getText();
             String billingServiceDescription = billingDescriptionField.getText();
+            if(!is_double_number_format(billingServicePrice)) break;
             connection.updateServiceData(updateBillingID,billingServiceName,billingServiceAmount,billingServicePrice,billingServiceDescription,oldServiceNames.get(i));
         }
         for(int i = 0; i < discountContentPane.getChildren().size() ; i++){
@@ -895,6 +919,140 @@ public class BillingsPopupController implements Initializable{
         saveData.getScene().getWindow().hide();
     }
 
+    private boolean verifyFields(String issuerName, String issuerCUI
+            , String issuerTradeRegisterNumber, String issuerEUID
+            , String issuerCountry, String issuerCity
+            , String issuerCounty, String issuerStreet
+            , String issuerNumber, String issuerZipcode
+            , String issuerEmail, String issuerPhoneNumber
+            , String clientName, String clientCUI
+            , String clientTradeRegisterNumber, String clientEUID
+            , String clientCountry, String clientCity
+            , String clientCounty, String clientStreet
+            , String clientNumber, String clientZipcode
+            , String clientEmail, String clientPhoneNumber
+            , String serviceCurrency
+            , String paymentBank, String paymentBeneficiary
+            , String paymentIBAN, String paymentSwift
+            , String paymentReference, String paymentExchange
+            , String paymentIssueDate, String paymentDueDate
+            , String paymentCurrency, String paymentStatus
+            , String calculationSubtotal, String calculationTax
+            , String calculationTotal){
+            String[] strings = {issuerName,issuerCUI,issuerTradeRegisterNumber
+                    ,issuerEUID,issuerCountry,issuerCity
+                    ,issuerCounty,issuerStreet,issuerNumber
+                    ,issuerZipcode,issuerEmail,issuerPhoneNumber
+                    ,clientName,clientCUI,clientTradeRegisterNumber
+                    ,clientEUID,clientCountry,clientCity
+                    ,clientCounty,clientStreet,clientNumber
+                    ,clientZipcode,clientEmail,clientPhoneNumber
+                    ,serviceCurrency
+                    ,paymentBank,paymentBeneficiary
+                    ,paymentIBAN,paymentSwift,paymentReference
+                    ,paymentExchange,paymentIssueDate,paymentDueDate
+                    ,paymentCurrency,paymentStatus
+                    ,calculationSubtotal,calculationTax,calculationTotal};
+
+
+            for (String word : strings)
+                 if (word == null){
+                   errorText.setText("One or many fields are empty");
+                   errorText.setVisible(true);
+                   return false;
+                }
+
+            if (issuerName.length() > 120){
+                errorText.setText("Issuer Name field exceeds 120 characters");
+                errorText.setVisible(true);
+                return false;
+            }
+            if(issuerCUI.length() > 8){
+                errorText.setText("Issuer CUI field exceeds 8 characters");
+                errorText.setVisible(true);
+                return false;
+            }
+            if(!issuerCUI.matches("\\d+")){
+                errorText.setText("Issuer CUI field must contain only numbers");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!issuerTradeRegisterNumber.matches("^J\\d{1,2}/\\d{4}/\\d{2}.\\d{2}.\\d{4}$")){
+                errorText.setText("Issuer Trade Register does not have the correct format");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!issuerEUID.matches("^ROONRC\\.J\\d{1,2}/\\d{4}/\\d{2}.\\d{2}.\\d{4}$")){
+                errorText.setText("Issuer EUID does not have the correct format");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!issuerCountry.matches("^[a-zA-Z]+$") ){
+                errorText.setText("Issuer Country must have only letters");
+                errorText.setVisible(true);
+                return false;
+            }
+            if(!issuerCity.matches("^[a-zA-Z]+$")){
+                errorText.setText("Issuer City must have only letters");
+                errorText.setVisible(true);
+                return false;
+            }
+            if(!issuerCounty.matches("^[a-zA-Z]+$")){
+                errorText.setText("Issuer County must have only letters");
+                errorText.setVisible(true);
+                return false;
+            }
+            if(!issuerNumber.matches("\\d+")){
+                errorText.setText("Issuer Number must have only digits");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if( !(issuerZipcode.length() == 6) ){
+                errorText.setText("Issuer Zipcode needs to be 6 characters");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!issuerZipcode.matches("\\d+")){
+                errorText.setText("Issuer ZipCode must have only digits");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!clientCUI.matches("\\d+")){
+                errorText.setText("Client CUI field must contain only numbers");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!clientTradeRegisterNumber.matches("^J\\d{1,2}/\\d{4}/\\d{2}.\\d{2}.\\d{4}$")){
+                errorText.setText("Issuer Trade Register does not have the correct format");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            if(!clientEUID.matches("^ROONRC\\.J\\d{1,2}/\\d{4}/\\d{2}.\\d{2}.\\d{4}$")){
+                errorText.setText("Issuer EUID does not have the correct format");
+                errorText.setVisible(true);
+                return false;
+            }
+
+            
+
+            return true;
+    }
+    private boolean is_double_number_format(String servicePrice){
+        if (!servicePrice.matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")){
+            errorText.setText("Price field of Service must be a decimal number");
+            errorText.setVisible(true);
+            return false;
+        }
+        return true;
+    }
     public boolean isEditable() {
         return isEditable;
     }

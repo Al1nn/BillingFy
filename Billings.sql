@@ -11,7 +11,7 @@ CREATE TABLE Billings(
     Issuer_Number varchar(100),
     Issuer_Zipcode varchar(6),
     Issuer_Email varchar(100),
-    Issuer_Phone_Number varchar(10),
+    Issuer_Phone_Number varchar(15),
     Client_Name varchar(150),
     Client_CUI varchar(8),
     Client_Trade_Register_Number varchar(50),
@@ -44,7 +44,7 @@ CREATE TABLE BillingsService(
 	Service_ID varchar(5),
     Service_Name varchar(100),
     Service_Amount BIGINT,
-    Service_Price double,
+    Service_Price varchar(100),
     Service_Description varchar(100)
 );
 
