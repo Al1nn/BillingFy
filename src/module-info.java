@@ -10,7 +10,7 @@ module BillingFy {
 	requires java.sql;
 	requires jBCrypt;
 	requires json.simple;
-    requires mysql.connector.java;
+    requires mysql.connector.j;
     opens application to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.register to javafx.graphics, javafx.fxml;
 	opens application.billings to javafx.graphics, javafx.fxml, javafx.base;

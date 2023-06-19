@@ -414,7 +414,7 @@ public class Billing {
 		jo.put("issuerTradeRegisterNumber",issuerTradeRegisterNumber);
 		jo.put("issuerEUID",issuerEUID);
 		jo.put("issuerCountry",issuerCountry);
-		jo.put("issuerCity",issuerCity);
+		jo.put("issuerCity",issuerCity); // Urmatoarele linii de cod sunt asemănătoare
 		jo.put("issuerCounty",issuerCounty);
 		jo.put("issuerStreet",issuerStreet);
 		jo.put("issuerNumber",issuerNumber);
@@ -443,7 +443,7 @@ public class Billing {
 			serviceObject.put("servicePrice",service.getBillingServicePrice());
 			serviceObject.put("serviceDescription",service.getBillingServiceDescription());
 			serviceArray.add(serviceObject);
-		}
+		} // Următoarele linii de cod sunt asemănătoare
 		jo.put("services",serviceArray);
 		JSONArray discountArray = new JSONArray();
 		for(BillingDiscount discount : discounts){
