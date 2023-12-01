@@ -14,7 +14,7 @@ public class BillingsDatabase {
     public synchronized Connection getConnection() throws ClassNotFoundException {
         String databaseName = "BillingFy";
         String databaseUser = "root";
-        String databasePassword = "your_password";
+        String databasePassword = "FRES-123";
         String url = "jdbc:mysql://localhost:3306/" + databaseName;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
