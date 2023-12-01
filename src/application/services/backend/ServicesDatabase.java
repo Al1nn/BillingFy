@@ -13,7 +13,7 @@ public class ServicesDatabase {
     public Connection getConnection() throws ClassNotFoundException {
         String databaseName = "BillingFy";
         String databaseUser = "root";
-        String databasePassword = "FRES-123";
+        String databasePassword = "your_password";
         String url = "jdbc:mysql://localhost:3306/" + databaseName;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
