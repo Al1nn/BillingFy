@@ -110,9 +110,6 @@ public class RegisterController implements Initializable{
     		String registerPasswordText = registerPasswordTextField.getText().toString();
     		if(verifyFields(registerUsernameText, registerEmailText, registerPasswordText)) 
     		{
-    			System.out.println("Username : "+registerUsernameText);
-    			System.out.println("Email : "+ registerEmailText);
-    			System.out.println("Password : "+ registerPasswordText);
     			LoginDatabase connection = new LoginDatabase();
     			connection.insertData(registerUsernameText, registerEmailText, registerPasswordText);
     			registerBackButtonClicked(event);
